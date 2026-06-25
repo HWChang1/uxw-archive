@@ -438,7 +438,7 @@ body.embed-mode .lnb{display:none!important}
   <tr class="r-desc">
     <td>보관 기준일자<br>(05시 기준)</td>
     <td colspan="2">보관 SKU 정보</td>
-    <td class="chg" onclick="focusItem(10)"><span class="tobe-hl">동일 SKU를 여러<br>물류센터에<br>보관 중인 경우<br>물류센터별 노출</span><span class="badge">10</span></td>
+    <td class="chg" onclick="focusItem(10)"><span class="tobe-hl">동일 SKU가 여러 물류센터에<br>보관된 경우 물류센터별로 구분하여 제공</span><span class="badge">10</span></td>
     <td>물류센터에<br>보관된 총 재고수량</td>
     <td>
       <div class="ci">보관비가 부과되는 재고수량</div>
@@ -797,7 +797,7 @@ async function downloadExcel() {
     WS.mergeCells(`C${RD}:D${RD}`);
     [
       [`A${RD}`,'보관 기준일자\n(05시 기준)',                       BG.desc,FC.light,false],
-      [`B${RD}`,'동일 SKU를 여러 물류센터에\n보관중인 경우 물류센터별 노출',BG.desc,FC.light,false],
+      [`B${RD}`,'동일 SKU가 여러 물류센터에 보관된 경우 물류센터별로 구분하여 제공',BG.desc,FC.light,false],
       [`C${RD}`,'보관 SKU 정보',                                   BG.desc,FC.light,false],
       [`E${RD}`,'물류센터에\n보관된 총 재고수량',                    BG.desc,FC.light,false],
       [`F${RD}`,'보관비가 부과되는 재고수량',BG.tobe,FC.tobe,false],
