@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>재고보관내역_비교버전</title>
+<link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --ff:'Pretendard Variable',-apple-system,sans-serif;
+  --brand:#00b84f;
+  --tobe-bg:#edfaf3;--tobe-bd:rgba(0,184,79,0.3);--tobe-color:#007a35;
+  --err-bg:#fdecec;--err-bd:rgba(192,24,28,0.28);--err-color:#c0181c;
+  --xl-head:#e4eaf1;--xl-sub:#eef1f5;--xl-bd:#c8d0d8;
+  --panel-w:340px;
+  --bar-h:42px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--ff);background:#f0f2f5;color:rgba(0,0,0,0.82);font-size:12px;-webkit-font-smoothing:antialiased}
+
+/* ── 상단 바 ── */
+.rev-bar{
+  background:#1a1a2e;color:#fff;
+  padding:32px 20px;display:flex;align-items:center;gap:12px;
+  position:sticky;top:0;z-index:300;
+}
+.rev-title{font-size:20px;font-weight:700}
+.rev-sub{font-size:11px;color:rgba(255,255,255,0.42);margin-top:12px}
+.rev-meta{margin-left:auto;display:flex;align-items:center;gap:10px}
+.rev-chip{
+  font-size:10px;background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.14);border-radius:4px;
+  padding:3px 8px;color:rgba(255,255,255,0.55);
+}
+.diff-btn{
+  display:flex;align-items:center;gap:7px;
+  background:rgba(0,184,79,0.18);border:1px solid rgba(0,184,79,0.4);
+  border-radius:6px;padding:5px 13px;cursor:pointer;
+  font-size:12px;font-family:var(--ff);color:#fff;
+  transition:background .15s;
+}
+.diff-btn:hover{background:rgba(0,184,79,0.3)}
+.diff-btn.active{background:rgba(0,184,79,0.32);border-color:var(--brand)}
+.dbadge{
+  background:var(--brand);color:#fff;border-radius:99px;
+  font-size:10px;font-weight:700;padding:1px 7px;
+}
+
+/* ── 레이아웃 ── */
+.main-area{
+  padding:20px 24px 80px;
+  transition:margin-right .25s ease;
+}
+.main-area.shifted{margin-right:var(--panel-w)}
+
+/* ── 엑셀 박스 ── */
+.xl-wrap{background:#fff;border:1px solid var(--xl-bd);border-radius:8px;overflow:auto;box-shadow:0 2px 12px rgba(0,0,0,0.07)}
+.xl-wrap table{border-collapse:collapse;min-width:1100px;width:100%}
+.xl-wrap td{border:1px solid var(--xl-bd);font-family:var(--ff);font-size:11px;padding:0;vertical-align:top}
+.r-title td{background:#d4dde8;font-weight:700;font-size:12px;color:rgba(0,0,0,0.72);padding:8px 14px}
+.r-note td{background:#fafae8;color:rgba(0,0,0,0.62);padding:12px 14px;line-height:1.85;font-size:11px}
+.r-head td{background:var(--xl-head);font-weight:700;text-align:center;vertical-align:middle;padding:7px 5px;color:rgba(0,0,0,0.72)}
+.r-sub td{background:var(--xl-sub);font-weight:600;font-size:10px;text-align:center;vertical-align:middle;padding:5px 4px;color:rgba(0,0,0,0.6)}
+.r-desc td{background:#fafbfc;font-size:10px;text-align:center;vertical-align:middle;padding:5px 5px;color:rgba(0,0,0,0.5);line-height:1.45}
+.r-data td{background:#fff;padding:5px 8px;vertical-align:middle;font-size:11px;color:rgba(0,0,0,0.6)}
+.r-data:hover td{background:#f7f9fb}
+.r-data td:first-child{text-align:center;color:rgba(0,0,0,0.38)}
+.num{text-align:right !important}
+.w-date{width:74px}.w-wh{width:126px}.w-id{width:88px}.w-nm{width:116px}.w-tot{width:66px}.w-n{width:58px}
+
+/* ── 변경 셀 ── */
+.chg{
+  background:var(--tobe-bg) !important;
+  border:1.5px solid var(--tobe-bd) !important;
+  position:relative;cursor:pointer;
+}
+.chg:hover{background:#d3f5e6 !important}
+.err{
+  background:var(--err-bg) !important;
+  border:1.5px solid var(--err-bd) !important;
+  position:relative;cursor:pointer;
+}
+.err:hover{background:#fad4d4 !important}
+.ci{padding:5px 22px 5px 7px;line-height:1.55}
+
+/* 번호 배지 */
+.badge{
+  position:absolute;top:4px;right:4px;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--brand);color:#fff;
+  font-size:9px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+.badge.e{background:var(--err-color)}
+
+/* 인라인 변경 span (노트 안) */
+.n-chg{
+  display:inline;background:var(--tobe-bg);
+  border-bottom:1.5px solid var(--tobe-bd);
+  border-radius:2px;padding:1px 4px;cursor:pointer;
+}
+.n-chg:hover{background:#d3f5e6}
+.n-err{
+  display:inline;background:var(--err-bg);
+  border-bottom:1.5px solid var(--err-bd);
+  border-radius:2px;padding:1px 4px;cursor:pointer;
+}
+.ib{
+  display:inline-flex;width:15px;height:15px;border-radius:50%;
+  background:var(--brand);color:#fff;font-size:8px;font-weight:700;
+  align-items:center;justify-content:center;
+  vertical-align:middle;margin-right:2px;
+}
+.ib.e{background:var(--err-color)}
+
+/* ══════════════════════════════════
+   드로어 패널
+══════════════════════════════════ */
+.drawer{
+  position:fixed;top:var(--bar-h);right:0;
+  width:var(--panel-w);height:calc(100vh - var(--bar-h));
+  background:#fff;border-left:1px solid #e0e4ea;
+  box-shadow:-6px 0 28px rgba(0,0,0,0.1);
+  transform:translateX(100%);
+  transition:transform .25s cubic-bezier(.4,0,.2,1);
+  z-index:200;display:flex;flex-direction:column;
+}
+.drawer.open{transform:translateX(0)}
+
+/* 드로어 헤더 */
+.dr-head{
+  padding:14px 18px 12px;
+  border-bottom:1px solid #ebeef2;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.dr-head-left{display:flex;flex-direction:column;gap:2px}
+.dr-head-title{font-size:13px;font-weight:700;color:rgba(0,0,0,0.82)}
+.dr-head-sub{font-size:10px;color:rgba(0,0,0,0.38)}
+.dr-close{
+  width:28px;height:28px;border:none;background:none;
+  cursor:pointer;border-radius:5px;color:rgba(0,0,0,0.36);
+  font-size:16px;display:flex;align-items:center;justify-content:center;
+  transition:background .12s;
+}
+.dr-close:hover{background:#f0f2f5;color:rgba(0,0,0,0.7)}
+
+/* 드로어 스크롤 영역 */
+.dr-scroll{flex:1;overflow-y:auto;padding:6px 0}
+
+/* 드로어 카드 */
+.dr-card{
+  padding:13px 18px;
+  border-bottom:1px solid #f2f4f7;
+  cursor:pointer;
+  transition:background .1s;
+}
+.dr-card:hover{background:#f8f9fb}
+.dr-card.active{
+  background:#f5fef8;
+  border-left:3px solid var(--brand);
+  padding-left:15px;
+}
+.dr-card.active.is-err{
+  background:#fef8f8;
+  border-left-color:var(--err-color);
+}
+
+/* 카드 위치 태그 */
+.dr-loc{
+  display:flex;align-items:center;gap:6px;
+  margin-bottom:8px;
+}
+.dr-num{
+  display:inline-flex;width:19px;height:19px;border-radius:50%;
+  background:var(--brand);color:#fff;
+  font-size:9px;font-weight:700;
+  align-items:center;justify-content:center;flex-shrink:0;
+}
+.dr-num.e{background:var(--err-color)}
+.dr-loc-text{font-size:10px;color:rgba(0,0,0,0.38);line-height:1.4}
+
+/* ASIS 블록 */
+.dr-asis{
+  background:#f5f6f8;
+  border-radius:6px;
+  padding:8px 10px;
+  margin-bottom:6px;
+  position:relative;
+}
+.dr-asis-label{
+  font-size:9px;font-weight:700;
+  color:rgba(0,0,0,0.32);
+  letter-spacing:.4px;
+  margin-bottom:4px;
+  text-transform:uppercase;
+}
+.dr-asis-text{
+  font-size:10.5px;
+  color:rgba(0,0,0,0.42);
+  line-height:1.6;
+  text-decoration:line-through;
+  text-decoration-color:rgba(0,0,0,0.3);
+  word-break:keep-all;
+}
+.dr-asis-text.no-strike{text-decoration:none}
+
+/* 화살표 */
+.dr-arrow{
+  display:flex;align-items:center;gap:6px;
+  margin:5px 0;
+  font-size:10px;color:rgba(0,0,0,0.22);
+}
+.dr-arrow::before,.dr-arrow::after{
+  content:'';flex:1;height:1px;background:rgba(0,0,0,0.08);
+}
+
+/* TOBE 블록 */
+.dr-tobe{
+  background:var(--tobe-bg);
+  border:1px solid var(--tobe-bd);
+  border-radius:6px;
+  padding:8px 10px;
+  margin-bottom:7px;
+}
+.dr-tobe.is-err{
+  background:var(--err-bg);
+  border-color:var(--err-bd);
+}
+.dr-tobe-label{
+  font-size:9px;font-weight:700;
+  color:var(--tobe-color);
+  letter-spacing:.4px;
+  margin-bottom:4px;
+  text-transform:uppercase;
+}
+.dr-tobe-label.is-err{color:var(--err-color)}
+.dr-tobe-text{
+  font-size:11px;font-weight:600;
+  color:var(--tobe-color);
+  line-height:1.6;
+  word-break:keep-all;
+}
+.dr-tobe-text.is-err{color:var(--err-color)}
+
+/* 이유 */
+.dr-why{
+  font-size:10px;
+  color:rgba(0,0,0,0.4);
+  font-style:italic;
+  line-height:1.55;
+  padding-top:2px;
+}
+.dr-why-note{
+  display:inline-block;
+  margin-top:4px;
+  font-size:9px;font-style:normal;
+  color:rgba(0,150,80,0.8);
+  background:rgba(0,184,79,0.07);
+  border-radius:3px;padding:2px 6px;
+}
+</style></head>
+<body>
+
+<!-- ── 상단 바 ── -->
+<div class="rev-bar">
+  <div>
+    <div class="rev-title">재고보관내역 — 비교버전</div>
+    <div class="rev-sub">26.06.25 · 기획담당 이재호 · N배송 by FBN 오픈베타 대응</div>
+  </div>
+  <div class="rev-meta">
+    <span class="rev-chip">TOBE 기준 보기</span>
+    <button class="diff-btn" id="diffBtn" onclick="toggleDrawer()">
+      📋 변경 내역 <span class="dbadge" id="badgeCount">12</span>
+    </button>
+  </div>
+</div>
+
+<!-- ── 메인 영역 ── -->
+<div class="main-area" id="mainArea">
+<div class="xl-wrap"><table>
+
+  <tr class="r-title"><td colspan="16">기준 일자 : 2026.06.01 ~ 2026.06.14</td></tr>
+
+  <tr class="r-note"><td colspan="16">
+    ※ 지난 달까지의 월별 보관 내역은 매일 05시 기준으로 물류센터에 보관 중인 수량이 표시됩니다.<br>
+    ※ 이번 달 보관 내역은 다운로드 날짜 하루 전, 05시까지의 데이터가 표시됩니다.<br>
+    ※ 다운로드 시점에 따라 조회되는 데이터가 다를 수 있으니, 정확한 최종 내역은 집계가 마감되는 매월 5일 이후 다시 확인해 주세요.<br><br>
+    ※ 항목별 주요 안내사항<br>
+    - 물류센터: 동일한 SKU를 여러 물류센터에 보관 중인 경우, 물류센터별로 내역 제공<br>
+    - 총 재고수량: 물류센터에 보관 중인 전체 수량<br>
+    - <span class="n-chg" onclick="focusItem(1)"><span class="ib">1</span>A. 출고 가능(*N배송 by FBN 전용): 주문이 들어오면 바로 출고할 수 있는 수량, 보관비 부과됨</span><br>
+    - <span class="n-chg" onclick="focusItem(2)"><span class="ib">2</span>B. 판매 대기(*N배송 by FBN 전용): 아직 판매 개시 전인 수량, 보관비 부과 안 됨</span><br>
+    - <span class="n-chg" onclick="focusItem(3)"><span class="ib">3</span>C. 주문 처리 중(*N배송 by FBN 전용): 주문이 들어와 물류센터에서 작업 중인 수량, 보관비 부과 안 됨</span><br>
+    - <span class="n-chg" onclick="focusItem(4)"><span class="ib">4</span>(판매자 책임) 판매 불가(*N배송 by FBN 전용): 판매자 귀책 또는 반품 처리 중으로 판매할 수 없는 수량, 보관비 부과됨</span><br>
+    &nbsp;&nbsp;D. 소비기한 만료: 소비기한이 만료되어 판매할 수 없는 수량<br>
+    &nbsp;&nbsp;E. 하자: 상품 자체 하자로 판매할 수 없는 수량<br>
+    &nbsp;&nbsp;F. 폐기 예정: 판매자의 책임으로 인해 폐기 예정인 수량<br>
+    &nbsp;&nbsp;<span class="n-chg" onclick="focusItem(5)"><span class="ib">5</span>G. 회수 예정: 판매자 요청으로 물류센터에서 회수 예정인 수량, 보관비 부과됨</span><br>
+    &nbsp;&nbsp;H. 리퍼 예정: (통합반품센터 전용) 판매가 가능하도록 리퍼가 예정된 수량<br>
+    &nbsp;&nbsp;<span class="n-chg" onclick="focusItem(6)"><span class="ib">6</span>I. 재포장 예정: (통합반품센터 전용) 반품된 상품을 판매 가능한 상태로 재포장 예정인 수량</span><br>
+    - <span class="n-chg" onclick="focusItem(9)"><span class="ib">9</span>J. (물류사 책임) 판매 불가(*N배송 by FBN 전용): 물류사 책임으로 판매할 수 없어 물류사에서 자체 폐기하는 수량이며 보관비 부과 안 됨</span><br>
+    - <span class="n-chg" onclick="focusItem(7)"><span class="ib">7</span>보관비 부과 재고수량(*N배송 by FBN 전용): 보관비가 부과되어 비용이 지출되는 수량 (A+D+E+F+G+H+I)</span><br>
+    - <span class="n-err" onclick="focusItem(12)"><span class="ib e">!</span>컬럼 설명 수식: (A+D+E+F+G+H) → I 포함 여부 개발 확인 필요</span><br><br>
+    <span class="n-chg" onclick="focusItem(8)"><span class="ib">8</span>※ * 표시 항목은 N배송 by FBN 이용 판매자에게만 제공됩니다. 미이용 판매자의 경우 해당 항목은 빈 값으로 표시됩니다.</span>
+  </td></tr>
+
+  <tr class="r-head">
+    <td rowspan="2" class="w-date">일자</td>
+    <td rowspan="2" class="w-wh">물류센터</td>
+    <td rowspan="2" class="w-id">SKU ID</td>
+    <td rowspan="2" class="w-nm">SKU 명</td>
+    <td rowspan="2" class="w-tot">총 재고수량</td>
+    <td rowspan="2" class="chg w-n" onclick="focusItem(10)">
+      <div class="ci">출고 가능(A)<br><span style="font-size:9px">*N배송 by FBN 전용</span></div>
+      <span class="badge">10</span>
+    </td>
+    <td rowspan="2" class="chg w-n" onclick="focusItem(9)">
+      <div class="ci">판매 대기(B)<br><span style="font-size:9px">*N배송 by FBN 전용</span></div>
+      <span class="badge">9</span>
+    </td>
+    <td rowspan="2" class="chg w-n" onclick="focusItem(9)">
+      <div class="ci">주문 처리 중(C)<br><span style="font-size:9px">*N배송 by FBN 전용</span></div>
+      <span class="badge">9</span>
+    </td>
+    <td colspan="6" class="chg" onclick="focusItem(4)">
+      <div class="ci">(판매자 책임) 판매 불가 <span style="font-size:9px">*N배송 by FBN 전용</span></div>
+      <span class="badge">4</span>
+    </td>
+    <td rowspan="2" class="chg w-n" onclick="focusItem(9)">
+      <div class="ci">(물류사 책임) 판매 불가<br><span style="font-size:9px">*N배송 by FBN 전용</span></div>
+      <span class="badge">9</span>
+    </td>
+    <td rowspan="2" class="chg w-n" onclick="focusItem(7)">
+      <div class="ci">보관비 부과<br>재고수량<br><span style="font-size:9px">*N배송 by FBN 전용</span></div>
+      <span class="badge">7</span>
+    </td>
+  </tr>
+  <tr class="r-sub">
+    <td class="w-n">소비기한<br>만료(D)</td>
+    <td class="w-n">하자(E)</td>
+    <td class="w-n">폐기<br>예정(F)</td>
+    <td class="chg w-n" onclick="focusItem(11)">
+      <div class="ci">회수 예정(G)</div>
+      <span class="badge">11</span>
+    </td>
+    <td class="w-n">리퍼<br>예정(H)</td>
+    <td class="chg w-n" onclick="focusItem(6)">
+      <div class="ci">재포장 예정(I)</div>
+      <span class="badge">6</span>
+    </td>
+  </tr>
+
+  <tr class="r-desc">
+    <td>보관 기준일자<br>(05시 기준)</td>
+    <td>SKU가 보관된<br>물류센터</td>
+    <td>보관<br>SKU 정보</td>
+    <td>물류센터에<br>보관된 총 재고수량</td>
+    <td class="chg" onclick="focusItem(10)">
+      <div class="ci">주문이 들어오면<br>바로 출고할 수 있는 재고수량</div>
+      <span class="badge">10</span>
+    </td>
+    <td class="chg" onclick="focusItem(10)">
+      <div class="ci">아직 판매 개시 전인<br>재고수량</div>
+      <span class="badge">10</span>
+    </td>
+    <td>주문이 들어와<br>작업 중인 재고수량</td>
+    <td colspan="6">판매자 책임으로 판매할 수 없는 재고수량</td>
+    <td>물류사 책임으로<br>판매할 수 없는 재고수량</td>
+    <td class="err" onclick="focusItem(12)">
+      <div class="ci">보관비가 부과되는 재고수량<br><span style="color:var(--err-color);font-weight:700">(A+D+E+F+G+H) ← I 누락</span></div>
+      <span class="badge e">!</span>
+    </td>
+  </tr>
+
+  <tr class="r-data">
+    <td class="w-date">2026.6.1</td><td class="w-wh">CJ대한통운(더풀필)<br>용인저온새벽F/C</td>
+    <td class="w-id">NS1uV7A0h8Ge2V</td><td class="w-nm">새벽배송 테스트 SKU 2</td>
+    <td class="num">1,000</td><td class="num">1,000</td><td class="num">—</td><td class="num">—</td>
+    <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td>
+    <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">1,000</td>
+  </tr>
+  <tr class="r-data">
+    <td class="w-date">2026.6.1</td><td class="w-wh">CJ대한통운(더풀필)<br>군포새벽F/C</td>
+    <td class="w-id">NS1uf7lC3f2tlh</td><td class="w-nm">오늘배송/새벽배송<br>테스트 상품</td>
+    <td class="num">96</td><td class="num">96</td><td class="num">—</td><td class="num">—</td>
+    <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td>
+    <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">96</td>
+  </tr>
+  <tr class="r-data">
+    <td class="w-date">2026.6.1</td><td class="w-wh">아르고(ARGO)<br>네이버 남이천센터</td>
+    <td class="w-id">NS1uz4asgFVB0R</td><td class="w-nm">입고 화면 연계<br>테스트 1</td>
+    <td class="num">400</td><td class="num">—</td><td class="num">—</td><td class="num">—</td>
+    <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td>
+    <td class="num">—</td><td class="num">400</td><td class="num">—</td><td class="num">—</td>
+  </tr>
+
+</table></div>
+</div><!-- /main-area -->
+
+<!-- ══════════════════════════════════
+     드로어 패널
+══════════════════════════════════ -->
+<div class="drawer" id="drawer">
+  <div class="dr-head">
+    <div class="dr-head-left">
+      <div class="dr-head-title">변경 내역</div>
+      <div class="dr-head-sub">총 12건 · 항목 클릭 시 위치 이동</div>
+    </div>
+    <button class="dr-close" onclick="toggleDrawer()">✕</button>
+  </div>
+  <div class="dr-scroll" id="drScroll"></div>
+</div>
+
+<script>
+/* ── 변경 데이터 ── */
+const DIFFS = [
+  {
+    n: 1, type: 'c', where: '안내 주석 · A항목',
+    asis: 'A. 집품 가능(네이버 직계약 서비스 전용):\n집품 및 출고 작업이 가능한 수량, 보관비 부과됨',
+    tobe: 'A. 출고 가능(*N배송 by FBN 전용):\n주문이 들어오면 바로 출고할 수 있는 수량, 보관비 부과됨',
+    why: "'집품'은 물류 피킹 용어 → 판매자 언어 '출고 가능'으로 교체",
+  },
+  {
+    n: 2, type: 'c', where: '안내 주석 · B항목',
+    asis: 'B. 판매 대기(네이버 직계약 서비스 전용):\n진열 전 상태의 판매 대기 중인 수량, 보관비 부과 안 됨',
+    tobe: 'B. 판매 대기(*N배송 by FBN 전용):\n아직 판매 개시 전인 수량, 보관비 부과 안 됨',
+    why: "'진열 전'은 물류 내부 용어 → '판매 개시 전'으로 교체",
+  },
+  {
+    n: 3, type: 'c', where: '안내 주석 · C항목',
+    asis: 'C. 주문 처리 중(네이버 직계약 서비스 전용):\n주문이 들어와 물류센터에서 작업 중인 수량, 보관비 부과 안 됨',
+    tobe: 'C. 주문 처리 중(*N배송 by FBN 전용):\n주문이 들어와 물류센터에서 작업 중인 수량, 보관비 부과 안 됨',
+    why: '서비스명 통일',
+  },
+  {
+    n: 4, type: 'c', where: '안내 주석 + 컬럼 헤더 · 판매 불가 카테고리',
+    asis: '(판매자 책임) 판매 불가(네이버 직계약 서비스 전용):\n판매자 책임으로 인해 판매할 수 없는 수량, 보관비 부과됨',
+    tobe: '(판매자 책임) 판매 불가(*N배송 by FBN 전용):\n판매자 귀책 또는 반품 처리 중으로 판매할 수 없는 수량, 보관비 부과됨',
+    why: "H·I는 반품 처리 중 상태 포함 → '귀책 또는 반품 처리 중'으로 수정. 서비스명 통일",
+    note: '카테고리명을 '보관비 부과 판매불가'로 변경하는 방안도 검토 가능 — 기획 확인 필요',
+  },
+  {
+    n: 5, type: 'c', where: '안내 주석 · G항목',
+    asis: 'G. 반출 예정: 판매자에게 반출 예정인 수량',
+    tobe: 'G. 회수 예정: 판매자 요청으로 물류센터에서 회수 예정인 수량, 보관비 부과됨',
+    why: "'반출'은 물류 용어 → 판매자 관점 '회수'로 교체. 보관비 부과됨 안내 누락 추가",
+  },
+  {
+    n: 6, type: 'c', where: '안내 주석 + 컬럼 헤더 · I항목',
+    asis: 'I. 양품화 예정: (통합반품센터 전용)\n판매가 불가능한 재고를 양품 상태로 복원하기 위해 양품화 예정인 수량',
+    tobe: 'I. 재포장 예정: (통합반품센터 전용)\n반품된 상품을 판매 가능한 상태로 재포장 예정인 수량',
+    why: "'양품화'는 물류 내부 용어 → '재포장'으로 교체. '반품된 상품' 맥락 명시",
+  },
+  {
+    n: 7, type: 'c', where: '안내 주석 + 컬럼 헤더 · 보관비 부과 재고수량',
+    asis: '보관비 부과 재고수량(네이버 직계약 서비스 전용):\n보관비가 부과되어 비용이 지출되는 수량 (A+D+E+F+G+H)',
+    tobe: '보관비 부과 재고수량(*N배송 by FBN 전용):\n보관비가 부과되어 비용이 지출되는 수량 (A+D+E+F+G+H+I)',
+    why: 'I(재포장 예정) 수식 누락 수정 + 서비스명 통일',
+  },
+  {
+    n: 8, type: 'c', where: '안내 주석 · 하단 이용 안내',
+    asis: "※ '네이버 직계약 서비스 전용'이 표시된 항목은 'N배송 직계약' 프로그램을 이용 중인 판매자에게만 제공됩니다",
+    tobe: '※ * 표시 항목은 N배송 by FBN 이용 판매자에게만 제공됩니다. 미이용 판매자의 경우 해당 항목은 빈 값으로 표시됩니다.',
+    why: '서비스명 통일 + 미이용 판매자에게 빈 값 안내 추가 (혼란 방지)',
+  },
+  {
+    n: 9, type: 'c', where: '컬럼 헤더 · 서비스명 (B·C·판매자책임·J·보관비 등 6곳)',
+    asis: '*네이버 직계약 서비스 전용',
+    tobe: '*N배송 by FBN 전용',
+    why: '7월 오픈베타 서비스명 전면 반영',
+  },
+  {
+    n: 10, type: 'c', where: '컬럼 헤더 · A 컬럼명 + 설명',
+    asis: '집품 가능(A)\n집품 및 출고 작업이 가능한 재고수량\n아직 진열 전으로 판매 대기 중인 재고수량',
+    tobe: '출고 가능(A)\n주문이 들어오면 바로 출고할 수 있는 재고수량\n아직 판매 개시 전인 재고수량',
+    why: "물류 용어 '집품', '진열 전' → 판매자 언어로 전환",
+  },
+  {
+    n: 11, type: 'c', where: '컬럼 헤더 · G 컬럼명',
+    asis: '반출 예정(G)',
+    tobe: '회수 예정(G)',
+    why: "'반출'은 물류 용어 → 판매자 관점 '회수'로 교체",
+  },
+  {
+    n: 12, type: 'e', where: '⚠ 데이터 오류 · 컬럼 설명 수식',
+    asis: '보관비가 부과되는 재고수량 (A+D+E+F+G+H)',
+    tobe: '보관비가 부과되는 재고수량 (A+D+E+F+G+H+I) — I 추가 필요',
+    why: '안내 주석 수식과 컬럼 설명 불일치. I(재포장 예정)가 컬럼 설명에서 누락',
+    note: '개발팀 확인 및 수정 필요',
+  },
+];
+
+/* ── 드로어 빌드 ── */
+function buildDrawer() {
+  const scroll = document.getElementById('drScroll');
+  scroll.innerHTML = DIFFS.map(d => {
+    const isErr = d.type === 'e';
+    const note = d.note
+      ? `<span class="dr-why-note">💬 ${d.note}</span>`
+      : '';
+    return `
+      <div class="dr-card${isErr ? ' is-err' : ''}" id="dc-${d.n}" onclick="focusItem(${d.n})">
+        <div class="dr-loc">
+          <span class="dr-num${isErr ? ' e' : ''}">${isErr ? '!' : d.n}</span>
+          <span class="dr-loc-text">${d.where}</span>
+        </div>
+        <div class="dr-asis">
+          <div class="dr-asis-label">ASIS</div>
+          <div class="dr-asis-text">${d.asis.replace(/\n/g, '<br>')}</div>
+        </div>
+        <div class="dr-arrow">▼</div>
+        <div class="dr-tobe${isErr ? ' is-err' : ''}">
+          <div class="dr-tobe-label${isErr ? ' is-err' : ''}">TOBE</div>
+          <div class="dr-tobe-text${isErr ? ' is-err' : ''}">${d.tobe.replace(/\n/g, '<br>')}</div>
+        </div>
+        <div class="dr-why">${d.why}${note}</div>
+      </div>`;
+  }).join('');
+}
+
+/* ── 드로어 토글 ── */
+let drawerOpen = false;
+function toggleDrawer() {
+  drawerOpen = !drawerOpen;
+  document.getElementById('drawer').classList.toggle('open', drawerOpen);
+  document.getElementById('mainArea').classList.toggle('shifted', drawerOpen);
+  const btn = document.getElementById('diffBtn');
+  btn.classList.toggle('active', drawerOpen);
+  btn.innerHTML = drawerOpen
+    ? '✕ 닫기'
+    : '📋 변경 내역 <span class="dbadge" id="badgeCount">12</span>';
+}
+
+/* ── 항목 포커스 ── */
+function focusItem(n) {
+  if (!drawerOpen) toggleDrawer();
+  document.querySelectorAll('.dr-card').forEach(el => el.classList.remove('active'));
+  const target = document.getElementById('dc-' + n);
+  if (target) {
+    target.classList.add('active');
+    setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 60);
+  }
+}
+
+buildDrawer();
+</script>
+</body></html>

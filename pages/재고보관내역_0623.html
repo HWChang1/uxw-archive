@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>재고보관내역_UXW검수본_0623</title>
+<link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --ff:'Pretendard Variable',-apple-system,sans-serif;
+  --brand:#00b84f;
+  --tobe-bg:#edfaf3;--tobe-bd:rgba(0,184,79,0.35);--tobe-color:#007a35;
+  --err-bg:#fdecec;--err-bd:rgba(192,24,28,0.3);--err-color:#c0181c;
+  --asis-text:rgba(0,0,0,0.36);--asis-del:rgba(0,0,0,0.48);
+  --xl-head:#e4eaf1;--xl-sub:#eef1f5;--xl-bd:#c8d0d8;--xl-note:#fafae8;
+  --panel-w:320px;--bar-h:40px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--ff);background:#f0f2f5;color:rgba(0,0,0,0.82);font-size:13px;-webkit-font-smoothing:antialiased}
+
+/* ── 상단 바 ── */
+.rev-bar{background:#1a1a2e;color:#fff;padding:32px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:300}
+.rev-title{font-size:20px;font-weight:700}
+.rev-sub{font-size:11px;color:rgba(255,255,255,0.42);margin-top:12px}
+.rev-meta{margin-left:auto;display:flex;align-items:center;gap:10px}
+.xl-btn{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.18);border-radius:6px;padding:5px 12px;cursor:pointer;font-size:11px;font-family:var(--ff);color:rgba(255,255,255,0.78);transition:background .15s;white-space:nowrap}
+.xl-btn:hover:not(:disabled){background:rgba(255,255,255,0.15)}
+.xl-btn:disabled{opacity:.45;cursor:wait}
+.xl-btn-icon{font-size:13px;line-height:1}
+.diff-toggle{display:flex;align-items:center;gap:7px;background:rgba(0,184,79,0.18);border:1px solid rgba(0,184,79,0.4);border-radius:6px;padding:5px 13px;cursor:pointer;font-size:12px;font-family:var(--ff);color:#fff;transition:background .15s}
+.diff-toggle:hover{background:rgba(0,184,79,0.3)}
+.dbadge{background:var(--brand);border-radius:99px;font-size:10px;font-weight:700;padding:1px 7px;color:#fff}
+
+/* ── 섹션 레이아웃 ── */
+.sec-wrap{background:#f0f2f5;transition:margin-right .25s ease}
+.sec-wrap.panel-open{margin-right:var(--panel-w)}
+.sec-divider{height:24px;background:#DCE2EA}
+.sec-tbl{margin-top:0}
+.sec-hd{padding:20px 36px 12px;font-size:15px;font-weight:700;color:#000;letter-spacing:.2px;display:flex;align-items:center;gap:8px;background:#f0f2f5}
+.sec-num{display:inline-flex;width:20px;height:20px;border-radius:50%;background:#000;color:#fff;font-size:10px;font-weight:700;align-items:center;justify-content:center;flex-shrink:0}
+
+/* ── ASIS/TOBE 레이블 바 ── */
+.split-bar{position:sticky;top:var(--bar-h);z-index:200;display:flex;border-bottom:1px solid #ECEEF2}
+.sb-a{flex:0 0 44%;background:#f0f2f5;padding:14px 36px;font-size:13px;font-weight:700;color:rgba(0,0,0,0.38);border-right:1px solid #ECEEF2;display:flex;align-items:center;gap:6px}
+.sb-t{flex:1;background:#fff;padding:14px 36px;font-size:13px;font-weight:700;color:var(--brand);display:flex;align-items:center;gap:6px}
+.sb-dot{width:8px;height:8px;border-radius:50%}
+
+/* ── 스플릿 레이아웃 ── */
+.page-wrap{display:flex;align-items:flex-start}
+.pane-a{flex:0 0 44%;background:#f5f6f8;border-right:1px solid #ECEEF2;min-width:0}
+.pane-t{flex:1;background:#fff;min-width:0}
+
+/* ── 섹션 헤더 ── */
+.sec{padding:12px 36px 10px;font-size:10px;font-weight:700;color:rgba(0,0,0,0.36);letter-spacing:.4px;border-top:1px solid #ebeef2;text-transform:uppercase}
+.sec.tobe{color:var(--brand)}
+/* ── 기준 일시 타이틀 ── */
+.pane-date{font-size:20px;font-weight:700;color:rgba(0,0,0,0.82);padding:16px 36px 14px;border-bottom:1px solid #ebeef2;letter-spacing:.05px}
+.pane-a .pane-date{color:rgba(0,0,0,0.38);font-weight:400;font-size:20px;text-decoration:line-through}
+/* ── 표 섹션 레이블 ── */
+.tbl-lbl{padding:14px 36px;font-size:13px;font-weight:700;color:rgba(0,0,0,0.38);display:flex;align-items:center;gap:6px}
+.tbl-lbl.tobe-lbl{color:var(--brand)}
+/* ── ASIS 표 ── */
+.xl-asis .r-head td,.xl-asis .r-sub td{white-space:nowrap}
+.xl-asis .ci{padding:4px 4px}
+[data-why]{cursor:help}
+
+/* ── ASIS 노트 영역 ── */
+.note-a{padding:20px 36px 28px;font-size:13px;color:var(--asis-text);line-height:1.9}
+.note-a .del{text-decoration:line-through;color:var(--asis-del)}
+.note-a .err-del{text-decoration:line-through;color:rgba(192,24,28,0.6)}
+
+/* ── TOBE 노트 영역 ── */
+.note-t{padding:20px 36px 28px;font-size:14px;color:rgba(0,0,0,0.78);line-height:1.85}
+.note-t .chg{display:inline;background:var(--tobe-bg);border-bottom:1.5px solid var(--tobe-bd);border-radius:2px;padding:1px 3px;cursor:pointer}
+.note-t .chg:hover{background:#d0f2e2}
+.note-t .err{display:inline;background:var(--err-bg);border-bottom:1.5px solid var(--err-bd);border-radius:2px;padding:1px 3px;cursor:pointer}
+.ibadge{display:none}
+.ibadge.e{display:none}
+
+/* ── 컬럼 헤더 비교 (compact) ── */
+.hd-split{display:flex;border-top:1px solid #ebeef2}
+.hd-a{flex:0 0 44%;border-right:1px solid #ECEEF2;padding:20px 36px 20px;display:flex;flex-direction:column;gap:6px}
+.hd-t{flex:1;padding:20px 36px 20px;display:flex;flex-direction:column;gap:6px}
+.hd-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;padding:3px 8px;border-radius:4px;font-size:10px;line-height:1.4;gap:4px}
+.chip-a{background:#eceef2;color:var(--asis-del);text-decoration:line-through}
+.chip-t{background:var(--tobe-bg);color:var(--tobe-color);font-weight:600;border:1px solid var(--tobe-bd);cursor:pointer}
+.chip-t:hover{background:#d0f2e2}
+.chip-err{background:var(--err-bg);color:var(--err-color);font-weight:600;border:1px solid var(--err-bd);cursor:pointer}
+.chip-arrow{font-size:9px;color:rgba(0,0,0,0.28)}
+.hd-label{font-size:9px;color:rgba(0,0,0,0.36);margin-bottom:2px;font-weight:700}
+.hd-row-wrap{margin-bottom:2px}
+
+/* ── 전체 TOBE 표 ── */
+.full-tobe{padding:0 0 60px}
+.xl-scroll{overflow-x:auto}
+.xl-box{background:#fff;border:1px solid var(--xl-bd);border-radius:6px;overflow:auto;box-shadow:0 1px 6px rgba(0,0,0,0.05);margin:12px 16px}
+.xl-box table{border-collapse:collapse;min-width:1100px;width:100%}
+.xl-box td{border:1px solid var(--xl-bd);font-family:var(--ff);font-size:11px;padding:0;vertical-align:top}
+.r-title td{background:#d4dde8;font-weight:700;font-size:12px;padding:7px 12px}
+.r-head td{background:var(--xl-head);font-weight:700;text-align:center;vertical-align:middle;padding:6px 5px;color:rgba(0,0,0,0.72);font-size:11px;white-space:nowrap}
+.r-sub td{background:var(--xl-sub);font-weight:600;font-size:10px;text-align:center;vertical-align:middle;padding:4px 3px;color:rgba(0,0,0,0.6);white-space:nowrap}
+.r-desc td{background:#fafbfc;font-size:10px;text-align:center;vertical-align:middle;padding:4px 4px;color:rgba(0,0,0,0.5);line-height:1.4;word-break:keep-all}
+.r-data td{background:#fff;padding:4px 7px;vertical-align:middle;font-size:11px;color:rgba(0,0,0,0.6)}
+.r-data:hover td{background:#f7f9fb}
+.num{text-align:right !important}
+.w-date{width:72px}.w-wh{width:110px;min-width:110px}.w-id{width:80px;min-width:80px;word-break:break-all}.w-nm{width:120px;min-width:120px;word-break:break-all}.w-tot{width:66px}.w-n{width:90px}
+.chg-cell{position:relative;cursor:pointer}
+.tobe-hl{background:rgba(0,184,79,0.18);border-radius:3px;padding:1px 3px;color:rgba(0,0,0,0.82);font-weight:600}
+/* Excel zone backgrounds */
+.z-grp{background:#F2F2F2!important}
+.z-fbn{background:#D9E2F3!important}
+.z-com{background:#D8D8D8!important}
+.z-blue{background:#BDD6EE!important}
+.z-org{background:#F7CAAC!important}
+.z-orglt{background:#FBE4D5!important}
+.err-cell{background:var(--err-bg) !important;border:1.5px solid var(--err-bd) !important;cursor:pointer}
+.ci{padding:5px 20px 5px 6px;line-height:1.5}
+.badge{display:none}
+.badge.e{display:none}
+
+/* ── 우측 드로어 ── */
+.diff-panel{position:fixed;top:var(--bar-h);right:0;width:var(--panel-w);height:calc(100vh - var(--bar-h));background:#fff;border-left:1px solid #e0e4ea;box-shadow:-6px 0 28px rgba(0,0,0,0.1);transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);z-index:250;display:flex;flex-direction:column}
+.diff-panel.open{transform:translateX(0)}
+.dr-head{padding:14px 18px 12px;border-bottom:1px solid #ebeef2;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.dr-head-left{display:flex;flex-direction:column;gap:2px}
+.dr-head-title{font-size:13px;font-weight:700;color:rgba(0,0,0,0.82)}
+.dr-head-sub{font-size:11px;color:rgba(0,0,0,0.38)}
+.dr-close{width:28px;height:28px;border:none;background:none;cursor:pointer;border-radius:5px;color:rgba(0,0,0,0.36);font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .12s}
+.dr-close:hover{background:#f0f2f5;color:rgba(0,0,0,0.7)}
+.dr-scroll{flex:1;overflow-y:auto;padding:6px 0}
+.dr-card{padding:13px 18px;border-bottom:1px solid #f2f4f7;cursor:pointer;transition:background .1s}
+.dr-card:hover{background:#f8f9fb}
+.dr-card.active{background:#f5fef8;border-left:3px solid var(--brand);padding-left:15px}
+.dr-card.active.is-err{background:#fef8f8;border-left-color:var(--err-color)}
+.dr-loc{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.dr-num{display:inline-flex;width:21px;height:21px;border-radius:50%;background:var(--brand);color:#fff;font-size:10px;font-weight:700;align-items:center;justify-content:center;flex-shrink:0}
+.dr-num.e{background:var(--err-color)}
+.dr-loc-text{font-size:13px;font-weight:700;color:rgba(0,0,0,0.82);line-height:1.45}
+.dr-asis{background:#f5f6f8;border-radius:6px;padding:8px 10px;margin-bottom:6px}
+.dr-asis-label{font-size:10px;font-weight:700;color:rgba(0,0,0,0.32);letter-spacing:.4px;margin-bottom:5px;text-transform:uppercase}
+.dr-asis-text{font-size:12px;color:rgba(0,0,0,0.42);line-height:1.65;text-decoration:line-through;text-decoration-color:rgba(0,0,0,0.3);word-break:keep-all}
+.dr-arrow{display:flex;align-items:center;gap:6px;margin:5px 0;font-size:10px;color:rgba(0,0,0,0.22)}
+.dr-arrow::before,.dr-arrow::after{content:'';flex:1;height:1px;background:rgba(0,0,0,0.08)}
+.dr-tobe{background:var(--tobe-bg);border:1px solid var(--tobe-bd);border-radius:6px;padding:8px 10px;margin-bottom:7px}
+.dr-tobe.is-err{background:var(--err-bg);border-color:var(--err-bd)}
+.dr-tobe-label{font-size:10px;font-weight:700;color:var(--tobe-color);letter-spacing:.4px;margin-bottom:5px;text-transform:uppercase}
+.dr-tobe-label.is-err{color:var(--err-color)}
+.dr-tobe-text{font-size:12px;font-weight:600;color:var(--tobe-color);line-height:1.65;word-break:keep-all}
+.dr-tobe-text.is-err{color:var(--err-color)}
+.dr-why{padding-top:6px}
+.dr-why-label{display:block;font-size:10px;font-weight:700;color:var(--brand);margin-bottom:4px;letter-spacing:.2px}
+.dr-why-text{font-size:12px;color:rgba(0,0,0,0.82);line-height:1.6}
+
+/* ── 호버 툴팁 (변경 이유만) ── */
+#why-tip{position:fixed;z-index:500;background:rgba(14,16,26,0.95);color:rgba(255,255,255,0.92);font-size:11.5px;line-height:1.65;padding:9px 13px;border-radius:9px;max-width:320px;pointer-events:none;display:none;box-shadow:0 6px 24px rgba(0,0,0,0.4)}
+.why-tip-label{display:block;font-size:10px;font-weight:700;color:rgba(0,220,120,0.85);margin-bottom:4px;letter-spacing:.2px}
+
+/* ── Shell LNB ── */
+.lnb{position:fixed;top:0;left:0;width:240px;background:#fff;border-right:1px solid rgba(0,0,0,0.12);display:flex;flex-direction:column;height:100vh;transition:width .2s ease;z-index:400;overflow:hidden}
+.lnb.collapsed{width:48px}
+.lnb-head{padding:20px 18px 14px;border-bottom:1px solid rgba(0,0,0,0.08);flex-shrink:0;display:flex;flex-direction:column}
+.lnb-head-top{display:flex;align-items:center;justify-content:space-between}
+.lnb-title{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:700;color:#00b84f;cursor:pointer;text-decoration:none;overflow:hidden;white-space:nowrap}
+.lnb-title-mark{font-size:16px;flex-shrink:0}
+.lnb-title-text{overflow:hidden;text-overflow:ellipsis;transition:opacity .15s}
+.lnb.collapsed .lnb-title-text{opacity:0;width:0}
+.lnb-toggle{width:24px;height:24px;border-radius:4px;border:1px solid rgba(0,0,0,0.12);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(0,0,0,0.38);flex-shrink:0}
+.lnb-toggle:hover{background:#f7f8fa}
+.lnb-cta{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;height:38px;margin-top:14px;background:#00b84f;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;transition:background .15s;white-space:nowrap;overflow:hidden}
+.lnb-cta:hover{background:#00a245}
+.lnb-cta-text{transition:opacity .15s}
+.lnb.collapsed .lnb-cta{padding:0}
+.lnb.collapsed .lnb-cta-text{opacity:0;width:0}
+.lnb-scroll{flex:1;overflow-y:auto;overflow-x:hidden;padding:8px 0 24px}
+.lnb-section-label{font-size:11px;font-weight:600;color:rgba(0,0,0,0.38);letter-spacing:.4px;padding:14px 18px 6px;white-space:nowrap;transition:opacity .15s}
+.lnb.collapsed .lnb-section-label{opacity:0;pointer-events:none}
+.lnb-group-label{font-size:10px;font-weight:600;color:rgba(0,0,0,0.38);letter-spacing:.3px;padding:10px 18px 4px;opacity:.8;white-space:nowrap;transition:opacity .15s}
+.lnb.collapsed .lnb-group-label{opacity:0;pointer-events:none}
+.lnb-item{display:flex;align-items:center;gap:8px;padding:8px 18px;font-size:13px;color:rgba(0,0,0,0.56);cursor:pointer;text-decoration:none;border-left:2px solid transparent;transition:background .12s,color .12s}
+.lnb.collapsed .lnb-item{padding:8px 0;justify-content:center;border-left:none}
+.lnb-item:hover{background:#f7f8fa}
+.lnb-item.active{background:rgba(0,184,79,0.07);color:rgba(0,0,0,0.81);font-weight:600;border-left-color:#00b84f}
+.lnb-item-label{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:opacity .15s}
+.lnb.collapsed .lnb-item-label{opacity:0;width:0;flex:0}
+.lnb-item-icon{font-size:14px;flex-shrink:0}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block}
+.status-dot.검토중{background:#f5b400}
+.status-dot.반영완료{background:#00b84f}
+.status-dot.반영거부{background:#f42428}
+.status-dot.대기중{background:#c4c8d0}
+#page-content{transition:margin-left .2s ease}
+.lnb-item-date{font-size:10px;font-weight:400;color:rgba(0,0,0,0.32);white-space:nowrap;margin-left:auto;margin-right:4px;transition:opacity .15s}
+.lnb.collapsed .lnb-item-date{display:none}
+.lnb.collapsed .lnb-cta{display:none!important}
+.lnb.collapsed .lnb-scroll{display:none!important}
+.lnb.collapsed .lnb-title{display:none}
+.lnb.collapsed .lnb-head{padding:12px 0;align-items:center}
+.lnb.collapsed .lnb-head-top{justify-content:center}
+/* ── 탭 ── */
+.tab-bar{background:#fff;border-bottom:1px solid #dde2e8;padding:0 20px;display:flex;position:sticky;top:var(--bar-h);z-index:200}
+.tab-item{padding:12px 0;margin-right:24px;font-size:13px;font-weight:600;color:rgba(0,0,0,0.38);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s}
+.tab-item.active{color:var(--brand);border-bottom-color:var(--brand)}
+.tab-pane{display:none}.tab-pane.active{display:block}
+.compare-frame{width:100%;height:calc(100vh - var(--bar-h) - 43px);border:none;display:block}
+
+/* 스택홀더 배포용: 새검수건 버튼 숨김 (검수 기능은 작성자 전용) */
+.lnb-cta{display:none!important}
+</style></head>
+<body>
+<nav class="lnb" id="lnb"></nav>
+<div id="page-content">
+
+<!-- ── 상단 바 ── -->
+<div class="rev-bar">
+  <div>
+    <div class="rev-title">재고보관내역</div>
+    <div class="rev-sub">26.06.25 · 기획담당 이재호 · N배송 by FBN 오픈베타 대응</div>
+  </div>
+  <div class="rev-meta">
+    <button class="xl-btn" id="xlBtn" onclick="downloadExcel()">
+      <span class="xl-btn-icon">↓</span> 엑셀 다운로드
+    </button>
+    <button class="diff-toggle" id="diffToggle" onclick="togglePanel()">
+      📋 변경 내역 <span class="dbadge">10</span>
+    </button>
+  </div>
+</div>
+
+
+<!-- ── 탭 바 ── -->
+<div class="tab-bar">
+  <div class="tab-item active" onclick="switchTab('compare')">제안 보기</div>
+  <div class="tab-item" onclick="switchTab('propose')">비교 보기</div>
+</div>
+
+<div id="pane-propose" class="tab-pane">
+<!-- ── 섹션 래퍼 ── -->
+<div class="sec-wrap" id="mainArea">
+
+  <!-- ① 안내 가이드 -->
+  <div class="sec-block">
+    <div class="sec-hd"><span class="sec-num">1</span> 안내 가이드</div>
+    <div class="split-bar">
+      <div class="sb-a"><span class="sb-dot" style="background:#ccc"></span>ASIS — 현재</div>
+      <div class="sb-t"><span class="sb-dot" style="background:var(--brand)"></span>TOBE — 제안</div>
+    </div>
+    <div class="page-wrap">
+      <div class="pane-a">
+        <div class="pane-date">기준 일자 : 2026.06.01 ~ 2026.06.14</div>
+        <div class="note-a">
+          <span class="del">※ 지난 달까지의 월별 보관 내역은 매일 05시 기준으로 물류센터에 보관 중인 수량이 표시됩니다.</span><br>
+          <span class="del">※ 이번 달 보관 내역은 다운로드 날짜 하루 전, 05시까지의 데이터가 표시됩니다.</span><br>
+          <span class="del">※ 다운로드 시점에 따라 조회되는 데이터가 다를 수 있으니, 정확한 최종 내역은 집계가 마감되는 매월 5일 이후 다시 확인해 주세요.</span><br>
+          ※ [스마트스토어 판매자센터 &gt; 재고관리 페이지]와 데이터 업데이트 일시가 상이하기 때문에 해당 파일과 재고관리페이지의 실제 재고수량이 다를 수 있습니다.<br><br>
+          <span class="del">※ 항목별 주요 안내사항</span><br>
+          <span class="del">- 물류센터: 동일한 SKU를 여러 물류센터에 보관 중인 경우, 물류센터별로 내역 제공</span><br>
+          <span class="del">- 총 재고수량: 물류센터에 보관 중인 전체 수량</span><br>
+          - <span class="del">A. 집품 가능(네이버 직계약 서비스 전용): 집품 및 출고 작업이 가능한 수량, 보관비 부과됨</span><br>
+          - <span class="del">B. 판매 대기(네이버 직계약 서비스 전용): 진열 전 상태의 판매 대기 중인 수량, 보관비 부과 안 됨</span><br>
+          - <span class="del">C. 주문 처리 중(네이버 직계약 서비스 전용): 주문이 들어와 물류센터에서 작업 중인 수량, 보관비 부과 안 됨</span><br>
+          - <span class="del">(판매자 책임) 판매 불가(네이버 직계약 서비스 전용): 판매자 책임으로 인해 판매할 수 없는 수량, 보관비 부과됨</span><br>
+          &nbsp;&nbsp;<span class="del">D. 소비기한 만료: 소비기한이 만료되어 판매할 수 없는 수량</span><br>
+          &nbsp;&nbsp;<span class="del">E. 하자: 상품 자체 하자로 판매할 수 없는 수량</span><br>
+          &nbsp;&nbsp;<span class="del">F. 폐기 예정: 판매자의 책임으로 인해 폐기 예정인 수량</span><br>
+          &nbsp;&nbsp;<span class="del">G. 반출 예정: 판매자에게 반출 예정인 수량</span><br>
+          &nbsp;&nbsp;<span class="del">H. 리퍼 예정: (통합반품센터 전용) 판매가 가능하도록 리퍼가 예정된 수량</span><br>
+          &nbsp;&nbsp;<span class="del">I. 양품화 예정: (통합반품센터 전용) 판매가 불가능한 재고를 양품 상태로 복원하기 위해 양품화 예정인 수량</span><br>
+          - <span class="del">J. (물류사 책임) 판매 불가(네이버 직계약 서비스 전용): 물류사 책임으로 판매할 수 없어 물류사에서 자체 폐기하는 수량이며 보관비 부과 안 됨</span><br>
+          - <span class="del">보관비 부과 재고수량(네이버 직계약 서비스 전용): 보관비가 부과되어 비용이 지출되는 수량 (A+D+E+F+G+H)</span><br>
+          - <span class="del">보관비 부과 재고수량 수식: (A+D+E+F+G+H+I) → TOBE에서 재포장예정(I) 보관비 미부과로 재분류, 수식 변경</span><br><br>
+          <span class="del">※ '네이버 직계약 서비스 전용'이 표시된 항목은 'N배송 직계약' 프로그램을 이용 중인 판매자에게만 제공됩니다</span><br><br>
+          <span class="del">※ 추가로 궁금한 사항은 아래 링크를 통해 고객센터에 문의해 주세요.</span><br><br>
+          <span class="del"><a style="color:#1a6bcc;font-size:11px">고객센터 문의</a></span>
+        </div>
+      </div>
+      <div class="pane-t">
+        <div class="pane-date"><span class="tobe-hl" style="cursor:help" data-why="'기준 일자'를 '기준 일시'로 바꾸고 기준 시각(05시)을 함께 명시. '언제 기준이냐'는 문의가 가장 많아 시점 혼란을 해소.">기준 일시 : 26.06.01 05:00 ~ 26.06.14 05:00</span></div>
+        <div class="note-t">
+          <span class="tobe-hl" data-why="항목별 설명은 컬럼 헤더 설명행으로 옮기고, 주석은 기준 시점·업데이트 주기 안내만 남겨 재편. 문의가 잦은 정보에 집중.">※ 재고수량 일시 기준<br>
+          &nbsp;- 지난 달: 일별 오전 5시 기준 (1일~말일)<br>
+          &nbsp;- 이번 달: 다운로드 전일 오전 5시 기준</span><br><br>
+          <span class="tobe-hl" data-why="정보량이 많은 파일이라 핵심만 남겨 가독성을 높임.">※ 전월 최종 내역은 매월 5일 이후 확인을 권장합니다.</span><br>
+          ※ [스마트스토어 판매자센터 &gt; 재고관리 페이지]와 데이터 업데이트 일시가 상이하기 때문에 해당 파일과 재고관리페이지의 실제 재고수량이 다를 수 있습니다.<br>
+          <span class="tobe-hl" data-why="서비스명(N배송 by FBN)을 반영하고 워딩을 간결화.">※ '네이버 by FBN 상품 전용 데이터' 항목은 '일반 N배송' 상품엔 데이터가 미노출됩니다.</span><br>
+          <span class="tobe-hl" data-why="정보량이 많은 파일이라 핵심만 남겨 가독성을 높임.">※ 추가 문의는 아래의 '고객센터 문의하기'를 이용해 주세요.</span><br><br>
+          <a class="tobe-hl" style="color:#1a6bcc;font-size:11px" data-why="'고객센터 문의'를 '문의하기 ›'로 동사화하고 방향 기호를 추가. 단순 링크를 클릭을 유도하는 버튼형 CTA로 전환.">고객센터 문의하기 ›</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- ② 데이터 테이블 -->
+  <div class="sec-block sec-tbl">
+    <div class="sec-hd"><span class="sec-num">2</span> 데이터 테이블</div>
+    <div style="background:#f5f6f8;padding-bottom:16px">
+      <div class="tbl-lbl"><span class="sb-dot" style="background:#ccc"></span>ASIS — 현재</div>
+      <div class="xl-box xl-asis" style="margin:4px 16px 0">
+    <table>
+      <tr class="r-head">
+        <td rowspan="3" class="w-date">일자</td>
+        <td rowspan="3" class="w-wh">물류센터</td>
+        <td rowspan="3" class="w-id">SKU ID</td>
+        <td rowspan="3" class="w-nm">SKU 명</td>
+        <td rowspan="3" class="w-tot">총 재고수량<br><span style="font-size:9px;font-weight:400">(A+B+C+D+E+F+G+H+I)</span></td>
+        <td rowspan="3" class="w-n" style="color:rgba(0,0,0,0.42)"><div class="ci"><span style="text-decoration:line-through">집품 가능(A)</span><br><span style="font-size:9px;color:rgba(0,0,0,0.42);text-decoration:line-through">*네이버 직계약 서비스 전용</span></div></td>
+        <td rowspan="3" class="w-n"><div class="ci">판매 대기(B)<br><span style="font-size:9px;color:rgba(0,0,0,0.42);text-decoration:line-through">*네이버 직계약 서비스 전용</span></div></td>
+        <td rowspan="3" class="w-n"><div class="ci">주문 처리 중(C)<br><span style="font-size:9px;color:rgba(0,0,0,0.42);text-decoration:line-through">*네이버 직계약 서비스 전용</span></div></td>
+        <td colspan="7">(판매자 책임) 판매 불가</td>
+        <td rowspan="3" class="w-n" style="color:rgba(0,0,0,0.42)"><div class="ci"><span style="text-decoration:line-through">보관비 부과 재고수량</span><br><span style="font-size:9px;text-decoration:line-through">*네이버 직계약 서비스 전용</span></div></td>
+      </tr>
+      <tr class="r-sub">
+        <td colspan="6">판매자 책임&nbsp;&nbsp;보관비 부과</td>
+        <td>물류사 책임<br>보관비 미부과</td>
+      </tr>
+      <tr class="r-sub">
+        <td class="w-n">소비기한 만료(D)</td>
+        <td class="w-n">하자(E)</td>
+        <td class="w-n">폐기 예정(F)</td>
+        <td class="w-n">반출 예정(G)</td>
+        <td class="w-n" style="color:rgba(0,0,0,0.42)"><span style="text-decoration:line-through">리퍼 예정(H)</span></td>
+        <td class="w-n" style="color:rgba(0,0,0,0.42)"><span style="text-decoration:line-through">양품화 예정(I)</span></td>
+        <td class="w-n">폐기 예정(J)</td>
+      </tr>
+      <tr class="r-desc">
+        <td>보관 기준일자<br>(05시 기준)</td>
+        <td style="color:rgba(0,0,0,0.42)"><span style="text-decoration:line-through">SKU가 보관된 물류센터</span></td>
+        <td colspan="2">보관 SKU 정보</td>
+        <td>물류센터에<br>보관된 총 재고수량</td>
+        <td style="color:rgba(0,0,0,0.42)"><div class="ci"><span style="text-decoration:line-through">집품 및 출고 작업이<br>가능한 재고수량</span></div></td>
+        <td><div class="ci">아직 진열 전으로<br>판매 대기 중인 재고수량</div></td>
+        <td>주문이 들어와<br>작업 중인 재고수량</td>
+        <td>소비기한이 만료되어<br>판매할 수 없는 수량</td>
+        <td>상품 자체 하자로<br>판매할 수 없는 수량</td>
+        <td>판매자의 책임으로<br>인해 폐기 예정인 수량</td>
+        <td>판매자에게<br>반출 예정인 수량</td>
+        <td style="color:rgba(0,0,0,0.42)"><div class="ci"><span style="text-decoration:line-through">리퍼 처리가<br>예정된 재고수량</span></div></td>
+        <td style="color:rgba(0,0,0,0.42)"><div class="ci"><span style="text-decoration:line-through">반품된 상품을 양품 상태로<br>복원하기 위해 양품화 예정인 재고수량</span></div></td>
+        <td>물류사 책임으로<br>자체 폐기 예정인 수량</td>
+        <td style="color:rgba(0,0,0,0.42)"><div class="ci" style="text-decoration:line-through">보관비가 부과되는 재고수량<br><span style="font-weight:700">(A+D+E+F+G+H+I)</span></div></td>
+      </tr>
+      <tr class="r-data">
+        <td class="w-date">2026.6.1</td><td class="w-wh">CJ대한통운(더풀필)<br>용인저온새벽F/C</td>
+        <td class="w-id">NS1uV7A0h8Ge2V</td><td class="w-nm">새벽배송 테스트 SKU 2</td>
+        <td class="num">1,000</td><td class="num">1,000</td><td class="num">—</td><td class="num">—</td>
+        <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td>
+        <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">1,000</td>
+      </tr>
+    </table>
+    </div>
+    </div><!-- /ASIS bg -->
+    <div style="background:#fff;padding-bottom:24px">
+      <div class="tbl-lbl tobe-lbl"><span class="sb-dot" style="background:var(--brand)"></span>TOBE — 제안</div>
+      <div class="xl-box" style="margin:4px 16px 0">
+    <table>
+      <tr class="r-head" style="background:#f5f6f8">
+        <td colspan="5" class="chg-cell z-grp" onclick="focusItem(13)" style="font-size:10px;padding:5px 8px;text-align:center;vertical-align:middle;font-weight:700;color:rgba(0,0,0,0.54);border-bottom:2px solid rgba(0,0,0,0.16)"><span class="tobe-hl">공용</span><span class="badge">13</span></td>
+        <td colspan="11" class="chg-cell z-fbn" onclick="focusItem(13)" style="font-size:10px;padding:5px 8px;text-align:center;vertical-align:middle;border-bottom:2px solid rgba(0,0,0,0.16)">
+          <div class="ci"><span class="tobe-hl">N배송 FBN 상품</span><span style="font-size:9px;display:block;font-weight:400">(일반 N배송 상품의 경우 데이터가 미노출 됩니다)</span></div>
+          <span class="badge">13</span>
+        </td>
+      </tr>
+      <tr class="r-head">
+        <td rowspan="3" class="w-date z-com">일자</td>
+        <td rowspan="3" class="w-id z-com">SKU ID</td>
+        <td rowspan="3" class="w-nm z-com">SKU 명</td>
+        <td rowspan="3" class="chg-cell w-wh z-com" onclick="focusItem(16)"><span class="tobe-hl">물류센터</span><span class="badge">16</span></td>
+        <td rowspan="3" class="w-tot z-com">총 재고수량<br><span style="font-size:9px;font-weight:400">(A+B+C+D+E+F+G+H+I)</span></td>
+        <td rowspan="3" class="chg-cell w-n z-blue" onclick="focusItem(14)"><div class="ci"><span class="tobe-hl">보관비 부과 재고수량<br><span style="font-size:9px;font-weight:400">(A+D+E+F+G+H)</span></span></div><span class="badge">14</span></td>
+        <td rowspan="3" class="chg-cell w-n z-blue" onclick="focusItem(9)"><div class="ci"><span class="tobe-hl">판매 가능 수량(A)</span><br><span class="tobe-hl" style="font-size:9px;color:#C0181C;font-weight:700">보관비 부과</span></div><span class="badge">9</span></td>
+        <td rowspan="3" class="w-n z-blue"><div class="ci">판매 대기(B)<br><span class="tobe-hl" style="font-size:9px;color:rgba(0,0,0,0.42)">보관비 미부과</span></div></td>
+        <td rowspan="3" class="w-n z-blue"><div class="ci">주문 처리 중(C)<br><span class="tobe-hl" style="font-size:9px;color:rgba(0,0,0,0.42)">보관비 미부과</span></div></td>
+        <td colspan="7" class="chg-cell z-org" onclick="focusItem(4)"><div class="ci"><span class="tobe-hl">판매 불가</span></div><span class="badge">4</span></td>
+      </tr>
+      <tr class="r-sub">
+        <td colspan="6" class="chg-cell z-orglt" data-why="'판매자 책임'을 '판매자 귀책'으로 변경. 귀책 사유를 직접 지칭해 의미를 명확히 함."><span class="tobe-hl">판매자 귀책</span></td>
+        <td class="chg-cell z-orglt" data-why="'물류사 책임'을 '물류사 귀책'으로 통일. '판매자 귀책'과 표현을 일관되게 맞춤."><span class="tobe-hl">물류사 귀책</span></td>
+      </tr>
+      <tr class="r-sub">
+        <td class="w-n z-orglt"><div class="ci">소비기한 만료(D)<br><span class="tobe-hl" style="font-size:9px;color:#C0181C;font-weight:700">보관비 부과</span></div></td>
+        <td class="w-n z-orglt"><div class="ci">하자(E)<br><span class="tobe-hl" style="font-size:9px;color:#C0181C;font-weight:700">보관비 부과</span></div></td>
+        <td class="w-n z-orglt"><div class="ci">폐기 예정(F)<br><span class="tobe-hl" style="font-size:9px;color:#C0181C;font-weight:700">보관비 부과</span></div></td>
+        <td class="w-n z-orglt"><div class="ci">반출 예정(G)<br><span class="tobe-hl" style="font-size:9px;color:#C0181C;font-weight:700">보관비 부과</span></div></td>
+        <td class="chg-cell w-n z-orglt" onclick="focusItem(11)"><div class="ci"><span class="tobe-hl">리퍼(등급화) 예정(H)</span><br><span class="tobe-hl" style="font-size:9px;color:#C0181C;font-weight:700">보관비 부과</span></div><span class="badge">11</span></td>
+        <td class="chg-cell w-n z-orglt" onclick="focusItem(5)"><div class="ci"><span class="tobe-hl">박스 재포장 예정(I)</span><br><span class="tobe-hl" style="font-size:9px;color:rgba(0,0,0,0.42)">보관비 미부과</span></div><span class="badge">5</span></td>
+        <td class="w-n z-orglt"><div class="ci">폐기 예정(J)<br><span style="font-size:9px;color:rgba(0,0,0,0.42)">보관비 미부과</span></div></td>
+      </tr>
+      <tr class="r-desc">
+        <td>보관 기준일자<br>(05시 기준)</td>
+        <td colspan="2">보관 SKU 정보</td>
+        <td class="chg-cell" onclick="focusItem(16)"><div class="ci"><span class="tobe-hl">동일 SKU를 여러<br>물류센터에<br>보관 중인 경우<br>물류센터별 노출</span></div><span class="badge">16</span></td>
+        <td>물류센터에<br>보관된 총 재고수량</td>
+        <td><div class="ci">보관비가 부과되는 재고수량</div></td>
+        <td class="chg-cell" onclick="focusItem(9)"><div class="ci"><span class="tobe-hl">주문이 들어오면 바로 출고할 수 있는 재고수량</span></div><span class="badge">9</span></td>
+        <td class="chg-cell" onclick="focusItem(9)"><div class="ci"><span class="tobe-hl">아직 물류센터 진열 전으로 판매 대기 중인 재고수량</span></div><span class="badge">9</span></td>
+        <td>주문이 들어와<br>작업 중인 재고수량</td>
+        <td><div class="ci">소비기한이 만료되어<br>판매할 수 없는 수량</div></td>
+        <td><div class="ci">상품 자체 하자로<br>판매할 수 없는 수량</div></td>
+        <td><div class="ci">판매자의 책임으로<br>인해 폐기 예정인 수량</div></td>
+        <td><div class="ci">판매자에게<br>반출 예정인 수량</div></td>
+        <td class="chg-cell" onclick="focusItem(11)"><div class="ci"><span class="tobe-hl">판매가 가능하도록 리퍼(등급화) 처리가 예정된 재고수량</span></div><span class="badge">11</span></td>
+        <td class="chg-cell" onclick="focusItem(5)"><div class="ci"><span class="tobe-hl">포장 박스가 훼손되어 재포장이 예정된 수량</span></div><span class="badge">5</span></td>
+        <td><div class="ci">물류사 책임으로<br>자체 폐기 예정인 수량</div></td>
+      </tr>
+      <tr class="r-data">
+        <td class="w-date">2026.6.1</td><td class="w-id">NS1uV7A0h8Ge2V</td><td class="w-nm">새벽배송 테스트 SKU 2</td>
+        <td class="w-wh">CJ대한통운(더풀필)<br>용인저온새벽F/C</td>
+        <td class="num">1,000</td><td class="num">1,000</td><td class="num">1,000</td><td class="num">—</td><td class="num">—</td>
+        <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td>
+        <td class="num">—</td><td class="num">—</td><td class="num">—</td>
+      </tr>
+    </table>
+    </div>
+    </div><!-- /TOBE bg -->
+  </div><!-- /sec-tbl -->
+
+</div><!-- /sec-wrap -->
+</div><!-- /pane-propose -->
+
+<div id="pane-compare" class="tab-pane active">
+  <iframe class="compare-frame" src="재고보관내역_비교버전.html?embed=1"></iframe>
+</div>
+
+<div id="why-tip"><span class="why-tip-label">✦ 변경 이유</span><span id="why-tip-body"></span></div>
+
+<!-- ── 우측 드로어 패널 ── -->
+<div class="diff-panel" id="diffPanel">
+  <div class="dr-head">
+    <div class="dr-head-left">
+      <div class="dr-head-title">변경 내역</div>
+      <div class="dr-head-sub">총 10건 · 항목 클릭 시 위치 이동</div>
+    </div>
+    <button class="dr-close" onclick="togglePanel()">✕</button>
+  </div>
+  <div class="dr-scroll" id="dpScroll"></div>
+</div>
+</div><!-- /page-content -->
+
+<script>
+const DIFFS = [
+  {n:2,where:"안내 주석 · 구조 전면 재설계",type:"c",asis:"항목별 주요 안내사항을 산문형으로 나열 (A·B·C·D~J 각 항목 설명, 네이버 직계약 서비스 전용 안내 반복)",tobe:"※ 재고수량 일시 기준\n- 지난 달: 일별 오전 5시 기준 (1일~말일)\n- 이번 달: 다운로드 전일 오전 5시 기준\n※ 전월 최종 내역은 매월 5일 이후 확인 권장\n※ N배송 by FBN 상품 전용 데이터 항목은 일반 N배송 상품엔 미노출\n※ 추가 문의 안내 + 고객센터 링크 신규 추가",why:"항목별 설명은 컬럼 헤더 설명행으로 옮기고, 주석은 기준 시점·업데이트 주기 안내만 남겨 재편. 문의가 잦은 정보에 집중."},
+  {n:4,where:"안내 주석 + 컬럼 헤더 · 판매 불가 카테고리",type:"c",asis:"(판매자 책임) 판매 불가(네이버 직계약 서비스 전용): 판매자 책임으로 인해 판매할 수 없는 수량",tobe:"(판매자 책임) 판매 불가(*N배송 by FBN 전용): 판매자 귀책 또는 반품 처리 중으로 판매할 수 없는 수량",why:"H·I(리퍼/박스 재포장 예정)는 반품 처리 중 상태를 포함 → '귀책 또는 반품 처리 중'으로 수정, 서비스명 통일.\n※ '보관비 부과 판매불가'로 카테고리명 변경 검토 — 기획 확인 필요."},
+  {n:5,where:"안내 주석 + 컬럼 헤더 · I항목 (양품화→박스 재포장)",type:"c",asis:"I. 양품화 예정: (통합반품센터 전용)\n판매가 불가능한 재고를 양품 상태로 복원하기 위해 양품화 예정인 수량",tobe:"I. 박스 재포장 예정:\n포장 박스가 훼손되어 재포장이 예정된 수량",why:"'양품화'는 의미가 포괄적 → '박스 재포장'으로 직관화(반품상품관리와 용어 통일). 거점 정보 '(통합반품센터 전용)'은 판매자에게 불필요해 삭제."},
+  {n:8,where:"컬럼 헤더 · 서비스명 전체 (B·C·판매불가·J·보관비)",type:"c",asis:"*네이버 직계약 서비스 전용",tobe:"*N배송 by FBN 전용",why:"7월 오픈베타 서비스명 전면 반영."},
+  {n:9,where:"컬럼 헤더 · 컬럼명 A + 컬럼 설명 A·B",type:"c",asis:"집품 가능(A) / 집품 및 출고 작업이 가능한 재고수량 / 아직 진열 전으로 판매 대기 중인 재고수량",tobe:"판매 가능 수량(A) / 주문이 들어오면 바로 출고할 수 있는 재고수량 / 아직 물류센터 진열 전으로 판매 대기 중인 재고수량",why:"재고관리 페이지는 같은 상태값을 '판매 가능 수량'으로 표기. 한 상태값에 명칭이 둘이면 판매자 혼선·VOS 증가·신뢰도 저하 우려 → 명칭을 통일. 업데이트 시점 차이는 안내 가이드로 보완."},
+  {n:11,where:"컬럼 헤더 · H항목 (리퍼 예정 → 리퍼(등급화) 예정)",type:"c",asis:"H. 리퍼 예정: (통합반품센터 전용)\n판매가 가능하도록 리퍼가 예정된 수량",tobe:"H. 리퍼(등급화) 예정:\n판매가 가능하도록 리퍼(등급화) 처리가 예정된 재고수량",why:"'리퍼'만으로는 등급 분류 의미가 불명확 → '리퍼(등급화)'로 명시. 거점 정보 '(통합반품센터 전용)'은 판매자에게 불필요해 삭제."},
+  {n:13,where:"컬럼 구조 · 그룹 헤더 신규 추가",type:"c",asis:"그룹 헤더 없이 16개 컬럼 나열",tobe:"공용 데이터 (일자·물류센터·SKU ID·SKU명·총재고) / 네이버 by FBN 상품 전용 데이터 (보관비부과~폐기예정J)",why:"컬럼마다 반복되던 '*N배송 by FBN 전용'을 그룹 헤더로 통합. 헤더 가독성을 높이고 일반 N배송 판매자의 빈 값 혼란을 해소."},
+  {n:14,where:"컬럼 순서 · 보관비 부과 재고수량 위치 이동",type:"c",asis:"보관비 부과 재고수량 — 마지막 컬럼(16번째)",tobe:"보관비 부과 재고수량 — 총 재고수량 바로 다음(6번째)으로 이동",why:"보관비는 FBN 판매자의 핵심 지표 → 총 재고수량 옆으로 전진 배치. 핵심 결과값을 먼저 보고 세부 항목으로 넘어가는 시선 흐름을 만들고, 부과 비중도 한눈에 파악."},
+  {n:15,where:"기준 일시 · 날짜→일시 표기 변경",type:"c",asis:"기준 일자 : 2026.06.01 ~ 2026.06.14 (날짜만 표기)",tobe:"기준 일시 : 26.06.01 05:00 ~ 26.06.14 05:00 (기준 시각 명시)",why:"기준 시각(05시)을 함께 명시해 '언제 기준이냐'는 문의에 직접 응답. 모호했던 일 단위 기준을 시각 단위로 명확화."},
+  {n:16,where:"컬럼 순서 · 물류센터 위치 변경",type:"c",asis:"일자 · 물류센터 · SKU ID · SKU명 순 나열",tobe:"일자 · SKU ID · SKU명 · 물류센터 순으로 재배열",why:"탐색 기본 키인 SKU ID·SKU명을 앞으로, 물류센터·수량을 뒤로 재배열. '식별→위치→수량' 정보 계층으로 탐색 동선을 최적화."},
+];
+
+function switchTab(name){
+  document.querySelectorAll('.tab-item').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(el=>el.classList.remove('active'));
+  document.querySelector(`.tab-item[onclick*="${name}"]`).classList.add('active');
+  document.getElementById('pane-'+name).classList.add('active');
+  const btn=document.getElementById('diffToggle');
+  // 제안 보기(pane-compare)일 때만 버튼 표시
+  btn.style.display=(name==='compare')?'':'none';
+  if(panelOpen){
+    panelOpen=false;
+    document.getElementById("diffPanel").classList.remove("open");
+    document.querySelector(".sec-wrap").classList.remove("panel-open");
+    btn.innerHTML=`📋 변경 내역 <span class="dbadge">10</span>`;
+  }
+}
+
+let panelOpen=false;
+function buildPanel(){
+  document.getElementById("dpScroll").innerHTML=DIFFS.map(d=>{
+    const isErr=d.type==='e';
+    return `
+    <div class="dr-card${isErr?' is-err':''}" id="dp-${d.n}" onclick="focusItem(${d.n})">
+      <div class="dr-loc">
+        <span class="dr-num${isErr?' e':''}">${isErr?'!':d.n}</span>
+        <span class="dr-loc-text">${d.where}</span>
+      </div>
+      <div class="dr-asis">
+        <div class="dr-asis-label">ASIS</div>
+        <div class="dr-asis-text">${d.asis.replace(/\n/g,'<br>')}</div>
+      </div>
+      <div class="dr-arrow">▼</div>
+      <div class="dr-tobe${isErr?' is-err':''}">
+        <div class="dr-tobe-label${isErr?' is-err':''}">TOBE</div>
+        <div class="dr-tobe-text${isErr?' is-err':''}">${d.tobe.replace(/\n/g,'<br>')}</div>
+      </div>
+      <div class="dr-why"><span class="dr-why-label">✦ 변경 이유</span><span class="dr-why-text">${d.why.replace(/\n/g,'<br>')}</span></div>
+    </div>`;
+  }).join("");
+}
+function downloadExcel(){
+  var btn=document.getElementById('xlBtn');
+  btn.disabled=true;
+  btn.innerHTML='<span class="xl-btn-icon">⏳</span> 준비 중...';
+  var b64='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';
+  var bin=atob(b64);
+  var bytes=new Uint8Array(bin.length);
+  for(var i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
+  var blob=new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download='재고보관내역_UXW검수본_0625.xlsx';a.click();
+  URL.revokeObjectURL(url);
+  btn.disabled=false;
+  btn.innerHTML='<span class="xl-btn-icon">↓</span> 엑셀 다운로드';
+}
+function togglePanel(){
+  if(document.getElementById('pane-compare').classList.contains('active')){
+    const iframe=document.querySelector('.compare-frame');
+    if(iframe) iframe.contentWindow.postMessage({type:'toggleDrawer'},'*');
+    return;
+  }
+  panelOpen=!panelOpen;
+  document.getElementById("diffPanel").classList.toggle("open",panelOpen);
+  document.querySelector(".sec-wrap").classList.toggle("panel-open",panelOpen);
+  document.getElementById("diffToggle").innerHTML=panelOpen
+    ? `✕ 닫기`
+    : `📋 변경 내역 <span class="dbadge">10</span>`;
+}
+
+window.addEventListener('message',function(e){
+  if(e.data&&e.data.type==='drawerState'){
+    document.getElementById("diffToggle").innerHTML=e.data.open
+      ? `✕ 닫기`
+      : `📋 변경 내역 <span class="dbadge">10</span>`;
+  }
+});
+function focusItem(n){
+  if(!panelOpen)togglePanel();
+  document.querySelectorAll(".dr-card").forEach(e=>e.classList.remove("active"));
+  const t=document.getElementById("dp-"+n);
+  if(t){t.classList.add("active");setTimeout(()=>t.scrollIntoView({behavior:"smooth",block:"nearest"}),50);}
+}
+buildPanel();
+
+// ── rev-bar 실제 높이 → --bar-h 동적 반영 ──
+(function(){var b=document.querySelector('.rev-bar');if(b)document.documentElement.style.setProperty('--bar-h',b.offsetHeight+'px');})();
+
+// ── 변경 이유 호버 툴팁 ──
+(function(){
+  // changed element에서 onclick 제거 + data-why 동적 주입
+  document.querySelectorAll('.chg-cell,.chip-t,.chip-err,.chg,.err-cell').forEach(function(el){
+    var m=(el.getAttribute('onclick')||'').match(/focusItem\((\d+)\)/);
+    if(!m)return;
+    var d=DIFFS.find(function(x){return x.n===parseInt(m[1]);});
+    if(d)el.dataset.why=d.why;
+    el.removeAttribute('onclick');
+  });
+
+  var tip=document.getElementById('why-tip');
+  var body=document.getElementById('why-tip-body');
+
+  document.addEventListener('mouseenter',function(e){
+    var el=e.target.closest('[data-why]');
+    if(!el||!el.dataset.why)return;
+    body.textContent=el.dataset.why;
+    tip.style.display='block';
+    var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight;
+    var left=Math.max(8,Math.min(r.left+r.width/2-tw/2,window.innerWidth-tw-8));
+    var top=r.top-th-10;
+    if(top<8)top=r.bottom+10;
+    tip.style.left=left+'px';
+    tip.style.top=top+'px';
+  },true);
+
+  document.addEventListener('mouseleave',function(e){
+    if(e.target.closest('[data-why]'))tip.style.display='none';
+  },true);
+})();
+</script>
+<script src="../assets/shell.js?v=3"></script>
+<script>
+(async function(){
+  const docs = await loadDocs();
+  renderLNB({ active: '재고보관내역_0623', docs });
+  const pc = document.getElementById('page-content');
+  const lnb = document.getElementById('lnb');
+  const upd = () => { pc.style.marginLeft = lnb.classList.contains('collapsed') ? '48px' : '240px'; };
+  upd();
+  new MutationObserver(upd).observe(lnb, {attributes:true, attributeFilter:['class']});
+})();
+</script>
+</body></html>

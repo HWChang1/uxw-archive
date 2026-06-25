@@ -1,0 +1,22 @@
+{
+  "docs": [
+    {
+      "id": "재고보관내역_0623",
+      "title": "재고보관내역",
+      "date": "2026-06-23",
+      "status": "검토중",
+      "planner": "이재호",
+      "changeCount": 12,
+      "file": "pages/재고보관내역_0623.html"
+    },
+    {
+      "id": "반품상품관리_0618",
+      "title": "반품상품관리",
+      "date": "2026-06-18",
+      "status": "검토중",
+      "planner": "류교빈",
+      "changeCount": 12,
+      "file": "pages/반품상품관리_0618.html"
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UXW 검수 아카이브</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net/" crossorigin>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <!-- 좌측 LNB -->
+  <nav class="lnb" id="lnb"></nav>
+
+  <!-- 우측 메인 -->
+  <main class="main" id="main">
+    <!-- 빈 상태 -->
+    <div class="empty-state" id="emptyState">
+      <div class="empty-state-icon">📋</div>
+      <div class="empty-state-title">검수 문서를 선택하세요</div>
+      <div class="empty-state-desc">좌측 목록에서 문서를 클릭하면<br>이 영역에 검수본이 표시됩니다.</div>
+    </div>
+
+    <!-- 문서 메타바 + iframe (선택 시 표시) -->
+    <div class="doc-metabar" id="metabar" style="display:none">
+      <div class="dm-title" id="dmTitle"></div>
+      <div class="dm-meta">
+        <div class="dm-meta-item">작성일 <b id="dmDate"></b></div>
+        <div class="dm-meta-item">담당 기획자 <b id="dmPlanner"></b></div>
+        <div class="dm-meta-item">변경 <b id="dmCount"></b>건</div>
+      </div>
+      <div class="dm-right">
+        <span class="dm-status-label">상태</span>
+        <select class="input" id="statusSelect" style="width:120px;height:32px">
+          <option>검토중</option><option>반영완료</option><option>반영거부</option><option>대기중</option>
+        </select>
+        <button class="btn btn-secondary btn-sm" id="saveBtn">docs.json 저장</button>
+        <button class="btn btn-danger btn-sm" id="deleteBtn">문서 삭제</button>
+      </div>
+    </div>
+    <!-- 첨부파일 바 -->
+    <div class="attach-bar" id="attachBar" style="display:none">
+      <span class="attach-bar-label">첨부파일</span>
+      <div class="attach-list" id="attachList"></div>
+      <label class="btn btn-secondary btn-sm attach-add-btn" style="cursor:pointer">
+        ＋ 파일 추가
+        <input type="file" id="attachInput" multiple style="display:none" accept="image/*,.xlsx,.xls,.csv,.pdf,.pptx,.ppt,.docx,.doc">
+      </label>
+    </div>
+    <div class="doc-frame-wrap" id="frameWrap" style="display:none">
+      <iframe class="doc-frame" id="docFrame" title="검수 문서"></iframe>
+    </div>
+  </main>
+</div>
+
+<script src="assets/shell.js?v=3"></script>
+<script>
+let DOCS = [];
+
+function getParam(name) {
+  return new URLSearchParams(location.search).get(name);
+}
+
+async function selectDoc(id) {
+  const doc = DOCS.find(d => d.id === id);
+  const empty     = document.getElementById("emptyState");
+  const metabar   = document.getElementById("metabar");
+  const attachBar = document.getElementById("attachBar");
+  const frameWrap = document.getElementById("frameWrap");
+
+  if (!doc) {
+    empty.style.display     = "flex";
+    metabar.style.display   = "none";
+    attachBar.style.display = "none";
+    frameWrap.style.display = "none";
+    return;
+  }
+  empty.style.display     = "none";
+  metabar.style.display   = "flex";
+  attachBar.style.display = "flex";
+  frameWrap.style.display = "block";
+
+  document.getElementById("dmTitle").textContent   = doc.title;
+  document.getElementById("dmDate").textContent    = doc.date;
+  document.getElementById("dmPlanner").textContent = doc.planner || "—";
+  document.getElementById("dmCount").textContent   = doc.changeCount ?? 0;
+  document.getElementById("statusSelect").value    = doc.status;
+  document.getElementById("docFrame").src          = doc.file;
+
+  await renderAttachList(id);
+}
+
+/* ── 첨부파일 목록 렌더 ── */
+async function renderAttachList(docId) {
+  const list = document.getElementById("attachList");
+  let records;
+  try { records = await getAttachments(docId); }
+  catch (e) { records = []; }
+
+  if (!records.length) {
+    list.innerHTML = `<span class="attach-empty">첨부된 파일이 없습니다</span>`;
+    return;
+  }
+  list.innerHTML = records.map(r => `
+    <span class="attach-chip" title="${escapeHtml(r.name)}">
+      <span>${fileIcon(r.name, r.type)}</span>
+      <span class="attach-chip-name">${escapeHtml(r.name)}</span>
+      <span class="attach-chip-size">${formatBytes(r.size)}</span>
+      <button class="attach-chip-dl" data-dl="${r.id}" title="다운로드">↓</button>
+      <button class="attach-chip-del" data-del="${r.id}" title="삭제">✕</button>
+    </span>`).join("");
+
+  list.querySelectorAll("[data-dl]").forEach(btn => {
+    btn.onclick = () => downloadAttachmentById(Number(btn.dataset.dl));
+  });
+  list.querySelectorAll("[data-del]").forEach(btn => {
+    btn.onclick = async () => {
+      if (!confirm("첨부파일을 삭제할까요?")) return;
+      await deleteAttachment(Number(btn.dataset.del));
+      await renderAttachList(docId);
+    };
+  });
+}
+
+/* ── 파일 추가 ── */
+async function onAttachFiles(files) {
+  const id = getParam("doc");
+  if (!id) return;
+  const MAX = 20 * 1024 * 1024; // 20MB per file
+  for (const file of files) {
+    if (file.size > MAX) { alert(`${file.name}\n파일 크기가 20MB를 초과합니다.`); continue; }
+    await saveAttachment(id, file);
+  }
+  await renderAttachList(id);
+}
+
+/* ── 상태 변경 ── */
+function onStatusChange() {
+  const id  = getParam("doc");
+  const doc = DOCS.find(d => d.id === id);
+  if (!doc) return;
+  doc.status = document.getElementById("statusSelect").value;
+  renderLNB({ active: id, docs: DOCS });
+}
+
+/* ── docs.json 저장 ── */
+function saveDocs() {
+  downloadJSON("docs.json", { docs: DOCS });
+  alert("docs.json 파일이 다운로드되었습니다.\n\nuxw-archive/data/docs.json 위치에 덮어쓰기 해주세요.");
+}
+
+/* ── 문서 삭제 ── */
+async function deleteDoc() {
+  const id  = getParam("doc");
+  const doc = DOCS.find(d => d.id === id);
+  if (!doc) return;
+  if (!confirm(`"${doc.title}" 검수 문서를 삭제할까요?\n\n첨부파일도 함께 삭제됩니다.\n삭제 후 docs.json을 덮어쓰기 해야 반영됩니다.`)) return;
+
+  await deleteAllAttachments(id);
+  DOCS = DOCS.filter(d => d.id !== id);
+  downloadJSON("docs.json", { docs: DOCS });
+  alert("삭제 완료.\n\n다운로드된 docs.json을 uxw-archive/data/ 위치에 덮어쓰기 해주세요.");
+
+  // 빈 상태로 전환
+  history.replaceState(null, "", "index.html");
+  renderLNB({ active: "", docs: DOCS });
+  await selectDoc(null);
+}
+
+(async function init() {
+  DOCS = await loadDocs();
+  const active = getParam("doc");
+  renderLNB({ active: active || "", docs: DOCS });
+  await selectDoc(active);
+
+  document.getElementById("statusSelect").addEventListener("change", onStatusChange);
+  document.getElementById("saveBtn").addEventListener("click", saveDocs);
+  document.getElementById("deleteBtn").addEventListener("click", deleteDoc);
+
+  document.getElementById("attachInput").addEventListener("change", function () {
+    if (this.files.length) onAttachFiles(Array.from(this.files));
+    this.value = "";
+  });
+
+  if (window.UXW_OFFLINE) {
+    console.info("[UXW] 로컬 file:// 모드 — 임베드 시드 데이터 사용 중");
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>용어집 — UXW 검수 아카이브</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net/" crossorigin>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.page-head{background:#1a1a2e;color:#fff;padding:32px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:300;border-bottom:none}
+.page-head-title{font-size:20px;font-weight:700;color:#fff}
+.page-head-sub{font-size:11px;color:rgba(255,255,255,0.42);margin-top:12px}
+.page-head-right .btn{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.18);border-radius:6px;color:rgba(255,255,255,0.78);font-size:11px;height:auto;padding:5px 12px}
+.page-head-right .btn:hover{background:rgba(255,255,255,0.15)}
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <nav class="lnb" id="lnb"></nav>
+
+  <main class="main">
+    <div class="page-head">
+      <div>
+        <div class="page-head-title">📖 용어집</div>
+        <div class="page-head-sub">공급자 용어 → 판매자 용어 변환 기준 · 팀 공유용</div>
+      </div>
+      <div class="page-head-right">
+        <button class="btn btn-ghost btn-sm" id="exportCommentsBtn">💬 코멘트 내보내기 JSON</button>
+        <button class="btn btn-secondary btn-sm" id="saveGlossaryBtn">glossary.json 저장</button>
+      </div>
+    </div>
+
+    <div class="page-body">
+      <div class="page-inner">
+        <!-- 툴바 -->
+        <div class="gl-toolbar">
+          <div class="gl-search">
+            <span class="gl-search-icon">🔍</span>
+            <input class="input" id="searchInput" placeholder="용어·설명 검색">
+          </div>
+          <div class="gl-filters" id="filters">
+            <button class="gl-filter active" data-cat="전체">전체</button>
+            <button class="gl-filter" data-cat="물류">물류</button>
+            <button class="gl-filter" data-cat="검품">검품</button>
+            <button class="gl-filter" data-cat="재고처리">재고처리</button>
+            <button class="gl-filter" data-cat="UI텍스트">UI텍스트</button>
+          </div>
+        </div>
+
+        <div id="offlineNote"></div>
+
+        <!-- 테이블 -->
+        <table class="gl-table">
+          <thead>
+            <tr>
+              <th style="width:130px">공급자 용어</th>
+              <th style="width:140px">판매자 용어</th>
+              <th>설명</th>
+              <th style="width:170px">맥락/사용 화면</th>
+              <th style="width:90px">카테고리</th>
+              <th class="gl-col-comment">코멘트</th>
+              <th class="gl-col-edit">편집</th>
+            </tr>
+          </thead>
+          <tbody id="glBody"></tbody>
+        </table>
+
+        <div style="margin-top:14px">
+          <button class="btn btn-secondary btn-sm" id="addTermBtn">＋ 용어 추가</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="assets/shell.js?v=3"></script>
+<script>
+const COMMENT_KEY = "uxw_glossary_comments";
+const CATS = ["물류", "검품", "재고처리", "UI텍스트"];
+
+/* 오프라인(file://) 폴백용 시드 — data/glossary.json 과 동일하게 유지 */
+const SEED_GLOSSARY = { terms: [
+  {id:1,supplier:"양품화 처리",seller:"박스 재포장",description:"반품 상품 중 상품 자체에는 이상이 없으나 포장 박스가 훼손된 경우, 새 박스로 교체하여 판매 가능한 상태로 전환하는 작업",context:"반품상품관리 > 반품 처리 설정",category:"재고처리"},
+  {id:2,supplier:"커스텀 양품화",seller:"브랜드 포장재 사용",description:"박스 재포장 시 공통 박스 대신 브랜드 자체 포장재를 사용하는 옵션. 자재 사전 입고 필요",context:"반품상품관리 > 박스 재포장 하위 옵션",category:"재고처리"},
+  {id:3,supplier:"일반 양품화",seller:"일반 박스 사용",description:"박스 재포장 시 N배송 공통 포장 박스를 사용하는 기본 옵션",context:"반품상품관리 > 박스 재포장 하위 옵션",category:"재고처리"},
+  {id:4,supplier:"SIOC(단수)",seller:"상품 단위로 출고되는 상품",description:"별도 포장 없이 상품 자체가 바로 배송 박스가 되는 형태. 박스 재포장 서비스 적용 가능 조건",context:"반품상품관리 > 박스 재포장 적용 조건",category:"물류"},
+  {id:5,supplier:"리퍼(등급화) 처리",seller:"리퍼(등급화)",description:"반품 상품의 하자 정도를 최상·상·중 등급으로 분류하여 할인된 가격에 재판매하는 서비스. 추가 작업비 발생. 리퍼 상품은 자동 재판매되지 않으므로 판매자가 직접 상품/SKU 재등록 필요",context:"반품상품관리 > 반품 처리 설정",category:"재고처리"},
+  {id:6,supplier:"패션 전용 검품",seller:"패션·패브릭 전문 검품",description:"의류·패브릭(침구·커튼 등) 상품의 봉제선, 원단, 라벨 훼손 여부 등을 전용 검품대에서 꼼꼼하게 확인하는 선택형 검품 서비스. 추가 비용 발생",context:"반품상품관리 > 검품 서비스 옵션",category:"검품"},
+  {id:7,supplier:"수거 대행",seller:"상품 자동 수거",description:"구매자가 반품 신청 시 N배송 지정 택배사가 자동으로 수거하는 서비스. 판매자가 별도 액션 없이 자동 처리됨을 강조",context:"반품 처리 단계 2단계",category:"물류"},
+  {id:8,supplier:"처리 완료",seller:"재고 처리 완료",description:"반품 상품의 재고 처리(재판매/박스 재포장/리퍼/반출/폐기)가 완료된 상태. 처리 결과 및 재고 내역이 시스템에 반영됨",context:"반품 처리 단계 6단계",category:"UI텍스트"},
+  {id:9,supplier:"재판매 가능",seller:"새상품으로 재판매",description:"검품 결과 정상 판정된 반품 상품이 새상품으로 재판매되는 처리 결과. 상태 표현에서 판매자에게 의미 있는 결과 중심 표현으로 전환",context:"재고 처리 결과 표시",category:"UI텍스트"}
+]};
+
+let TERMS = [];
+let activeCat = "전체";
+let searchQ = "";
+let openComment = null;   // 펼쳐진 코멘트 term id
+let editing = null;       // 편집 중 term id
+
+/* ── 코멘트 (localStorage) ── */
+function loadComments() {
+  try { return JSON.parse(localStorage.getItem(COMMENT_KEY)) || {}; }
+  catch (e) { return {}; }
+}
+function saveComments(obj) {
+  localStorage.setItem(COMMENT_KEY, JSON.stringify(obj));
+}
+function commentsFor(id) { return loadComments()[String(id)] || []; }
+
+function todayStr() {
+  const d = new Date();
+  return String(d.getMonth() + 1).padStart(2, "0") + "/" + String(d.getDate()).padStart(2, "0");
+}
+
+/* ── 필터링 ── */
+function visibleTerms() {
+  return TERMS.filter(t => {
+    if (activeCat !== "전체" && t.category !== activeCat) return false;
+    if (searchQ) {
+      const hay = (t.supplier + " " + t.seller + " " + t.description + " " + t.context).toLowerCase();
+      if (!hay.includes(searchQ.toLowerCase())) return false;
+    }
+    return true;
+  });
+}
+
+/* ── 렌더 ── */
+function render() {
+  const body = document.getElementById("glBody");
+  const list = visibleTerms();
+  if (!list.length) {
+    body.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--fg-tertiary);padding:32px">검색 결과가 없습니다.</td></tr>`;
+    return;
+  }
+  body.innerHTML = list.map(t => editing === t.id ? editRow(t) : viewRow(t)).join("");
+  bindRowEvents();
+}
+
+function viewRow(t) {
+  const cnt = commentsFor(t.id).length;
+  const badge = cnt ? `<span class="gl-comment-count">${cnt}</span>` : "";
+  const open = openComment === t.id;
+  let html = `<tr class="gl-row" data-id="${t.id}">
+    <td><span class="gl-supplier">${escapeHtml(t.supplier)}</span></td>
+    <td><span class="gl-seller">${escapeHtml(t.seller)}</span></td>
+    <td><div class="gl-desc">${escapeHtml(t.description)}</div></td>
+    <td><span class="gl-context">${escapeHtml(t.context)}</span></td>
+    <td><span class="gl-cat ${t.category}">${escapeHtml(t.category)}</span></td>
+    <td class="gl-col-comment">
+      <button class="gl-comment-btn" data-act="comment" data-id="${t.id}" title="코멘트">💬${badge}</button>
+    </td>
+    <td class="gl-col-edit">
+      <button class="gl-edit-btn" data-act="edit" data-id="${t.id}">편집</button>
+    </td>
+  </tr>`;
+  if (open) html += commentPanel(t);
+  return html;
+}
+
+function commentPanel(t) {
+  const comments = commentsFor(t.id);
+  const items = comments.length
+    ? comments.map((c, i) => `<div class="gl-comment-item">
+        <span class="gl-comment-author">${escapeHtml(c.author || "익명")}</span>
+        <span class="gl-comment-date">· ${escapeHtml(c.date)}</span>
+        <span class="gl-comment-text">"${escapeHtml(c.text)}"</span>
+        <button class="gl-comment-del" data-act="delc" data-id="${t.id}" data-idx="${i}">삭제</button>
+      </div>`).join("")
+    : `<div class="gl-comment-empty">아직 코멘트가 없습니다.</div>`;
+
+  return `<tr class="gl-comment-row"><td colspan="7">
+    <div class="gl-comment-panel">
+      <div class="gl-comment-panel-title">💬 ${escapeHtml(t.supplier)} → ${escapeHtml(t.seller)} 코멘트</div>
+      <div class="gl-comment-form">
+        <input class="input" data-f="author" placeholder="작성자 이름">
+        <input class="input" data-f="text" placeholder="코멘트 입력 후 등록">
+        <button class="btn btn-primary btn-sm" data-act="addc" data-id="${t.id}">등록</button>
+      </div>
+      <div class="gl-comment-list">
+        <div class="gl-comment-list-label">기존 코멘트 (${comments.length})</div>
+        ${items}
+      </div>
+    </div>
+  </td></tr>`;
+}
+
+function editRow(t) {
+  const catOpts = CATS.map(c => `<option ${c === t.category ? "selected" : ""}>${c}</option>`).join("");
+  return `<tr class="gl-row gl-edit-mode" data-id="${t.id}">
+    <td><input class="gl-edit-input" data-e="supplier" value="${escapeHtml(t.supplier)}"></td>
+    <td><input class="gl-edit-input" data-e="seller" value="${escapeHtml(t.seller)}"></td>
+    <td><textarea class="gl-edit-input" data-e="description" rows="3">${escapeHtml(t.description)}</textarea></td>
+    <td><input class="gl-edit-input" data-e="context" value="${escapeHtml(t.context)}"></td>
+    <td>
+      <select class="gl-edit-input" data-e="category">${catOpts}</select>
+      <div class="gl-edit-actions">
+        <button class="btn btn-primary btn-sm" data-act="savee" data-id="${t.id}">저장</button>
+      </div>
+    </td>
+    <td class="gl-col-comment">—</td>
+    <td class="gl-col-edit">
+      <button class="gl-edit-btn" data-act="cancele" data-id="${t.id}" style="color:var(--fg-tertiary)">취소</button>
+    </td>
+  </tr>`;
+}
+
+/* ── 이벤트 바인딩 ── */
+function bindRowEvents() {
+  document.querySelectorAll("[data-act]").forEach(el => {
+    el.onclick = function () {
+      const act = this.dataset.act;
+      const id = Number(this.dataset.id);
+      if (act === "comment") { openComment = (openComment === id ? null : id); render(); }
+      else if (act === "edit") { editing = id; openComment = null; render(); }
+      else if (act === "cancele") { editing = null; if (isBlank(id)) removeTerm(id); render(); }
+      else if (act === "savee") saveEdit(id);
+      else if (act === "addc") addComment(id, this);
+      else if (act === "delc") delComment(id, Number(this.dataset.idx));
+    };
+  });
+}
+
+function isBlank(id) {
+  const t = TERMS.find(x => x.id === id);
+  return t && !t.supplier && !t.seller && !t.description;
+}
+function removeTerm(id) { TERMS = TERMS.filter(t => t.id !== id); }
+
+function saveEdit(id) {
+  const row = document.querySelector(`tr.gl-edit-mode[data-id="${id}"]`);
+  const t = TERMS.find(x => x.id === id);
+  row.querySelectorAll("[data-e]").forEach(inp => { t[inp.dataset.e] = inp.value.trim(); });
+  editing = null;
+  render();
+}
+
+function addComment(id, btn) {
+  const panel = btn.closest(".gl-comment-form");
+  const author = panel.querySelector('[data-f="author"]').value.trim();
+  const text = panel.querySelector('[data-f="text"]').value.trim();
+  if (!text) { alert("코멘트를 입력해 주세요."); return; }
+  const all = loadComments();
+  const key = String(id);
+  all[key] = all[key] || [];
+  all[key].push({ author: author || "익명", date: todayStr(), text });
+  saveComments(all);
+  render();
+}
+
+function delComment(id, idx) {
+  const all = loadComments();
+  const key = String(id);
+  if (all[key]) { all[key].splice(idx, 1); saveComments(all); render(); }
+}
+
+function addTerm() {
+  const nextId = TERMS.reduce((m, t) => Math.max(m, t.id), 0) + 1;
+  TERMS.push({ id: nextId, supplier: "", seller: "", description: "", context: "", category: "재고처리" });
+  editing = nextId;
+  activeCat = "전체"; searchQ = "";
+  document.getElementById("searchInput").value = "";
+  document.querySelectorAll(".gl-filter").forEach(f => f.classList.toggle("active", f.dataset.cat === "전체"));
+  render();
+  const row = document.querySelector(`tr[data-id="${nextId}"]`);
+  if (row) row.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+/* ── 다운로드/내보내기 ── */
+function saveGlossary() {
+  const clean = TERMS.filter(t => t.supplier || t.seller || t.description);
+  downloadJSON("glossary.json", { terms: clean });
+  alert("glossary.json 파일이 다운로드되었습니다.\n\nuxw-archive/data/glossary.json 위치에 덮어쓰기 해주세요.");
+}
+function exportComments() {
+  const all = loadComments();
+  if (!Object.keys(all).length) { alert("저장된 코멘트가 없습니다."); return; }
+  // 용어 정보와 함께 내보내기
+  const out = {};
+  Object.keys(all).forEach(id => {
+    const t = TERMS.find(x => String(x.id) === id);
+    out[id] = { term: t ? `${t.supplier} → ${t.seller}` : id, comments: all[id] };
+  });
+  downloadJSON("uxw_glossary_comments.json", out);
+}
+
+/* ── init ── */
+(async function init() {
+  renderLNB({ active: "glossary", docs: await loadDocs() });
+
+  const data = await loadJSON("data/glossary.json", SEED_GLOSSARY);
+  TERMS = (data && data.terms) ? data.terms : [];
+
+  if (window.UXW_OFFLINE) {
+    document.getElementById("offlineNote").innerHTML =
+      `<div class="alert alert-info" style="margin-bottom:16px">로컬 파일(file://)로 열려 임베드된 초기 용어 데이터를 표시 중입니다. 편집·코멘트는 정상 동작하며, 변경 내용은 <b>glossary.json 저장</b> / <b>코멘트 내보내기</b>로 공유하세요.</div>`;
+  }
+
+  document.getElementById("searchInput").addEventListener("input", e => { searchQ = e.target.value; render(); });
+  document.getElementById("filters").addEventListener("click", e => {
+    const btn = e.target.closest(".gl-filter");
+    if (!btn) return;
+    document.querySelectorAll(".gl-filter").forEach(f => f.classList.remove("active"));
+    btn.classList.add("active");
+    activeCat = btn.dataset.cat;
+    render();
+  });
+  document.getElementById("addTermBtn").addEventListener("click", addTerm);
+  document.getElementById("saveGlossaryBtn").addEventListener("click", saveGlossary);
+  document.getElementById("exportCommentsBtn").addEventListener("click", exportComments);
+
+  render();
+})();
+</script>
+</body>
+</html>
