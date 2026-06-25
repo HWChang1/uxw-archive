@@ -438,7 +438,7 @@ body.embed-mode .lnb{display:none!important}
   <tr class="r-desc">
     <td>보관 기준일자<br>(05시 기준)</td>
     <td colspan="2">보관 SKU 정보</td>
-    <td class="chg" onclick="focusItem(10)"><span class="tobe-hl">동일 SKU가 여러 물류센터에<br>보관된 경우 물류센터별로 구분하여 제공</span><span class="badge">10</span></td>
+    <td class="chg" onclick="focusItem(11)"><span class="tobe-hl">동일 SKU가 여러 물류센터에<br>보관된 경우 물류센터별로 구분하여 제공</span><span class="badge">11</span></td>
     <td>물류센터에<br>보관된 총 재고수량</td>
     <td>
       <div class="ci">보관비가 부과되는 재고수량</div>
@@ -485,7 +485,7 @@ body.embed-mode .lnb{display:none!important}
   <div class="dr-head">
     <div class="dr-head-left">
       <div class="dr-head-title">변경 내역</div>
-      <div class="dr-head-sub">총 10건 · 항목 클릭 시 위치 이동</div>
+      <div class="dr-head-sub">총 11건 · 항목 클릭 시 위치 이동</div>
     </div>
     <button class="dr-close" onclick="toggleDrawer()">✕</button>
   </div>
@@ -555,8 +555,9 @@ const DIFFS = [
     n: 10, type: 'c', where: '컬럼 순서 · 물류센터 위치 변경',
     asis: '일자 · 물류센터 · SKU ID · SKU명 순 나열',
     tobe: '일자 · SKU ID · SKU명 · 물류센터 순으로 재배열',
-    why: '상품 탐색의 기본 키인 SKU ID·SKU명을 앞 컬럼에 배치하고, 보관 위치(물류센터)와 재고 수량 정보를 좌→우 시선 흐름 순으로 재배열. 식별→위치→수량의 정보 계층으로 구조화해 판매자의 데이터 탐색 동선을 최적화. 동일 SKU의 재고가 여러 물류센터로 분산되는 경우, 안내 없이 하단 데이터만 노출되면 판매자가 혼동할 수 있어 구분 기준 안내를 추가.',
+    why: '상품 탐색의 기본 키인 SKU ID·SKU명을 앞 컬럼에 배치하고, 보관 위치(물류센터)와 재고 수량 정보를 좌→우 시선 흐름 순으로 재배열. 식별→위치→수량의 정보 계층으로 구조화해 판매자의 데이터 탐색 동선을 최적화.',
   },
+  {n:11,type:'c',where:'물류센터 · 분산 보관 안내 추가',asis:'안내 문구 없이 하단 데이터만 노출',tobe:'동일 SKU가 여러 물류센터에 보관된 경우 물류센터별로 구분하여 제공',why:'동일 SKU의 재고가 여러 물류센터로 분산되는 경우, 안내 없이 하단 데이터만 노출되면 판매자가 혼동할 수 있어 구분 기준 안내를 추가.'},
 ];
 
 /* ── 드로어 빌드 ── */
