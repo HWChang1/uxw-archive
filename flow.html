@@ -5,25 +5,40 @@
 <style>
 /* ── flow 페이지 전용(공통 shell 위에 얹음) ── */
 .flow-scroll{flex:1;min-height:0;overflow-y:auto;background:var(--bg-secondary)}
-.flow-page{--fg:rgba(0,0,0,.84);--fg2:rgba(0,0,0,.56);--fg3:rgba(0,0,0,.38);--bd:rgba(0,0,0,.12);--bd2:rgba(0,0,0,.07);--brand:#00b84f;--lnk:#1a6dd6;color:var(--fg);font-size:13px}
+.flow-page{--fg:rgba(0,0,0,.84);--fg2:rgba(0,0,0,.56);--fg3:rgba(0,0,0,.38);--bd:rgba(0,0,0,.12);--bd2:rgba(0,0,0,.07);--brand:#00b84f;--lnk:#1a6dd6;--miss:#e5484d;--gap:#e08600;--mistake:#d8641f;color:var(--fg);font-size:13px}
 .flow-page .top{background:#1a1a2e;color:#fff;padding:22px 40px}.flow-page .top h1{font-size:20px}.flow-page .top p{font-size:12px;color:rgba(255,255,255,.55);margin-top:6px}
-.flow-page .wrap{max-width:1000px;margin:0 auto;padding:26px 40px 100px}
-.flow-page .intro{background:#edfaf3;border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 16px;font-size:12.5px;line-height:1.7;margin-bottom:24px}
-.flow-page .job{background:#fff;border:1px solid var(--bd);border-radius:10px;margin-bottom:18px;overflow:hidden}
-.flow-page .job-h{padding:15px 20px;border-bottom:1px solid var(--bd2);display:flex;align-items:center;gap:10px}
-.flow-page .job-ic{width:34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.flow-page .job-t{font-size:15px;font-weight:700}.flow-page .job-sub{font-size:11.5px;color:var(--fg2);margin-top:2px}
-.flow-page .job-b{padding:18px 20px}
-.flow-page .flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:14px}
-.flow-page .fstep{border:1px solid var(--bd);border-radius:8px;padding:9px 13px;font-size:12px;background:var(--bg-secondary);min-width:96px;text-align:center}
-.flow-page .fstep b{display:block;font-size:12.5px}.flow-page .fstep small{color:var(--fg3);font-size:10.5px}
-.flow-page .fstep.hot{border-color:#f42428;color:#f42428}
-.flow-page .fsep{color:var(--fg3)}
-.flow-page .meta{font-size:12px;color:var(--fg2);line-height:1.9}.flow-page .meta b{color:var(--fg)}
-.flow-page .tag{display:inline-block;font-size:11px;background:var(--bg-tertiary,#f0f1f5);border:1px solid var(--bd2);border-radius:99px;padding:2px 9px;margin:0 4px 4px 0}
-.flow-page .lnk{color:var(--lnk);text-decoration:none}
-.flow-page .ph{opacity:.55}.flow-page .ph .job-ic{background:var(--bd)}
+.flow-page .wrap{max-width:1180px;margin:0 auto;padding:26px 40px 100px}
+.flow-page .intro{background:#edfaf3;border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 16px;font-size:12.5px;line-height:1.7;margin-bottom:16px}
+.flow-page .intro b{color:var(--fg)}
+/* 범례 */
+.flow-page .legend{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:11.5px;color:var(--fg2);margin-bottom:16px}
+.flow-page .lg{display:inline-flex;align-items:center;gap:6px}
+.flow-page .lg i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.flow-page .lg .i-miss{background:var(--miss)}.flow-page .lg .i-gap{background:var(--gap)}.flow-page .lg .i-mis{background:var(--mistake)}
+.flow-page .legend .sep{color:var(--fg3);margin-left:auto;font-size:11px}
+/* 매트릭스 */
+.flow-page .mx-scroll{overflow-x:auto;border:1px solid var(--bd);border-radius:12px}
+.flow-page .mx{display:grid;grid-template-columns:118px repeat(6,minmax(150px,1fr));min-width:1040px;background:var(--bd2)}
+.flow-page .mx>div{background:#fff}
+.flow-page .mx-corner{background:#f7f8fa}
+.flow-page .mx-stage{background:#f7f8fa;padding:11px 12px}
+.flow-page .mx-stage .n{font-size:11px;color:var(--fg3)}
+.flow-page .mx-stage .t{font-size:12.5px;font-weight:700;display:block;margin-top:1px}
+.flow-page .mx-stage .a{font-size:10.5px;color:var(--brand);margin-top:2px;display:block}
+.flow-page .mx-seg{background:#fbfbfa;padding:12px 11px}
+.flow-page .mx-seg .t{font-size:12.5px;font-weight:700}
+.flow-page .mx-seg .s{font-size:10.5px;color:var(--fg3);display:block;margin-top:2px}
+.flow-page .mx-cell{padding:9px 11px;display:flex;flex-direction:column;gap:5px}
+.flow-page .chip{font-size:11.5px;line-height:1.4;color:var(--fg)}
+.flow-page .chip.mk{border-left:3px solid var(--bd);padding-left:7px;color:var(--fg2)}
+.flow-page .chip.miss{border-left-color:var(--miss)}
+.flow-page .chip.gap{border-left-color:var(--gap)}
+.flow-page .chip.mis{border-left-color:var(--mistake)}
+.flow-page .chip .fl{font-size:10px;font-weight:700;margin-left:4px;vertical-align:1px}
+.flow-page .chip.miss .fl{color:var(--miss)}.flow-page .chip.gap .fl{color:var(--gap)}.flow-page .chip.mis .fl{color:var(--mistake)}
+.flow-page .mx-empty{padding:9px 11px;color:var(--fg3);font-size:11.5px}
 .flow-page .todo{font-size:11.5px;color:var(--fg3);font-style:italic}
+.flow-page .axis-note{font-size:11px;color:var(--fg3);margin:10px 2px 0}
 </style></head><body>
 <div class="app-shell">
   <nav class="lnb" id="lnb"></nav>
@@ -31,35 +46,62 @@
   <main class="main">
     <div class="flow-scroll">
       <div class="flow-page">
-        <div class="top"><h1>🗺️ UX Flow 아카이브</h1><p>Customer Job(고객 과업)별 UX flow · 각 과업이 어떤 화면·기능을 거치는지 모아 UXW·UX flow 검수의 맥락으로 활용 · 기획자 공유용</p></div>
+        <div class="top"><h1>🗺️ UX Flow 아카이브</h1><p>셀러 daily routine × seller segment 매트릭스 · 각 셀 = 그 단계에서 닿는 화면·기능(service flow) · UXW·UX flow 검수의 맥락 기반 · 기획자 공유용</p></div>
         <div class="wrap">
-          <div class="intro"><b>구성 원칙</b> — <b>Customer Job(과업) 단위</b>로 분류(과업은 유한하고 명확). 각 과업 아래에 end-to-end flow(화면 순서) + 관련 화면·기능 + 관련 검수본. '상황'은 과업 안의 flow 변형(variant)으로 둔다(무한 확장 방지).</div>
+          <div class="intro">
+            <b>구성 원칙</b> — <b>가로축 = 셀러 daily routine 6단계</b>(관찰된 행동이라 안정적인 척추) · <b>세로축 = seller segment 3종</b>(같은 루틴에서 켜지는 구간·진입점이 다름) · <b>각 셀 = 그 단계×segment에서 닿는 화면·기능(service flow 노드) + 필요 데이터</b>. '상황'은 셀 안의 variant로 둔다(무한 확장 방지). 세로로 읽으면 routine, 셀을 이으면 service flow, 행끼리 비교하면 segment. <b>1차 = 2P 맥락</b>으로 채움(3P는 New 행의 진입부 참조). 셀 내용은 두 Figma에서 뽑은 초안 — 네이버 실제 화면과 대조해 갱신 필요.
+          </div>
 
-          <!-- 과업 1 (seed) -->
-          <div class="job"><div class="job-h"><span class="job-ic">📦</span><div><div class="job-t">입고하기</div><div class="job-sub">셀러가 상품을 N배송 물류센터에 입고시킨다</div></div></div>
-            <div class="job-b">
-              <div class="flow">
-                <div class="fstep"><b>입고신청</b><small>입고관리</small></div><span class="fsep">›</span>
-                <div class="fstep"><b>입고대기</b><small>입고상세</small></div><span class="fsep">›</span>
-                <div class="fstep"><b>입고중</b><small>입고상세</small></div><span class="fsep">›</span>
-                <div class="fstep hot"><b>리포트처리대기</b><small>이슈 발생 시</small></div><span class="fsep">›</span>
-                <div class="fstep"><b>입고완료</b><small>판매가능 재고</small></div>
-              </div>
-              <div class="meta">
-                <b>관련 화면</b> <span class="tag">입고관리(목록)</span><span class="tag">입고상세</span><span class="tag">리포트관리</span><span class="tag">리포트상세</span><span class="tag">알림</span><br>
-                <b>관련 변경/피쳐</b> 입고 리포트 <b>자동승인</b> 전환 (2026.07) · 직접승인(10일) → 당일 23:59:59 자동승인, 이의는 '이의 신청'<br>
-                <b>관련 검수본</b> <a class="lnk" href="pages/입고리포트_자동승인_다탭검수본.html">입고리포트 자동승인 UXW 검수본 ›</a>
-              </div>
+          <div class="legend">
+            <span class="lg"><i class="i-miss"></i>미제공 데이터</span>
+            <span class="lg"><i class="i-gap"></i>Gap(끊김)</span>
+            <span class="lg"><i class="i-mis"></i>흔한 실수</span>
+            <span class="sep">🟡 신규(2P) · ⚫ 기존(3P) 표기는 셀 채울 때 추가</span>
+          </div>
+
+          <div class="mx-scroll">
+            <div class="mx">
+              <!-- 헤더행: 코너 + routine 6단계 -->
+              <div class="mx-corner mx-stage"><span class="n">단계 (routine)</span></div>
+              <div class="mx-stage"><span class="n">1</span><span class="t">진입·인지</span><span class="a">Awareness</span></div>
+              <div class="mx-stage"><span class="n">2</span><span class="t">현황 확인</span><span class="a">Understanding</span></div>
+              <div class="mx-stage"><span class="n">3</span><span class="t">원인 진단</span><span class="a">Understanding</span></div>
+              <div class="mx-stage"><span class="n">4</span><span class="t">의사결정</span><span class="a">마진·우선순위</span></div>
+              <div class="mx-stage"><span class="n">5</span><span class="t">조치·실행</span><span class="a">Action</span></div>
+              <div class="mx-stage"><span class="n">6</span><span class="t">관리·모니터링</span><span class="a">Managements</span></div>
+
+              <!-- Net-new -->
+              <div class="mx-seg"><span class="t">Net-new</span><span class="s">판센 자체가 처음</span></div>
+              <div class="mx-cell"><span class="chip">판센 가입</span><span class="chip mk gap">공지·검색으로 2P 인지<span class="fl">GAP</span></span></div>
+              <div class="mx-empty">— (판매 전)</div>
+              <div class="mx-empty">—</div>
+              <div class="mx-empty">—</div>
+              <div class="mx-cell"><span class="chip">상품 등록</span><span class="chip">첫 입고 신청</span></div>
+              <div class="mx-cell"><span class="chip">입고 상태 확인</span></div>
+
+              <!-- New -->
+              <div class="mx-seg"><span class="t">New</span><span class="s">3P→2P 전환</span></div>
+              <div class="mx-cell"><span class="chip mk gap">3P 홈·알림서 2P 발견<span class="fl">GAP</span></span><span class="chip">APP push</span></div>
+              <div class="mx-cell"><span class="chip">기존 3P 매출과 비교</span></div>
+              <div class="mx-cell"><span class="chip mk miss">어떤 SKU를 2P로?<span class="fl">미제공</span></span></div>
+              <div class="mx-cell"><span class="chip mk miss">3P vs 2P 마진 비교<span class="fl">미제공</span></span></div>
+              <div class="mx-cell"><span class="chip">상품 2P 전환·SKU 연결</span><span class="chip">입고 신청</span></div>
+              <div class="mx-cell"><span class="chip">입고 리포트</span><span class="chip mk">자동승인</span></div>
+
+              <!-- Current -->
+              <div class="mx-seg"><span class="t">Current</span><span class="s">2P 운영 중</span></div>
+              <div class="mx-cell"><span class="chip">로그인</span><span class="chip">알림 · APP push</span></div>
+              <div class="mx-cell"><span class="chip">전일 매출</span><span class="chip">판매가능재고</span></div>
+              <div class="mx-cell"><span class="chip">VI별 매출</span><span class="chip mk gap">노출상태(위너/배지)<span class="fl">GAP</span></span><span class="chip">품절임박·보관료·소비기한</span></div>
+              <div class="mx-cell"><span class="chip">마진계산</span><span class="chip mk miss">경쟁가·정산·보관료<span class="fl">미제공</span></span></div>
+              <div class="mx-cell"><span class="chip">가격/광고/노출 관리</span><span class="chip">입고 생성 · 반출 생성</span><span class="chip">반품 검수</span></div>
+              <div class="mx-cell"><span class="chip">처리 현황</span><span class="chip mk mis">소비기한·보관료<span class="fl">흔한실수</span></span></div>
             </div>
           </div>
 
-          <!-- 과업 placeholder -->
-          <div class="job ph"><div class="job-h"><span class="job-ic">↩️</span><div><div class="job-t">반품 처리하기</div><div class="job-sub">반품 상품을 확인하고 재고 처리(재판매/재포장/리퍼/폐기)한다</div></div></div>
-            <div class="job-b"><div class="todo">· flow 미정리 — 반품상품관리 검수 시 채우기 (반품상품관리_0618 참고)</div></div></div>
-          <div class="job ph"><div class="job-h"><span class="job-ic">📊</span><div><div class="job-t">재고 확인·관리하기</div><div class="job-sub">보관 재고 현황과 보관비를 확인한다</div></div></div>
-            <div class="job-b"><div class="todo">· flow 미정리 — 재고보관내역 검수 시 채우기 (재고보관내역_0623 참고)</div></div></div>
+          <p class="axis-note">※ 세로↓ routine 단계 흐름 · 가로→ 각 segment의 여정. Net-new는 1~4단계가 비어 있음 = 운영 루프 진입 전(도입 여정이 본체). New 행의 진단·의사결정에 🔴미제공이 몰림 = 3P→2P 전환 다리의 최대 끊김.</p>
 
-          <p class="todo" style="margin-top:20px">※ 새 검수건을 진행할 때마다 해당 과업의 flow를 여기에 append. 7월 중순 UX flow 검수 시작 시 이 아카이브가 기반이 됨.</p>
+          <p class="todo" style="margin-top:16px">※ UXW 검수할 때마다 해당 화면을 이 매트릭스의 셀에 핀 꽂고(어느 단계×segment) 🔴미제공·🟠흔한실수·💬Gap을 표기 → 지도가 검수와 함께 채워짐. 관련 검수본: <a class="lnk" href="pages/입고리포트_자동승인_다탭검수본.html">입고리포트 자동승인 UXW 검수본 ›</a></p>
         </div>
       </div>
     </div>
