@@ -104,6 +104,11 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 .acc-hint{font-size:11px;font-weight:400;color:var(--fg3);margin-left:8px}
 .sec-group{font-size:14px;font-weight:800;color:var(--fg);margin:22px 0 12px 2px}
 .sec-group span{font-size:12px;font-weight:500;color:var(--fg2);margin-left:6px}
+.acc-body{padding:2px 18px 16px}
+.bg-block{margin-bottom:13px}.bg-block:last-child{margin-bottom:0}
+.bg-label{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;color:#0a7a3c;background:rgba(0,184,79,.1);border-radius:4px;padding:2px 8px;margin-bottom:6px}
+.bg-block p{font-size:12.5px;line-height:1.7;color:var(--fg2);margin:0}
+.bg-block ul{margin:4px 0 0 18px;line-height:1.8;font-size:12.5px;color:var(--fg2)}
 .term{display:grid;grid-template-columns:130px 1fr;font-size:12.5px;border-top:1px solid var(--bd2)}.term dt{background:var(--bg);padding:9px 12px;border-bottom:1px solid var(--bd2);font-weight:700}.term dd{padding:9px 12px;border-bottom:1px solid var(--bd2);color:var(--fg2);line-height:1.6}
 .why-tip{position:fixed;z-index:99999;background:rgba(14,16,26,.96);color:rgba(255,255,255,.92);font-size:12px;line-height:1.6;padding:9px 13px;border-radius:9px;max-width:290px;pointer-events:none;display:none;box-shadow:0 6px 24px rgba(0,0,0,.4)}
 .why-tip-label{display:block;font-size:10px;font-weight:700;color:rgba(0,220,120,.85);margin-bottom:4px;letter-spacing:.4px}
@@ -162,11 +167,19 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 <div id="p-tone" class="pane active"><div class="content">
   <div class="sec-head"><div class="sec-title">톤 &amp; 매너 · 변경 배경</div></div>
   <details class="tone-box acc">
-    <summary>🗂 변경 배경<span class="acc-hint">대부분 아는 내용 — 필요하면 펼쳐 보기</span></summary>
-    <ul>
-    <li>입고 리포트 승인: <b>직접승인(등록 후 10일 내)</b> → <b>당일 23:59 자동승인</b></li>
-    <li>물류 작업이 리포트 등록 전 먼저 진행돼 직접승인과 실무 간 시차·병목 발생</li>
-    <li>작업은 되돌릴 수 없고 당월 리포트는 당월 정산 → 승인 갭 둘 이유 없음</li></ul>
+    <summary>🗂 변경 배경</summary>
+    <div class="acc-body">
+      <div class="bg-block"><span class="bg-label">Problem</span>
+        <p>입고 이슈 발생 시 판매자의 리포트 승인이 필요하나, 물류사는 <b>선작업 후 리포트를 발행</b>하는 구조 → '승인 → 작업'까지 <b>최대 +10일</b> 리드타임 발생.</p></div>
+      <div class="bg-block"><span class="bg-label">Current</span>
+        <ul>
+          <li>입고 이슈 발생 시 판매자 리포트 승인 필요(최대 10일)</li>
+          <li>입고리포트 오픈 후 총 완료 <b>5,806건</b> — 판매자 처리완료 3,171건 · 승인기한만료 <b>2,588건(44%)</b> · 강제종료 47건</li>
+          <li>강제종료 47건은 물류사 확인 후 당일 내 정정되도록 안내 필요</li>
+        </ul></div>
+      <div class="bg-block"><span class="bg-label">Hypothesis</span>
+        <p>리포트 승인을 <b>당일 23:59:59 자동승인</b>으로 바꿔 물류사 실제 운영 프로세스와 싱크를 맞추면 병목이 제거될 것.</p></div>
+    </div>
   </details>
   <div class="sec-group">핵심 변경<span>· 전 탭 공통 적용</span></div>
   <div class="tone-box"><div class="tone-h">🔤 워딩 변경 · '문의하기' → '이의 신청'</div><ul>
