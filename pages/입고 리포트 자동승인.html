@@ -4,12 +4,13 @@
 :root{--fg:rgba(0,0,0,.84);--fg2:rgba(0,0,0,.56);--fg3:rgba(0,0,0,.38);--bg:#f7f8fa;--bg2:#f0f1f5;--bd:rgba(0,0,0,.13);--bd2:rgba(0,0,0,.07);--brand:#00b84f;--red:#f42428;--lnk:#1a6dd6;--ff:'Pretendard Variable',-apple-system,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;letter-spacing:-.25px;-webkit-font-smoothing:antialiased}
-.review-bar{background:#1a1a2e;color:#fff;padding:20px 36px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:300}
+.review-bar{background:#1a1a2e;color:#fff;padding:20px 36px;display:flex;align-items:center;gap:12px}
+.doc-sticky{position:sticky;top:0;z-index:300;background:#fff}
 .review-bar-title{font-size:19px;font-weight:700}.review-bar-sub{font-size:11.5px;color:rgba(255,255,255,.55);margin-top:6px}
 .rb-meta{margin-left:auto}
 .chg-btn{background:#243b2e;border:1px solid rgba(0,184,79,.5);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;color:#eafff2;display:inline-flex;align-items:center;gap:8px}
 .chg-btn .n{background:var(--brand);color:#062a16;border-radius:99px;font-size:12px;font-weight:800;min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;padding:0 6px}
-.tab-bar{background:#fff;border-bottom:1px solid var(--bd);padding:0 36px;display:flex;gap:24px;position:sticky;top:62px;z-index:190;flex-wrap:wrap}
+.tab-bar{background:#fff;border-bottom:1px solid var(--bd);padding:0 36px;display:flex;gap:24px;flex-wrap:wrap}
 .tab-item{padding:14px 0;font-size:13px;font-weight:600;color:var(--fg3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
 .tab-item.active{color:var(--brand);border-bottom-color:var(--brand)}
 .pane{display:none}.pane.active{display:block}
@@ -131,6 +132,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;l
 <nav class="lnb" id="lnb"></nav>
 <div id="page-content">
 
+<div class="doc-sticky">
 <div class="review-bar">
   <div><div class="review-bar-title">입고 리포트 자동승인 · UXW 검수본</div>
   <div class="review-bar-sub">2026.07.03 · N배송플랫폼기획 박선영 · 입고 리포트 자동승인</div></div>
@@ -144,6 +146,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;l
   <div class="tab-item" onclick="tab('rdetail')">리포트 상세</div>
   <div class="tab-item" onclick="tab('alarm')">알림</div>
   <div class="tab-item" onclick="tab('help')">도움말·Q&amp;A</div>
+</div>
 </div>
 
 <!-- 톤 & 배경 -->
