@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>입고리포트 자동승인_UXW 다탭 검수본</title>
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>입고 리포트 자동승인</title>
 <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 :root{--fg:rgba(0,0,0,.84);--fg2:rgba(0,0,0,.56);--fg3:rgba(0,0,0,.38);--bg:#f7f8fa;--bg2:#f0f1f5;--bd:rgba(0,0,0,.13);--bd2:rgba(0,0,0,.07);--brand:#00b84f;--red:#f42428;--lnk:#1a6dd6;--ff:'Pretendard Variable',-apple-system,sans-serif}
@@ -97,7 +97,39 @@ body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;l
 .term{display:grid;grid-template-columns:130px 1fr;font-size:12.5px;border-top:1px solid var(--bd2)}.term dt{background:var(--bg);padding:9px 12px;border-bottom:1px solid var(--bd2);font-weight:700}.term dd{padding:9px 12px;border-bottom:1px solid var(--bd2);color:var(--fg2);line-height:1.6}
 .why-tip{position:fixed;z-index:99999;background:rgba(14,16,26,.96);color:rgba(255,255,255,.92);font-size:12px;line-height:1.6;padding:9px 13px;border-radius:9px;max-width:290px;pointer-events:none;display:none;box-shadow:0 6px 24px rgba(0,0,0,.4)}
 .why-tip-label{display:block;font-size:10px;font-weight:700;color:rgba(0,220,120,.85);margin-bottom:4px;letter-spacing:.4px}
+/* ── 아카이브 LNB (재고 검수본과 동일) ── */
+.lnb{position:fixed;top:0;left:0;width:240px;background:#fff;border-right:1px solid rgba(0,0,0,0.12);display:flex;flex-direction:column;height:100vh;transition:width .2s ease;z-index:400;overflow:hidden}
+.lnb.collapsed{width:48px}
+.lnb-head{padding:20px 18px 14px;border-bottom:1px solid rgba(0,0,0,0.08);flex-shrink:0;display:flex;flex-direction:column}
+.lnb-head-top{display:flex;align-items:center;justify-content:space-between}
+.lnb-title{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:700;color:#00b84f;cursor:pointer;text-decoration:none;overflow:hidden;white-space:nowrap}
+.lnb-title-mark{font-size:16px;flex-shrink:0}
+.lnb-title-text{overflow:hidden;text-overflow:ellipsis;transition:opacity .15s}
+.lnb.collapsed .lnb-title-text{opacity:0;width:0}
+.lnb-toggle{width:24px;height:24px;border-radius:4px;border:1px solid rgba(0,0,0,0.12);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(0,0,0,0.38);flex-shrink:0}
+.lnb-toggle:hover{background:#f7f8fa}
+.lnb-scroll{flex:1;overflow-y:auto;overflow-x:hidden;padding:8px 0 24px}
+.lnb-section-label{font-size:11px;font-weight:600;color:rgba(0,0,0,0.38);letter-spacing:.4px;padding:14px 18px 6px;white-space:nowrap;transition:opacity .15s}
+.lnb.collapsed .lnb-section-label{opacity:0;pointer-events:none}
+.lnb-item{display:flex;align-items:center;gap:8px;padding:8px 18px;font-size:13px;color:rgba(0,0,0,0.56);cursor:pointer;text-decoration:none;border-left:2px solid transparent;transition:background .12s,color .12s}
+.lnb.collapsed .lnb-item{padding:8px 0;justify-content:center;border-left:none}
+.lnb-item:hover{background:#f7f8fa}
+.lnb-item.active{background:rgba(0,184,79,0.07);color:rgba(0,0,0,0.81);font-weight:600;border-left-color:#00b84f}
+.lnb-item-label{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:opacity .15s}
+.lnb.collapsed .lnb-item-label{opacity:0;width:0;flex:0}
+.lnb-item-icon{font-size:14px;flex-shrink:0}
+.lnb-item-date{font-size:10px;font-weight:400;color:rgba(0,0,0,0.32);white-space:nowrap;margin-left:auto;margin-right:4px;transition:opacity .15s}
+.lnb.collapsed .lnb-item-date{display:none}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block}
+.status-dot.검토중{background:#f5b400}.status-dot.반영완료{background:#00b84f}.status-dot.반영거부{background:#f42428}.status-dot.대기중{background:#c4c8d0}
+.lnb.collapsed .lnb-scroll{display:none!important}
+.lnb.collapsed .lnb-title{display:none}
+.lnb.collapsed .lnb-head{padding:12px 0;align-items:center}
+.lnb.collapsed .lnb-head-top{justify-content:center}
+#page-content{margin-left:240px;transition:margin-left .2s ease}
 </style></head><body>
+<nav class="lnb" id="lnb"></nav>
+<div id="page-content">
 
 <div class="review-bar">
   <div><div class="review-bar-title">입고 리포트 자동승인 · UXW 검수본</div>
@@ -321,6 +353,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;l
 </div></div>
 
 <div class="why-tip" id="why-tip"><span class="why-tip-label">✦ 변경 이유</span><span id="why-tip-body"></span></div>
+</div>
 <script>
 function tab(n){document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(t=>t.classList.remove('active'));var pane=document.getElementById('p-'+n);if(pane)pane.classList.add('active');document.querySelectorAll('.tab-item').forEach(t=>{if((t.getAttribute('onclick')||'').indexOf("'"+n+"'")>=0)t.classList.add('active')});window.scrollTo(0,0);}
 function dr(el){return false;}
@@ -334,5 +367,17 @@ function dr(el){return false;}
 (function(){var tip=document.getElementById('why-tip'),b=document.getElementById('why-tip-body');
 document.addEventListener('mouseover',function(e){var el=e.target.closest('[data-why]');if(!el||!el.dataset.why)return;b.textContent=el.dataset.why;tip.style.display='block';var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,left=Math.max(8,Math.min(r.left+r.width/2-tw/2,window.innerWidth-tw-8)),top=r.top-th-10;if(top<8)top=r.bottom+10;tip.style.left=left+'px';tip.style.top=top+'px';});
 document.addEventListener('mouseout',function(e){if(e.target.closest('[data-why]'))tip.style.display='none';});})();
+</script>
+<script src="../assets/shell.js?v=3"></script>
+<script>
+(async function(){
+  const docs = await loadDocs();
+  renderLNB({ active: '입고 리포트 자동승인', docs });
+  const pc = document.getElementById('page-content');
+  const lnb = document.getElementById('lnb');
+  const upd = () => { pc.style.marginLeft = lnb.classList.contains('collapsed') ? '48px' : '240px'; };
+  upd();
+  new MutationObserver(upd).observe(lnb, {attributes:true, attributeFilter:['class']});
+})();
 </script>
 </body></html>
