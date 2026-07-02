@@ -109,6 +109,8 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 .bg-label{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;color:#0a7a3c;background:rgba(0,184,79,.1);border-radius:4px;padding:2px 8px;margin-bottom:6px}
 .bg-block p{font-size:12.5px;line-height:1.7;color:var(--fg2);margin:0}
 .bg-block ul{margin:4px 0 0 18px;line-height:1.8;font-size:12.5px;color:var(--fg2)}
+.kc-h{font-size:13px;font-weight:700;margin-bottom:8px}
+.kc-divider{border-top:1px solid var(--bd2);margin:16px 0}
 .term{display:grid;grid-template-columns:130px 1fr;font-size:12.5px;border-top:1px solid var(--bd2)}.term dt{background:var(--bg);padding:9px 12px;border-bottom:1px solid var(--bd2);font-weight:700}.term dd{padding:9px 12px;border-bottom:1px solid var(--bd2);color:var(--fg2);line-height:1.6}
 .why-tip{position:fixed;z-index:99999;background:rgba(14,16,26,.96);color:rgba(255,255,255,.92);font-size:12px;line-height:1.6;padding:9px 13px;border-radius:9px;max-width:290px;pointer-events:none;display:none;box-shadow:0 6px 24px rgba(0,0,0,.4)}
 .why-tip-label{display:block;font-size:10px;font-weight:700;color:rgba(0,220,120,.85);margin-bottom:4px;letter-spacing:.4px}
@@ -181,16 +183,20 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
         <p>리포트 승인을 <b>당일 23:59:59 자동승인</b>으로 바꿔 물류사 실제 운영 프로세스와 싱크를 맞추면 병목이 제거될 것.</p></div>
     </div>
   </details>
-  <div class="sec-group">핵심 변경<span>· 전 탭 공통 적용</span></div>
-  <div class="tone-box"><div class="tone-h">🔤 워딩 변경 · '문의하기' → '이의 신청'</div><ul>
+  <div class="tone-box"><div class="tone-h">📌 핵심 변경 <span style="font-size:12px;font-weight:500;color:var(--fg2)">· 전 탭 공통 적용</span></div>
+    <div class="kc-h">🔤 워딩 변경 · '문의하기' → '이의 신청'</div>
+    <ul>
     <li>ASIS <b>'문의하기'</b> → TOBE <b>'이의 신청'</b> (전 탭 통일)</li>
     <li>사유: <b>단순 문의가 아니라 선작업을 보류시키는 액션</b> → '문의하기'는 결과 과소 전달</li>
-    <li>'이의제기'는 부담 → <b>'이의 신청'</b>으로 완화. 결과는 보조문구: <i>"이의 신청 시 물류센터 선작업이 보류되고 담당자가 확인합니다."</i></li></ul></div>
-  <div class="tone-box"><div class="tone-h">🔤 상태값 변경 · '리포트처리대기' → '리포트승인대기'</div><ul>
+    <li>'이의제기'는 부담 → <b>'이의 신청'</b>으로 완화. 결과는 보조문구: <i>"이의 신청 시 물류센터 선작업이 보류되고 담당자가 확인합니다."</i></li></ul>
+    <div class="kc-divider"></div>
+    <div class="kc-h">🔤 상태값 변경 · '리포트처리대기' → '리포트승인대기'</div>
+    <ul>
     <li><b>ASIS 불일치</b>: 입고쪽 '리포트처리대기' vs 리포트관리 '리포트승인대기' — 화면마다 다름</li>
     <li><b>왜 '승인'인가</b>: 판매자 액션은 <b>'승인'</b>, <b>'처리'</b>는 그 뒤 네이버(공급자)의 몫 → 판매자 화면 상태값엔 부적절</li>
     <li>판매자가 할 일(=승인)을 담은 <b>'리포트승인대기'</b>로 전 화면 통일 (리포트관리 '승인대기'와 일치)</li>
-    <li><b>연동</b>: 자동화 문구도 '자동 승인 <s>처리</s>' → <b>'자동 승인'</b>('처리'는 네이버 몫)</li></ul></div>
+    <li><b>연동</b>: 자동화 문구도 '자동 승인 <s>처리</s>' → <b>'자동 승인'</b>('처리'는 네이버 몫)</li></ul>
+  </div>
   <div class="tone-box"><div class="tone-h">🎙 이번 검수 톤 원칙</div><ul>
     <li><b>부정 프레임 제거, 사유는 유지</b>: "문제/지연" → "입고이슈"(중립)</li>
     <li><b>기존 용어 재사용</b>: '승인기한' 등 유지 (단 '리포트처리대기'→'리포트승인대기'는 위 참고)</li>
