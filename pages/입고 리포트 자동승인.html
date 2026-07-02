@@ -130,6 +130,8 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 .loc-tab{display:inline-block;font-size:11px;font-weight:700;color:var(--fg3);min-width:56px}
 .kc-divider{border-top:1px solid var(--bd2);margin:16px 0}
 /* 변경 내역 드로어 */
+/* ⏸ 보류(HIDE): 아래 한 줄이 변경내역 버튼+드로어를 숨김 — 복구하려면 이 줄만 삭제 */
+.chg-btn,#chgDrawer{display:none!important}
 .chg-btn{cursor:pointer;user-select:none}
 .chg-drawer{position:fixed;top:0;right:0;height:100vh;width:344px;max-width:88vw;background:#fff;border-left:1px solid var(--bd);box-shadow:-6px 0 24px rgba(0,0,0,.14);transform:translateX(100%);transition:transform .25s ease;z-index:600;display:flex;flex-direction:column}
 .chg-drawer.open{transform:translateX(0)}
