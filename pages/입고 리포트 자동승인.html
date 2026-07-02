@@ -92,6 +92,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;l
 [data-why]{cursor:help}
 [data-why]::before{counter-increment:chgno;content:counter(chgno);display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--brand);color:#fff;font-size:9px;font-weight:700;margin-right:5px;vertical-align:middle;text-decoration:none;line-height:1;flex-shrink:0}
 .chg-corner{position:absolute;top:-8px;right:-8px;z-index:3;cursor:help}.chg-corner::before{margin-right:0}
+.push[data-why]{cursor:help}.push[data-why]::before{position:absolute;top:-8px;right:-8px;margin-right:0;z-index:3}
 .chip-l .as[data-why]{position:relative;cursor:help}
 .chip-l .as[data-why]::before{position:absolute;top:-8px;right:-8px;margin:0;width:14px;height:14px;font-size:8px}
 .note{background:var(--bg);border:1px solid var(--bd2);border-radius:6px;padding:9px 13px;font-size:11.5px;color:var(--fg3);line-height:1.6;margin-top:12px}
@@ -365,10 +366,10 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
     <div class="gist"><span class="lab">핵심</span>기존 '리포트 등록 안내'(ASIS)를 입고 자동승인용으로 확장한 <b>'N배송 리포트 등록 안내 (자동승인 예정)'(TOBE) 신설</b> — 승인기한·확인 후 '이의 신청' 경로 안내(기획팀 요청).</div>
   </div>
   <div class="noti-pair">
-    <div class="push asis-card"><span class="pair-label asis">ASIS · 기존</span>
+    <div class="push asis-card"><span class="pair-label asis">ASIS</span>
       <div class="push-head"><span>물류연동</span><span>✕</span></div><div class="push-title">N배송 리포트 등록 안내</div>
       <div class="push-body">물류사에서 리포트(리포트 ID: {$리포트ID$})를 등록했습니다.</div></div>
-    <div class="push new"><span class="pair-label tobe">TOBE · 신설</span><span class="chg-corner" data-why="기존 '리포트 등록 안내' 확장 — 등록 + 승인기한 지나면 자동승인 안내(확인·이의는 상세 클릭)" onclick="dr(this)"></span>
+    <div class="push new" data-why="기존 '리포트 등록 안내' 확장 — 등록 + 승인기한 지나면 자동승인 안내(확인·이의는 상세 클릭)" onclick="dr(this)"><span class="pair-label tobe">TOBE</span>
       <div class="push-head"><span>물류연동 · 오후 3시 20분</span><span>✕</span></div><div class="push-title">N배송 리포트 등록 안내 (자동승인 예정)</div>
       <div class="push-body">입고이슈로 리포트가 등록되었습니다. 승인기한(오늘 23:59)이 지나면 자동 승인됩니다.</div>
       <div class="push-body" style="margin-top:8px;color:var(--fg3);font-size:11px">↳ 클릭 시 리포트 상세로 새 탭 연결</div></div>
