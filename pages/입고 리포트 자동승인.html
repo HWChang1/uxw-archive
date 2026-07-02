@@ -171,18 +171,18 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 </div>
 
 <div class="tab-bar">
-  <div class="tab-item active" onclick="tab('tone')">톤 &amp; 배경</div>
-  <div class="tab-item" onclick="tab('ipgo')">입고 상세</div>
-  <div class="tab-item" onclick="tab('list')">입고 관리</div>
-  <div class="tab-item" onclick="tab('rdetail')">리포트 상세</div>
-  <div class="tab-item" onclick="tab('alarm')">알림</div>
-  <div class="tab-item" onclick="tab('help')">도움말·Q&amp;A</div>
+  <div class="tab-item active" onclick="tab('tone')">배경 &amp; 변경내역</div>
+  <div class="tab-item" onclick="tab('ipgo')">1. 입고상세</div>
+  <div class="tab-item" onclick="tab('list')">2. 입고관리</div>
+  <div class="tab-item" onclick="tab('rdetail')">3. 리포트상세</div>
+  <div class="tab-item" onclick="tab('alarm')">4. 알림</div>
+  <div class="tab-item" onclick="tab('help')">5. 도움말·Q&amp;A</div>
 </div>
 </div>
 
-<!-- 톤 & 배경 -->
+<!-- 배경 & 변경내역 -->
 <div id="p-tone" class="pane active"><div class="content">
-  <div class="sec-head"><div class="sec-title">톤 &amp; 매너 · 변경 배경</div></div>
+  <div class="sec-head"><div class="sec-title">배경 &amp; 변경 내역</div></div>
   <details class="tone-box acc">
     <summary>🗂 변경 배경</summary>
     <div class="acc-body">
@@ -212,7 +212,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
           <li><b>ASIS</b> — 입고관리 '리포트처리대기' · 리포트관리 '리포트승인대기'</li>
           <li><b>왜 '승인'인가요?</b> — 판매자 액션은 '승인'이며, 그 이후 '처리'는 공급자의 액션 → 판매자 화면 상태값엔 부적절</li>
         </ul></div></div>
-      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><div class="loc-grp"><span class="loc-tab">입고 상세</span><a class="kc-goto" onclick="goTab('ipgo','st-step')">진행 단계</a> · <a class="kc-goto" onclick="goTab('ipgo','st-summary')">요약</a> · <a class="kc-goto" onclick="goTab('ipgo','st-history')">상태이력</a></div><div class="loc-grp"><span class="loc-tab">입고 관리</span><a class="kc-goto" onclick="goTab('list','st-chip')">상태 칩</a> · <a class="kc-goto" onclick="goTab('list','st-filter')">필터</a> · <a class="kc-goto" onclick="goTab('list','st-list')">목록</a></div></div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><div class="loc-grp"><span class="loc-tab">입고상세</span><a class="kc-goto" onclick="goTab('ipgo','st-step')">진행 단계</a> · <a class="kc-goto" onclick="goTab('ipgo','st-summary')">요약</a> · <a class="kc-goto" onclick="goTab('ipgo','st-history')">상태이력</a></div><div class="loc-grp"><span class="loc-tab">입고관리</span><a class="kc-goto" onclick="goTab('list','st-chip')">상태 칩</a> · <a class="kc-goto" onclick="goTab('list','st-filter')">필터</a> · <a class="kc-goto" onclick="goTab('list','st-list')">목록</a></div></div></div>
     </div>
   </div>
   <div class="tone-box"><div class="tone-h">📖 관련 용어</div><dl class="term">
