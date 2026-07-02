@@ -95,6 +95,15 @@ body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;l
 .note{background:var(--bg);border:1px solid var(--bd2);border-radius:6px;padding:9px 13px;font-size:11.5px;color:var(--fg3);line-height:1.6;margin-top:12px}
 .faq{border:1px solid var(--bd2);border-radius:8px;background:#fff;overflow:hidden}.faq-q{padding:13px 16px;font-weight:700;font-size:13px;border-bottom:1px solid var(--bd2);background:var(--bg)}.faq-a{padding:12px 16px 16px;font-size:12.5px;color:var(--fg2);line-height:1.7;border-bottom:1px solid var(--bd2)}.faq-a:last-child{border-bottom:none}
 .tone-box{background:#fff;border:1px solid var(--bd2);border-radius:8px;padding:16px 18px;margin-bottom:14px}.tone-h{font-weight:700;font-size:14px;margin-bottom:10px}.tone-box ul{margin:0 0 0 18px;line-height:1.85;font-size:12.5px;color:var(--fg2)}
+details.acc{padding:0}
+details.acc>summary{cursor:pointer;padding:14px 18px;list-style:none;display:flex;align-items:center;margin:0;font-weight:700;font-size:14px}
+details.acc>summary::-webkit-details-marker{display:none}
+details.acc>summary::after{content:'▾';margin-left:auto;color:var(--fg3);font-size:11px;transition:transform .2s}
+details.acc[open]>summary::after{transform:rotate(180deg)}
+details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12.5px;color:var(--fg2)}
+.acc-hint{font-size:11px;font-weight:400;color:var(--fg3);margin-left:8px}
+.sec-group{font-size:14px;font-weight:800;color:var(--fg);margin:22px 0 12px 2px}
+.sec-group span{font-size:12px;font-weight:500;color:var(--fg2);margin-left:6px}
 .term{display:grid;grid-template-columns:130px 1fr;font-size:12.5px;border-top:1px solid var(--bd2)}.term dt{background:var(--bg);padding:9px 12px;border-bottom:1px solid var(--bd2);font-weight:700}.term dd{padding:9px 12px;border-bottom:1px solid var(--bd2);color:var(--fg2);line-height:1.6}
 .why-tip{position:fixed;z-index:99999;background:rgba(14,16,26,.96);color:rgba(255,255,255,.92);font-size:12px;line-height:1.6;padding:9px 13px;border-radius:9px;max-width:290px;pointer-events:none;display:none;box-shadow:0 6px 24px rgba(0,0,0,.4)}
 .why-tip-label{display:block;font-size:10px;font-weight:700;color:rgba(0,220,120,.85);margin-bottom:4px;letter-spacing:.4px}
@@ -153,17 +162,14 @@ body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;l
 <div id="p-tone" class="pane active"><div class="content">
   <div class="sec-head"><div class="sec-title">톤 &amp; 매너 · 변경 배경</div>
     <div class="gist"><span class="lab">핵심</span>이번 검수 전반에 적용한 배경·톤 원칙·용어. 개별 탭 문구 판단의 근거.</div></div>
-  <div class="tone-box"><div class="tone-h">🗂 변경 배경</div><ul>
+  <details class="tone-box acc">
+    <summary>🗂 변경 배경<span class="acc-hint">대부분 아는 내용 — 필요하면 펼쳐 보기</span></summary>
+    <ul>
     <li>입고 리포트 승인: <b>직접승인(등록 후 10일 내)</b> → <b>당일 23:59 자동승인</b></li>
     <li>물류 작업이 리포트 등록 전 먼저 진행돼 직접승인과 실무 간 시차·병목 발생</li>
-    <li>작업은 되돌릴 수 없고 당월 리포트는 당월 정산 → 승인 갭 둘 이유 없음</li></ul></div>
-  <div class="tone-box"><div class="tone-h">🎙 이번 검수 톤 원칙</div><ul>
-    <li><b>부정 프레임 제거, 사유는 유지</b>: "문제/지연" → "입고이슈"(중립)</li>
-    <li><b>기존 용어 재사용</b>: '승인기한' 등 유지 (단 '리포트처리대기'→'리포트승인대기'는 아래 참고)</li>
-    <li><b>자동 처리 안심 + 결과·경로 명확</b>: "자동 승인 → 입고 진행 / 이의는 '이의 신청'"</li>
-    <li><b>기간 제한 액션엔 승인기한 노출</b>: 상태·액션값 옆에 날짜·시간 병기</li>
-    <li><b>자동화≠수동 제거</b>: 자동이라도 '승인하기'(수동) 버튼 유지</li>
-    <li><b>내부 용어 비노출</b>: '선작업' 등 물류 내부어는 판매자 문구에 안 씀</li></ul></div>
+    <li>작업은 되돌릴 수 없고 당월 리포트는 당월 정산 → 승인 갭 둘 이유 없음</li></ul>
+  </details>
+  <div class="sec-group">핵심 변경<span>· 전 탭 공통 적용</span></div>
   <div class="tone-box"><div class="tone-h">🔤 워딩 변경 · '문의하기' → '이의 신청'</div><ul>
     <li>ASIS <b>'문의하기'</b> → TOBE <b>'이의 신청'</b> (전 탭 통일)</li>
     <li>사유: <b>단순 문의가 아니라 선작업을 보류시키는 액션</b> → '문의하기'는 결과 과소 전달</li>
@@ -173,6 +179,13 @@ body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;l
     <li><b>왜 '승인'인가</b>: 판매자 액션은 <b>'승인'</b>, <b>'처리'</b>는 그 뒤 네이버(공급자)의 몫 → 판매자 화면 상태값엔 부적절</li>
     <li>판매자가 할 일(=승인)을 담은 <b>'리포트승인대기'</b>로 전 화면 통일 (리포트관리 '승인대기'와 일치)</li>
     <li><b>연동</b>: 자동화 문구도 '자동 승인 <s>처리</s>' → <b>'자동 승인'</b>('처리'는 네이버 몫)</li></ul></div>
+  <div class="tone-box"><div class="tone-h">🎙 이번 검수 톤 원칙</div><ul>
+    <li><b>부정 프레임 제거, 사유는 유지</b>: "문제/지연" → "입고이슈"(중립)</li>
+    <li><b>기존 용어 재사용</b>: '승인기한' 등 유지 (단 '리포트처리대기'→'리포트승인대기'는 위 참고)</li>
+    <li><b>자동 처리 안심 + 결과·경로 명확</b>: "자동 승인 → 입고 진행 / 이의는 '이의 신청'"</li>
+    <li><b>기간 제한 액션엔 승인기한 노출</b>: 상태·액션값 옆에 날짜·시간 병기</li>
+    <li><b>자동화≠수동 제거</b>: 자동이라도 '승인하기'(수동) 버튼 유지</li>
+    <li><b>내부 용어 비노출</b>: '선작업' 등 물류 내부어는 판매자 문구에 안 씀</li></ul></div>
   <div class="tone-box"><div class="tone-h">📖 관련 용어</div><dl class="term">
     <dt>승인기한</dt><dd>이의를 신청할 수 있는 마감(자동 승인 시점). 등록 당일 23:59</dd>
     <dt>이의 신청</dt><dd>승인기한 내 이견을 접수하는 경로. 신청 시 선작업 보류·담당자 확인. 직접승인의 '승인/거부' 대체</dd>
