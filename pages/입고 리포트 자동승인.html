@@ -17,6 +17,8 @@ body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;l
 .content{padding:22px 36px 100px;max-width:1040px;margin:0 auto;counter-reset:chgno}
 .sec-head{margin-bottom:18px}
 .sec-title{font-size:18px;font-weight:700;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.title-ab{display:inline-flex;flex-direction:column;align-items:flex-start;gap:2px;line-height:1.2}
+.title-ab .as{font-size:12px;font-weight:600}
 .sec-req{font-size:11px;background:rgba(0,184,79,.1);color:#0a7a3c;border:1px solid rgba(0,184,79,.3);border-radius:99px;padding:2px 9px}
 .crumb-badge{font-size:11px;font-weight:500;background:var(--bg2);color:var(--fg3);border:1px solid var(--bd2);border-radius:99px;padding:3px 10px}
 .gist{background:#edfaf3;border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:11px 15px;font-size:12.5px;color:var(--fg);line-height:1.7;margin-top:11px}
@@ -223,8 +225,8 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 
 <!-- 입고 상세 -->
 <div id="p-ipgo" class="pane"><div class="content">
-  <div class="sec-head"><div class="sec-title"><span class="as">N배송 입고관리</span> <span class="to" data-why="'입고 상세' 화면인데 타이틀이 '입고관리'라 목록과 혼동 → 실제 화면명으로 정정" onclick="dr(this)">N배송 입고상세</span> <span class="crumb-badge">N배송 관리 › 입고관리 › 입고상세</span><span class="sc-btn" style="margin-left:auto">메뉴얼 확인하기</span></div>
-    <div class="gist"><span class="lab">핵심</span>부정 프레임(문제·지연)만 걷어내되 <b>사유(입고이슈)·기존 용어(승인기한)는 유지</b>, 결과("입고가 진행됩니다")까지. 좁은 스텝은 워싱, 상세는 칩·버튼 분리. 긴박한 마감은 날짜·시간으로.</div>
+  <div class="sec-head"><div class="sec-title"><span class="title-ab"><span class="as">N배송 입고관리</span><span class="to" data-why="'입고 상세' 화면인데 타이틀이 '입고관리'라 목록과 혼동 → 실제 화면명으로 정정" onclick="dr(this)">N배송 입고상세</span></span> <span class="crumb-badge">N배송 관리 › 입고관리 › 입고상세</span><span class="sc-btn" style="margin-left:auto">메뉴얼 확인하기</span></div>
+    <div class="gist"><span class="lab">핵심</span>화면 타이틀 <b>'입고관리'→'입고상세'</b> 정정(목록과 혼동 방지). 상태값 <b>'리포트처리대기'→'리포트승인대기'</b>(스텝·요약·상태이력). 부정 프레임(문제·지연)은 제거하되 <b>사유(입고이슈)·기존 용어(승인기한)는 유지</b>하고 결과('입고가 진행됩니다')까지 안내. 마감은 승인기한(날짜·시간) 병기.</div>
   </div>
   <div class="screen"><div class="sc-body">
       <div class="card"><div class="card-h"><span class="card-h-t">입고 단계</span><span class="btn-o">입고 리포트 확인하기</span></div><div class="card-b">
@@ -280,7 +282,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 <!-- 입고 관리 -->
 <div id="p-list" class="pane"><div class="content">
   <div class="sec-head"><div class="sec-title">N배송 입고관리 <span class="crumb-badge">N배송 관리 › 입고관리</span><span class="sc-btn" style="margin-left:auto">메뉴얼 바로가기</span></div>
-    <div class="gist"><span class="lab">핵심</span>상태 대시보드 <b>리포트승인대기 i-툴팁</b>과 <b>목록 상단 알림</b>을 자동 승인·이의 안내로 워싱(탭1과 동일 워딩). 필터·목록은 원본 구조대로 재현.</div>
+    <div class="gist"><span class="lab">핵심</span>상태 칩 <b>'리포트승인대기' i-툴팁</b>과 <b>목록 상단 알림</b>을 자동 승인·이의 안내 문구로 워싱(전 탭 정본 워딩 통일). 상태값 <b>'리포트처리대기'→'리포트승인대기'</b>(칩·필터·목록).</div>
   </div>
   <div class="screen"><div class="sc-body">
       <div class="chips">
@@ -315,8 +317,8 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 
 <!-- 리포트 상세 -->
 <div id="p-rdetail" class="pane"><div class="content">
-  <div class="sec-head"><div class="sec-title">리포트 상세보기 <span class="crumb-badge">N배송 관리 › 리포트관리 › 리포트상세</span></div>
-    <div class="gist"><span class="lab">핵심</span>자동승인 전환의 중심 화면. <b>'10일 내 승인' 안내 → 당일 자동승인 교체</b> · 하단 <b>'문의하기'→'이의 신청'</b>. '승인하기'는 유지(자동이라도 더 빨리 수동 승인 가능).</div>
+  <div class="sec-head"><div class="sec-title"><span class="title-ab"><span class="as">리포트 상세보기</span><span class="to" data-why="타이틀이 동사형 '상세보기' → 명사형 '리포트 상세'로 정정(입고상세 등 다른 화면 타이틀과 통일)" onclick="dr(this)">리포트 상세</span></span> <span class="crumb-badge">N배송 관리 › 리포트관리 › 리포트상세</span></div>
+    <div class="gist"><span class="lab">핵심</span>자동승인 전환의 중심 화면. 타이틀 <b>'리포트 상세보기'→'리포트 상세'</b>(동사형 지양·타 화면 통일). 상태이력 <b>'10일 내 승인' → 당일 자동승인</b>으로 교체. 하단 버튼 <b>'문의하기'→'이의 신청'</b>. '승인하기'는 유지(자동이라도 더 빨리 수동 승인 가능).</div>
   </div>
   <div class="screen"><div class="sc-body">
       <div class="card"><div class="card-h"><span class="card-h-t">리포트</span></div><div class="card-b" style="padding:0"><div class="sum4">
@@ -360,7 +362,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 <!-- 알림 -->
 <div id="p-alarm" class="pane"><div class="content">
   <div class="sec-head"><div class="sec-title">알림 · 리포트 등록 안내 (자동승인 예정) 신설</div>
-    <div class="gist"><span class="lab">핵심</span>기존 '리포트 등록 안내'(ASIS)를 입고 자동승인 리포트용으로 확장한 <b>'N배송 리포트 등록 안내 (자동승인 예정)'(TOBE) 신설</b> — 승인기한·확인 후 '이의 신청' 경로 안내(기획팀 요청). 아래 첫 줄=ASIS↔TOBE 쌍, 그 아래=변경 없는 기존 알림.</div>
+    <div class="gist"><span class="lab">핵심</span>기존 '리포트 등록 안내'(ASIS)를 입고 자동승인용으로 확장한 <b>'N배송 리포트 등록 안내 (자동승인 예정)'(TOBE) 신설</b> — 승인기한·확인 후 '이의 신청' 경로 안내(기획팀 요청).</div>
   </div>
   <div class="noti-pair">
     <div class="push asis-card"><span class="pair-label asis">ASIS · 기존</span>
