@@ -111,6 +111,18 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 .bg-block ul{margin:4px 0 0 18px;line-height:1.8;font-size:12.5px;color:var(--fg2)}
 .kc-h{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center}
 .kc-num{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.72);color:#fff;font-size:11px;font-weight:700;margin-right:7px;flex-shrink:0}
+.kc-tag{display:inline-block;font-size:11px;font-weight:700;color:var(--fg2);background:var(--bg);border:1px solid var(--bd2);border-radius:4px;padding:1px 7px;margin-right:8px;flex-shrink:0}
+.kc-ch{font-size:13px}
+.kc-as{text-decoration:line-through;color:var(--fg3);font-weight:600}
+.kc-to{color:var(--brand);font-weight:800}
+.kc-body{padding-left:26px;margin-bottom:2px}
+.kc-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;font-size:12.5px;line-height:1.65}.kc-row:last-child{margin-bottom:0}
+.kc-k{flex-shrink:0;width:56px;color:var(--fg3);font-weight:700;font-size:11.5px;padding-top:1px}
+.kc-v{color:var(--fg2);flex:1;min-width:0}
+.kc-v ul{margin:5px 0 0;padding-left:15px;line-height:1.7}.kc-v ul li{margin-bottom:3px}
+.kc-goto{color:var(--brand);font-weight:700;cursor:pointer;text-decoration:none;border-bottom:1px solid rgba(0,184,79,.45);padding-bottom:1px}.kc-goto:hover{border-bottom-color:var(--brand)}
+.kc-flash{border-radius:10px;animation:kcflash 1.8s ease-out}
+@keyframes kcflash{0%{box-shadow:0 0 0 4px rgba(0,184,79,.55)}70%{box-shadow:0 0 0 4px rgba(0,184,79,.42)}100%{box-shadow:0 0 0 4px rgba(0,184,79,0)}}
 .kc-divider{border-top:1px solid var(--bd2);margin:16px 0}
 .term{display:grid;grid-template-columns:130px 1fr;font-size:12.5px;border-top:1px solid var(--bd2)}.term dt{background:var(--bg);padding:9px 12px;border-bottom:1px solid var(--bd2);font-weight:700}.term dd{padding:9px 12px;border-bottom:1px solid var(--bd2);color:var(--fg2);line-height:1.6}
 .why-tip{position:fixed;z-index:99999;background:rgba(14,16,26,.96);color:rgba(255,255,255,.92);font-size:12px;line-height:1.6;padding:9px 13px;border-radius:9px;max-width:290px;pointer-events:none;display:none;box-shadow:0 6px 24px rgba(0,0,0,.4)}
@@ -184,19 +196,22 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
         <p>리포트 승인을 <b>당일 23:59:59 자동승인</b>으로 바꿔 물류사 실제 운영 프로세스와 싱크를 맞추면 병목이 제거될 것.</p></div>
     </div>
   </details>
-  <div class="tone-box"><div class="tone-h" style="margin-bottom:32px">📌 핵심 변경 <span style="font-size:12px;font-weight:500;color:var(--fg2)">· 전 탭 공통 적용</span></div>
-    <div class="kc-h"><span class="kc-num">1</span>워딩 변경 · '문의하기' → '이의 신청'</div>
-    <ul>
-    <li>ASIS <b>'문의하기'</b> → TOBE <b>'이의 신청'</b> (전 탭 통일)</li>
-    <li>사유: <b>단순 문의가 아니라 선작업을 보류시키는 액션</b> → '문의하기'는 결과 과소 전달</li>
-    <li>'이의제기'는 부담 → <b>'이의 신청'</b>으로 완화. 결과는 보조문구: <i>"이의 신청 시 물류센터 선작업이 보류되고 담당자가 확인합니다."</i></li></ul>
+  <div class="tone-box"><div class="tone-h" style="margin-bottom:32px">📌 핵심 변경 <span style="font-size:12px;font-weight:500;color:var(--fg2)">· 워딩 · 상태값</span></div>
+    <div class="kc-h"><span class="kc-num">1</span><span class="kc-tag">워딩 변경</span><span class="kc-ch"><span class="kc-as">문의하기</span> → <span class="kc-to">이의 신청</span></span></div>
+    <div class="kc-body">
+      <div class="kc-row"><span class="kc-k">변경 이유</span><div class="kc-v">단순 문의가 아닌 <b>선작업을 보류시키는 액션</b>이므로 '문의하기'는 결과를 과소하게 전달하는 경향이 큼</div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v">리포트상세 <a class="kc-goto" onclick="goTab('rdetail','rdetail-cta')">화면으로 이동 →</a></div></div>
+    </div>
     <div class="kc-divider"></div>
-    <div class="kc-h"><span class="kc-num">2</span>상태값 변경 · '리포트처리대기' → '리포트승인대기'</div>
-    <ul>
-    <li><b>ASIS 불일치</b>: 입고쪽 '리포트처리대기' vs 리포트관리 '리포트승인대기' — 화면마다 다름</li>
-    <li><b>왜 '승인'인가</b>: 판매자 액션은 <b>'승인'</b>, <b>'처리'</b>는 그 뒤 네이버(공급자)의 몫 → 판매자 화면 상태값엔 부적절</li>
-    <li>판매자가 할 일(=승인)을 담은 <b>'리포트승인대기'</b>로 전 화면 통일 (리포트관리 '승인대기'와 일치)</li>
-    <li><b>연동</b>: 자동화 문구도 '자동 승인 <s>처리</s>' → <b>'자동 승인'</b>('처리'는 네이버 몫)</li></ul>
+    <div class="kc-h"><span class="kc-num">2</span><span class="kc-tag">상태값 변경</span><span class="kc-ch">리포트<span class="kc-as">처리</span>대기 → 리포트<span class="kc-to">승인</span>대기</span></div>
+    <div class="kc-body">
+      <div class="kc-row"><span class="kc-k">변경 이유</span><div class="kc-v">페이지별 워딩이 상이함
+        <ul>
+          <li><b>ASIS</b> — 입고관리 '리포트처리대기' · 리포트관리 '리포트승인대기'</li>
+          <li><b>왜 '승인'인가요?</b> — 판매자 액션은 '승인'이며, 그 이후 '처리'는 공급자의 액션 → 판매자 화면 상태값엔 부적절</li>
+        </ul></div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v">전체 탭</div></div>
+    </div>
   </div>
   <div class="tone-box"><div class="tone-h">🎙 이번 검수 톤 원칙</div><ul>
     <li><b>부정 프레임 제거, 사유는 유지</b>: "문제/지연" → "입고이슈"(중립)</li>
@@ -336,7 +351,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
         <table class="dt"><thead><tr><th>리포트상태</th><th>변경정보</th><th>변경일시</th></tr></thead><tbody>
           <tr><td><span class="badge-st warn">승인대기</span></td><td>물류사 리포트 등록</td><td>2026.07.03 14:38</td></tr>
         </tbody></table></div></div>
-      <div style="display:flex;gap:8px;justify-content:center;align-items:center">
+      <div id="rdetail-cta" style="display:flex;gap:8px;justify-content:center;align-items:center">
         <span class="step-cta" style="background:#eceef1;color:var(--fg3);text-decoration:line-through">문의하기</span>
         <span style="color:var(--fg3)">→</span>
         <span class="step-cta" style="background:#fff;border:1px solid var(--bd);color:var(--fg)" data-why="'문의하기'는 단순 문의 뉘앙스 → 선작업을 보류시키는 액션이라 '이의 신청'으로 변경(버튼 형태 유지)" onclick="dr(this)">이의 신청</span>
@@ -391,6 +406,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 </div>
 <script>
 function tab(n){document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(t=>t.classList.remove('active'));var pane=document.getElementById('p-'+n);if(pane)pane.classList.add('active');document.querySelectorAll('.tab-item').forEach(t=>{if((t.getAttribute('onclick')||'').indexOf("'"+n+"'")>=0)t.classList.add('active')});window.scrollTo(0,0);}
+function goTab(n,anchor){tab(n);requestAnimationFrame(function(){var el=document.getElementById(anchor);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.remove('kc-flash');void el.offsetWidth;el.classList.add('kc-flash');setTimeout(function(){el.classList.remove('kc-flash');},1900);});}
 function dr(el){return false;}
 /* i-툴팁: 클릭 토글 + 닫기버튼 + 바깥클릭 닫기 (0618 방식) */
 (function(){
