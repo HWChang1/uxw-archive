@@ -77,6 +77,7 @@ function renderLNB(opts) {
   if (!docHtml) docHtml = `<div style="padding:8px 18px;font-size:11px;color:rgba(0,0,0,0.32)">문서 없음</div>`;
 
   const glossaryAct = opts.active === "glossary" ? " active" : "";
+  const flowAct = opts.active === "flow" ? " active" : "";
 
   const lnbEl = document.getElementById("lnb");
   const isCollapsed = lnbEl.classList.contains("collapsed");
@@ -97,6 +98,9 @@ function renderLNB(opts) {
       <div style="border-top:1px solid rgba(0,0,0,0.07);margin:4px 0 2px"></div>
       <a class="lnb-item${glossaryAct}" href="${_ROOT}glossary.html">
         <span class="lnb-item-icon">📖</span><span class="lnb-item-label">용어집</span>
+      </a>
+      <a class="lnb-item${flowAct}" href="${_ROOT}flow.html">
+        <span class="lnb-item-icon">🗺️</span><span class="lnb-item-label">UX Flow</span>
       </a>
     </div>`;
 
