@@ -137,14 +137,16 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 .cd-total{font-size:11px;font-weight:700;color:#0a7a3c;background:rgba(0,184,79,.1);border-radius:99px;padding:2px 9px}
 .cd-x{margin-left:auto;border:none;background:none;font-size:16px;cursor:pointer;color:var(--fg3);line-height:1;padding:2px 4px}
 .cd-body{overflow-y:auto;padding:6px 10px 28px}
-.cd-grp{font-size:11px;font-weight:800;color:var(--fg3);letter-spacing:.3px;padding:13px 8px 5px}
-.cd-row{display:flex;align-items:flex-start;gap:9px;padding:8px 9px;border-radius:8px;cursor:pointer;line-height:1.42}
+.cd-sec{font-size:11px;font-weight:800;color:var(--fg3);letter-spacing:.3px;margin:14px 4px 4px}
+.cd-sec.b{border-top:1px solid var(--bd2);padding-top:14px;margin-top:12px}
+.cd-theme{font-size:12.5px;font-weight:700;color:var(--fg);margin:11px 4px 5px;line-height:1.45}
+.cd-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 9px;border-radius:8px;cursor:pointer;line-height:1.4}
 .cd-row:hover{background:var(--bg)}
 .cd-row.active{background:rgba(0,184,79,.12)}
-.cd-g{flex-shrink:0;font-size:11px;font-weight:700;color:var(--fg3);min-width:17px;text-align:right;padding-top:2px}
-.cd-loc{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:50%;background:var(--brand);color:#fff;font-size:9px;font-weight:800;margin-top:1px}
-.cd-label{font-size:12px;color:var(--fg);min-width:0}
-.cd-row.seen .cd-loc{opacity:.45}.cd-row.seen .cd-label{color:var(--fg2)}
+.cd-label{font-size:12px;color:var(--fg2);min-width:0}
+.cd-badge{flex-shrink:0;font-size:10.5px;font-weight:700;color:#0a7a3c;background:rgba(0,184,79,.1);border-radius:99px;padding:2px 8px}
+.cd-row.active .cd-label{color:var(--fg)}
+.cd-row.seen .cd-label{color:var(--fg3)}.cd-row.seen .cd-badge{opacity:.5}
 .term{display:grid;grid-template-columns:130px 1fr;font-size:12.5px;border-top:1px solid var(--bd2)}.term dt{background:var(--bg);padding:9px 12px;border-bottom:1px solid var(--bd2);font-weight:700}.term dd{padding:9px 12px;border-bottom:1px solid var(--bd2);color:var(--fg2);line-height:1.6}
 .why-tip{position:fixed;z-index:99999;background:rgba(14,16,26,.96);color:rgba(255,255,255,.92);font-size:12px;line-height:1.6;padding:9px 13px;border-radius:9px;max-width:290px;pointer-events:none;display:none;box-shadow:0 6px 24px rgba(0,0,0,.4)}
 .why-tip-label{display:block;font-size:10px;font-weight:700;color:rgba(0,220,120,.85);margin-bottom:4px;letter-spacing:.4px}
@@ -433,46 +435,65 @@ function dr(el){return false;}
 (function(){var tip=document.getElementById('why-tip'),b=document.getElementById('why-tip-body');
 document.addEventListener('mouseover',function(e){var el=e.target.closest('[data-why]');if(!el||!el.dataset.why)return;b.textContent=el.dataset.why;tip.style.display='block';var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,left=Math.max(8,Math.min(r.left+r.width/2-tw/2,window.innerWidth-tw-8)),top=r.top-th-10;if(top<8)top=r.bottom+10;tip.style.left=left+'px';tip.style.top=top+'px';});
 document.addEventListener('mouseout',function(e){if(e.target.closest('[data-why]'))tip.style.display='none';});})();
-/* ── 변경 내역 드로어 (전체 1~18 + 탭내 번호=배지) ── */
-var CHANGES=[
- {p:'ipgo',t:"타이틀 '입고관리'→'입고상세'"},
- {p:'ipgo',t:"진행 단계 상태값 →'리포트 승인 대기'"},
- {p:'ipgo',t:"안내 문구 자동승인·이의 안내로 워싱"},
- {p:'ipgo',t:"승인기한(날짜·시간) 병기"},
- {p:'ipgo',t:"버튼 '확인하기'(처리 뉘앙스 제거)"},
- {p:'ipgo',t:"요약 입고상태 →'리포트승인대기'"},
- {p:'ipgo',t:"요약에 승인기한 병기"},
- {p:'ipgo',t:"상태이력 →'리포트승인대기'"},
- {p:'list',t:"상태 칩 상태값 →'리포트승인대기'"},
- {p:'list',t:"상태 칩 i-툴팁(ASIS/TOBE 안내)"},
- {p:'list',t:"입고상태 필터 →'리포트승인대기'"},
- {p:'list',t:"목록 상단 알림 자동승인·이의 안내로 워싱"},
- {p:'list',t:"목록 상태값 →'리포트승인대기'"},
- {p:'list',t:"목록에 승인기한 병기"},
- {p:'rdetail',t:"타이틀 '리포트 상세보기'→'리포트 상세'"},
- {p:'rdetail',t:"상태이력 '10일'→당일 자동승인 안내"},
- {p:'rdetail',t:"버튼 '문의하기'→'이의 신청'"},
- {p:'alarm',t:"'리포트 등록 안내 (자동승인 예정)' 신설"}
+/* ── 변경 내역 드로어 (테마별 · 핵심 2개가 뼈대) ── */
+var TABN={ipgo:'입고상세',list:'입고관리',rdetail:'리포트상세',alarm:'알림'};
+var CHG_SECTIONS=[
+ {sec:"핵심 변경 · 전 탭 공통", themes:[
+   {t:"① 워딩 · <s style=\"color:var(--fg3)\">문의하기</s> → <span style=\"color:var(--brand)\">이의 신청</span>", items:[
+     {p:'rdetail',l:3,loc:"리포트상세 버튼"}
+   ]},
+   {t:"② 상태값 · 리포트<s style=\"color:var(--fg3)\">처리</s>대기 → 리포트<span style=\"color:var(--brand)\">승인</span>대기", items:[
+     {p:'ipgo',l:2,loc:"입고상세 진행 단계"},
+     {p:'ipgo',l:6,loc:"입고상세 요약"},
+     {p:'ipgo',l:8,loc:"입고상세 상태이력"},
+     {p:'list',l:1,loc:"입고관리 상태 칩"},
+     {p:'list',l:3,loc:"입고관리 필터"},
+     {p:'list',l:5,loc:"입고관리 목록"}
+   ]}
+ ]},
+ {sec:"화면별 개별 변경", themes:[
+   {t:"타이틀 정정", items:[
+     {p:'ipgo',l:1,loc:"입고상세 '입고관리'→'입고상세'"},
+     {p:'rdetail',l:1,loc:"리포트상세 '상세보기'→'상세'"}
+   ]},
+   {t:"안내 문구 워싱 · 부정프레임 제거·자동승인/이의", items:[
+     {p:'ipgo',l:3,loc:"입고상세 안내"},
+     {p:'list',l:4,loc:"입고관리 목록 상단 알림"},
+     {p:'rdetail',l:2,loc:"리포트상세 상태이력"}
+   ]},
+   {t:"승인기한(날짜·시간) 병기", items:[
+     {p:'ipgo',l:4,loc:"입고상세 요약"},
+     {p:'ipgo',l:7,loc:"입고상세 진행"},
+     {p:'list',l:6,loc:"입고관리 목록"}
+   ]},
+   {t:"기타 · 버튼·툴팁·신설", items:[
+     {p:'ipgo',l:5,loc:"입고상세 '확인하기' 버튼"},
+     {p:'list',l:2,loc:"입고관리 상태 칩 i-툴팁"},
+     {p:'alarm',l:1,loc:"알림 '리포트 등록 안내' 신설"}
+   ]}
+ ]}
 ];
-var TABN={ipgo:'1. 입고상세',list:'2. 입고관리',rdetail:'3. 리포트상세',alarm:'4. 알림'};
 function renderDrawer(){
   var body=document.getElementById('cdBody');if(!body)return;
-  var html='',cur=null,loc=0,g=0;
-  CHANGES.forEach(function(c){
-    if(c.p!==cur){cur=c.p;loc=0;html+='<div class="cd-grp">'+TABN[c.p]+'</div>';}
-    loc++;g++;
-    html+='<div class="cd-row" data-g="'+g+'" data-p="'+c.p+'" data-l="'+loc+'" onclick="goToMarker('+g+')"><span class="cd-g">'+g+'</span><span class="cd-loc">'+loc+'</span><span class="cd-label">'+c.t+'</span></div>';
+  var html='',total=0;
+  CHG_SECTIONS.forEach(function(s,si){
+    html+='<div class="cd-sec'+(si>0?' b':'')+'">'+s.sec+'</div>';
+    s.themes.forEach(function(th){
+      html+='<div class="cd-theme">'+th.t+'</div>';
+      th.items.forEach(function(it){
+        total++;
+        html+='<div class="cd-row" data-p="'+it.p+'" data-l="'+it.l+'" onclick="goToMarker(\''+it.p+'\','+it.l+',this)"><span class="cd-label">'+it.loc+'</span><span class="cd-badge">'+TABN[it.p]+' '+it.l+'</span></div>';
+      });
+    });
   });
   body.innerHTML=html;
-  var tot=document.getElementById('cdTotal');if(tot)tot.textContent='전체 '+CHANGES.length+'건';
-  var n=document.querySelector('.chg-btn .n');if(n)n.textContent=CHANGES.length;
+  var tot=document.getElementById('cdTotal');if(tot)tot.textContent='전체 '+total+'건';
+  var n=document.querySelector('.chg-btn .n');if(n)n.textContent=total;
 }
 function toggleDrawer(show){var d=document.getElementById('chgDrawer');if(!d)return;if(show===undefined)show=!d.classList.contains('open');d.classList.toggle('open',show);}
-function goToMarker(g){
-  var row=document.querySelector('.cd-row[data-g="'+g+'"]');if(!row)return;
-  var p=row.getAttribute('data-p'),loc=parseInt(row.getAttribute('data-l'),10);
+function goToMarker(p,loc,rowEl){
   document.querySelectorAll('.cd-row.active').forEach(function(r){r.classList.remove('active');});
-  row.classList.add('active');row.classList.add('seen');
+  if(rowEl){rowEl.classList.add('active');rowEl.classList.add('seen');}
   tab(p);
   requestAnimationFrame(function(){
     var marks=document.querySelectorAll('#p-'+p+' [data-why], #p-'+p+' .qi.chg');
