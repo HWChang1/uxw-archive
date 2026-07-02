@@ -120,7 +120,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 .kc-k{flex-shrink:0;width:56px;color:var(--fg3);font-weight:700;font-size:11.5px;padding-top:1px}
 .kc-v{color:var(--fg2);flex:1;min-width:0}
 .kc-v ul{margin:5px 0 0;padding-left:15px;line-height:1.7}.kc-v ul li{margin-bottom:3px}
-.kc-goto{color:var(--brand);font-weight:700;cursor:pointer;text-decoration:none;border-bottom:1px solid rgba(0,184,79,.45);padding-bottom:1px}.kc-goto:hover{border-bottom-color:var(--brand)}
+.kc-goto{color:var(--lnk);font-weight:700;cursor:pointer;text-decoration:none;border-bottom:1px solid rgba(26,109,214,.4);padding-bottom:1px;margin-right:14px}.kc-goto:last-child{margin-right:0}.kc-goto:hover{border-bottom-color:var(--lnk)}
 .kc-flash{animation:kcflash 1.9s ease-out}
 @keyframes kcflash{0%,20%{outline:3px solid var(--brand);outline-offset:3px}100%{outline:3px solid transparent;outline-offset:3px}}
 .loc-grp{margin-bottom:6px;line-height:1.95}.loc-grp:last-child{margin-bottom:0}
@@ -202,7 +202,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
     <div class="kc-h"><span class="kc-num">1</span><span class="kc-tag">워딩 변경</span><span class="kc-ch"><span class="kc-as">문의하기</span> → <span class="kc-to">이의 신청</span></span></div>
     <div class="kc-body">
       <div class="kc-row"><span class="kc-k">변경 이유</span><div class="kc-v">단순 문의가 아닌 <b>선작업을 보류시키는 액션</b>이므로 '문의하기'는 결과를 과소하게 전달하는 경향이 큼</div></div>
-      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v">리포트상세 <a class="kc-goto" onclick="goTab('rdetail','rdetail-cta')">화면으로 이동 →</a></div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><a class="kc-goto" onclick="goTab('rdetail','rdetail-cta')">리포트상세 ›</a></div></div>
     </div>
     <div class="kc-divider"></div>
     <div class="kc-h"><span class="kc-num">2</span><span class="kc-tag">상태값 변경</span><span class="kc-ch">리포트<span class="kc-as">처리</span>대기 → 리포트<span class="kc-to">승인</span>대기</span></div>
@@ -212,7 +212,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
           <li><b>ASIS</b> — 입고관리 '리포트처리대기' · 리포트관리 '리포트승인대기'</li>
           <li><b>왜 '승인'인가요?</b> — 판매자 액션은 '승인'이며, 그 이후 '처리'는 공급자의 액션 → 판매자 화면 상태값엔 부적절</li>
         </ul></div></div>
-      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><div class="loc-grp"><span class="loc-tab">입고상세</span><a class="kc-goto" onclick="goTab('ipgo','st-step')">진행 단계</a> · <a class="kc-goto" onclick="goTab('ipgo','st-summary')">요약</a> · <a class="kc-goto" onclick="goTab('ipgo','st-history')">상태이력</a></div><div class="loc-grp"><span class="loc-tab">입고관리</span><a class="kc-goto" onclick="goTab('list','st-chip')">상태 칩</a> · <a class="kc-goto" onclick="goTab('list','st-filter')">필터</a> · <a class="kc-goto" onclick="goTab('list','st-list')">목록</a></div></div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><div class="loc-grp"><span class="loc-tab">입고상세</span><a class="kc-goto" onclick="goTab('ipgo','st-step')">진행 단계 ›</a><a class="kc-goto" onclick="goTab('ipgo','st-summary')">요약 ›</a><a class="kc-goto" onclick="goTab('ipgo','st-history')">상태이력 ›</a></div><div class="loc-grp"><span class="loc-tab">입고관리</span><a class="kc-goto" onclick="goTab('list','st-chip')">상태 칩 ›</a><a class="kc-goto" onclick="goTab('list','st-filter')">필터 ›</a><a class="kc-goto" onclick="goTab('list','st-list')">목록 ›</a></div></div></div>
     </div>
   </div>
   <div class="tone-box"><div class="tone-h">📖 관련 용어</div><dl class="term">
