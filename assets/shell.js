@@ -17,7 +17,7 @@ const _ROOT = (() => {
 /* ── 임베드 시드(폴백) : data/docs.json 과 동일하게 유지 ── */
 const SEED_DOCS = {
   docs: [
-    { id: "입고 리포트 자동승인", title: "입고 리포트 자동승인", date: "2026-07-03", status: "검토중", planner: "N배송플랫폼기획 박선영", changeCount: 18, file: "pages/입고 리포트 자동승인.html" },
+    { id: "입고 리포트 자동승인", title: "입고리포트 자동승인", date: "2026-07-03", status: "검토중", planner: "N배송플랫폼기획 박선영", changeCount: 18, file: "pages/입고 리포트 자동승인.html" },
     { id: "재고보관내역_0623", title: "재고보관내역", date: "2026-06-23", status: "검토중", planner: "이재호", changeCount: 12, file: "pages/재고보관내역_0623.html" },
     { id: "반품상품관리_0618", title: "반품상품관리", date: "2026-06-18", status: "검토중", planner: "류교빈", changeCount: 12, file: "pages/반품상품관리_0618.html" }
   ]
