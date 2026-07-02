@@ -109,7 +109,8 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 .bg-label{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;color:#0a7a3c;background:rgba(0,184,79,.1);border-radius:4px;padding:2px 8px;margin-bottom:6px}
 .bg-block p{font-size:12.5px;line-height:1.7;color:var(--fg2);margin:0}
 .bg-block ul{margin:4px 0 0 18px;line-height:1.8;font-size:12.5px;color:var(--fg2)}
-.kc-h{font-size:13px;font-weight:700;margin-bottom:8px}
+.kc-h{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center}
+.kc-num{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.72);color:#fff;font-size:11px;font-weight:700;margin-right:7px;flex-shrink:0}
 .kc-divider{border-top:1px solid var(--bd2);margin:16px 0}
 .term{display:grid;grid-template-columns:130px 1fr;font-size:12.5px;border-top:1px solid var(--bd2)}.term dt{background:var(--bg);padding:9px 12px;border-bottom:1px solid var(--bd2);font-weight:700}.term dd{padding:9px 12px;border-bottom:1px solid var(--bd2);color:var(--fg2);line-height:1.6}
 .why-tip{position:fixed;z-index:99999;background:rgba(14,16,26,.96);color:rgba(255,255,255,.92);font-size:12px;line-height:1.6;padding:9px 13px;border-radius:9px;max-width:290px;pointer-events:none;display:none;box-shadow:0 6px 24px rgba(0,0,0,.4)}
@@ -183,14 +184,14 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
         <p>리포트 승인을 <b>당일 23:59:59 자동승인</b>으로 바꿔 물류사 실제 운영 프로세스와 싱크를 맞추면 병목이 제거될 것.</p></div>
     </div>
   </details>
-  <div class="tone-box"><div class="tone-h">📌 핵심 변경 <span style="font-size:12px;font-weight:500;color:var(--fg2)">· 전 탭 공통 적용</span></div>
-    <div class="kc-h">🔤 워딩 변경 · '문의하기' → '이의 신청'</div>
+  <div class="tone-box"><div class="tone-h" style="margin-bottom:32px">📌 핵심 변경 <span style="font-size:12px;font-weight:500;color:var(--fg2)">· 전 탭 공통 적용</span></div>
+    <div class="kc-h"><span class="kc-num">1</span>워딩 변경 · '문의하기' → '이의 신청'</div>
     <ul>
     <li>ASIS <b>'문의하기'</b> → TOBE <b>'이의 신청'</b> (전 탭 통일)</li>
     <li>사유: <b>단순 문의가 아니라 선작업을 보류시키는 액션</b> → '문의하기'는 결과 과소 전달</li>
     <li>'이의제기'는 부담 → <b>'이의 신청'</b>으로 완화. 결과는 보조문구: <i>"이의 신청 시 물류센터 선작업이 보류되고 담당자가 확인합니다."</i></li></ul>
     <div class="kc-divider"></div>
-    <div class="kc-h">🔤 상태값 변경 · '리포트처리대기' → '리포트승인대기'</div>
+    <div class="kc-h"><span class="kc-num">2</span>상태값 변경 · '리포트처리대기' → '리포트승인대기'</div>
     <ul>
     <li><b>ASIS 불일치</b>: 입고쪽 '리포트처리대기' vs 리포트관리 '리포트승인대기' — 화면마다 다름</li>
     <li><b>왜 '승인'인가</b>: 판매자 액션은 <b>'승인'</b>, <b>'처리'</b>는 그 뒤 네이버(공급자)의 몫 → 판매자 화면 상태값엔 부적절</li>
