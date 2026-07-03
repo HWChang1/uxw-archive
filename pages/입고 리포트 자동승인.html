@@ -256,7 +256,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
         <div class="kc-future-why"><b>이유</b> — 사용자는 액션을 수행한 화면(입고 상세)에서 상태를 이어 확인한다. 리포트 상태를 보려 리포트관리로 이동해 개별 조회하는 것은 맥락 이탈이므로, 액션이 일어난 자리에서 상태를 끝까지 노출하는 편이 맥락 전환과 인지 부하를 줄이는 경험이다.</div>
         <div class="kc-mini">
           <div class="kc-mini-h">📄 리포트처리대기 <span class="kc-flag">승인대기</span></div>
-          <div class="kc-mini-d">입고 중 문제로 리포트가 등록되어, 승인 후 입고가 진행됩니다. 승인기한 내 이의 신청이 없으면 자동 승인됩니다.</div>
+          <div class="kc-mini-d">입고 중 문제로 등록된 리포트는 승인기한 내 이의 신청이 없으면 자동 승인되어 입고가 진행됩니다.</div>
           <div class="kc-mini-dl">승인기한 2026.07.03 23:59</div>
           <span class="kc-mini-btn">리포트 확인하기</span>
         </div>
@@ -286,7 +286,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
           <div class="step done"><div class="step-ic">🚚</div><div class="step-t">입고 중</div><div class="step-d">입고센터에 도착한 상품을 접수 중입니다.</div></div>
           <div class="step-sep">›</div>
           <div class="step active" id="st-step"><div class="step-ic">📄</div><div class="step-t">리포트처리대기</div>
-            <div class="step-d ab blk"><span class="as">입고 중 문제가 발견되어 접수가 지연되고 있습니다.</span><span class="to" data-why="자동 승인 전환 안내 + 승인기한(마감)을 직관적으로 노출해 마감 전 조치 유도" onclick="dr(this)">입고 중 문제로 리포트가 등록되어, 승인 후 입고가 진행됩니다. 승인기한 내 이의 신청이 없으면 자동 승인됩니다.</span></div>
+            <div class="step-d ab blk"><span class="as">입고 중 문제가 발견되어 접수가 지연되고 있습니다.</span><span class="to" data-why="자동 승인 전환 안내 + 승인기한(마감)을 직관적으로 노출해 마감 전 조치 유도" onclick="dr(this)">입고 중 문제로 등록된 리포트는 승인기한 내 이의 신청이 없으면 자동 승인되어 입고가 진행됩니다.</span></div>
             <div style="margin-top:9px"><span class="to" style="font-size:11px" data-why="기한 제한 액션(이의 신청)이 걸린 상태 → 그 마감(승인기한)을 날짜·시간으로 명시해 시점 인지" onclick="dr(this)">승인기한 2026.07.03 23:59</span></div>
             <div style="margin-top:auto;padding-top:11px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center">
               <span class="step-cta" style="background:#eceef1;color:var(--fg3);text-decoration:line-through">리포트 확인하러 가기</span><span style="color:var(--fg3)">→</span>
@@ -335,7 +335,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
   <div class="screen"><div class="sc-body">
       <div class="chips">
         <div class="chip"><span class="chip-ic g">▦</span><div><div class="chip-l">전체</div><div class="chip-n">65<small>건</small></div></div></div>
-        <div class="chip on" id="st-chip"><span class="chip-ic r">🧾</span><div><div class="chip-l"><span style="display:inline-flex;align-items:center;gap:5px">리포트처리대기<span class="qi chg">?<span class="tip"><div class="tip-outer"><div class="tip-col tip-col-asis"><span class="tip-col-header h-asis">ASIS</span><div class="tip-col-body">입고 중 문제가 발견되어 검수가 지연되고 있습니다. 입고신청과 연결된 리포트를 승인해주세요.</div></div><div class="tip-col"><span class="tip-col-header h-tobe">TOBE</span><div class="tip-col-body"><span class="tip-hl">입고 중 문제로 리포트가 등록되어, 승인 후 입고가 진행됩니다. 승인기한 내 이의 신청이 없으면 자동 승인되며, 이의 신청은 리포트 상세페이지에서 가능합니다.</span><div class="tip-col-callout">💡 <strong>자동 승인 · 승인기한 제한 · 이의 경로 안내</strong></div></div></div></div><button class="tip-close">✕</button></span></span></span></div><div class="chip-n">1<small>건</small></div></div></div>
+        <div class="chip on" id="st-chip"><span class="chip-ic r">🧾</span><div><div class="chip-l"><span style="display:inline-flex;align-items:center;gap:5px">리포트처리대기<span class="qi chg">?<span class="tip"><div class="tip-outer"><div class="tip-col tip-col-asis"><span class="tip-col-header h-asis">ASIS</span><div class="tip-col-body">입고 중 문제가 발견되어 검수가 지연되고 있습니다. 입고신청과 연결된 리포트를 승인해주세요.</div></div><div class="tip-col"><span class="tip-col-header h-tobe">TOBE</span><div class="tip-col-body"><span class="tip-hl">입고 중 문제로 등록된 리포트는 승인기한 내 이의 신청이 없으면 자동 승인되어 입고가 진행됩니다. 이의 신청은 리포트 상세페이지에서 가능합니다.</span><div class="tip-col-callout">💡 <strong>자동 승인 · 승인기한 제한 · 이의 경로 안내</strong></div></div></div></div><button class="tip-close">✕</button></span></span></span></div><div class="chip-n">1<small>건</small></div></div></div>
         <div class="chip"><span class="chip-ic">🗂️</span><div><div class="chip-l">임시저장</div><div class="chip-n">0<small>건</small></div></div></div>
         <div class="chip"><span class="chip-ic">⏳</span><div><div class="chip-l">입고대기</div><div class="chip-n">2<small>건</small></div></div></div>
         <div class="chip"><span class="chip-ic">🚚</span><div><div class="chip-l">입고중</div><div class="chip-n">5<small>건</small></div></div></div>
