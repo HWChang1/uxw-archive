@@ -143,6 +143,17 @@
 .flow-page .lc.churn .lct{color:#a8546a}
 .flow-page .lc-arw{display:flex;align-items:center;color:#c2c6cf;font-size:14px}
 .flow-page .lc-note{font-size:11.5px;color:var(--ink3);margin:4px 0 0;line-height:1.55}
+
+/* 실제 화면 갤러리 */
+.flow-page .shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:14px}
+.flow-page .shot{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:box-shadow .15s,transform .15s}
+.flow-page .shot:hover{box-shadow:0 8px 24px rgba(0,0,0,.1);transform:translateY(-2px)}
+.flow-page .shot .imgwrap{background:#f0f2f5;height:230px;overflow:hidden;display:flex;align-items:flex-start;justify-content:center;border-bottom:1px solid var(--line2)}
+.flow-page .shot .imgwrap img{width:100%;height:auto;display:block}
+.flow-page .shot .cap{padding:12px 15px;display:flex;flex-direction:column;gap:3px}
+.flow-page .shot .cap b{font-size:13.5px;font-weight:700}
+.flow-page .shot .cap .d{font-size:11.5px;color:var(--ink3);line-height:1.5}
+.flow-page .shot .cap .lk{font-size:11px;color:#1a6dd6;margin-top:2px}
 </style></head><body>
 <div class="app-shell">
   <nav class="lnb" id="lnb"></nav>
@@ -334,6 +345,16 @@
               <div class="uf2"><div class="nm">매출 진단→조치</div><div class="stp"><span class="s">홈 → 요약</span><span class="a">›</span><span class="s">진단<br>(판매분석·검색인기도)</span><span class="a">›</span><span class="s act">가격/광고/노출 조치</span><span class="gp2">⚠ GAP-001 기간 불일치 · GAP-002 진단 파편화</span></div></div>
               <div class="uf2"><div class="nm">고객 관리·CRM<br><span style="font-weight:400;color:var(--ink3);font-size:11px">네이버 고유 강점</span></div><div class="stp"><span class="s">고객현황·재구매 진단</span><span class="a">›</span><span class="s">관심/충성 세그먼트</span><span class="a">›</span><span class="s">혜택 등록</span><span class="a">›</span><span class="s act">마케팅메시지 발송</span><span class="gp2" style="color:var(--ink3);background:#f1f3f5">세그먼트↔혜택↔마메 허브-스포크(단선 아님) · 쿠팡 루틴엔 얇던 축<span class="ev">ⓘ 근거<span class="tip"><span class="q">고도화 MVP는 CRM을 '세그먼트(잠재·발견·관심·구매·충성) ↔ 혜택 ↔ 마케팅메시지'가 세그먼트 ID를 공유하며 수렴하는 허브-스포크로 설계. 앵커 IA=혜택/마케팅 + 데이터분석&gt;고객현황·재구매. 단 폐쇄몰 유형은 고객등급 관리 미지원(유형별 가용성 차이).</span><span class="src">위키: 판매자센터 고도화 MVP(고객군 타겟팅) · <a href="https://wiki.navercorp.com/pages/viewpage.action?pageId=4667404329" target="_blank" rel="noopener">문서 열기 ↗</a></span></span></span></span></div></div>
               <div class="uf2"><div class="nm">정산·비용 확인</div><div class="stp"><span class="s">정산내역(수수료)</span><span class="a">›</span><span class="s">물류비 청구(보관·부가비)</span><span class="a">›</span><span class="s">기본비(정산관리)</span><span class="gp2">⚠ 통합 마진 한 화면 없음 · GAP-002</span></div></div>
+            </div>
+          </section>
+
+          <section>
+            <div class="sec-h"><h2>실제 화면 (8~9월 신규 · Figma)</h2><span class="sub">각 과업의 실제 판매자센터 화면 — 이미지 클릭 시 Figma 원본</span></div>
+            <div class="shots">
+              <a class="shot" href="https://www.figma.com/design/XhZJuagnaQJMCU3T38tRS5/NFA-%EB%B3%B5%EC%82%AC%EB%B3%B8?node-id=1292-221633" target="_blank" rel="noopener">
+                <div class="imgwrap"><img src="assets/screens/재고이슈리포트.png" alt="재고이슈리포트 화면" loading="lazy"></div>
+                <div class="cap"><b>재고이슈리포트</b><span class="d">반품·재고 이슈 처리 · 리포트 승인/강제종료 (연결 과업: 반품 처리 · GAP-007)</span><span class="lk">Figma 원본 열기 ↗</span></div>
+              </a>
             </div>
           </section>
 
