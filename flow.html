@@ -65,8 +65,7 @@
 .flow-page .mx-seg .s{font-size:11.5px;color:var(--ink3);display:block;margin-top:4px;line-height:1.5}
 .flow-page .mx-cell{padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-height:96px}
 .flow-page .chip{font-size:12.5px;line-height:1.5;color:var(--ink)}
-.flow-page .chip.mk{padding-left:10px;border-left:3px solid var(--line);color:var(--ink2)}
-.flow-page .chip.miss{border-left-color:var(--miss)}.flow-page .chip.gap{border-left-color:var(--gap)}.flow-page .chip.mis{border-left-color:var(--mis)}
+.flow-page .chip.mk{color:var(--ink2)}
 .flow-page .gmk{font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:99px;margin-left:5px;white-space:nowrap;vertical-align:1px}
 .flow-page .gmk.g-miss{color:var(--miss);background:var(--miss-bg)}
 .flow-page .gmk.g-gap{color:var(--gap);background:var(--gap-bg)}
@@ -79,10 +78,10 @@
 .flow-page .pipe-h .s{font-size:12px;color:var(--ink3);font-weight:400}
 .flow-page .pipe-h .badge{font-size:11px;font-weight:700;color:#fff;background:var(--ink);border-radius:99px;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center}
 .flow-page .pipe{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px 6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
-.flow-page .node{font-size:12.5px;line-height:1.4;border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:#fbfcfd;display:flex;align-items:center;text-align:center}
-.flow-page .node.dec{border-color:var(--blue);color:#33409c;border-radius:22px;font-weight:600;background:var(--blue-bg)}
-.flow-page .node.act{border-color:var(--brand);color:var(--brand-dk);font-weight:600;background:#eafaf1}
-.flow-page .arw{color:var(--ink3);font-size:13px;display:flex;align-items:center}
+.flow-page .node{font-size:12.5px;line-height:1.4;border:none;border-radius:8px;padding:8px 12px;background:#eef0f3;color:var(--ink);display:flex;align-items:center;text-align:center}
+.flow-page .node.dec{color:#33409c;font-weight:600;background:var(--blue-bg)}
+.flow-page .node.act{color:var(--brand-dk);font-weight:600;background:#e3f5ea}
+.flow-page .arw{color:#c2c6cf;font-size:13px;display:flex;align-items:center}
 .flow-page .loop{font-size:11.5px;color:var(--ink3);display:flex;align-items:center;margin-left:4px}
 
 /* user flow cards */
@@ -243,10 +242,10 @@
               </div>
             </div>
             <style>
-            .pipe .node.par{flex-direction:column;align-items:stretch;text-align:left;border-color:var(--brand);background:#eafaf1;padding:8px 12px;gap:5px}
+            .pipe .node.par{flex-direction:column;align-items:stretch;text-align:left;background:#e3f5ea;padding:9px 12px;gap:5px}
             .pipe .par-t{font-size:11px;font-weight:700;color:var(--brand-dk)}
             .pipe .par-t em{font-style:normal;font-weight:400;color:var(--ink3);margin-left:5px}
-            .pipe .par-row{font-size:12px;color:var(--ink);background:#fff;border:1px solid #c7ead5;border-radius:6px;padding:4px 8px}
+            .pipe .par-row{font-size:12px;color:var(--ink);background:rgba(255,255,255,.7);border-radius:6px;padding:4px 8px}
             .pipe .par-row b{color:var(--brand-dk)}
             </style>
             <div class="pipe-block">
@@ -272,10 +271,10 @@
             .ufb-seg + .uf2{border-top:none}
             .uf2 .nm{flex:0 0 132px;font-size:13px;font-weight:700;padding-top:6px;line-height:1.4}
             .uf2 .stp{display:flex;flex-wrap:wrap;align-items:center;gap:7px 5px;flex:1;min-width:0}
-            .uf2 .s{font-size:12px;line-height:1.35;border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:#fbfcfd}
-            .uf2 .s.act{border-color:var(--brand);color:var(--brand-dk);font-weight:600;background:#eafaf1}
-            .uf2 .s.crit{border-color:var(--mis);color:var(--mis);font-weight:600;background:var(--mis-bg)}
-            .uf2 .a{color:var(--ink3);font-size:12px}
+            .uf2 .s{font-size:12px;line-height:1.35;border:none;border-radius:7px;padding:6px 10px;background:#eef0f3;color:var(--ink)}
+            .uf2 .s.act{color:var(--brand-dk);font-weight:600;background:#e3f5ea}
+            .uf2 .s.crit{color:var(--mis);font-weight:600;background:var(--mis-bg)}
+            .uf2 .a{color:#c2c6cf;font-size:12px}
             .uf2 .gp2{flex-basis:100%;font-size:11px;color:var(--miss);margin-top:2px}
             </style>
             <div class="sec-h"><h2>셀러 라이프스테이지별 User Flow</h2><span class="sub">과업별 수행 단계 — Service Flow가 스테이지 전체 여정이면, 이건 각 과업을 끝내는 세부 스텝</span></div>
