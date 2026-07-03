@@ -7,9 +7,11 @@
 .flow-scroll{flex:1;min-height:0;overflow-y:auto;background:var(--bg-secondary)}
 .flow-page{--fg:rgba(0,0,0,.84);--fg2:rgba(0,0,0,.56);--fg3:rgba(0,0,0,.38);--bd:rgba(0,0,0,.12);--bd2:rgba(0,0,0,.07);--brand:#00b84f;--lnk:#1a6dd6;--miss:#e5484d;--gap:#e08600;--mistake:#d8641f;color:var(--fg);font-size:13px}
 .flow-page .top{background:#1a1a2e;color:#fff;padding:22px 40px}.flow-page .top h1{font-size:20px}.flow-page .top p{font-size:12px;color:rgba(255,255,255,.55);margin-top:6px}
-.flow-page .wrap{max-width:1180px;margin:0 auto;padding:26px 40px 100px}
-.flow-page .intro{background:#edfaf3;border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 16px;font-size:12.5px;line-height:1.7;margin-bottom:16px}
+.flow-page .wrap{max-width:1220px;margin:0 auto;padding:26px 40px 100px}
+.flow-page .intro{background:#edfaf3;border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 16px;font-size:12.5px;line-height:1.7;margin-bottom:14px}
 .flow-page .intro b{color:var(--fg)}
+.flow-page .models{background:#f4f6ff;border-left:3px solid #4a5ab7;border-radius:0 8px 8px 0;padding:11px 16px;font-size:12px;line-height:1.7;margin-bottom:16px}
+.flow-page .models b{color:var(--fg)}
 /* 범례 */
 .flow-page .legend{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:11.5px;color:var(--fg2);margin-bottom:16px}
 .flow-page .lg{display:inline-flex;align-items:center;gap:6px}
@@ -18,7 +20,7 @@
 .flow-page .legend .sep{color:var(--fg3);margin-left:auto;font-size:11px}
 /* 매트릭스 */
 .flow-page .mx-scroll{overflow-x:auto;border:1px solid var(--bd);border-radius:12px}
-.flow-page .mx{display:grid;grid-template-columns:118px repeat(6,minmax(150px,1fr));min-width:1040px;background:var(--bd2)}
+.flow-page .mx{display:grid;grid-template-columns:118px repeat(6,minmax(158px,1fr));min-width:1120px;background:var(--bd2)}
 .flow-page .mx>div{background:#fff}
 .flow-page .mx-corner{background:#f7f8fa}
 .flow-page .mx-stage{background:#f7f8fa;padding:11px 12px}
@@ -38,7 +40,12 @@
 .flow-page .chip.miss .fl{color:var(--miss)}.flow-page .chip.gap .fl{color:var(--gap)}.flow-page .chip.mis .fl{color:var(--mistake)}
 .flow-page .mx-empty{padding:9px 11px;color:var(--fg3);font-size:11.5px}
 .flow-page .todo{font-size:11.5px;color:var(--fg3);font-style:italic}
-.flow-page .axis-note{font-size:11px;color:var(--fg3);margin:10px 2px 0}
+.flow-page .axis-note{font-size:11px;color:var(--fg3);margin:10px 2px 0;line-height:1.7}
+.flow-page h3{font-size:14px;font-weight:700;margin:26px 0 10px}
+.flow-page .gaptbl{width:100%;border-collapse:collapse;font-size:11.5px;background:#fff;border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.flow-page .gaptbl th,.flow-page .gaptbl td{border-bottom:1px solid var(--bd2);padding:8px 10px;text-align:left;vertical-align:top}
+.flow-page .gaptbl th{background:#f7f8fa;font-weight:700;font-size:11px;color:var(--fg2)}
+.flow-page .sev-h{color:var(--miss);font-weight:700}.flow-page .sev-m{color:var(--gap);font-weight:700}
 </style></head><body>
 <div class="app-shell">
   <nav class="lnb" id="lnb"></nav>
@@ -46,22 +53,26 @@
   <main class="main">
     <div class="flow-scroll">
       <div class="flow-page">
-        <div class="top"><h1>🗺️ UX Flow 아카이브</h1><p>셀러 daily routine × seller segment 매트릭스 · 각 셀 = 그 단계에서 닿는 화면·기능(service flow) · UXW·UX flow 검수의 맥락 기반 · 기획자 공유용</p></div>
+        <div class="top"><h1>🗺️ UX Flow 아카이브</h1><p>셀러 daily routine × seller segment 매트릭스 · 각 셀 = 그 단계에서 닿는 화면·기능(service flow) · 실화면(s01~s31)+8~9월 신규 Figma(s32~s39) 반영 · 기획자 공유용</p></div>
         <div class="wrap">
           <div class="intro">
-            <b>구성 원칙</b> — <b>가로축 = 셀러 daily routine 6단계</b>(관찰된 행동이라 안정적인 척추) · <b>세로축 = seller segment 3종</b>(같은 루틴에서 켜지는 구간·진입점이 다름) · <b>각 셀 = 그 단계×segment에서 닿는 화면·기능(service flow 노드) + 필요 데이터</b>. '상황'은 셀 안의 variant로 둔다(무한 확장 방지). 세로로 읽으면 routine, 셀을 이으면 service flow, 행끼리 비교하면 segment. <b>1차 = 2P 맥락</b>으로 채움(3P는 New 행의 진입부 참조). 셀 내용은 두 Figma에서 뽑은 초안 — 네이버 실제 화면과 대조해 갱신 필요.
+            <b>구성 원칙</b> — <b>가로축 = 셀러 daily routine 6단계</b>(관찰된 행동=안정적 척추) · <b>세로축 = seller segment 3종</b>(같은 루틴에서 켜지는 구간·진입점이 다름) · <b>각 셀 = 그 단계×segment에서 닿는 화면·기능</b>. 세로로 읽으면 routine, 셀을 이으면 service flow, 행끼리 비교하면 segment. 상세 화면 근거는 <code>screen-map/</code>(s01~s39), 끊김은 <code>_GAPS.md</code>.
+          </div>
+
+          <div class="models">
+            <b>⚑ 2P 이행/계약 3모델</b>(도입 시 셀러가 선택) — ① <b>제휴 물류사 N배송</b>(물류사 위탁, 셀러가 물류사 선정) · ② <b>N판매자배송</b>(셀러 자기 창고+계약 택배 직접배송) · ③ <b>N배송 FBN</b>(네이버 직접계약, 입고~출고~반품 전과정 센터 내 관리 / <b>8월 기능오픈, 소개·신청 7/8</b>). &nbsp;|&nbsp; <b>반품·교환</b>은 물류센터 검수 → <b>검수확정</b>에서 분기(반품=자동환불 / 교환=교환품 자동재출고). <b>출고</b>(교환·사은품·수기, 센터→고객) ≠ <b>반출</b>(재고 회수, 센터→셀러).
           </div>
 
           <div class="legend">
-            <span class="lg"><i class="i-miss"></i>미제공 데이터</span>
-            <span class="lg"><i class="i-gap"></i>Gap(끊김)</span>
-            <span class="lg"><i class="i-mis"></i>흔한 실수</span>
-            <span class="sep">🟡 신규(2P) · ⚫ 기존(3P) 표기는 셀 채울 때 추가</span>
+            <span class="lg"><i class="i-miss"></i>미제공/부재</span>
+            <span class="lg"><i class="i-gap"></i>끊김·파편화</span>
+            <span class="lg"><i class="i-mis"></i>되돌릴 수 없음·흔한 실수</span>
+            <span class="sep">마커의 <b>GAP-00x</b> = _GAPS.md 우선순위표</span>
           </div>
 
           <div class="mx-scroll">
             <div class="mx">
-              <!-- 헤더행: 코너 + routine 6단계 -->
+              <!-- 헤더행 -->
               <div class="mx-corner mx-stage"><span class="n">단계 (routine)</span></div>
               <div class="mx-stage"><span class="n">1</span><span class="t">진입·인지</span><span class="a">Awareness</span></div>
               <div class="mx-stage"><span class="n">2</span><span class="t">현황 확인</span><span class="a">Understanding</span></div>
@@ -72,36 +83,48 @@
 
               <!-- Net-new -->
               <div class="mx-seg"><span class="t">Net-new</span><span class="s">판센 자체가 처음</span></div>
-              <div class="mx-cell"><span class="chip">판센 가입</span><span class="chip mk gap">공지·검색으로 2P 인지<span class="fl">GAP</span></span></div>
+              <div class="mx-cell"><span class="chip">판센 가입</span><span class="chip mk gap">2P 소개(제휴·직접·FBN)<span class="fl">GAP-004</span></span></div>
               <div class="mx-empty">— (판매 전)</div>
               <div class="mx-empty">—</div>
               <div class="mx-empty">—</div>
-              <div class="mx-cell"><span class="chip">상품 등록</span><span class="chip">첫 입고 신청</span></div>
-              <div class="mx-cell"><span class="chip">입고 상태 확인</span></div>
+              <div class="mx-cell"><span class="chip">상품 등록</span><span class="chip mk miss">SKU 생성·연결<span class="fl">GAP-003</span></span><span class="chip">첫 입고신청</span></div>
+              <div class="mx-cell"><span class="chip">입고 리포트</span></div>
 
               <!-- New -->
               <div class="mx-seg"><span class="t">New</span><span class="s">3P→2P 전환</span></div>
-              <div class="mx-cell"><span class="chip mk gap">3P 홈·알림서 2P 발견<span class="fl">GAP</span></span><span class="chip">APP push</span></div>
-              <div class="mx-cell"><span class="chip">기존 3P 매출과 비교</span></div>
-              <div class="mx-cell"><span class="chip mk miss">어떤 SKU를 2P로?<span class="fl">미제공</span></span></div>
-              <div class="mx-cell"><span class="chip mk miss">3P vs 2P 마진 비교<span class="fl">미제공</span></span></div>
-              <div class="mx-cell"><span class="chip">상품 2P 전환·SKU 연결</span><span class="chip">입고 신청</span></div>
-              <div class="mx-cell"><span class="chip">입고 리포트</span><span class="chip mk">자동승인</span></div>
+              <div class="mx-cell"><span class="chip">3P 홈·알림서 2P 발견</span><span class="chip mk gap">소개(FBN·제휴·직접)<span class="fl">GAP-004</span></span></div>
+              <div class="mx-cell"><span class="chip">기존 3P 매출 비교</span><span class="chip">(비즈어드바이저)</span></div>
+              <div class="mx-cell"><span class="chip">어떤 SKU를 2P로?</span><span class="chip">판매분석 배송유형별</span></div>
+              <div class="mx-cell"><span class="chip">FBN 출고비 계산기</span><span class="chip mk miss">통합 마진계산기 없음<span class="fl">미제공</span></span></div>
+              <div class="mx-cell"><span class="chip">모델 신청(s13/25/36)</span><span class="chip mk miss">상품 2P전환·SKU연결<span class="fl">GAP-003</span></span><span class="chip">입고신청</span></div>
+              <div class="mx-cell"><span class="chip mk gap">입고 리포트<span class="fl">GAP-007</span></span><span class="chip mk miss">이용권한(회수→강등)<span class="fl">GAP-005</span></span></div>
 
               <!-- Current -->
               <div class="mx-seg"><span class="t">Current</span><span class="s">2P 운영 중</span></div>
-              <div class="mx-cell"><span class="chip">로그인</span><span class="chip">알림 · APP push</span></div>
-              <div class="mx-cell"><span class="chip">전일 매출</span><span class="chip">판매가능재고</span></div>
-              <div class="mx-cell"><span class="chip">VI별 매출</span><span class="chip mk gap">노출상태(위너/배지)<span class="fl">GAP</span></span><span class="chip">품절임박·보관료·소비기한</span></div>
-              <div class="mx-cell"><span class="chip">마진계산</span><span class="chip mk miss">경쟁가·정산·보관료<span class="fl">미제공</span></span></div>
-              <div class="mx-cell"><span class="chip">가격/광고/노출 관리</span><span class="chip">입고 생성 · 반출 생성</span><span class="chip">반품 검수</span></div>
-              <div class="mx-cell"><span class="chip">처리 현황</span><span class="chip mk mis">소비기한·보관료<span class="fl">흔한실수</span></span></div>
+              <div class="mx-cell"><span class="chip">홈 대시보드</span><span class="chip mk gap">홈→요약 기간 불일치<span class="fl">GAP-001</span></span></div>
+              <div class="mx-cell"><span class="chip">홈 판매성과·요약 리포트</span><span class="chip">SKU별 재고수량(정상/품절)</span></div>
+              <div class="mx-cell"><span class="chip">판매·방문·검색 분석</span><span class="chip">검색인기도현황·재고이슈리포트</span><span class="chip mk gap">진단 도구 파편화<span class="fl">GAP-002</span></span></div>
+              <div class="mx-cell"><span class="chip">정산·수수료 / FBN 출고비계산기</span><span class="chip mk miss">통합 마진계산기 없음<span class="fl">미제공</span></span></div>
+              <div class="mx-cell"><span class="chip">가격/광고/노출·주문발송</span><span class="chip">입고·출고·반출·사은품정책</span><span class="chip mk mis">반품/교환 검수확정<span class="fl">GAP-006</span></span></div>
+              <div class="mx-cell"><span class="chip mk gap">입고·재고이슈 리포트<span class="fl">GAP-007</span></span><span class="chip">물류비청구·정산·반출상세</span></div>
             </div>
           </div>
 
-          <p class="axis-note">※ 세로↓ routine 단계 흐름 · 가로→ 각 segment의 여정. Net-new는 1~4단계가 비어 있음 = 운영 루프 진입 전(도입 여정이 본체). New 행의 진단·의사결정에 🔴미제공이 몰림 = 3P→2P 전환 다리의 최대 끊김.</p>
+          <p class="axis-note">※ 세로↓ routine 흐름 · 가로→ 각 segment 여정. <b>Net-new</b>는 1~4단계가 빔=운영 루프 진입 전(도입 여정이 본체). <b>New(3P→2P 전환)</b>의 진단·의사결정에 미제공이 몰림 = 전환 다리의 최대 끊김. <b>노출·프로모션 진단</b>은 네이버가 제공함(검색인기도현황·프로모션진단) — 초기 "🔴 미제공" 가설은 기각, 대신 <b>파편화(GAP-002)</b>로 재정의.</p>
 
-          <p class="todo" style="margin-top:16px">※ UXW 검수할 때마다 해당 화면을 이 매트릭스의 셀에 핀 꽂고(어느 단계×segment) 🔴미제공·🟠흔한실수·💬Gap을 표기 → 지도가 검수와 함께 채워짐. 관련 검수본: <a class="lnk" href="pages/입고리포트_자동승인_다탭검수본.html">입고리포트 자동승인 UXW 검수본 ›</a></p>
+          <h3>우선순위 Gap (추정 · ⚠️는 사용자 검증 필요 — 상세 _GAPS.md)</h3>
+          <table class="gaptbl">
+            <tr><th style="width:52px">순위</th><th style="width:150px">GAP</th><th>한줄</th><th style="width:64px">심각도</th><th style="width:74px">routine</th></tr>
+            <tr><td>1</td><td><b>GAP-006</b> 되돌릴 수 없는 액션 다발</td><td>검수확정→자동환불/재출고, 사은품정책·SKU연동·양식제출 '수정불가'가 곳곳에</td><td class="sev-h">高</td><td>5 조치</td></tr>
+            <tr><td>2</td><td><b>GAP-005</b> 연동종료·권한회수 강등</td><td>준수율 미달/연동종료 → 2P 상품 전부 일반배송 강등+태그 해제</td><td class="sev-h">高</td><td>6 관리</td></tr>
+            <tr><td>3</td><td><b>GAP-003</b> SKU 온보딩 입력부담</td><td>입고 전 SKU마다 다수 필수입력+연동후 수정불가, 상품→SKU 전환 부담</td><td class="sev-h">高</td><td>5 도입</td></tr>
+            <tr><td>4</td><td><b>GAP-004</b> 2P 3모델 명칭 혼동</td><td>제휴 N배송·N판매자배송·N배송 FBN 구분 어려움(도입 오선택)</td><td class="sev-m">中</td><td>1 인지</td></tr>
+            <tr><td>5</td><td><b>GAP-001</b> 홈→요약 기간 불일치</td><td>홈 일간→요약 30일, 매일 반복 동선 혼란 (제보=확정)</td><td class="sev-m">中</td><td>1→2</td></tr>
+            <tr><td>6</td><td><b>GAP-007</b> 리포트 자동승인</td><td>입고·재고이슈 리포트 n일 후 자동승인, 이의 기회 놓침</td><td class="sev-m">中</td><td>6 관리</td></tr>
+            <tr><td>7</td><td><b>GAP-002</b> 진단/비용 파편화</td><td>검색진단 2곳, 프로모션 진단/실행 분리, 물류비·재고 3P/2P 분리</td><td class="sev-m">中~低</td><td>3 진단</td></tr>
+          </table>
+
+          <p class="todo" style="margin-top:16px">※ 화면 근거 s01~s39는 <code>screen-map/</code>(라이브 s01~s31 + 8~9월 신규 Figma s32~s39). 관련 검수본: <a class="lnk" href="pages/입고리포트_자동승인_다탭검수본.html">입고리포트 자동승인 UXW 검수본 ›</a> (GAP-007 관련)</p>
         </div>
       </div>
     </div>
