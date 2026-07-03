@@ -220,20 +220,43 @@
           </section>
 
           <section>
-            <div class="sec-h"><h2>Segment별 User Flow</h2><span class="sub">과업 · use case</span></div>
-            <div class="uf-grid">
-              <div class="uf"><span class="seg">Net-new</span><div class="h">판센 온보딩·첫 판매</div><div class="st">가입 → 상품 등록 → 판매·주문발송</div></div>
-              <div class="uf"><span class="seg">Net-new</span><div class="h">2P 첫 도입</div><div class="st">소개 → 모델 선택 → 신청 → SKU 생성·연결·입력 → 입고 → 판매개시</div><span class="gp">⚠ GAP-004 3모델 명칭 · GAP-006 연동후 수정불가</span></div>
-              <div class="uf"><span class="seg">New</span><div class="h">2P 전환 결정</div><div class="st">3P 매출 진단 → 어떤 SKU를 2P로(배송유형별) → 마진 비교(출고비계산기) → 모델 선택</div><span class="gp">⚠ 통합 마진계산기 없음 · GAP-004</span></div>
-              <div class="uf"><span class="seg">New</span><div class="h">상품→SKU 전환·첫 입고</div><div class="st">배송속성 변경 → SKU 연결 → 정보 입력 → 입고 신청 → 입고 리포트</div><span class="gp">⚠ GAP-006 연동후 수정불가</span></div>
-              <div class="uf"><span class="seg">New</span><div class="h">운영 권한 유지(직접배송)</div><div class="st">발송기한 준수율 관리 → 이용권한 유지</div><span class="gp">⚠ GAP-005 준수율 미달 → 상품 강등</span></div>
-              <div class="uf"><span class="seg">Current</span><div class="h">입고하기</div><div class="st">SKU 확인 → 입고신청 4단계 → 입고상세 추적(대기→중→리포트→완료) → 판매가능 전환</div></div>
-              <div class="uf"><span class="seg">Current</span><div class="h">반품 처리하기</div><div class="st">리스트 → 검수 상세(정상/하자/리퍼) → <b>[검수확정]→자동환불</b>. 미신청입고→긴급입고/회송</div><span class="gp">⚠ GAP-006 검수확정 되돌릴 수 없음</span></div>
-              <div class="uf"><span class="seg">Current</span><div class="h">교환 처리하기</div><div class="st">교환 검수 → 검수확정 → <b>교환품 자동재출고</b> → 재배송</div><span class="gp">⚠ GAP-006 검수확정 되돌릴 수 없음</span></div>
-              <div class="uf"><span class="seg">Current</span><div class="h">반출하기(재고 회수)</div><div class="st">판매불가/자동반출 대상 → 반출신청 3단계(정보→SKU[정상/판매불가]→확인) → 반출상세·반출증</div><span class="gp">⚠ GAP-006 정책·취소 시점</span></div>
-              <div class="uf"><span class="seg">Current</span><div class="h">출고하기(수기·사은품)</div><div class="st">수기출고 신청(상품/SKU/주문번호) · 사은품 정책 → 조건 충족 시 자동출고</div><span class="gp">⚠ GAP-006 시작후 수정불가 / 확인중 후 취소불가</span></div>
-              <div class="uf"><span class="seg">Current</span><div class="h">매출 진단→조치</div><div class="st">홈→요약 → 판매·노출 진단(판매분석·검색인기도) → 가격/광고/노출 조치</div><span class="gp">⚠ GAP-001 기간 불일치 · GAP-002 진단 파편화</span></div>
-              <div class="uf"><span class="seg">Current</span><div class="h">정산·비용 확인</div><div class="st">정산내역(수수료) + 물류비 청구(보관·부가비) + 기본비(정산관리)</div><span class="gp">⚠ 통합 마진 한 화면 없음 · GAP-002</span></div>
+            <style>
+            .ufb{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 20px 12px;margin-top:12px}
+            .ufb-seg{font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:.4px;text-transform:uppercase;padding:14px 0 2px}
+            .uf2{display:flex;align-items:flex-start;gap:16px;padding:13px 0;border-top:1px solid var(--line2)}
+            .ufb-seg + .uf2{border-top:none}
+            .uf2 .nm{flex:0 0 132px;font-size:13px;font-weight:700;padding-top:6px;line-height:1.4}
+            .uf2 .stp{display:flex;flex-wrap:wrap;align-items:center;gap:7px 5px;flex:1;min-width:0}
+            .uf2 .s{font-size:12px;line-height:1.35;border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:#fbfcfd}
+            .uf2 .s.act{border-color:var(--brand);color:var(--brand-dk);font-weight:600;background:#eafaf1}
+            .uf2 .s.crit{border-color:var(--mis);color:var(--mis);font-weight:600;background:var(--mis-bg)}
+            .uf2 .a{color:var(--ink3);font-size:12px}
+            .uf2 .gp2{flex-basis:100%;font-size:11px;color:var(--miss);margin-top:2px}
+            </style>
+            <div class="sec-h"><h2>Segment별 User Flow</h2><span class="sub">과업별 수행 단계 — Service Flow가 segment 전체 여정이면, 이건 각 과업을 끝내는 세부 스텝</span></div>
+
+            <div class="ufb">
+              <div class="ufb-seg">Net-new · 판센 처음</div>
+              <div class="uf2"><div class="nm">판센 온보딩·첫 판매</div><div class="stp"><span class="s">가입</span><span class="a">›</span><span class="s">상품 등록</span><span class="a">›</span><span class="s act">판매·주문발송</span></div></div>
+              <div class="uf2"><div class="nm">2P 첫 도입</div><div class="stp"><span class="s">2P 소개</span><span class="a">›</span><span class="s">◇ 모델 선택</span><span class="a">›</span><span class="s">신청</span><span class="a">›</span><span class="s">SKU 생성·연결</span><span class="a">›</span><span class="s">SKU 정보 입력</span><span class="a">›</span><span class="s">입고</span><span class="a">›</span><span class="s act">판매 개시</span><span class="gp2">⚠ GAP-004 3모델 명칭 · GAP-006 SKU 연동후 수정불가</span></div></div>
+            </div>
+
+            <div class="ufb">
+              <div class="ufb-seg">New · 3P→2P 전환</div>
+              <div class="uf2"><div class="nm">2P 전환 결정</div><div class="stp"><span class="s">3P 매출 진단</span><span class="a">›</span><span class="s">어떤 SKU를 2P로<br>(배송유형별)</span><span class="a">›</span><span class="s">마진 비교<br>(출고비계산기)</span><span class="a">›</span><span class="s">◇ 모델 선택</span><span class="gp2">⚠ 통합 마진계산기 없음 · GAP-004</span></div></div>
+              <div class="uf2"><div class="nm">상품→SKU 전환·첫 입고</div><div class="stp"><span class="s">배송속성 변경</span><span class="a">›</span><span class="s">SKU 연결</span><span class="a">›</span><span class="s">정보 입력</span><span class="a">›</span><span class="s">입고 신청</span><span class="a">›</span><span class="s act">입고 리포트</span><span class="gp2">⚠ GAP-006 연동후 수정불가</span></div></div>
+              <div class="uf2"><div class="nm">운영 권한 유지<br><span style="font-weight:400;color:var(--ink3);font-size:11px">직접배송</span></div><div class="stp"><span class="s">발송기한 준수율 관리</span><span class="a">›</span><span class="s act">이용권한 유지</span><span class="gp2">⚠ GAP-005 준수율 미달 → 상품 강등</span></div></div>
+            </div>
+
+            <div class="ufb">
+              <div class="ufb-seg">Current · 2P 운영</div>
+              <div class="uf2"><div class="nm">입고하기</div><div class="stp"><span class="s">SKU 확인</span><span class="a">›</span><span class="s">입고신청 4단계</span><span class="a">›</span><span class="s">입고상세<br>(대기→중→리포트→완료)</span><span class="a">›</span><span class="s act">판매가능 전환</span></div></div>
+              <div class="uf2"><div class="nm">반품 처리하기</div><div class="stp"><span class="s">반품 리스트</span><span class="a">›</span><span class="s">검수 상세<br>(정상/하자/리퍼)</span><span class="a">›</span><span class="s crit">◆ 검수확정</span><span class="a">›</span><span class="s act">자동 환불</span><span class="a">›</span><span class="s">재고 처리</span><span class="gp2">⚠ GAP-006 검수확정 되돌릴 수 없음 · 미신청입고→긴급입고/회송</span></div></div>
+              <div class="uf2"><div class="nm">교환 처리하기</div><div class="stp"><span class="s">교환 검수</span><span class="a">›</span><span class="s crit">◆ 검수확정</span><span class="a">›</span><span class="s act">교환품 자동재출고</span><span class="a">›</span><span class="s">재배송</span><span class="a">›</span><span class="s">교환완료</span><span class="gp2">⚠ GAP-006 검수확정 되돌릴 수 없음</span></div></div>
+              <div class="uf2"><div class="nm">반출하기<br><span style="font-weight:400;color:var(--ink3);font-size:11px">재고 회수</span></div><div class="stp"><span class="s">대상 판단</span><span class="a">›</span><span class="s">반출신청 3단계<br>(정보→SKU→확인)</span><span class="a">›</span><span class="s">반출상세·반출증</span><span class="a">›</span><span class="s">정산</span><span class="gp2">⚠ GAP-006 정책·취소 시점</span></div></div>
+              <div class="uf2"><div class="nm">출고하기<br><span style="font-weight:400;color:var(--ink3);font-size:11px">수기·사은품</span></div><div class="stp"><span class="s">수기: 신청</span><span class="a">›</span><span class="s">출고상세</span><span class="a" style="margin:0 6px">/</span><span class="s">사은품: 정책 설정</span><span class="a">›</span><span class="s act">조건 충족 시 자동출고</span><span class="gp2">⚠ GAP-006 시작후 수정불가 / 확인중 후 취소불가</span></div></div>
+              <div class="uf2"><div class="nm">매출 진단→조치</div><div class="stp"><span class="s">홈 → 요약</span><span class="a">›</span><span class="s">진단<br>(판매분석·검색인기도)</span><span class="a">›</span><span class="s act">가격/광고/노출 조치</span><span class="gp2">⚠ GAP-001 기간 불일치 · GAP-002 진단 파편화</span></div></div>
+              <div class="uf2"><div class="nm">정산·비용 확인</div><div class="stp"><span class="s">정산내역(수수료)</span><span class="a">›</span><span class="s">물류비 청구(보관·부가비)</span><span class="a">›</span><span class="s">기본비(정산관리)</span><span class="gp2">⚠ 통합 마진 한 화면 없음 · GAP-002</span></div></div>
             </div>
           </section>
 
