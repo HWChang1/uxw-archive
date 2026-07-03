@@ -3,204 +3,262 @@
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="assets/style.css">
 <style>
-/* ── flow 페이지 전용(공통 shell 위에 얹음) ── */
-.flow-scroll{flex:1;min-height:0;overflow-y:auto;background:var(--bg-secondary)}
-.flow-page{--fg:rgba(0,0,0,.84);--fg2:rgba(0,0,0,.56);--fg3:rgba(0,0,0,.38);--bd:rgba(0,0,0,.12);--bd2:rgba(0,0,0,.07);--brand:#00b84f;--lnk:#1a6dd6;--miss:#e5484d;--gap:#e08600;--mistake:#d8641f;color:var(--fg);font-size:13px}
-.flow-page .top{background:#1a1a2e;color:#fff;padding:22px 40px}.flow-page .top h1{font-size:20px}.flow-page .top p{font-size:12px;color:rgba(255,255,255,.55);margin-top:6px}
-.flow-page .wrap{max-width:1220px;margin:0 auto;padding:26px 40px 100px}
-.flow-page .intro{background:#edfaf3;border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 16px;font-size:12.5px;line-height:1.7;margin-bottom:14px}
-.flow-page .intro b{color:var(--fg)}
-.flow-page .models{background:#f4f6ff;border-left:3px solid #4a5ab7;border-radius:0 8px 8px 0;padding:11px 16px;font-size:12px;line-height:1.7;margin-bottom:16px}
-.flow-page .models b{color:var(--fg)}
-/* 범례 */
-.flow-page .legend{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:11.5px;color:var(--fg2);margin-bottom:16px}
-.flow-page .lg{display:inline-flex;align-items:center;gap:6px}
-.flow-page .lg i{width:11px;height:11px;border-radius:3px;display:inline-block}
-.flow-page .lg .i-miss{background:var(--miss)}.flow-page .lg .i-gap{background:var(--gap)}.flow-page .lg .i-mis{background:var(--mistake)}
-.flow-page .legend .sep{color:var(--fg3);margin-left:auto;font-size:11px}
-/* 매트릭스 */
-.flow-page .mx-scroll{overflow-x:auto;border:1px solid var(--bd);border-radius:12px}
-.flow-page .mx{display:grid;grid-template-columns:118px repeat(6,minmax(158px,1fr));min-width:1120px;background:var(--bd2)}
-.flow-page .mx>div{background:#fff}
-.flow-page .mx-corner{background:#f7f8fa}
-.flow-page .mx-stage{background:#f7f8fa;padding:11px 12px}
-.flow-page .mx-stage .n{font-size:11px;color:var(--fg3)}
-.flow-page .mx-stage .t{font-size:12.5px;font-weight:700;display:block;margin-top:1px}
-.flow-page .mx-stage .a{font-size:10.5px;color:var(--brand);margin-top:2px;display:block}
-.flow-page .mx-seg{background:#fbfbfa;padding:12px 11px}
-.flow-page .mx-seg .t{font-size:12.5px;font-weight:700}
-.flow-page .mx-seg .s{font-size:10.5px;color:var(--fg3);display:block;margin-top:2px}
-.flow-page .mx-cell{padding:9px 11px;display:flex;flex-direction:column;gap:5px}
-.flow-page .chip{font-size:11.5px;line-height:1.4;color:var(--fg)}
-.flow-page .chip.mk{border-left:3px solid var(--bd);padding-left:7px;color:var(--fg2)}
-.flow-page .chip.miss{border-left-color:var(--miss)}
-.flow-page .chip.gap{border-left-color:var(--gap)}
-.flow-page .chip.mis{border-left-color:var(--mistake)}
-.flow-page .chip .fl{font-size:10px;font-weight:700;margin-left:4px;vertical-align:1px}
-.flow-page .chip.miss .fl{color:var(--miss)}.flow-page .chip.gap .fl{color:var(--gap)}.flow-page .chip.mis .fl{color:var(--mistake)}
-.flow-page .mx-empty{padding:9px 11px;color:var(--fg3);font-size:11.5px}
-.flow-page .todo{font-size:11.5px;color:var(--fg3);font-style:italic}
-.flow-page .axis-note{font-size:11px;color:var(--fg3);margin:10px 2px 0;line-height:1.7}
-.flow-page h3{font-size:14px;font-weight:700;margin:26px 0 10px}
-.flow-page .gaptbl{width:100%;border-collapse:collapse;font-size:11.5px;background:#fff;border:1px solid var(--bd);border-radius:10px;overflow:hidden}
-.flow-page .gaptbl th,.flow-page .gaptbl td{border-bottom:1px solid var(--bd2);padding:8px 10px;text-align:left;vertical-align:top}
-.flow-page .gaptbl th{background:#f7f8fa;font-weight:700;font-size:11px;color:var(--fg2)}
-.flow-page .sev-h{color:var(--miss);font-weight:700}.flow-page .sev-m{color:var(--gap);font-weight:700}
+.flow-scroll{flex:1;min-height:0;overflow-y:auto;background:#f5f6f8}
+.flow-page{
+  --ink:#1b1c25;--ink2:#565766;--ink3:#9296a3;--line:#e9eaef;--line2:#f1f2f6;
+  --card:#fff;--bg:#f5f6f8;--brand:#00b84f;--brand-dk:#08913e;--blue:#4b59b5;--blue-bg:#eef0fb;
+  --miss:#e5484d;--gap:#d98500;--mis:#d8641f;--miss-bg:#fdecec;--gap-bg:#fbf1df;--mis-bg:#fbeee7;
+  font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;color:var(--ink);font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.flow-page *{box-sizing:border-box}
+
+/* hero */
+.flow-page .top{background:linear-gradient(120deg,#1a1a2e,#232344);color:#fff;padding:34px 48px}
+.flow-page .top h1{font-size:23px;font-weight:700;letter-spacing:-.3px}
+.flow-page .top p{font-size:13px;color:rgba(255,255,255,.62);margin-top:10px;max-width:900px;line-height:1.65}
+
+.flow-page .wrap{max-width:1240px;margin:0 auto;padding:32px 48px 120px}
+
+/* section */
+.flow-page section{margin-top:40px}
+.flow-page section:first-of-type{margin-top:0}
+.flow-page .sec-h{display:flex;align-items:baseline;gap:10px;margin-bottom:16px}
+.flow-page .sec-h h2{font-size:17px;font-weight:700;letter-spacing:-.2px}
+.flow-page .sec-h .sub{font-size:12.5px;color:var(--ink3);font-weight:400}
+
+/* callout cards */
+.flow-page .note{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;font-size:13px;line-height:1.75;color:var(--ink2)}
+.flow-page .note.brand{border-left:4px solid var(--brand)}
+.flow-page .note b{color:var(--ink);font-weight:600}
+.flow-page .note code{background:var(--line2);border-radius:5px;padding:1px 6px;font-size:12px;color:var(--ink2)}
+
+/* 3 models */
+.flow-page .models{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:6px}
+.flow-page .model{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.flow-page .model .mn{font-size:11px;font-weight:700;color:var(--blue);background:var(--blue-bg);display:inline-block;padding:3px 9px;border-radius:99px;margin-bottom:9px}
+.flow-page .model .mt{font-size:14px;font-weight:700;margin-bottom:5px}
+.flow-page .model .md{font-size:12.5px;color:var(--ink2);line-height:1.65}
+.flow-page .model .mtag{font-size:11px;color:var(--ink3);margin-top:9px;display:block}
+.flow-page .relbar{background:var(--blue-bg);border-radius:12px;padding:13px 18px;font-size:12.5px;color:#333a63;margin-top:14px;line-height:1.7}
+.flow-page .relbar b{color:#1f2547}
+
+/* legend */
+.flow-page .legend{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;font-size:12.5px;color:var(--ink2);margin:20px 0 0}
+.flow-page .lg{display:inline-flex;align-items:center;gap:7px}
+.flow-page .lg i{width:12px;height:12px;border-radius:4px;display:inline-block}
+.flow-page .i-miss{background:var(--miss)}.flow-page .i-gap{background:var(--gap)}.flow-page .i-mis{background:var(--mis)}
+.flow-page .legend .sep{color:var(--ink3);margin-left:auto;font-size:12px}
+
+/* matrix */
+.flow-page .mx-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+.flow-page .mx{display:grid;grid-template-columns:132px repeat(6,minmax(176px,1fr));min-width:1200px}
+.flow-page .mx>div{border-bottom:1px solid var(--line2);border-right:1px solid var(--line2)}
+.flow-page .mx .r-last{border-bottom:none}
+.flow-page .mx-corner{background:#fafbfc}
+.flow-page .mx-stage{background:#fafbfc;padding:14px 16px}
+.flow-page .mx-stage .n{font-size:11px;color:var(--ink3);font-weight:600}
+.flow-page .mx-stage .t{font-size:13.5px;font-weight:700;display:block;margin-top:3px}
+.flow-page .mx-stage .a{font-size:11px;color:var(--brand-dk);margin-top:3px;display:block;font-weight:500}
+.flow-page .mx-seg{background:#fafbfc;padding:16px}
+.flow-page .mx-seg .t{font-size:13.5px;font-weight:700}
+.flow-page .mx-seg .s{font-size:11.5px;color:var(--ink3);display:block;margin-top:4px;line-height:1.5}
+.flow-page .mx-cell{padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-height:96px}
+.flow-page .chip{font-size:12.5px;line-height:1.5;color:var(--ink)}
+.flow-page .chip.mk{padding-left:10px;border-left:3px solid var(--line);color:var(--ink2)}
+.flow-page .chip.miss{border-left-color:var(--miss)}.flow-page .chip.gap{border-left-color:var(--gap)}.flow-page .chip.mis{border-left-color:var(--mis)}
+.flow-page .gmk{font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:99px;margin-left:5px;white-space:nowrap;vertical-align:1px}
+.flow-page .gmk.g-miss{color:var(--miss);background:var(--miss-bg)}
+.flow-page .gmk.g-gap{color:var(--gap);background:var(--gap-bg)}
+.flow-page .gmk.g-mis{color:var(--mis);background:var(--mis-bg)}
+.flow-page .mx-empty{padding:14px 16px;color:var(--ink3);font-size:12.5px;display:flex;align-items:center}
+
+/* pipelines */
+.flow-page .pipe-block{margin-top:18px}
+.flow-page .pipe-h{font-size:13.5px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.flow-page .pipe-h .s{font-size:12px;color:var(--ink3);font-weight:400}
+.flow-page .pipe-h .badge{font-size:11px;font-weight:700;color:#fff;background:var(--ink);border-radius:99px;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center}
+.flow-page .pipe{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px 6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.flow-page .node{font-size:12.5px;line-height:1.4;border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:#fbfcfd;display:flex;align-items:center;text-align:center}
+.flow-page .node.dec{border-color:var(--blue);color:#33409c;border-radius:22px;font-weight:600;background:var(--blue-bg)}
+.flow-page .node.act{border-color:var(--brand);color:var(--brand-dk);font-weight:600;background:#eafaf1}
+.flow-page .arw{color:var(--ink3);font-size:13px;display:flex;align-items:center}
+.flow-page .loop{font-size:11.5px;color:var(--ink3);display:flex;align-items:center;margin-left:4px}
+
+/* user flow cards */
+.flow-page .uf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px}
+.flow-page .uf{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:var(--card)}
+.flow-page .uf .seg{font-size:10.5px;font-weight:700;color:var(--ink3);letter-spacing:.3px;text-transform:uppercase}
+.flow-page .uf .h{font-size:14px;font-weight:700;margin:3px 0 8px}
+.flow-page .uf .st{font-size:12.5px;color:var(--ink2);line-height:1.7}
+.flow-page .uf .st b{color:var(--brand-dk)}
+.flow-page .uf .gp{font-size:11.5px;color:var(--miss);margin-top:10px;display:block;background:var(--miss-bg);padding:6px 10px;border-radius:8px}
+
+/* gap table */
+.flow-page .gaptbl{width:100%;border-collapse:separate;border-spacing:0;font-size:12.5px;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.flow-page .gaptbl th,.flow-page .gaptbl td{border-bottom:1px solid var(--line2);padding:12px 14px;text-align:left;vertical-align:top;line-height:1.6}
+.flow-page .gaptbl tr:last-child td{border-bottom:none}
+.flow-page .gaptbl th{background:#fafbfc;font-weight:700;font-size:11.5px;color:var(--ink2)}
+.flow-page .gaptbl td b{font-weight:600}
+.flow-page .sev{font-weight:700;padding:2px 9px;border-radius:99px;font-size:11px;white-space:nowrap}
+.flow-page .sev-h{color:var(--miss);background:var(--miss-bg)}.flow-page .sev-m{color:var(--gap);background:var(--gap-bg)}
+.flow-page .rk{font-weight:700;color:var(--ink3)}
+
+.flow-page .foot{font-size:12px;color:var(--ink3);margin-top:22px;line-height:1.7}
+.flow-page .foot a,.flow-page .note a{color:#1a6dd6;text-decoration:none}
+.flow-page .axis-note{background:#fafbfc;border:1px solid var(--line);border-radius:12px;padding:14px 18px;font-size:12.5px;color:var(--ink2);line-height:1.75;margin-top:16px}
+.flow-page .axis-note b{color:var(--ink)}
 </style></head><body>
 <div class="app-shell">
   <nav class="lnb" id="lnb"></nav>
-
   <main class="main">
     <div class="flow-scroll">
       <div class="flow-page">
-        <div class="top"><h1>🗺️ UX Flow 아카이브</h1><p>셀러 daily routine × seller segment 매트릭스 · 각 셀 = 그 단계에서 닿는 화면·기능(service flow) · 실화면(s01~s31)+8~9월 신규 Figma(s32~s39) 반영 · 기획자 공유용</p></div>
+        <div class="top">
+          <h1>🗺️ UX Flow 아카이브</h1>
+          <p>셀러 daily routine × seller segment 매트릭스 · segment별 Service flow / User flow · 실화면(s01~s31)+8~9월 신규 Figma(s32~s39) 반영 · 기획자 공유용</p>
+        </div>
         <div class="wrap">
-          <div class="intro">
-            <b>구성 원칙</b> — <b>가로축 = 셀러 daily routine 6단계</b>(관찰된 행동=안정적 척추) · <b>세로축 = seller segment 3종</b>(같은 루틴에서 켜지는 구간·진입점이 다름) · <b>각 셀 = 그 단계×segment에서 닿는 화면·기능</b>. 세로로 읽으면 routine, 셀을 이으면 service flow, 행끼리 비교하면 segment. 상세 화면 근거는 <code>screen-map/</code>(s01~s39), 끊김은 <code>_GAPS.md</code>.
-          </div>
 
-          <div class="models">
-            <b>⚑ 2P 이행/계약 3모델</b>(도입 시 셀러가 선택) — ① <b>제휴 물류사 N배송</b>(물류사 위탁, 셀러가 물류사 선정) · ② <b>N판매자배송</b>(셀러 자기 창고+계약 택배 직접배송) · ③ <b>N배송 FBN</b>(네이버 직접계약, 입고~출고~반품 전과정 센터 내 관리 / <b>8월 기능오픈, 소개·신청 7/8</b>). &nbsp;|&nbsp; <b>반품·교환</b>은 물류센터 검수 → <b>검수확정</b>에서 분기(반품=자동환불 / 교환=교환품 자동재출고). <b>출고</b>(교환·사은품·수기, 센터→고객) ≠ <b>반출</b>(재고 회수, 센터→셀러).
-          </div>
-
-          <div class="legend">
-            <span class="lg"><i class="i-miss"></i>미제공/부재</span>
-            <span class="lg"><i class="i-gap"></i>끊김·파편화</span>
-            <span class="lg"><i class="i-mis"></i>되돌릴 수 없음·흔한 실수</span>
-            <span class="sep">마커의 <b>GAP-00x</b> = _GAPS.md 우선순위표</span>
-          </div>
-
-          <div class="mx-scroll">
-            <div class="mx">
-              <!-- 헤더행 -->
-              <div class="mx-corner mx-stage"><span class="n">단계 (routine)</span></div>
-              <div class="mx-stage"><span class="n">1</span><span class="t">진입·인지</span><span class="a">Awareness</span></div>
-              <div class="mx-stage"><span class="n">2</span><span class="t">현황 확인</span><span class="a">Understanding</span></div>
-              <div class="mx-stage"><span class="n">3</span><span class="t">원인 진단</span><span class="a">Understanding</span></div>
-              <div class="mx-stage"><span class="n">4</span><span class="t">의사결정</span><span class="a">마진·우선순위</span></div>
-              <div class="mx-stage"><span class="n">5</span><span class="t">조치·실행</span><span class="a">Action</span></div>
-              <div class="mx-stage"><span class="n">6</span><span class="t">관리·모니터링</span><span class="a">Managements</span></div>
-
-              <!-- Net-new -->
-              <div class="mx-seg"><span class="t">Net-new</span><span class="s">판센 자체가 처음</span></div>
-              <div class="mx-cell"><span class="chip">판센 가입</span><span class="chip mk gap">2P 소개(제휴·직접·FBN)<span class="fl">GAP-004</span></span></div>
-              <div class="mx-empty">— (판매 전)</div>
-              <div class="mx-empty">—</div>
-              <div class="mx-empty">—</div>
-              <div class="mx-cell"><span class="chip">상품 등록</span><span class="chip mk miss">SKU 생성·연결<span class="fl">GAP-003</span></span><span class="chip">첫 입고신청</span></div>
-              <div class="mx-cell"><span class="chip">입고 리포트</span></div>
-
-              <!-- New -->
-              <div class="mx-seg"><span class="t">New</span><span class="s">3P→2P 전환</span></div>
-              <div class="mx-cell"><span class="chip">3P 홈·알림서 2P 발견</span><span class="chip mk gap">소개(FBN·제휴·직접)<span class="fl">GAP-004</span></span></div>
-              <div class="mx-cell"><span class="chip">기존 3P 매출 비교</span><span class="chip">(비즈어드바이저)</span></div>
-              <div class="mx-cell"><span class="chip">어떤 SKU를 2P로?</span><span class="chip">판매분석 배송유형별</span></div>
-              <div class="mx-cell"><span class="chip">FBN 출고비 계산기</span><span class="chip mk miss">통합 마진계산기 없음<span class="fl">미제공</span></span></div>
-              <div class="mx-cell"><span class="chip">모델 신청(s13/25/36)</span><span class="chip mk miss">상품 2P전환·SKU연결<span class="fl">GAP-003</span></span><span class="chip">입고신청</span></div>
-              <div class="mx-cell"><span class="chip mk gap">입고 리포트<span class="fl">GAP-007</span></span><span class="chip mk miss">이용권한(회수→강등)<span class="fl">GAP-005</span></span></div>
-
-              <!-- Current -->
-              <div class="mx-seg"><span class="t">Current</span><span class="s">2P 운영 중</span></div>
-              <div class="mx-cell"><span class="chip">홈 대시보드</span><span class="chip mk gap">홈→요약 기간 불일치<span class="fl">GAP-001</span></span></div>
-              <div class="mx-cell"><span class="chip">홈 판매성과·요약 리포트</span><span class="chip">SKU별 재고수량(정상/품절)</span></div>
-              <div class="mx-cell"><span class="chip">판매·방문·검색 분석</span><span class="chip">검색인기도현황·재고이슈리포트</span><span class="chip mk gap">진단 도구 파편화<span class="fl">GAP-002</span></span></div>
-              <div class="mx-cell"><span class="chip">정산·수수료 / FBN 출고비계산기</span><span class="chip mk miss">통합 마진계산기 없음<span class="fl">미제공</span></span></div>
-              <div class="mx-cell"><span class="chip">가격/광고/노출·주문발송</span><span class="chip">입고·출고·반출·사은품정책</span><span class="chip mk mis">반품/교환 검수확정<span class="fl">GAP-006</span></span></div>
-              <div class="mx-cell"><span class="chip mk gap">입고·재고이슈 리포트<span class="fl">GAP-007</span></span><span class="chip">물류비청구·정산·반출상세</span></div>
+          <section>
+            <div class="note brand">
+              <b>구성 원칙</b> — 가로축 = 셀러 <b>daily routine 6단계</b>(관찰된 행동=안정적 척추) · 세로축 = <b>seller segment 3종</b>(같은 루틴에서 켜지는 구간·진입점이 다름) · 각 셀 = 그 단계×segment에서 닿는 화면·기능. 세로로 읽으면 routine, 셀을 이으면 service flow, 행끼리 비교하면 segment. 상세 근거는 <code>screen-map/</code>(s01~s39), 끊김은 <code>_GAPS.md</code>.
             </div>
-          </div>
+          </section>
 
-          <p class="axis-note">※ 세로↓ routine 흐름 · 가로→ 각 segment 여정. <b>Net-new</b>는 1~4단계가 빔=운영 루프 진입 전(도입 여정이 본체). <b>New(3P→2P 전환)</b>의 진단·의사결정에 미제공이 몰림 = 전환 다리의 최대 끊김. <b>노출·프로모션 진단</b>은 네이버가 제공함(검색인기도현황·프로모션진단) — 초기 "🔴 미제공" 가설은 기각, 대신 <b>파편화(GAP-002)</b>로 재정의.</p>
-
-          <style>
-          .sf-seg-block{margin:14px 0 6px}
-          .sf-seg-h{font-size:12.5px;font-weight:700;margin-bottom:8px}.sf-seg-h .s{font-size:11px;color:var(--fg3);font-weight:400;margin-left:6px}
-          .sf-pipe{display:flex;flex-wrap:wrap;align-items:center;gap:6px 4px;background:#fff;border:1px solid var(--bd);border-radius:10px;padding:12px 14px}
-          .node{font-size:11.5px;border:1px solid var(--bd);border-radius:7px;padding:6px 9px;background:var(--bg-secondary);white-space:nowrap}
-          .node.dec{border-color:#4a5ab7;color:#3a48a0;border-radius:16px;font-weight:600}
-          .node.act{border-color:var(--brand);color:#0a8f3f}
-          .node .g{color:var(--miss);font-weight:700;margin-left:4px}
-          .arw{color:var(--fg3);font-size:12px}
-          .loop{font-size:10.5px;color:var(--fg3);margin-left:6px}
-          .uf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:10px}
-          .uf{border:1px solid var(--bd);border-radius:10px;padding:10px 12px;background:#fff}
-          .uf .h{font-size:12px;font-weight:700;margin-bottom:4px}
-          .uf .st{font-size:11px;color:var(--fg2);line-height:1.6}
-          .uf .gp{font-size:10.5px;color:var(--miss);margin-top:5px;display:block}
-          </style>
-
-          <h3>Segment별 Service Flow (화면 시퀀스)</h3>
-          <div class="sf-seg-block">
-            <div class="sf-seg-h">① Net-new<span class="s">판센 자체가 처음 · 도입 여정이 본체</span></div>
-            <div class="sf-pipe">
-              <span class="node">판센 가입</span><span class="arw">›</span>
-              <span class="node">홈</span><span class="arw">›</span>
-              <span class="node">상품 등록</span><span class="arw">›</span>
-              <span class="node dec">◇ 2P 도입 결정</span><span class="arw">›</span>
-              <span class="node">2P 소개<span class="g">·GAP-004</span></span><span class="arw">›</span>
-              <span class="node">모델 선택·신청<br>(제휴/직접/FBN)</span><span class="arw">›</span>
-              <span class="node">SKU 생성·연결</span><span class="arw">›</span>
-              <span class="node">SKU 정보 입력</span><span class="arw">›</span>
-              <span class="node">입고 신청</span><span class="arw">›</span>
-              <span class="node">입고 리포트</span><span class="arw">›</span>
-              <span class="node act">판매 개시</span>
+          <section>
+            <div class="sec-h"><h2>⚑ 2P 이행·계약 3모델</h2><span class="sub">도입 시 셀러가 택1 · 이후 관리 화면·LNB가 모델별로 갈림</span></div>
+            <div class="models">
+              <div class="model"><span class="mn">모델 ①</span><div class="mt">제휴 N배송</div><div class="md">물류사에 위탁. 셀러가 물류사를 견적·선정해 계약.</div><span class="mtag">위탁형</span></div>
+              <div class="model"><span class="mn">모델 ②</span><div class="mt">N판매자배송</div><div class="md">셀러 자기 창고에서 계약 택배사로 직접 발송(도착보장 유지).</div><span class="mtag">직접배송형</span></div>
+              <div class="model"><span class="mn">모델 ③</span><div class="mt">N배송 FBN</div><div class="md">네이버 직접계약. 입고~출고~반품 전과정을 센터 내에서 관리.</div><span class="mtag">직접계약형 · 8월(소개·신청 7/8)</span></div>
             </div>
-          </div>
-          <div class="sf-seg-block">
-            <div class="sf-seg-h">② New<span class="s">3P→2P 전환 · 전환 다리가 핵심</span></div>
-            <div class="sf-pipe">
-              <span class="node">3P 운영 중</span><span class="arw">›</span>
-              <span class="node">2P 발견(홈·알림)</span><span class="arw">›</span>
-              <span class="node">소개·비교</span><span class="arw">›</span>
-              <span class="node">매출·마진 비교<span class="g">·미제공</span></span><span class="arw">›</span>
-              <span class="node dec">◇ 모델 선택<span class="g">·GAP-004</span></span><span class="arw">›</span>
-              <span class="node">상품 2P전환·SKU연결<span class="g">·GAP-003</span></span><span class="arw">›</span>
-              <span class="node">입고</span><span class="arw">›</span>
-              <span class="node act">2P 판매</span>
+            <div class="relbar"><b>반품·교환</b>은 물류센터 검수 → <b>검수확정</b>에서 분기(반품=자동환불 / 교환=교환품 자동재출고). &nbsp;·&nbsp; <b>출고</b>(센터→고객) ≠ <b>반출</b>(재고 회수, 센터→셀러).</div>
+          </section>
+
+          <section>
+            <div class="sec-h"><h2>daily routine × segment 매트릭스</h2><span class="sub">각 셀 = 닿는 화면·기능 + gap</span></div>
+            <div class="legend">
+              <span class="lg"><i class="i-miss"></i>미제공/부재</span>
+              <span class="lg"><i class="i-gap"></i>끊김·파편화</span>
+              <span class="lg"><i class="i-mis"></i>되돌릴 수 없음·흔한 실수</span>
+              <span class="sep">배지의 <b>GAP-00x</b> = _GAPS.md 우선순위</span>
             </div>
-          </div>
-          <div class="sf-seg-block">
-            <div class="sf-seg-h">③ Current<span class="s">2P 운영 중 · 매일 반복 루프</span></div>
-            <div class="sf-pipe">
-              <span class="node">홈<span class="g">·GAP-001</span></span><span class="arw">›</span>
-              <span class="node">현황(매출·재고)</span><span class="arw">›</span>
-              <span class="node">진단<span class="g">·GAP-002</span></span><span class="arw">›</span>
-              <span class="node">의사결정(마진)<span class="g">·미제공</span></span><span class="arw">›</span>
-              <span class="node act">조치(입고·출고·반출·반품/교환·사은품)<span class="g">·GAP-006</span></span><span class="arw">›</span>
-              <span class="node">관리(리포트·정산·물류비)</span>
-              <span class="loop">↻ 매일 반복</span>
+            <div class="mx-scroll" style="margin-top:14px">
+              <div class="mx">
+                <div class="mx-corner mx-stage"><span class="n">단계</span></div>
+                <div class="mx-stage"><span class="n">1</span><span class="t">진입·인지</span><span class="a">Awareness</span></div>
+                <div class="mx-stage"><span class="n">2</span><span class="t">현황 확인</span><span class="a">Understanding</span></div>
+                <div class="mx-stage"><span class="n">3</span><span class="t">원인 진단</span><span class="a">Understanding</span></div>
+                <div class="mx-stage"><span class="n">4</span><span class="t">의사결정</span><span class="a">마진·우선순위</span></div>
+                <div class="mx-stage"><span class="n">5</span><span class="t">조치·실행</span><span class="a">Action</span></div>
+                <div class="mx-stage"><span class="n">6</span><span class="t">관리·모니터링</span><span class="a">Managements</span></div>
+
+                <div class="mx-seg"><span class="t">Net-new</span><span class="s">판센 자체가 처음</span></div>
+                <div class="mx-cell"><span class="chip">판센 가입</span><span class="chip mk gap">2P 소개(제휴·직접·FBN)<span class="gmk g-gap">GAP-004</span></span></div>
+                <div class="mx-empty">— 판매 전</div>
+                <div class="mx-empty">—</div>
+                <div class="mx-empty">—</div>
+                <div class="mx-cell"><span class="chip">상품 등록</span><span class="chip mk miss">SKU 생성·연결<span class="gmk g-miss">GAP-003</span></span><span class="chip">첫 입고신청</span></div>
+                <div class="mx-cell"><span class="chip">입고 리포트</span></div>
+
+                <div class="mx-seg"><span class="t">New</span><span class="s">3P→2P 전환</span></div>
+                <div class="mx-cell"><span class="chip">3P 홈·알림서 2P 발견</span><span class="chip mk gap">소개(FBN·제휴·직접)<span class="gmk g-gap">GAP-004</span></span></div>
+                <div class="mx-cell"><span class="chip">기존 3P 매출 비교</span><span class="chip">(비즈어드바이저)</span></div>
+                <div class="mx-cell"><span class="chip">어떤 SKU를 2P로?</span><span class="chip">판매분석 배송유형별</span></div>
+                <div class="mx-cell"><span class="chip">FBN 출고비 계산기</span><span class="chip mk miss">통합 마진계산기 없음<span class="gmk g-miss">미제공</span></span></div>
+                <div class="mx-cell"><span class="chip">모델 신청(제휴/직접/FBN)</span><span class="chip mk miss">상품 2P전환·SKU연결<span class="gmk g-miss">GAP-003</span></span><span class="chip">입고신청</span></div>
+                <div class="mx-cell"><span class="chip">입고 리포트</span><span class="chip mk miss">이용권한(회수→강등)<span class="gmk g-miss">GAP-005</span></span></div>
+
+                <div class="mx-seg r-last"><span class="t">Current</span><span class="s">2P 운영 중</span></div>
+                <div class="mx-cell r-last"><span class="chip">홈 대시보드</span><span class="chip mk gap">홈→요약 기간 불일치<span class="gmk g-gap">GAP-001</span></span></div>
+                <div class="mx-cell r-last"><span class="chip">홈 판매성과·요약 리포트</span><span class="chip">SKU별 재고수량</span></div>
+                <div class="mx-cell r-last"><span class="chip">판매·방문·검색 분석</span><span class="chip">검색인기도·재고이슈리포트</span><span class="chip mk gap">진단 도구 파편화<span class="gmk g-gap">GAP-002</span></span></div>
+                <div class="mx-cell r-last"><span class="chip">정산·수수료 / 출고비계산기</span><span class="chip mk miss">통합 마진계산기 없음<span class="gmk g-miss">미제공</span></span></div>
+                <div class="mx-cell r-last"><span class="chip">가격/광고/노출·주문발송</span><span class="chip">입고·출고·반출·사은품</span><span class="chip mk mis">반품/교환 검수확정<span class="gmk g-mis">GAP-006</span></span></div>
+                <div class="mx-cell r-last"><span class="chip mk gap">입고·재고이슈 리포트<span class="gmk g-gap">GAP-007</span></span><span class="chip">물류비청구·정산·반출상세</span></div>
+              </div>
             </div>
-          </div>
+            <div class="axis-note">세로↓ routine 흐름 · 가로→ 각 segment 여정. <b>Net-new</b>는 1~4단계가 빔 = 운영 루프 진입 전(도입 여정이 본체). <b>New(3P→2P 전환)</b>의 진단·의사결정에 미제공이 몰림 = 전환 다리의 최대 끊김. <b>노출·프로모션 진단</b>은 네이버가 제공(검색인기도현황·프로모션진단) → 초기 "미제공" 가설 기각, <b>파편화(GAP-002)</b>로 재정의.</div>
+          </section>
 
-          <h3>Segment별 User Flow (과업 · use case)</h3>
-          <div class="uf-grid">
-            <div class="uf"><div class="h">Net-new · 판센 온보딩·첫 판매</div><div class="st">가입 → 상품 등록 → 판매·주문발송</div></div>
-            <div class="uf"><div class="h">Net-new · 2P 첫 도입</div><div class="st">소개 → 모델 선택 → 신청 → SKU 생성·연결·입력 → 입고 → 판매개시</div><span class="gp">⚠ GAP-004 3모델 명칭 · GAP-006 연동후 수정불가</span></div>
-            <div class="uf"><div class="h">New · 2P 전환 결정</div><div class="st">3P 매출 진단 → 어떤 SKU를 2P로(배송유형별 판매분석) → 마진 비교(FBN 출고비계산기) → 모델 선택</div><span class="gp">⚠ 통합 마진계산기 없음 · GAP-004</span></div>
-            <div class="uf"><div class="h">New · 상품→SKU 전환·첫 입고</div><div class="st">배송속성 변경 → SKU 연결 → SKU 정보 입력 → 입고 신청 → 입고 리포트</div><span class="gp">⚠ GAP-006 연동후 수정불가</span></div>
-            <div class="uf"><div class="h">New · 운영 권한 유지(직접배송)</div><div class="st">발송기한 준수율 관리 → 이용권한 유지</div><span class="gp">⚠ GAP-005 준수율 미달→상품 강등</span></div>
-            <div class="uf"><div class="h">Current · 입고하기</div><div class="st">SKU 확인 → 입고신청 4단계 → 입고상세 추적(대기→중→리포트→완료) → 판매가능 전환</div></div>
-            <div class="uf"><div class="h">Current · 반품 처리하기</div><div class="st">반품 리스트 → 검수 상세(정상/하자/리퍼) → <b>[검수확정]→자동환불</b>. 미신청입고→긴급입고/회송</div><span class="gp">⚠ GAP-006 검수확정 되돌릴 수 없음</span></div>
-            <div class="uf"><div class="h">Current · 교환 처리하기</div><div class="st">교환 검수 → 검수확정 → <b>교환품 자동재출고</b> → 재배송</div><span class="gp">⚠ GAP-006 검수확정 되돌릴 수 없음</span></div>
-            <div class="uf"><div class="h">Current · 반출하기(재고 회수)</div><div class="st">판매불가/자동반출 대상 → 반출신청 3단계(정보→SKU[정상/판매불가]→확인) → 반출상세·반출증</div><span class="gp">⚠ GAP-006 정책·취소 시점</span></div>
-            <div class="uf"><div class="h">Current · 출고하기(수기·사은품)</div><div class="st">수기출고 신청(상품/SKU/주문번호) · 사은품 정책→조건 충족 시 자동출고</div><span class="gp">⚠ GAP-006 시작후 수정불가/확인중 후 취소불가</span></div>
-            <div class="uf"><div class="h">Current · 매출 진단→조치</div><div class="st">홈→요약 → 판매·노출 진단(판매분석·검색인기도) → 가격/광고/노출 조치</div><span class="gp">⚠ GAP-001 기간 불일치 · GAP-002 진단 파편화</span></div>
-            <div class="uf"><div class="h">Current · 정산·비용 확인</div><div class="st">정산내역(수수료) + 물류비 청구(보관·부가비) + 기본비(정산관리)</div><span class="gp">⚠ 통합 마진 한 화면 없음 · GAP-002</span></div>
-          </div>
+          <section>
+            <div class="sec-h"><h2>Segment별 Service Flow</h2><span class="sub">화면·상태 시퀀스</span></div>
+            <div class="pipe-block">
+              <div class="pipe-h"><span class="badge">1</span>Net-new<span class="s">판센 처음 · 도입 여정이 본체</span></div>
+              <div class="pipe">
+                <span class="node">판센 가입</span><span class="arw">›</span>
+                <span class="node">홈</span><span class="arw">›</span>
+                <span class="node">상품 등록</span><span class="arw">›</span>
+                <span class="node dec">◇ 2P 도입 결정</span><span class="arw">›</span>
+                <span class="node">2P 소개</span><span class="arw">›</span>
+                <span class="node">모델 선택·신청<br>(제휴/직접/FBN)</span><span class="arw">›</span>
+                <span class="node">SKU 생성·연결</span><span class="arw">›</span>
+                <span class="node">SKU 정보 입력</span><span class="arw">›</span>
+                <span class="node">입고 신청</span><span class="arw">›</span>
+                <span class="node">입고 리포트</span><span class="arw">›</span>
+                <span class="node act">판매 개시</span>
+              </div>
+            </div>
+            <div class="pipe-block">
+              <div class="pipe-h"><span class="badge">2</span>New<span class="s">3P→2P 전환 · 전환 다리가 핵심</span></div>
+              <div class="pipe">
+                <span class="node">3P 운영 중</span><span class="arw">›</span>
+                <span class="node">2P 발견<br>(홈·알림)</span><span class="arw">›</span>
+                <span class="node">소개·비교</span><span class="arw">›</span>
+                <span class="node">매출·마진 비교</span><span class="arw">›</span>
+                <span class="node dec">◇ 모델 선택</span><span class="arw">›</span>
+                <span class="node">상품 2P전환<br>·SKU연결</span><span class="arw">›</span>
+                <span class="node">입고</span><span class="arw">›</span>
+                <span class="node act">2P 판매</span>
+              </div>
+            </div>
+            <div class="pipe-block">
+              <div class="pipe-h"><span class="badge">3</span>Current<span class="s">2P 운영 · 매일 반복 루프</span></div>
+              <div class="pipe">
+                <span class="node">홈</span><span class="arw">›</span>
+                <span class="node">현황<br>(매출·재고)</span><span class="arw">›</span>
+                <span class="node">진단</span><span class="arw">›</span>
+                <span class="node">의사결정<br>(마진)</span><span class="arw">›</span>
+                <span class="node act">조치<br>(입고·출고·반출·반품/교환·사은품)</span><span class="arw">›</span>
+                <span class="node">관리<br>(리포트·정산·물류비)</span>
+                <span class="loop">↻ 매일 반복</span>
+              </div>
+            </div>
+          </section>
 
-          <h3>우선순위 Gap (추정 · ⚠️는 사용자 검증 필요 — 상세 _GAPS.md)</h3>
-          <table class="gaptbl">
-            <tr><th style="width:52px">순위</th><th style="width:150px">GAP</th><th>한줄</th><th style="width:64px">심각도</th><th style="width:74px">routine</th></tr>
-            <tr><td>1</td><td><b>GAP-006</b> 되돌릴 수 없는 액션 다발</td><td>검수확정→자동환불/재출고, 사은품정책·SKU연동·양식제출 '수정불가'가 곳곳에</td><td class="sev-h">高</td><td>5 조치</td></tr>
-            <tr><td>2</td><td><b>GAP-005</b> 연동종료·권한회수 강등</td><td>준수율 미달/연동종료 → 2P 상품 전부 일반배송 강등+태그 해제</td><td class="sev-h">高</td><td>6 관리</td></tr>
-            <tr><td>3</td><td><b>GAP-003</b> SKU 온보딩 입력부담</td><td>입고 전 SKU마다 다수 필수입력+연동후 수정불가, 상품→SKU 전환 부담</td><td class="sev-h">高</td><td>5 도입</td></tr>
-            <tr><td>4</td><td><b>GAP-004</b> 2P 3모델 명칭 혼동</td><td>제휴 N배송·N판매자배송·N배송 FBN 구분 어려움(도입 오선택)</td><td class="sev-m">中</td><td>1 인지</td></tr>
-            <tr><td>5</td><td><b>GAP-001</b> 홈→요약 기간 불일치</td><td>홈 일간→요약 30일, 매일 반복 동선 혼란 (제보=확정)</td><td class="sev-m">中</td><td>1→2</td></tr>
-            <tr><td>6</td><td><b>GAP-007</b> 리포트 자동승인</td><td>입고·재고이슈 리포트 n일 후 자동승인, 이의 기회 놓침</td><td class="sev-m">中</td><td>6 관리</td></tr>
-            <tr><td>7</td><td><b>GAP-002</b> 진단/비용 파편화</td><td>검색진단 2곳, 프로모션 진단/실행 분리, 물류비·재고 3P/2P 분리</td><td class="sev-m">中~低</td><td>3 진단</td></tr>
-          </table>
+          <section>
+            <div class="sec-h"><h2>Segment별 User Flow</h2><span class="sub">과업 · use case (상세: _FLOWS_detail_*.md)</span></div>
+            <div class="uf-grid">
+              <div class="uf"><span class="seg">Net-new</span><div class="h">판센 온보딩·첫 판매</div><div class="st">가입 → 상품 등록 → 판매·주문발송</div></div>
+              <div class="uf"><span class="seg">Net-new</span><div class="h">2P 첫 도입</div><div class="st">소개 → 모델 선택 → 신청 → SKU 생성·연결·입력 → 입고 → 판매개시</div><span class="gp">⚠ GAP-004 3모델 명칭 · GAP-006 연동후 수정불가</span></div>
+              <div class="uf"><span class="seg">New</span><div class="h">2P 전환 결정</div><div class="st">3P 매출 진단 → 어떤 SKU를 2P로(배송유형별) → 마진 비교(출고비계산기) → 모델 선택</div><span class="gp">⚠ 통합 마진계산기 없음 · GAP-004</span></div>
+              <div class="uf"><span class="seg">New</span><div class="h">상품→SKU 전환·첫 입고</div><div class="st">배송속성 변경 → SKU 연결 → 정보 입력 → 입고 신청 → 입고 리포트</div><span class="gp">⚠ GAP-006 연동후 수정불가</span></div>
+              <div class="uf"><span class="seg">New</span><div class="h">운영 권한 유지(직접배송)</div><div class="st">발송기한 준수율 관리 → 이용권한 유지</div><span class="gp">⚠ GAP-005 준수율 미달 → 상품 강등</span></div>
+              <div class="uf"><span class="seg">Current</span><div class="h">입고하기</div><div class="st">SKU 확인 → 입고신청 4단계 → 입고상세 추적(대기→중→리포트→완료) → 판매가능 전환</div></div>
+              <div class="uf"><span class="seg">Current</span><div class="h">반품 처리하기</div><div class="st">리스트 → 검수 상세(정상/하자/리퍼) → <b>[검수확정]→자동환불</b>. 미신청입고→긴급입고/회송</div><span class="gp">⚠ GAP-006 검수확정 되돌릴 수 없음</span></div>
+              <div class="uf"><span class="seg">Current</span><div class="h">교환 처리하기</div><div class="st">교환 검수 → 검수확정 → <b>교환품 자동재출고</b> → 재배송</div><span class="gp">⚠ GAP-006 검수확정 되돌릴 수 없음</span></div>
+              <div class="uf"><span class="seg">Current</span><div class="h">반출하기(재고 회수)</div><div class="st">판매불가/자동반출 대상 → 반출신청 3단계(정보→SKU[정상/판매불가]→확인) → 반출상세·반출증</div><span class="gp">⚠ GAP-006 정책·취소 시점</span></div>
+              <div class="uf"><span class="seg">Current</span><div class="h">출고하기(수기·사은품)</div><div class="st">수기출고 신청(상품/SKU/주문번호) · 사은품 정책 → 조건 충족 시 자동출고</div><span class="gp">⚠ GAP-006 시작후 수정불가 / 확인중 후 취소불가</span></div>
+              <div class="uf"><span class="seg">Current</span><div class="h">매출 진단→조치</div><div class="st">홈→요약 → 판매·노출 진단(판매분석·검색인기도) → 가격/광고/노출 조치</div><span class="gp">⚠ GAP-001 기간 불일치 · GAP-002 진단 파편화</span></div>
+              <div class="uf"><span class="seg">Current</span><div class="h">정산·비용 확인</div><div class="st">정산내역(수수료) + 물류비 청구(보관·부가비) + 기본비(정산관리)</div><span class="gp">⚠ 통합 마진 한 화면 없음 · GAP-002</span></div>
+            </div>
+          </section>
 
-          <p class="todo" style="margin-top:16px">※ 화면 근거 s01~s39는 <code>screen-map/</code>(라이브 s01~s31 + 8~9월 신규 Figma s32~s39). 관련 검수본: <a class="lnk" href="pages/입고리포트_자동승인_다탭검수본.html">입고리포트 자동승인 UXW 검수본 ›</a> (GAP-007 관련)</p>
+          <section>
+            <div class="sec-h"><h2>우선순위 Gap</h2><span class="sub">추정 · ⚠️는 사용자 검증 필요 — 상세 _GAPS.md</span></div>
+            <table class="gaptbl">
+              <tr><th style="width:44px">#</th><th style="width:200px">GAP</th><th>한줄</th><th style="width:70px">심각도</th><th style="width:80px">routine</th></tr>
+              <tr><td class="rk">1</td><td><b>GAP-006</b> 되돌릴 수 없는 액션 다발</td><td>검수확정→자동환불/재출고, 사은품정책·SKU연동·양식제출 '수정불가'가 곳곳에</td><td><span class="sev sev-h">高</span></td><td>5 조치</td></tr>
+              <tr><td class="rk">2</td><td><b>GAP-005</b> 연동종료·권한회수 강등</td><td>준수율 미달/연동종료 → 2P 상품 전부 일반배송 강등+태그 해제</td><td><span class="sev sev-h">高</span></td><td>6 관리</td></tr>
+              <tr><td class="rk">3</td><td><b>GAP-003</b> SKU 온보딩 입력부담</td><td>입고 전 SKU마다 다수 필수입력+연동후 수정불가, 상품→SKU 전환 부담</td><td><span class="sev sev-h">高</span></td><td>5 도입</td></tr>
+              <tr><td class="rk">4</td><td><b>GAP-004</b> 2P 3모델 명칭 혼동</td><td>제휴 N배송·N판매자배송·N배송 FBN 구분 어려움(도입 오선택)</td><td><span class="sev sev-m">中</span></td><td>1 인지</td></tr>
+              <tr><td class="rk">5</td><td><b>GAP-001</b> 홈→요약 기간 불일치</td><td>홈 일간→요약 30일, 매일 반복 동선 혼란 (제보=확정)</td><td><span class="sev sev-m">中</span></td><td>1→2</td></tr>
+              <tr><td class="rk">6</td><td><b>GAP-007</b> 리포트 자동승인</td><td>입고·재고이슈 리포트 n일 후 자동승인, 이의 기회 놓침</td><td><span class="sev sev-m">中</span></td><td>6 관리</td></tr>
+              <tr><td class="rk">7</td><td><b>GAP-002</b> 진단/비용 파편화</td><td>검색진단 2곳, 프로모션 진단/실행 분리, 물류비·재고 3P/2P 분리</td><td><span class="sev sev-m">中~低</span></td><td>3 진단</td></tr>
+            </table>
+            <p class="foot">✅ 검증 확정: GAP-006·005·004·002 (+001 제보) &nbsp;·&nbsp; ⏸ 보류: GAP-003·007</p>
+          </section>
+
+          <p class="foot">화면 근거 s01~s39 = <code>screen-map/</code> (라이브 s01~s31 + 8~9월 신규 Figma s32~s39). 관련 검수본: <a href="pages/입고리포트_자동승인_다탭검수본.html">입고리포트 자동승인 UXW 검수본 ›</a></p>
         </div>
       </div>
     </div>
