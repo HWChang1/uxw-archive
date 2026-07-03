@@ -134,6 +134,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 .kc-future-h{font-size:12.5px;font-weight:700;color:var(--fg2);margin-bottom:6px}
 .kc-future-b{font-size:12px;color:var(--fg2);line-height:1.6}
 .kc-future-why{margin-top:6px;color:var(--fg3);font-size:11.5px;line-height:1.6}
+.kc-future-ul{margin:6px 0;padding-left:16px;line-height:1.6}.kc-future-ul li{margin-bottom:3px}
 .kc-mini{margin-top:11px;border:1.5px solid var(--brand);border-radius:10px;padding:12px 14px;background:#fff;max-width:360px}
 .kc-mini-h{font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px;margin-bottom:8px}
 .kc-flag{font-size:10px;font-weight:700;color:#fff;background:var(--brand);border-radius:99px;padding:2px 8px;letter-spacing:.3px}
@@ -246,7 +247,12 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
     </div>
     <div class="kc-future">
       <div class="kc-future-h">💡 이후 사용성을 위해 개선하면 좋을 점</div>
-      <div class="kc-future-b">[입고상세 › '리포트처리대기']의 고정 문구 대신 리포트 상태 노출.
+      <div class="kc-future-b">[입고상세 › '리포트처리대기']의 고정 문구 대신 리포트 상태 노출:
+        <ul class="kc-future-ul">
+          <li><b>승인대기</b> — 입고 중 문제가 발견되어 리포트가 등록되었습니다. 승인기한 내 이의 신청이 없으면 자동 승인되어 입고가 진행됩니다.</li>
+          <li><b>처리중</b> — 리포트가 승인되어 입고 작업이 진행 중입니다.</li>
+          <li><b>처리완료</b> — 입고 작업이 완료되어 곧 입고완료됩니다.</li>
+        </ul>
         <div class="kc-future-why"><b>이유</b> — 사용자는 액션을 수행한 화면(입고 상세)에서 상태를 이어 확인한다. 리포트 상태를 보려 리포트관리로 이동해 개별 조회하는 것은 맥락 이탈이므로, 액션이 일어난 자리에서 상태를 끝까지 노출하는 편이 맥락 전환과 인지 부하를 줄이는 경험이다.</div>
         <div class="kc-mini">
           <div class="kc-mini-h">📄 리포트 처리 대기 <span class="kc-flag">승인대기</span></div>
@@ -312,7 +318,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
         <table class="dt"><thead><tr><th>입고상태</th><th>변경정보</th><th>변경일시</th></tr></thead><tbody>
           <tr><td><span class="badge-st gray">입고대기</span></td><td>입고신청 등록</td><td>2024.12.24. 15:00</td></tr>
           <tr><td><span class="badge-st gray">입고중</span></td><td>물류사 도착 확인</td><td>2024.12.24. 15:00</td></tr>
-          <tr><td id="st-history"><span style="font-size:10px">리포트처리대기</span></td><td>입고 리포트 등록</td><td>2024.12.24. 15:00</td></tr>
+          <tr><td id="st-history"><span class="badge-st warn">리포트처리대기</span></td><td>입고 리포트 등록</td><td>2024.12.24. 15:00</td></tr>
         </tbody></table></div></div>
       <div class="note">※ 요약·현황·배송/도착정보·상태이력은 변경 대상 아님 — 첫 사용자 이해를 위해 원본 구조대로 재현. 변경은 <b>입고 단계('리포트 처리 대기')의 안내 문구·승인기한</b>에 한정.</div>
     </div>
@@ -346,7 +352,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
         <div class="alert">⊘ <span class="ab blk"><span class="as">리포트의 확인이 필요한 항목이 1건 있습니다. '리포트 처리 대기' 상태인 항목을 확인해 주세요.</span><span class="to" data-why="이의 신청 경로 안내 + 기존 용어 재사용, 정본 워딩으로 전 탭 통일" onclick="dr(this)">리포트 처리 대기 항목이 1건 있습니다. 리포트에서 상세 내역을 확인하시고, 승인요청항목에 이견이 있으시면 승인기한 내에 이의 신청을 해주세요.</span></span></div>
         <div class="alert" style="color:var(--fg2)">⊘ 배송정보를 입력하지 않은 항목이 2건 있습니다. 물류센터 도착 전까지 운송장번호 또는 차량번호를 입력해 주세요.</div>
         <table class="dt" style="margin-top:10px"><thead><tr><th>입고 ID</th><th>입고센터</th><th>SKU 종수</th><th>입고신청수량</th><th>입고완료수량</th><th>입고상태</th><th>입고예정일</th></tr></thead><tbody>
-          <tr><td class="lnk">IB17580945691874</td><td>품고 이천 375 XFC 네이버센터</td><td>1</td><td>1,000</td><td>-</td><td id="st-list"><span style="font-size:10px">리포트처리대기</span><div style="margin-top:5px"><span class="to" style="font-size:10px" data-why="목록 상태에도 승인기한 병기 — 어느 화면을 보든 마감 인지" onclick="dr(this)">승인기한 2026.07.03 23:59</span></div></td><td>2025.09.19.</td></tr>
+          <tr><td class="lnk">IB17580945691874</td><td>품고 이천 375 XFC 네이버센터</td><td>1</td><td>1,000</td><td>-</td><td id="st-list"><span class="badge-st warn">리포트처리대기</span><div style="margin-top:5px"><span class="to" style="font-size:10px" data-why="목록 상태에도 승인기한 병기 — 어느 화면을 보든 마감 인지" onclick="dr(this)">승인기한 2026.07.03 23:59</span></div></td><td>2025.09.19.</td></tr>
           <tr><td class="lnk">IB17810917514211</td><td>CJ대한통운(더풀필) 군포새벽F/C</td><td>8</td><td>800</td><td>-</td><td><span class="badge-st gray">입고대기</span></td><td>2026.07.10.</td></tr>
           <tr><td class="lnk">IB17810831419210</td><td>컬리 안산FSC</td><td>3</td><td>50</td><td>-</td><td><span class="badge-st gray">입고대기</span></td><td>2026.06.17.</td></tr>
         </tbody></table><div class="pg">‹ <b>1</b> 2 ›</div>
