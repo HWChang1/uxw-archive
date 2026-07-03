@@ -114,10 +114,12 @@
 .flow-page .axis-note b{color:var(--ink)}
 
 /* [ⓘ 근거] 리서치 근거 툴팁 (사내 위키) */
-.flow-page .ev{position:relative;display:inline-flex;align-items:center;gap:2px;font-size:10px;font-weight:700;color:#1a6dd6;background:#eaf2fd;border:1px solid #cfe0fa;border-radius:99px;padding:1px 7px;margin-left:6px;cursor:help;vertical-align:1px;white-space:nowrap;letter-spacing:0;line-height:1.5}
-.flow-page .ev:hover{background:#dcebfd}
+.flow-page .ev{position:relative;display:inline-flex;align-items:center;gap:2px;font-size:10px;font-weight:700;color:#1a6dd6;background:#eaf2fd;border:1px solid #cfe0fa;border-radius:99px;padding:1px 7px;margin-left:6px;cursor:pointer;vertical-align:1px;white-space:nowrap;letter-spacing:0;line-height:1.5;user-select:none}
+.flow-page .ev:hover,.flow-page .ev.open{background:#1a6dd6;color:#fff;border-color:#1a6dd6}
 .flow-page .ev .tip{position:absolute;bottom:calc(100% + 9px);left:50%;transform:translateX(-50%);width:290px;background:#1b1c25;color:#eef0f3;font-weight:400;font-size:11.5px;line-height:1.62;padding:12px 14px;border-radius:11px;box-shadow:0 10px 30px rgba(0,0,0,.28);opacity:0;visibility:hidden;transition:opacity .13s;z-index:60;text-align:left;pointer-events:none;white-space:normal}
-.flow-page .ev:hover .tip{opacity:1;visibility:visible}
+.flow-page .ev.open .tip{opacity:1;visibility:visible;pointer-events:auto}
+.flow-page .ev.open .tip .x{position:absolute;top:8px;right:10px;color:#8a8f9c;font-size:14px;cursor:pointer;line-height:1}
+.flow-page .ev.open .tip .x:hover{color:#fff}
 .flow-page .ev .tip::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:7px solid transparent;border-top-color:#1b1c25}
 .flow-page .ev .tip .q{color:#fff;display:block;margin-bottom:8px}
 .flow-page .ev .tip .q::before{content:"\201C"}.flow-page .ev .tip .q::after{content:"\201D"}
@@ -206,7 +208,7 @@
               <div class="trk"><span class="tl">New · 3P→2P 전환</span><span class="tf">허들 제거<span class="ev">ⓘ 근거<span class="tip"><span class="q">이미 매출이 나는 3P 판매자의 2P 전환은 AIDA(신규 획득)가 아니라 '허들 제거'. 의사결정 순서 = ①수익 확신(수수료 계산기) → ②운영 변화(업무 diff) → ③시작 부담(소량 테스트). 허들1 해소 전엔 2·3이 인지조차 안 됨.</span><span class="src">위키: N배송 2P 소개페이지 UX 검토(심리 기반) · <a href="https://wiki.navercorp.com/pages/viewpage.action?pageId=5244445757" target="_blank" rel="noopener">문서 열기 ↗</a></span></span></span></span><span class="tx">막힌 이유(수익 확신→운영 변화→시작 부담)를 순서대로 제거. <b>개인화 계산기가 결정 트리거</b> — AIDA로 뭉치면 이탈.</span></div>
               <div class="trk"><span class="tl">Current</span><span class="tf">운영 루프 (AUAM 아님)</span><span class="tx">퍼널이 아니라 매일 반복되는 발송·입고·진단·정산 루프. 상단 AUAM 밴드는 도입/인지 관점의 참조축.</span></div>
             </div>
-            <p class="foot">📌 사내 위키(Confluence) 13개 문서로 gap 근거 보강(<b>ⓘ 근거</b> hover) · 전시관리 리서치 결과·N배송 데이터는 <b>7/8·이후 갱신 예정</b>(현재 일부 잠정).</p>
+            <p class="foot">📌 사내 위키(Confluence) 13개 문서로 gap 근거 보강(<b>ⓘ 근거</b> 클릭 시 인용·위키링크) · 전시관리 리서치 결과·N배송 데이터는 <b>7/8·이후 갱신 예정</b>(현재 일부 잠정).</p>
           </section>
 
           <section>
@@ -330,6 +332,35 @@
 <script>
 (async function init() {
   renderLNB({ active: "flow", docs: await loadDocs() });
+})();
+
+// [ⓘ 근거] 툴팁: 클릭으로 고정/해제 (링크 클릭 가능하도록)
+(function(){
+  function closeAll(except){
+    document.querySelectorAll('.ev.open').forEach(function(ev){
+      if(ev===except) return;
+      ev.classList.remove('open');
+      var x=ev.querySelector('.tip .x'); if(x) x.remove();
+    });
+  }
+  document.addEventListener('click', function(e){
+    // 툴팁 내부(링크·닫기버튼 등) 클릭
+    var closeBtn=e.target.closest('.tip .x');
+    if(closeBtn){ closeAll(); e.preventDefault(); return; }
+    if(e.target.closest('.tip')) return; // 링크 등은 그대로 동작
+    var ev=e.target.closest('.ev');
+    if(!ev){ closeAll(); return; }
+    e.preventDefault();
+    var wasOpen=ev.classList.contains('open');
+    closeAll(ev);
+    if(wasOpen){ ev.classList.remove('open'); var ox=ev.querySelector('.tip .x'); if(ox) ox.remove(); }
+    else{
+      ev.classList.add('open');
+      var tip=ev.querySelector('.tip');
+      if(tip && !tip.querySelector('.x')){ var x=document.createElement('span'); x.className='x'; x.textContent='×'; tip.appendChild(x); }
+    }
+  });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeAll(); });
 })();
 </script>
 </body></html>
