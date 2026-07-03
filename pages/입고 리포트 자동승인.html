@@ -130,6 +130,16 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 .loc-tab{display:inline-block;font-size:11px;font-weight:700;color:var(--fg3);min-width:56px}
 .kc-divider{border-top:1px solid var(--bd2);margin:16px 0}
 .kc-note{font-size:12px;color:var(--fg3);line-height:1.65;padding-left:2px}
+.kc-future{margin:14px 0 2px 26px;padding:12px 14px;border-left:3px solid var(--bd);background:var(--bg);border-radius:0 8px 8px 0}
+.kc-future-h{font-size:12.5px;font-weight:700;color:var(--fg2);margin-bottom:6px}
+.kc-future-b{font-size:12px;color:var(--fg2);line-height:1.6}
+.kc-future-why{margin-top:6px;color:var(--fg3);font-size:11.5px;line-height:1.6}
+.kc-mini{margin-top:11px;border:1.5px solid var(--brand);border-radius:10px;padding:12px 14px;background:#fff;max-width:360px}
+.kc-mini-h{font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px;margin-bottom:8px}
+.kc-flag{font-size:10px;font-weight:700;color:#fff;background:var(--brand);border-radius:99px;padding:2px 8px;letter-spacing:.3px}
+.kc-mini-d{font-size:11.5px;color:var(--fg);line-height:1.6;background:#edfaf3;border-radius:6px;padding:8px 10px}
+.kc-mini-dl{font-size:11px;color:var(--fg2);margin:8px 0}
+.kc-mini-btn{display:inline-block;font-size:11px;background:var(--red);color:#fff;border-radius:6px;padding:6px 13px;font-weight:600}
 /* 변경 내역 드로어 */
 /* ⏸ 보류(HIDE): 아래 한 줄이 변경내역 버튼+드로어를 숨김 — 복구하려면 이 줄만 삭제 */
 .chg-btn,#chgDrawer{display:none!important}
@@ -222,14 +232,30 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
         <p>리포트 승인을 <b>당일 23:59:59 자동승인</b>으로 바꿔 물류사 실제 운영 프로세스와 싱크를 맞추면 병목이 제거될 것.</p></div>
     </div>
   </details>
-  <div class="tone-box"><div class="tone-h" style="margin-bottom:32px">📌 핵심 변경 <span style="font-size:12px;font-weight:500;color:var(--fg2)">· 워딩</span></div>
+  <div class="tone-box"><div class="tone-h" style="margin-bottom:32px">📌 핵심 변경 <span style="font-size:12px;font-weight:500;color:var(--fg2)">· 워딩 · 안내 문구</span></div>
     <div class="kc-h"><span class="kc-num">1</span><span class="kc-ch"><span class="kc-as">문의하기</span> → <span class="kc-to">이의 신청</span></span></div>
     <div class="kc-body">
       <div class="kc-row"><span class="kc-k">변경 이유</span><div class="kc-v">단순 문의가 아닌 <b>선작업을 보류시키는 액션</b>이므로 '문의하기'는 결과를 과소하게 전달하는 경향이 큼</div></div>
       <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><a class="kc-goto" onclick="goTab('rdetail','rdetail-cta')">리포트상세 ›</a></div></div>
     </div>
     <div class="kc-divider"></div>
-    <div class="kc-note">※ <b>상태값 '리포트처리대기'</b>는 검토 후 <b>유지</b> — 입고 단계가 고정 라벨이라 승인~처리 단계를 포괄하므로, '승인 대기'로 좁히면 승인 후 부정확(리포트관리의 '승인대기'는 별도 상세 상태).</div>
+    <div class="kc-h"><span class="kc-num">2</span><span class="kc-ch"><span class="kc-as">'접수 지연' 안내</span> → <span class="kc-to">자동 승인·승인기한 안내</span></span></div>
+    <div class="kc-body">
+      <div class="kc-row"><span class="kc-k">변경 이유</span><div class="kc-v">자동 승인 전환과 <b>승인기한(마감)</b>을 명확히 안내해, 마감 전 검토·이의 신청을 유도</div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><div class="loc-grp"><span class="loc-tab">입고상세</span><a class="kc-goto" onclick="goTab('ipgo','st-step')">진행 단계 ›</a></div><div class="loc-grp"><span class="loc-tab">입고관리</span><a class="kc-goto" onclick="goTab('list','st-chip')">상태 칩 툴팁 ›</a></div></div></div>
+    </div>
+    <div class="kc-future">
+      <div class="kc-future-h">💡 이후 사용성을 위해 개선하면 좋을 점</div>
+      <div class="kc-future-b">[입고상세 › '리포트처리대기']의 고정 문구 대신 리포트 상태 노출.
+        <div class="kc-future-why"><b>이유</b> — 사용자는 액션을 수행한 화면(입고 상세)에서 상태를 이어 확인한다. 리포트 상태를 보려 리포트관리로 이동해 개별 조회하는 것은 맥락 이탈이므로, 액션이 일어난 자리에서 상태를 끝까지 노출하는 편이 맥락 전환과 인지 부하를 줄이는 경험이다.</div>
+        <div class="kc-mini">
+          <div class="kc-mini-h">📄 리포트 처리 대기 <span class="kc-flag">승인대기</span></div>
+          <div class="kc-mini-d">입고 중 문제로 리포트가 등록되어, 승인 후 입고가 진행됩니다. 승인기한 내 이의 신청이 없으면 자동 승인됩니다.</div>
+          <div class="kc-mini-dl">승인기한 2026.07.03 23:59</div>
+          <span class="kc-mini-btn">리포트 확인하기</span>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="tone-box"><div class="tone-h">📖 관련 용어</div><dl class="term">
     <dt>승인기한</dt><dd>이의를 신청할 수 있는 마감(자동 승인 시점). 등록 당일 23:59</dd>
@@ -250,7 +276,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
           <div class="step done"><div class="step-ic">🚚</div><div class="step-t">입고 중</div><div class="step-d">입고센터에 도착한 상품을 접수 중입니다.</div></div>
           <div class="step-sep">›</div>
           <div class="step active" id="st-step"><div class="step-ic">📄</div><div class="step-t">리포트 처리 대기</div>
-            <div class="step-d ab blk"><span class="as">입고 중 문제가 발견되어 접수가 지연되고 있습니다.</span><span class="to" data-why="자동 승인 전환 안내 + 승인기한(마감)을 직관적으로 노출해 마감 전 조치 유도" onclick="dr(this)">입고 중 문제가 발견되어 리포트가 등록되었습니다. 승인기한이 지나면 자동 승인되어 입고가 진행됩니다.</span></div>
+            <div class="step-d ab blk"><span class="as">입고 중 문제가 발견되어 접수가 지연되고 있습니다.</span><span class="to" data-why="자동 승인 전환 안내 + 승인기한(마감)을 직관적으로 노출해 마감 전 조치 유도" onclick="dr(this)">입고 중 문제로 리포트가 등록되어, 승인 후 입고가 진행됩니다. 승인기한 내 이의 신청이 없으면 자동 승인됩니다.</span></div>
             <div style="margin-top:9px"><span class="to" style="font-size:11px" data-why="긴박한 자동승인 마감 → 날짜·시간 명시(기존 용어 '승인기한')" onclick="dr(this)">승인기한 2026.07.03 23:59</span></div>
             <div style="margin-top:auto;padding-top:11px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center">
               <span class="step-cta" style="background:#eceef1;color:var(--fg3);text-decoration:line-through">리포트 확인하러 가기</span><span style="color:var(--fg3)">→</span>
@@ -301,7 +327,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
   <div class="screen"><div class="sc-body">
       <div class="chips">
         <div class="chip"><span class="chip-ic g">▦</span><div><div class="chip-l">전체</div><div class="chip-n">65<small>건</small></div></div></div>
-        <div class="chip on" id="st-chip"><span class="chip-ic r">🧾</span><div><div class="chip-l"><span style="display:inline-flex;align-items:center;gap:5px">리포트처리대기<span class="qi chg">?<span class="tip"><div class="tip-outer"><div class="tip-col tip-col-asis"><span class="tip-col-header h-asis">ASIS</span><div class="tip-col-body">입고 중 문제가 발견되어 검수가 지연되고 있습니다. 입고신청과 연결된 리포트를 승인해주세요.</div></div><div class="tip-col"><span class="tip-col-header h-tobe">TOBE</span><div class="tip-col-body">입고 중 문제가 발견되어 <span class="tip-hl">리포트가 등록</span>되었습니다. <span class="tip-hl">승인기한</span>이 지나면 <span class="tip-hl">자동 승인</span>되어 입고가 진행됩니다. 승인요청항목에 이견이 있으시면 승인기한 내에 리포트 상세에서 <span class="tip-hl">이의 신청</span>을 해주세요.<div class="tip-col-callout">💡 <strong>자동 승인·이의 경로 안내 + 승인기한 직관 노출</strong> · 기존 용어(승인기한·등록) 재사용, '발행' 배제 (탭1·목록 알림과 동일 워딩)</div></div></div></div><button class="tip-close">✕</button></span></span></span></div><div class="chip-n">1<small>건</small></div></div></div>
+        <div class="chip on" id="st-chip"><span class="chip-ic r">🧾</span><div><div class="chip-l"><span style="display:inline-flex;align-items:center;gap:5px">리포트처리대기<span class="qi chg">?<span class="tip"><div class="tip-outer"><div class="tip-col tip-col-asis"><span class="tip-col-header h-asis">ASIS</span><div class="tip-col-body">입고 중 문제가 발견되어 검수가 지연되고 있습니다. 입고신청과 연결된 리포트를 승인해주세요.</div></div><div class="tip-col"><span class="tip-col-header h-tobe">TOBE</span><div class="tip-col-body">입고 중 문제로 <span class="tip-hl">리포트가 등록</span>되어, 승인 후 입고가 진행됩니다. 승인기한 내 <span class="tip-hl">이의 신청</span>이 없으면 <span class="tip-hl">자동 승인</span>됩니다. 이의 신청은 <span class="tip-hl">리포트 상세</span>에서 할 수 있습니다.<div class="tip-col-callout">💡 <strong>자동 승인·이의 경로 안내 + 승인기한 직관 노출</strong> · 기존 용어(승인기한·등록) 재사용, '발행' 배제 (탭1·목록 알림과 동일 워딩)</div></div></div></div><button class="tip-close">✕</button></span></span></span></div><div class="chip-n">1<small>건</small></div></div></div>
         <div class="chip"><span class="chip-ic">🗂️</span><div><div class="chip-l">임시저장</div><div class="chip-n">0<small>건</small></div></div></div>
         <div class="chip"><span class="chip-ic">⏳</span><div><div class="chip-l">입고대기</div><div class="chip-n">2<small>건</small></div></div></div>
         <div class="chip"><span class="chip-ic">🚚</span><div><div class="chip-l">입고중</div><div class="chip-n">5<small>건</small></div></div></div>
@@ -317,7 +343,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
       </div></div>
       <div class="card"><div class="card-b">
         <div class="listtop"><b>조회 목록 (총 65개)</b><div class="listtop-r"><span class="sel">기본정렬순 <span>▾</span></span><span class="sel">50개씩 <span>▾</span></span><span class="btn-o">엑셀다운</span></div></div>
-        <div class="alert">⊘ <span class="ab blk"><span class="as">리포트의 확인이 필요한 항목이 1건 있습니다. '리포트 처리 대기' 상태인 항목을 확인해 주세요.</span><span class="to" data-why="부정 프레임 제거 + 기존 용어 재사용. 상태값·이의 안내는 정본 워딩으로 전 탭 통일" onclick="dr(this)">리포트 처리 대기 항목이 1건 있습니다. 리포트에서 상세 내역을 확인하시고, 승인요청항목에 이견이 있으시면 승인기한 내에 이의 신청을 해주세요.</span></span></div>
+        <div class="alert">⊘ <span class="ab blk"><span class="as">리포트의 확인이 필요한 항목이 1건 있습니다. '리포트 처리 대기' 상태인 항목을 확인해 주세요.</span><span class="to" data-why="이의 신청 경로 안내 + 기존 용어 재사용, 정본 워딩으로 전 탭 통일" onclick="dr(this)">리포트 처리 대기 항목이 1건 있습니다. 리포트에서 상세 내역을 확인하시고, 승인요청항목에 이견이 있으시면 승인기한 내에 이의 신청을 해주세요.</span></span></div>
         <div class="alert" style="color:var(--fg2)">⊘ 배송정보를 입력하지 않은 항목이 2건 있습니다. 물류센터 도착 전까지 운송장번호 또는 차량번호를 입력해 주세요.</div>
         <table class="dt" style="margin-top:10px"><thead><tr><th>입고 ID</th><th>입고센터</th><th>SKU 종수</th><th>입고신청수량</th><th>입고완료수량</th><th>입고상태</th><th>입고예정일</th></tr></thead><tbody>
           <tr><td class="lnk">IB17580945691874</td><td>품고 이천 375 XFC 네이버센터</td><td>1</td><td>1,000</td><td>-</td><td id="st-list"><span style="font-size:10px">리포트처리대기</span><div style="margin-top:5px"><span class="to" style="font-size:10px" data-why="목록 상태에도 승인기한 병기 — 어느 화면을 보든 마감 인지" onclick="dr(this)">승인기한 2026.07.03 23:59</span></div></td><td>2025.09.19.</td></tr>
@@ -451,7 +477,7 @@ var CHG_SECTIONS=[
      {p:'ipgo',l:1,loc:"입고상세 '입고관리'→'입고상세'"},
      {p:'rdetail',l:1,loc:"리포트상세 '상세보기'→'상세'"}
    ]},
-   {t:"안내 문구 워싱 · 부정프레임 제거·자동승인/이의", items:[
+   {t:"안내 문구 워싱 · 자동승인·이의 안내", items:[
      {p:'ipgo',l:3,loc:"입고상세 안내"},
      {p:'list',l:4,loc:"입고관리 목록 상단 알림"},
      {p:'rdetail',l:2,loc:"리포트상세 상태이력"}
