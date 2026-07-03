@@ -118,13 +118,7 @@
         </div>
         <div class="wrap">
 
-          <section>
-            <div class="note brand">
-              <b>구성 원칙</b> — 가로축 = 셀러 <b>daily routine 6단계</b>(관찰된 행동=안정적 척추) · 세로축 = <b>seller segment 3종</b>(같은 루틴에서 켜지는 구간·진입점이 다름) · 각 셀 = 그 단계×segment에서 닿는 화면·기능. 세로로 읽으면 routine, 셀을 이으면 service flow, 행끼리 비교하면 segment. 상세 근거는 <code>screen-map/</code>(s01~s39), 끊김은 <code>_GAPS.md</code>.
-            </div>
-          </section>
-
-          <section>
+          <section style="margin-top:0">
             <div class="sec-h"><h2>⚑ 2P 이행·계약 3모델</h2><span class="sub">도입 시 셀러가 택1 · 이후 관리 화면·LNB가 모델별로 갈림</span></div>
             <div class="models">
               <div class="model"><span class="mn">모델 ①</span><div class="mt">제휴 N배송</div><div class="md">물류사에 위탁. 셀러가 물류사를 견적·선정해 계약.</div><span class="mtag">위탁형</span></div>
@@ -140,7 +134,7 @@
               <span class="lg"><i class="i-miss"></i>미제공/부재</span>
               <span class="lg"><i class="i-gap"></i>끊김·파편화</span>
               <span class="lg"><i class="i-mis"></i>되돌릴 수 없음·흔한 실수</span>
-              <span class="sep">배지의 <b>GAP-00x</b> = _GAPS.md 우선순위</span>
+              <span class="sep">배지의 <b>GAP-00x</b> = 아래 우선순위 표</span>
             </div>
             <div class="mx-scroll" style="margin-top:14px">
               <div class="mx">
@@ -226,7 +220,7 @@
           </section>
 
           <section>
-            <div class="sec-h"><h2>Segment별 User Flow</h2><span class="sub">과업 · use case (상세: _FLOWS_detail_*.md)</span></div>
+            <div class="sec-h"><h2>Segment별 User Flow</h2><span class="sub">과업 · use case</span></div>
             <div class="uf-grid">
               <div class="uf"><span class="seg">Net-new</span><div class="h">판센 온보딩·첫 판매</div><div class="st">가입 → 상품 등록 → 판매·주문발송</div></div>
               <div class="uf"><span class="seg">Net-new</span><div class="h">2P 첫 도입</div><div class="st">소개 → 모델 선택 → 신청 → SKU 생성·연결·입력 → 입고 → 판매개시</div><span class="gp">⚠ GAP-004 3모델 명칭 · GAP-006 연동후 수정불가</span></div>
@@ -244,7 +238,7 @@
           </section>
 
           <section>
-            <div class="sec-h"><h2>우선순위 Gap</h2><span class="sub">추정 · ⚠️는 사용자 검증 필요 — 상세 _GAPS.md</span></div>
+            <div class="sec-h"><h2>우선순위 Gap</h2><span class="sub">추정 · ⚠️는 사용자 검증 필요</span></div>
             <table class="gaptbl">
               <tr><th style="width:44px">#</th><th style="width:200px">GAP</th><th>한줄</th><th style="width:70px">심각도</th><th style="width:80px">routine</th></tr>
               <tr><td class="rk">1</td><td><b>GAP-006</b> 되돌릴 수 없는 액션 다발</td><td>검수확정→자동환불/재출고, 사은품정책·SKU연동·양식제출 '수정불가'가 곳곳에</td><td><span class="sev sev-h">高</span></td><td>5 조치</td></tr>
@@ -258,7 +252,7 @@
             <p class="foot">✅ 검증 확정: GAP-006·005·004·002 (+001 제보) &nbsp;·&nbsp; ⏸ 보류: GAP-003·007</p>
           </section>
 
-          <p class="foot">화면 근거 s01~s39 = <code>screen-map/</code> (라이브 s01~s31 + 8~9월 신규 Figma s32~s39). 관련 검수본: <a href="pages/입고리포트_자동승인_다탭검수본.html">입고리포트 자동승인 UXW 검수본 ›</a></p>
+          <p class="foot">관련 검수본: <a href="pages/입고리포트_자동승인_다탭검수본.html">입고리포트 자동승인 UXW 검수본 ›</a></p>
         </div>
       </div>
     </div>
