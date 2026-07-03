@@ -460,7 +460,7 @@ function dr(el){return false;}
 document.addEventListener('mouseover',function(e){var el=e.target.closest('[data-why]');if(!el||!el.dataset.why)return;b.textContent=el.dataset.why;tip.style.display='block';var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,left=Math.max(8,Math.min(r.left+r.width/2-tw/2,window.innerWidth-tw-8)),top=r.top-th-10;if(top<8)top=r.bottom+10;tip.style.left=left+'px';tip.style.top=top+'px';});
 document.addEventListener('mouseout',function(e){if(e.target.closest('[data-why]'))tip.style.display='none';});})();
 /* ── 변경 내역 드로어 (테마별 · 핵심 2개가 뼈대) ── */
-var TABN={ipgo:입고상세,list:입고관리,rdetail:리포트상세,alarm:알림};
+var TABN={ipgo:'입고상세',list:'입고관리',rdetail:'리포트상세',alarm:'알림'};
 var CHG_SECTIONS=[
  {sec:"핵심 변경 · 전 탭 공통", themes:[
    {t:"① 워딩 · <s style=\"color:var(--fg3)\">문의하기</s> → <span style=\"color:var(--brand)\">이의 신청</span>", items:[
@@ -477,8 +477,8 @@ var CHG_SECTIONS=[
  ]},
  {sec:"화면별 개별 변경", themes:[
    {t:"타이틀 정정", items:[
-     {p:'ipgo',l:1,loc:"입고상세 입고관리→입고상세"},
-     {p:'rdetail',l:1,loc:"리포트상세 상세보기→상세"}
+     {p:'ipgo',l:1,loc:"입고상세 '입고관리'→'입고상세'"},
+     {p:'rdetail',l:1,loc:"리포트상세 '상세보기'→'상세'"}
    ]},
    {t:"안내 문구 워싱 · 자동승인·이의 안내", items:[
      {p:'ipgo',l:3,loc:"입고상세 안내"},
@@ -491,9 +491,9 @@ var CHG_SECTIONS=[
      {p:'list',l:6,loc:"입고관리 목록"}
    ]},
    {t:"기타 · 버튼·툴팁·신설", items:[
-     {p:'ipgo',l:5,loc:"입고상세 확인하기 버튼"},
+     {p:'ipgo',l:5,loc:"입고상세 '확인하기' 버튼"},
      {p:'list',l:2,loc:"입고관리 상태 칩 i-툴팁"},
-     {p:'alarm',l:1,loc:"알림 리포트 등록 안내 신설"}
+     {p:'alarm',l:1,loc:"알림 '리포트 등록 안내' 신설"}
    ]}
  ]}
 ];
@@ -511,7 +511,7 @@ function renderDrawer(){
     });
   });
   body.innerHTML=html;
-  var tot=document.getElementById('cdTotal');if(tot)tot.textContent=전체 +total+건;
+  var tot=document.getElementById('cdTotal');if(tot)tot.textContent='전체 '+total+'건';
   var n=document.querySelector('.chg-btn .n');if(n)n.textContent=total;
 }
 function toggleDrawer(show){var d=document.getElementById('chgDrawer');if(!d)return;if(show===undefined)show=!d.classList.contains('open');d.classList.toggle('open',show);}
@@ -534,7 +534,7 @@ renderDrawer();
 <script>
 (async function(){
   const docs = await loadDocs();
-  renderLNB({ active: 입고 리포트 자동승인, docs });
+  renderLNB({ active: '입고 리포트 자동승인', docs });
   const pc = document.getElementById('page-content');
   const lnb = document.getElementById('lnb');
   const upd = () => { pc.style.marginLeft = lnb.classList.contains('collapsed') ? '48px' : '240px'; };

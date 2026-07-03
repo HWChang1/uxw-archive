@@ -81,54 +81,6 @@
       "category": "재고상태"
     },
     {
-      "id": 11,
-      "supplier": "판매 대기(B)",
-      "seller": "판매 대기(B)",
-      "description": "아직 판매 개시 전인 재고수량. 물류센터 진열 완료 전 상태. N배송 by FBN 이용 판매자 전용. 보관비 미부과",
-      "context": "재고보관내역 > 컬럼 B",
-      "category": "재고상태"
-    },
-    {
-      "id": 12,
-      "supplier": "주문 처리 중(C)",
-      "seller": "주문 처리 중(C)",
-      "description": "주문이 들어와 물류센터에서 처리 중인 재고수량. N배송 by FBN 이용 판매자 전용. 보관비 미부과",
-      "context": "재고보관내역 > 컬럼 C",
-      "category": "재고상태"
-    },
-    {
-      "id": 13,
-      "supplier": "소비기한 만료(D)",
-      "seller": "소비기한 만료(D)",
-      "description": "소비기한이 만료되어 판매할 수 없는 재고수량. 판매자 귀책. 보관비 부과",
-      "context": "재고보관내역 > 컬럼 D (판매자 귀책 판매불가)",
-      "category": "재고상태"
-    },
-    {
-      "id": 14,
-      "supplier": "하자(E)",
-      "seller": "하자(E)",
-      "description": "상품 자체 하자로 판매할 수 없는 재고수량. 판매자 귀책. 보관비 부과",
-      "context": "재고보관내역 > 컬럼 E (판매자 귀책 판매불가)",
-      "category": "재고상태"
-    },
-    {
-      "id": 15,
-      "supplier": "폐기 예정(F)",
-      "seller": "폐기 예정(F)",
-      "description": "판매자 책임으로 폐기가 예정된 재고수량. 보관비 부과",
-      "context": "재고보관내역 > 컬럼 F (판매자 귀책 판매불가)",
-      "category": "재고상태"
-    },
-    {
-      "id": 16,
-      "supplier": "반출 예정(G)",
-      "seller": "반출 예정(G)",
-      "description": "판매자에게 반출이 예정된 재고수량. 보관비 부과",
-      "context": "재고보관내역 > 컬럼 G (판매자 귀책 판매불가)",
-      "category": "재고상태"
-    },
-    {
       "id": 17,
       "supplier": "리퍼 예정(H)",
       "seller": "리퍼(등급화) 예정(H)",
@@ -143,46 +95,6 @@
       "description": "반품된 상품을 판매 가능한 상태로 재포장 처리가 예정된 재고수량. 보관비 부과",
       "context": "재고보관내역 > 컬럼 I (판매자 귀책 판매불가)",
       "category": "재고상태"
-    },
-    {
-      "id": 19,
-      "supplier": "폐기 예정(J)",
-      "seller": "폐기 예정(J)",
-      "description": "물류사 책임으로 자체 폐기하는 재고수량. 보관비 미부과",
-      "context": "재고보관내역 > 컬럼 J (물류사 귀책 판매불가)",
-      "category": "재고상태"
-    },
-    {
-      "id": 20,
-      "supplier": "총 재고수량",
-      "seller": "총 재고수량",
-      "description": "물류센터에 보관된 전체 재고수량 (A+B+C+D+E+F+G+H+I)",
-      "context": "재고보관내역 > 합계 컬럼",
-      "category": "재고상태"
-    },
-    {
-      "id": 21,
-      "supplier": "보관비 부과 재고수량",
-      "seller": "보관비 부과 재고수량",
-      "description": "보관비가 부과되는 재고수량 (A+D+E+F+G+H+I). N배송 by FBN 이용 판매자 전용",
-      "context": "재고보관내역 > 비용 관련 컬럼",
-      "category": "비용"
-    },
-    {
-      "id": 22,
-      "supplier": "공용 데이터",
-      "seller": "공용 데이터",
-      "description": "모든 판매자에게 공통 제공되는 기본 재고 정보 항목. 일자·물류센터·SKU ID·SKU 명 포함",
-      "context": "재고보관내역 > 컬럼 그룹 구분",
-      "category": "데이터분류"
-    },
-    {
-      "id": 23,
-      "supplier": "네이버 by FBN 상품 전용 데이터",
-      "seller": "네이버 by FBN 상품 전용 데이터",
-      "description": "N배송 by FBN 이용 판매자에게만 제공되는 항목. 미이용 판매자의 경우 빈 값으로 노출",
-      "context": "재고보관내역 > 컬럼 그룹 구분",
-      "category": "데이터분류"
     }
   ]
 }
