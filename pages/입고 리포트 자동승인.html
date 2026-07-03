@@ -101,7 +101,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;l
 details.acc{padding:0}
 details.acc>summary{cursor:pointer;padding:14px 18px;list-style:none;display:flex;align-items:center;margin:0;font-weight:700;font-size:14px}
 details.acc>summary::-webkit-details-marker{display:none}
-details.acc>summary::after{content:'▾;margin-left:auto;color:var(--fg3);font-size:11px;transition:transform .2s}
+details.acc>summary::after{content:'▾';margin-left:auto;color:var(--fg3);font-size:11px;transition:transform .2s}
 details.acc[open]>summary::after{transform:rotate(180deg)}
 details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12.5px;color:var(--fg2)}
 .acc-hint{font-size:11px;font-weight:400;color:var(--fg3);margin-left:8px}
@@ -206,12 +206,12 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 </div>
 
 <div class="tab-bar">
-  <div class="tab-item active" onclick="tab(tone)">배경 &amp; 변경내역</div>
-  <div class="tab-item" onclick="tab(ipgo)">1. 입고상세</div>
-  <div class="tab-item" onclick="tab(list)">2. 입고관리</div>
-  <div class="tab-item" onclick="tab(rdetail)">3. 리포트상세</div>
-  <div class="tab-item" onclick="tab(alarm)">4. 알림</div>
-  <div class="tab-item" onclick="tab(help)">5. 도움말·Q&amp;A</div>
+  <div class="tab-item active" onclick="tab('tone')">배경 &amp; 변경내역</div>
+  <div class="tab-item" onclick="tab('ipgo')">1. 입고상세</div>
+  <div class="tab-item" onclick="tab('list')">2. 입고관리</div>
+  <div class="tab-item" onclick="tab('rdetail')">3. 리포트상세</div>
+  <div class="tab-item" onclick="tab('alarm')">4. 알림</div>
+  <div class="tab-item" onclick="tab('help')">5. 도움말·Q&amp;A</div>
 </div>
 </div>
 
@@ -237,13 +237,13 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
     <div class="kc-h"><span class="kc-num">1</span><span class="kc-ch"><span class="kc-as">문의하기</span> → <span class="kc-to">이의 신청하기</span></span></div>
     <div class="kc-body">
       <div class="kc-row"><span class="kc-k">변경 이유</span><div class="kc-v">단순 문의가 아닌 <b>선작업을 보류시키는 액션</b>이라 이의 신청으로 개선 · CTA는 동사형이 정론이라 버튼은 <b>이의 신청하기</b>(문의하기·승인하기와 통일)</div></div>
-      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><a class="kc-goto" onclick="goTab(rdetail','rdetail-cta)">리포트상세 ›</a></div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><a class="kc-goto" onclick="goTab('rdetail','rdetail-cta')">리포트상세 ›</a></div></div>
     </div>
     <div class="kc-divider"></div>
     <div class="kc-h"><span class="kc-num">2</span><span class="kc-ch"><span class="kc-as">접수 지연 안내</span> → <span class="kc-to">자동 승인·승인기한 안내</span></span></div>
     <div class="kc-body">
       <div class="kc-row"><span class="kc-k">변경 이유</span><div class="kc-v">자동 승인 전환과 <b>승인기한(마감)</b>을 명확히 안내해, 마감 전 검토·이의 신청을 유도</div></div>
-      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><div class="loc-grp"><span class="loc-tab">입고상세</span><a class="kc-goto" onclick="goTab(ipgo','st-step)">진행 단계 ›</a></div><div class="loc-grp"><span class="loc-tab">입고관리</span><a class="kc-goto" onclick="goTab(list','st-chip)">상태 칩 툴팁 ›</a></div></div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><div class="loc-grp"><span class="loc-tab">입고상세</span><a class="kc-goto" onclick="goTab('ipgo','st-step')">진행 단계 ›</a></div><div class="loc-grp"><span class="loc-tab">입고관리</span><a class="kc-goto" onclick="goTab('list','st-chip')">상태 칩 툴팁 ›</a></div></div></div>
     </div>
     <div class="kc-future">
       <div class="kc-future-h">💡 이후 사용성을 위해 개선하면 좋을 점</div>
@@ -266,7 +266,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
     <div class="kc-h"><span class="kc-num">3</span><span class="kc-ch"><span class="kc-as">실제와 다른·동사형 타이틀</span> → <span class="kc-to">실제 화면명·명사형</span></span></div>
     <div class="kc-body">
       <div class="kc-row"><span class="kc-k">변경 이유</span><div class="kc-v">실제 화면과 다른 명칭·동사형 타이틀을 <b>실제 화면명·명사형</b>으로 정정 (목록과 혼동되는 입고관리, 동사형 상세보기 지양)</div></div>
-      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><div class="loc-grp"><span class="loc-tab">입고상세</span><a class="kc-goto" onclick="goTab(ipgo','ipgo-title)">입고관리 → 입고상세 ›</a></div><div class="loc-grp"><span class="loc-tab">리포트상세</span><a class="kc-goto" onclick="goTab(rdetail','rdetail-title)">리포트 상세보기 → 리포트 상세 ›</a></div></div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><div class="loc-grp"><span class="loc-tab">입고상세</span><a class="kc-goto" onclick="goTab('ipgo','ipgo-title')">입고관리 → 입고상세 ›</a></div><div class="loc-grp"><span class="loc-tab">리포트상세</span><a class="kc-goto" onclick="goTab('rdetail','rdetail-title')">리포트 상세보기 → 리포트 상세 ›</a></div></div></div>
     </div>
   </div>
   <div class="tone-box"><div class="tone-h">📖 관련 용어</div><dl class="term">
@@ -400,7 +400,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
         <span class="step-cta" style="background:rgba(0,184,79,.18);border:1px solid var(--brand);color:rgba(0,0,0,.82)" data-why="문의하기는 단순 문의 뉘앙스 → 선작업을 보류시키는 이의 신청으로 개선. CTA는 동사형이 정론이라 버튼은 이의 신청하기(문의하기·승인하기와 형태 통일)" onclick="dr(this)">이의 신청하기</span>
         <span class="step-cta" style="background:var(--brand);color:#fff">승인하기</span>
       </div>
-      <div class="note" style="text-align:center">※ 문의하기'→이의 신청 워딩 변경(버튼 형태 유지, ASIS 회색). 승인하기는 자동 승인이라도 더 빨리 승인하고 싶을 때 쓰도록 유지.</div>
+      <div class="note" style="text-align:center">※ 문의하기→이의 신청 워딩 변경(버튼 형태 유지, ASIS 회색). 승인하기는 자동 승인이라도 더 빨리 승인하고 싶을 때 쓰도록 유지.</div>
     </div>
   </div>
 </div></div>
@@ -447,58 +447,58 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 </div>
 <script>
 function tab(n){document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(t=>t.classList.remove('active'));var pane=document.getElementById('p-'+n);if(pane)pane.classList.add('active');document.querySelectorAll('.tab-item').forEach(t=>{if((t.getAttribute('onclick')||'').indexOf("'"+n+"'")>=0)t.classList.add('active')});window.scrollTo(0,0);}
-function goTab(n,anchor){tab(n);requestAnimationFrame(function(){var el=document.getElementById(anchor);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.remove('kc-flash');void el.offsetWidth;el.classList.add('kc-flash');setTimeout(function(){el.classList.remove('kc-flash);},1900);});}
+function goTab(n,anchor){tab(n);requestAnimationFrame(function(){var el=document.getElementById(anchor);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.remove('kc-flash');void el.offsetWidth;el.classList.add('kc-flash');setTimeout(function(){el.classList.remove('kc-flash');},1900);});}
 function dr(el){return false;}
 /* i-툴팁: 클릭 토글 + 닫기버튼 + 바깥클릭 닫기 (0618 방식) */
 (function(){
-  document.querySelectorAll(.qi').forEach(function(qi){qi.addEventListener('click',function(e){e.stopPropagation();var op=qi.classList.contains('open');document.querySelectorAll('.qi.open').forEach(function(q){q.classList.remove('open');});if(!op)qi.classList.add('open');});});
+  document.querySelectorAll('.qi').forEach(function(qi){qi.addEventListener('click',function(e){e.stopPropagation();var op=qi.classList.contains('open');document.querySelectorAll('.qi.open').forEach(function(q){q.classList.remove('open');});if(!op)qi.classList.add('open');});});
   document.querySelectorAll('.qi .tip').forEach(function(t){t.addEventListener('click',function(e){e.stopPropagation();});});
   document.querySelectorAll('.tip-close').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var q=b.closest('.qi');if(q)q.classList.remove('open');});});
   document.addEventListener('click',function(){document.querySelectorAll('.qi.open').forEach(function(q){q.classList.remove('open');});});
 })();
 (function(){var tip=document.getElementById('why-tip'),b=document.getElementById('why-tip-body');
 document.addEventListener('mouseover',function(e){var el=e.target.closest('[data-why]');if(!el||!el.dataset.why)return;b.textContent=el.dataset.why;tip.style.display='block';var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,left=Math.max(8,Math.min(r.left+r.width/2-tw/2,window.innerWidth-tw-8)),top=r.top-th-10;if(top<8)top=r.bottom+10;tip.style.left=left+'px';tip.style.top=top+'px';});
-document.addEventListener('mouseout',function(e){if(e.target.closest('[data-why]'))tip.style.display='none;});})();
+document.addEventListener('mouseout',function(e){if(e.target.closest('[data-why]'))tip.style.display='none';});})();
 /* ── 변경 내역 드로어 (테마별 · 핵심 2개가 뼈대) ── */
-var TABN={ipgo:입고상세',list:입고관리,rdetail:리포트상세,alarm:알림};
+var TABN={ipgo:입고상세,list:입고관리,rdetail:리포트상세,alarm:알림};
 var CHG_SECTIONS=[
  {sec:"핵심 변경 · 전 탭 공통", themes:[
    {t:"① 워딩 · <s style=\"color:var(--fg3)\">문의하기</s> → <span style=\"color:var(--brand)\">이의 신청</span>", items:[
-     {p:'rdetail,l:3,loc:"리포트상세 버튼"}
+     {p:'rdetail',l:3,loc:"리포트상세 버튼"}
    ]},
    {t:"② 상태값 · 리포트<s style=\"color:var(--fg3)\">처리</s>대기 → 리포트<span style=\"color:var(--brand)\">승인</span>대기", items:[
-     {p:ipgo,l:2,loc:"입고상세 진행 단계"},
-     {p:ipgo,l:6,loc:"입고상세 요약"},
-     {p:ipgo,l:8,loc:"입고상세 상태이력"},
-     {p:list,l:1,loc:"입고관리 상태 칩"},
-     {p:list,l:3,loc:"입고관리 필터"},
-     {p:list,l:5,loc:"입고관리 목록"}
+     {p:'ipgo',l:2,loc:"입고상세 진행 단계"},
+     {p:'ipgo',l:6,loc:"입고상세 요약"},
+     {p:'ipgo',l:8,loc:"입고상세 상태이력"},
+     {p:'list',l:1,loc:"입고관리 상태 칩"},
+     {p:'list',l:3,loc:"입고관리 필터"},
+     {p:'list',l:5,loc:"입고관리 목록"}
    ]}
  ]},
  {sec:"화면별 개별 변경", themes:[
    {t:"타이틀 정정", items:[
-     {p:ipgo,l:1,loc:"입고상세 입고관리'→입고상세"},
-     {p:'rdetail,l:1,loc:"리포트상세 상세보기'→상세"}
+     {p:'ipgo',l:1,loc:"입고상세 입고관리→입고상세"},
+     {p:'rdetail',l:1,loc:"리포트상세 상세보기→상세"}
    ]},
    {t:"안내 문구 워싱 · 자동승인·이의 안내", items:[
-     {p:'ipgo,l:3,loc:"입고상세 안내"},
-     {p:list,l:4,loc:"입고관리 목록 상단 알림"},
-     {p:rdetail,l:2,loc:"리포트상세 상태이력"}
+     {p:'ipgo',l:3,loc:"입고상세 안내"},
+     {p:'list',l:4,loc:"입고관리 목록 상단 알림"},
+     {p:'rdetail',l:2,loc:"리포트상세 상태이력"}
    ]},
    {t:"승인기한(날짜·시간) 병기", items:[
-     {p:ipgo,l:4,loc:"입고상세 요약"},
-     {p:ipgo,l:7,loc:"입고상세 진행"},
-     {p:list,l:6,loc:"입고관리 목록"}
+     {p:'ipgo',l:4,loc:"입고상세 요약"},
+     {p:'ipgo',l:7,loc:"입고상세 진행"},
+     {p:'list',l:6,loc:"입고관리 목록"}
    ]},
    {t:"기타 · 버튼·툴팁·신설", items:[
-     {p:ipgo,l:5,loc:"입고상세 확인하기 버튼"},
-     {p:list,l:2,loc:"입고관리 상태 칩 i-툴팁"},
-     {p:alarm,l:1,loc:"알림 리포트 등록 안내 신설"}
+     {p:'ipgo',l:5,loc:"입고상세 확인하기 버튼"},
+     {p:'list',l:2,loc:"입고관리 상태 칩 i-툴팁"},
+     {p:'alarm',l:1,loc:"알림 리포트 등록 안내 신설"}
    ]}
  ]}
 ];
 function renderDrawer(){
-  var body=document.getElementById(cdBody');if(!body)return;
+  var body=document.getElementById('cdBody');if(!body)return;
   var html='',total=0;
   CHG_SECTIONS.forEach(function(s,si){
     html+='<div class="cd-sec'+(si>0?' b':'')+'">'+s.sec+'</div>';
