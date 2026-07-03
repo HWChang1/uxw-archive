@@ -131,6 +131,18 @@
 .flow-page .trk .tl{font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:.2px}
 .flow-page .trk .tf{font-size:13px;font-weight:700;margin:3px 0 5px;color:var(--brand-dk);display:flex;align-items:center;flex-wrap:wrap}
 .flow-page .trk .tx{font-size:12px;color:var(--ink2);line-height:1.62}
+
+/* 셀러 라이프스테이지 전체 축(진입~이탈) */
+.flow-page .lifecycle{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px;margin:16px 0 6px}
+.flow-page .lc{flex:1;min-width:120px;background:#f4f5f7;border-radius:10px;padding:11px 14px;display:flex;flex-direction:column;gap:3px}
+.flow-page .lc .lct{font-size:12.5px;font-weight:700;color:var(--ink)}
+.flow-page .lc .lcs{font-size:11px;color:var(--ink3);line-height:1.45}
+.flow-page .lc.cur{background:#e3f5ea}
+.flow-page .lc.cur .lct{color:var(--brand-dk)}
+.flow-page .lc.churn{background:#f6eef1}
+.flow-page .lc.churn .lct{color:#a8546a}
+.flow-page .lc-arw{display:flex;align-items:center;color:#c2c6cf;font-size:14px}
+.flow-page .lc-note{font-size:11.5px;color:var(--ink3);margin:4px 0 0;line-height:1.55}
 </style></head><body>
 <div class="app-shell">
   <nav class="lnb" id="lnb"></nav>
@@ -155,6 +167,18 @@
 
           <section>
             <div class="sec-h"><h2>daily routine × 셀러 라이프스테이지 매트릭스</h2><span class="sub">각 셀 = 닿는 화면·기능 + gap · 세로축 = 셀러 라이프스테이지(제품의 <b>구매자 CRM 세그먼트</b>와 다른 축)</span></div>
+            <div class="lifecycle">
+              <div class="lc"><span class="lct">가입심사</span><span class="lcs">개인 즉시 / 사업자 2일~</span></div>
+              <span class="lc-arw">›</span>
+              <div class="lc"><span class="lct">Net-new</span><span class="lcs">도입 여정 · 첫 세팅(G1)</span></div>
+              <span class="lc-arw">›</span>
+              <div class="lc"><span class="lct">New</span><span class="lcs">3P→2P 전환</span></div>
+              <span class="lc-arw">›</span>
+              <div class="lc cur"><span class="lct">Current</span><span class="lcs">운영 루프 · 반복(G2)</span></div>
+              <span class="lc-arw">⇄</span>
+              <div class="lc churn"><span class="lct">이탈·휴면</span><span class="lcs">재사용 안 함(G3) · 휴면/이용정지 → 재진입</span></div>
+            </div>
+            <p class="lc-note">📎 아래 매트릭스는 <b>daily routine이 있는 Net-new·New·Current</b>만 다룸 — 가입심사·이탈·휴면은 운영 루프가 없어 라이프스테이지 축에만 표기(재진입 유도가 별도 과제). <span class="ev">ⓘ 근거<span class="tip"><span class="q">전시관리 리서치는 판매자를 G1(신규 세팅)·G2(반복 운영)·G3(최초 세팅 후 재사용 안 함=이탈)으로 구분. 제품의 판매자 상태(가입심사중/정상/휴면/이용정지/탈퇴)와 함께 라이프스테이지의 양끝(진입·이탈)을 이룬다.</span><span class="src">위키: [26Q2] 판매자 전시관리툴 리서치 · <a href="https://wiki.navercorp.com/pages/viewpage.action?pageId=5187067892" target="_blank" rel="noopener">문서 열기 ↗</a></span></span></span></p>
             <div class="legend">
               <span class="lg"><i class="i-miss"></i>미제공/부재</span>
               <span class="lg"><i class="i-gap"></i>끊김·파편화</span>
@@ -196,8 +220,8 @@
                 <div class="mx-cell r-last"><span class="chip">홈 대시보드(오늘 주문·정산·CS)</span><span class="chip mk gap">홈→요약 기간 불일치<span class="gmk g-gap">GAP-001</span></span></div>
                 <div class="mx-cell r-last"><span class="chip">매출(요약·실시간)</span><span class="chip">오늘 주문 건수</span><span class="chip">재고(3P·2P SKU)</span></div>
                 <div class="mx-cell r-last" style="background:#f4fcf7"><span class="chip"><b>3P</b> 주문확인·송장·포장·발송</span><span class="chip"><b>2P</b> 재고확인·입고신청</span><span class="chip mk gap">택배 픽업 前 필수<span class="gmk g-gap">시간제약</span></span></div>
-                <div class="mx-cell r-last"><span class="chip">판매·방문·검색 분석</span><span class="chip mk gap">검색인기도 · 진단 파편화<span class="gmk g-gap">GAP-002</span></span></div>
-                <div class="mx-cell r-last"><span class="chip">가격/광고/노출 조정</span><span class="chip mk mis">반품·교환 검수확정<span class="gmk g-mis">GAP-006</span></span><span class="chip">반출·사은품</span></div>
+                <div class="mx-cell r-last"><span class="chip">판매·방문·검색 분석</span><span class="chip">고객현황·재구매(CRM 진단)</span><span class="chip mk gap">검색인기도 · 진단 파편화<span class="gmk g-gap">GAP-002</span></span></div>
+                <div class="mx-cell r-last"><span class="chip">가격/광고/노출 조정</span><span class="chip">고객 CRM 마케팅(혜택·마메)</span><span class="chip mk mis">반품·교환 검수확정<span class="gmk g-mis">GAP-006</span></span><span class="chip">반출·사은품</span></div>
                 <div class="mx-cell r-last"><span class="chip mk gap">입고·재고이슈 리포트<span class="gmk g-gap">GAP-007</span></span><span class="chip">물류비청구·정산</span></div>
               </div>
             </div>
@@ -308,6 +332,7 @@
               <div class="uf2"><div class="nm">반출하기<br><span style="font-weight:400;color:var(--ink3);font-size:11px">재고 회수</span></div><div class="stp"><span class="s">대상 판단</span><span class="a">›</span><span class="s">반출신청 3단계<br>(정보→SKU→확인)</span><span class="a">›</span><span class="s">반출상세·반출증</span><span class="a">›</span><span class="s">정산</span><span class="gp2">⚠ GAP-006 정책·취소 시점</span></div></div>
               <div class="uf2"><div class="nm">출고하기<br><span style="font-weight:400;color:var(--ink3);font-size:11px">수기·사은품</span></div><div class="stp"><span class="s">수기: 신청</span><span class="a">›</span><span class="s">출고상세</span><span class="a" style="margin:0 6px">/</span><span class="s">사은품: 정책 설정</span><span class="a">›</span><span class="s act">조건 충족 시 자동출고</span><span class="gp2">⚠ GAP-006 시작후 수정불가 / 확인중 후 취소불가</span></div></div>
               <div class="uf2"><div class="nm">매출 진단→조치</div><div class="stp"><span class="s">홈 → 요약</span><span class="a">›</span><span class="s">진단<br>(판매분석·검색인기도)</span><span class="a">›</span><span class="s act">가격/광고/노출 조치</span><span class="gp2">⚠ GAP-001 기간 불일치 · GAP-002 진단 파편화</span></div></div>
+              <div class="uf2"><div class="nm">고객 관리·CRM<br><span style="font-weight:400;color:var(--ink3);font-size:11px">네이버 고유 강점</span></div><div class="stp"><span class="s">고객현황·재구매 진단</span><span class="a">›</span><span class="s">관심/충성 세그먼트</span><span class="a">›</span><span class="s">혜택 등록</span><span class="a">›</span><span class="s act">마케팅메시지 발송</span><span class="gp2" style="color:var(--ink3);background:#f1f3f5">세그먼트↔혜택↔마메 허브-스포크(단선 아님) · 쿠팡 루틴엔 얇던 축<span class="ev">ⓘ 근거<span class="tip"><span class="q">고도화 MVP는 CRM을 '세그먼트(잠재·발견·관심·구매·충성) ↔ 혜택 ↔ 마케팅메시지'가 세그먼트 ID를 공유하며 수렴하는 허브-스포크로 설계. 앵커 IA=혜택/마케팅 + 데이터분석&gt;고객현황·재구매. 단 폐쇄몰 유형은 고객등급 관리 미지원(유형별 가용성 차이).</span><span class="src">위키: 판매자센터 고도화 MVP(고객군 타겟팅) · <a href="https://wiki.navercorp.com/pages/viewpage.action?pageId=4667404329" target="_blank" rel="noopener">문서 열기 ↗</a></span></span></span></span></div></div>
               <div class="uf2"><div class="nm">정산·비용 확인</div><div class="stp"><span class="s">정산내역(수수료)</span><span class="a">›</span><span class="s">물류비 청구(보관·부가비)</span><span class="a">›</span><span class="s">기본비(정산관리)</span><span class="gp2">⚠ 통합 마진 한 화면 없음 · GAP-002</span></div></div>
             </div>
           </section>
