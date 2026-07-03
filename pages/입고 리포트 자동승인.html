@@ -101,7 +101,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;l
 details.acc{padding:0}
 details.acc>summary{cursor:pointer;padding:14px 18px;list-style:none;display:flex;align-items:center;margin:0;font-weight:700;font-size:14px}
 details.acc>summary::-webkit-details-marker{display:none}
-details.acc>summary::after{content:'▾';margin-left:auto;color:var(--fg3);font-size:11px;transition:transform .2s}
+details.acc>summary::after{content:'▾;margin-left:auto;color:var(--fg3);font-size:11px;transition:transform .2s}
 details.acc[open]>summary::after{transform:rotate(180deg)}
 details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12.5px;color:var(--fg2)}
 .acc-hint{font-size:11px;font-weight:400;color:var(--fg3);margin-left:8px}
@@ -206,12 +206,12 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 </div>
 
 <div class="tab-bar">
-  <div class="tab-item active" onclick="tab('tone')">배경 &amp; 변경내역</div>
-  <div class="tab-item" onclick="tab('ipgo')">1. 입고상세</div>
-  <div class="tab-item" onclick="tab('list')">2. 입고관리</div>
-  <div class="tab-item" onclick="tab('rdetail')">3. 리포트상세</div>
-  <div class="tab-item" onclick="tab('alarm')">4. 알림</div>
-  <div class="tab-item" onclick="tab('help')">5. 도움말·Q&amp;A</div>
+  <div class="tab-item active" onclick="tab(tone)">배경 &amp; 변경내역</div>
+  <div class="tab-item" onclick="tab(ipgo)">1. 입고상세</div>
+  <div class="tab-item" onclick="tab(list)">2. 입고관리</div>
+  <div class="tab-item" onclick="tab(rdetail)">3. 리포트상세</div>
+  <div class="tab-item" onclick="tab(alarm)">4. 알림</div>
+  <div class="tab-item" onclick="tab(help)">5. 도움말·Q&amp;A</div>
 </div>
 </div>
 
@@ -237,13 +237,13 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
     <div class="kc-h"><span class="kc-num">1</span><span class="kc-ch"><span class="kc-as">문의하기</span> → <span class="kc-to">이의 신청하기</span></span></div>
     <div class="kc-body">
       <div class="kc-row"><span class="kc-k">변경 이유</span><div class="kc-v">단순 문의가 아닌 <b>선작업을 보류시키는 액션</b>이라 이의 신청으로 개선 · CTA는 동사형이 정론이라 버튼은 <b>이의 신청하기</b>(문의하기·승인하기와 통일)</div></div>
-      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><a class="kc-goto" onclick="goTab('rdetail','rdetail-cta')">리포트상세 ›</a></div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><a class="kc-goto" onclick="goTab(rdetail','rdetail-cta)">리포트상세 ›</a></div></div>
     </div>
     <div class="kc-divider"></div>
     <div class="kc-h"><span class="kc-num">2</span><span class="kc-ch"><span class="kc-as">접수 지연 안내</span> → <span class="kc-to">자동 승인·승인기한 안내</span></span></div>
     <div class="kc-body">
       <div class="kc-row"><span class="kc-k">변경 이유</span><div class="kc-v">자동 승인 전환과 <b>승인기한(마감)</b>을 명확히 안내해, 마감 전 검토·이의 신청을 유도</div></div>
-      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><div class="loc-grp"><span class="loc-tab">입고상세</span><a class="kc-goto" onclick="goTab('ipgo','st-step')">진행 단계 ›</a></div><div class="loc-grp"><span class="loc-tab">입고관리</span><a class="kc-goto" onclick="goTab('list','st-chip')">상태 칩 툴팁 ›</a></div></div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><div class="loc-grp"><span class="loc-tab">입고상세</span><a class="kc-goto" onclick="goTab(ipgo','st-step)">진행 단계 ›</a></div><div class="loc-grp"><span class="loc-tab">입고관리</span><a class="kc-goto" onclick="goTab(list','st-chip)">상태 칩 툴팁 ›</a></div></div></div>
     </div>
     <div class="kc-future">
       <div class="kc-future-h">💡 이후 사용성을 위해 개선하면 좋을 점</div>
@@ -266,18 +266,18 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
     <div class="kc-h"><span class="kc-num">3</span><span class="kc-ch"><span class="kc-as">실제와 다른·동사형 타이틀</span> → <span class="kc-to">실제 화면명·명사형</span></span></div>
     <div class="kc-body">
       <div class="kc-row"><span class="kc-k">변경 이유</span><div class="kc-v">실제 화면과 다른 명칭·동사형 타이틀을 <b>실제 화면명·명사형</b>으로 정정 (목록과 혼동되는 입고관리, 동사형 상세보기 지양)</div></div>
-      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><div class="loc-grp"><span class="loc-tab">입고상세</span><a class="kc-goto" onclick="goTab('ipgo','ipgo-title')">입고관리 → 입고상세 ›</a></div><div class="loc-grp"><span class="loc-tab">리포트상세</span><a class="kc-goto" onclick="goTab('rdetail','rdetail-title')">상세보기 → 상세 ›</a></div></div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><div class="loc-grp"><span class="loc-tab">입고상세</span><a class="kc-goto" onclick="goTab(ipgo','ipgo-title)">입고관리 → 입고상세 ›</a></div><div class="loc-grp"><span class="loc-tab">리포트상세</span><a class="kc-goto" onclick="goTab(rdetail','rdetail-title)">리포트 상세보기 → 리포트 상세 ›</a></div></div></div>
     </div>
   </div>
   <div class="tone-box"><div class="tone-h">📖 관련 용어</div><dl class="term">
     <dt>승인기한</dt><dd>이의를 신청할 수 있는 마감(자동 승인 시점). 등록 당일 23:59</dd>
-    <dt>이의 신청</dt><dd>승인기한 내 이견을 접수하는 경로. 신청 시 선작업 보류·담당자 확인. 직접승인의 '승인/거부' 대체</dd>
+    <dt>이의 신청</dt><dd>승인기한 내 이견을 접수하는 경로. 신청 시 선작업 보류·담당자 확인. 직접승인의 승인/거부 대체</dd>
     <dt>입고 리포트</dt><dd>입고 과정의 이슈·유상작업 비용을 물류사가 등록하는 리포트</dd></dl></div>
 </div></div>
 
 <!-- 입고 상세 -->
 <div id="p-ipgo" class="pane"><div class="content">
-  <div class="sec-head"><div class="sec-title"><span class="title-ab" id="ipgo-title"><span class="as">N배송 입고관리</span><span class="to" data-why="'입고 상세' 화면인데 타이틀이 '입고관리'라 목록과 혼동 → 실제 화면명으로 정정" onclick="dr(this)">N배송 입고상세</span></span> <span class="crumb-badge">N배송 관리 › 입고관리 › 입고상세</span><span class="sc-btn" style="margin-left:auto">메뉴얼 확인하기</span></div>  </div>
+  <div class="sec-head"><div class="sec-title"><span class="title-ab" id="ipgo-title"><span class="as">N배송 입고관리</span><span class="to" data-why="입고 상세 화면인데 타이틀이 입고관리라 목록과 혼동 → 실제 화면명으로 정정" onclick="dr(this)">N배송 입고상세</span></span> <span class="crumb-badge">N배송 관리 › 입고관리 › 입고상세</span><span class="sc-btn" style="margin-left:auto">메뉴얼 확인하기</span></div>  </div>
   <div class="screen"><div class="sc-body">
       <div class="card"><div class="card-h"><span class="card-h-t">입고 단계</span><span class="btn-o">입고 리포트 확인하기</span></div><div class="card-b">
         <div class="stepper">
@@ -290,7 +290,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
             <div style="margin-top:9px"><span class="to" style="font-size:11px" data-why="기한 제한 액션(이의 신청)이 걸린 상태 → 그 마감(승인기한)을 날짜·시간으로 명시해 시점 인지" onclick="dr(this)">승인기한 2026.07.03 23:59</span></div>
             <div style="margin-top:auto;padding-top:11px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center">
               <span class="step-cta" style="background:#eceef1;color:var(--fg3);text-decoration:line-through">리포트 확인하러 가기</span><span style="color:var(--fg3)">→</span>
-              <span class="step-cta" style="background:var(--red);color:#fff" data-why="CTA 정론 — 수행할 단일 행동을 동사로 직접 제시. '~하러 가기'의 이동·의무 뉘앙스를 덜고, 자동 승인 맥락에 맞춰 부담 없이 '확인'만 하도록 축소" onclick="dr(this)">리포트 확인하기</span>
+              <span class="step-cta" style="background:var(--red);color:#fff" data-why="CTA 정론 — 수행할 단일 행동을 동사로 직접 제시. ~하러 가기의 이동·의무 뉘앙스를 덜고, 자동 승인 맥락에 맞춰 부담 없이 확인만 하도록 축소" onclick="dr(this)">리포트 확인하기</span>
             </div>
           </div>
           <div class="step-sep">›</div>
@@ -324,7 +324,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
           <tr><td><span class="badge-st gray">입고중</span></td><td>물류사 도착 확인</td><td>2024.12.24. 15:00</td></tr>
           <tr><td id="st-history"><span class="badge-st warn">리포트처리대기</span></td><td>입고 리포트 등록</td><td>2024.12.24. 15:00</td></tr>
         </tbody></table></div></div>
-      <div class="note">※ 요약·현황·배송/도착정보·상태이력은 변경 대상 아님 — 첫 사용자 이해를 위해 원본 구조대로 재현. 변경은 <b>입고 단계('리포트처리대기')의 안내 문구·승인기한</b>에 한정.</div>
+      <div class="note">※ 요약·현황·배송/도착정보·상태이력은 변경 대상 아님 — 첫 사용자 이해를 위해 원본 구조대로 재현. 변경은 <b>입고 단계(리포트처리대기)의 안내 문구·승인기한</b>에 한정.</div>
     </div>
   </div>
 </div></div>
@@ -351,7 +351,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
       </div></div>
       <div class="card"><div class="card-b">
         <div class="listtop"><b>조회 목록 (총 65개)</b><div class="listtop-r"><span class="sel">기본정렬순 <span>▾</span></span><span class="sel">50개씩 <span>▾</span></span><span class="btn-o">엑셀다운</span></div></div>
-        <div class="alert">⊘ <span class="ab blk"><span class="as">리포트의 확인이 필요한 항목이 1건 있습니다. '리포트처리대기' 상태인 항목을 확인해 주세요.</span><span class="to" data-why="'확인 요청'만 있어 조치 필요성이 안 드러남 → 자동 승인 예정을 알려 기한 내 이의 신청(능동 조치)을 유도" onclick="dr(this)">리포트처리대기 항목이 1건 있습니다. 승인기한 내 이의 신청이 없으면 자동 승인됩니다.</span></span></div>
+        <div class="alert">⊘ <span class="ab blk"><span class="as">리포트의 확인이 필요한 항목이 1건 있습니다. 리포트처리대기 상태인 항목을 확인해 주세요.</span><span class="to" data-why="확인 요청만 있어 조치 필요성이 안 드러남 → 자동 승인 예정을 알려 기한 내 이의 신청(능동 조치)을 유도" onclick="dr(this)">리포트처리대기 항목이 1건 있습니다. 승인기한 내 이의 신청이 없으면 자동 승인됩니다.</span></span></div>
         <div class="alert" style="color:var(--fg2)">⊘ 배송정보를 입력하지 않은 항목이 2건 있습니다. 물류센터 도착 전까지 운송장번호 또는 차량번호를 입력해 주세요.</div>
         <table class="dt" style="margin-top:10px"><thead><tr><th>입고 ID</th><th>입고센터</th><th>SKU 종수</th><th>입고신청수량</th><th>입고완료수량</th><th>입고상태</th><th>입고예정일</th></tr></thead><tbody>
           <tr><td class="lnk">IB17580945691874</td><td>품고 이천 375 XFC 네이버센터</td><td>1</td><td>1,000</td><td>-</td><td id="st-list"><span class="badge-st warn">리포트처리대기</span><div style="margin-top:5px"><span class="to" style="font-size:10px" data-why="동일 원칙 — 기한 제한 액션이 걸린 상태엔 마감을 함께 노출. 목록에서도 상태 옆에 승인기한 병기(어느 화면에서든 마감 인지)" onclick="dr(this)">승인기한 2026.07.03 23:59</span></div></td><td>2025.09.19.</td></tr>
@@ -365,7 +365,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 
 <!-- 리포트 상세 -->
 <div id="p-rdetail" class="pane"><div class="content">
-  <div class="sec-head"><div class="sec-title"><span class="title-ab" id="rdetail-title"><span class="as">리포트 상세보기</span><span class="to" data-why="타이틀이 동사형 '상세보기' → 명사형 '리포트 상세'로 정정(입고상세 등 다른 화면 타이틀과 통일)" onclick="dr(this)">리포트 상세</span></span> <span class="crumb-badge">N배송 관리 › 리포트관리 › 리포트상세</span></div>  </div>
+  <div class="sec-head"><div class="sec-title"><span class="title-ab" id="rdetail-title"><span class="as">리포트 상세보기</span><span class="to" data-why="타이틀이 동사형 상세보기 → 명사형 리포트 상세로 정정(입고상세 등 다른 화면 타이틀과 통일)" onclick="dr(this)">리포트 상세</span></span> <span class="crumb-badge">N배송 관리 › 리포트관리 › 리포트상세</span></div>  </div>
   <div class="screen"><div class="sc-body">
       <div class="card"><div class="card-h"><span class="card-h-t">리포트</span></div><div class="card-b" style="padding:0"><div class="sum4">
         <div class="sum-l">리포트 ID</div><div class="sum-v"><span class="lnk">ER0000000000001</span></div><div class="sum-l">리포트유형</div><div class="sum-v">입고</div>
@@ -379,7 +379,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
         <div class="note">※ 입고이슈(코멘트·사진, 물류사 작성)는 변경 대상 아님 · 화면 맥락용.</div>
       </div></div>
       <div class="card"><div class="card-h"><span class="card-h-t">승인요청항목</span><span class="btn-o">↓ 상세내역 다운로드</span></div><div class="card-b">
-        <div style="font-size:11.5px;color:var(--fg2);line-height:1.7;margin-bottom:10px">· 리포트 승인 시 처리비용이 물류 부가비 월정산 항목으로 청구되며 월별 결제됩니다.<br>· 결제와 관련된 자세한 내용은 <span class="lnk">물류비 청구내역</span>에서 확인할 수 있습니다.<br>· 승인요청항목에 이의가 있는 경우 하단의 '이의 신청' 버튼을 눌러주세요.</div>
+        <div style="font-size:11.5px;color:var(--fg2);line-height:1.7;margin-bottom:10px">· 리포트 승인 시 처리비용이 물류 부가비 월정산 항목으로 청구되며 월별 결제됩니다.<br>· 결제와 관련된 자세한 내용은 <span class="lnk">물류비 청구내역</span>에서 확인할 수 있습니다.<br>· 승인요청항목에 이의가 있는 경우 하단의 이의 신청 버튼을 눌러주세요.</div>
         <div style="font-size:12.5px;font-weight:700;margin-bottom:8px">총 청구금액: 87,000원 <span style="font-weight:400;color:var(--fg3)">(VAT 별도)</span></div>
         <table class="dt"><thead><tr><th>작업</th><th>SKU ID</th><th>작업단위</th><th>작업단위당 금액</th><th>작업단위 수량</th><th>금액</th></tr></thead><tbody>
           <tr><td>바코드 덧방</td><td class="lnk">NS20240701A1</td><td>낱개</td><td>100원</td><td>10</td><td>1,000원</td></tr>
@@ -390,17 +390,17 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
         <div class="note">※ 승인요청항목(청구 내역)은 변경 대상 아님 · 화면 맥락용.</div>
       </div></div>
       <div class="card"><div class="card-h"><span class="card-h-t">상태이력</span></div><div class="card-b">
-        <div class="ab blk" style="margin-bottom:12px"><span class="as">'승인대기' 상태의 리포트는 10일 내로 승인하지 않을 경우 '승인기한만료' 상태로 전환되며, 이후에는 승인할 수 없습니다.</span><span class="to" data-why="10일 직접 승인 → 등록 당일 23:59 자동 승인으로 규칙 교체 + 기한 내 이의 신청 안내" onclick="dr(this)">'승인대기' 상태의 리포트는 등록 당일 23:59에 자동 승인됩니다. 승인요청항목에 이견이 있으시면 승인기한 내에 이의 신청을 해주세요.</span></div>
+        <div class="ab blk" style="margin-bottom:12px"><span class="as">승인대기 상태의 리포트는 10일 내로 승인하지 않을 경우 승인기한만료 상태로 전환되며, 이후에는 승인할 수 없습니다.</span><span class="to" data-why="10일 직접 승인 → 등록 당일 23:59 자동 승인으로 규칙 교체 + 기한 내 이의 신청 안내" onclick="dr(this)">승인대기 상태의 리포트는 등록 당일 23:59에 자동 승인됩니다. 승인요청항목에 이견이 있으시면 승인기한 내에 이의 신청을 해주세요.</span></div>
         <table class="dt"><thead><tr><th>리포트상태</th><th>변경정보</th><th>변경일시</th></tr></thead><tbody>
           <tr><td><span class="badge-st warn">승인대기</span></td><td>물류사 리포트 등록</td><td>2026.07.03 14:38</td></tr>
         </tbody></table></div></div>
       <div id="rdetail-cta" style="display:flex;gap:8px;justify-content:center;align-items:center">
         <span class="step-cta" style="background:#eceef1;color:var(--fg3);text-decoration:line-through">문의하기</span>
         <span style="color:var(--fg3)">→</span>
-        <span class="step-cta" style="background:rgba(0,184,79,.18);border:1px solid var(--brand);color:rgba(0,0,0,.82)" data-why="'문의하기'는 단순 문의 뉘앙스 → 선작업을 보류시키는 '이의 신청'으로 개선. CTA는 동사형이 정론이라 버튼은 '이의 신청하기'(문의하기·승인하기와 형태 통일)" onclick="dr(this)">이의 신청하기</span>
+        <span class="step-cta" style="background:rgba(0,184,79,.18);border:1px solid var(--brand);color:rgba(0,0,0,.82)" data-why="문의하기는 단순 문의 뉘앙스 → 선작업을 보류시키는 이의 신청으로 개선. CTA는 동사형이 정론이라 버튼은 이의 신청하기(문의하기·승인하기와 형태 통일)" onclick="dr(this)">이의 신청하기</span>
         <span class="step-cta" style="background:var(--brand);color:#fff">승인하기</span>
       </div>
-      <div class="note" style="text-align:center">※ '문의하기'→'이의 신청' 워딩 변경(버튼 형태 유지, ASIS 회색). '승인하기'는 자동 승인이라도 더 빨리 승인하고 싶을 때 쓰도록 유지.</div>
+      <div class="note" style="text-align:center">※ 문의하기'→이의 신청 워딩 변경(버튼 형태 유지, ASIS 회색). 승인하기는 자동 승인이라도 더 빨리 승인하고 싶을 때 쓰도록 유지.</div>
     </div>
   </div>
 </div></div>
@@ -412,7 +412,7 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
     <div class="push asis-card"><span class="pair-label asis">ASIS</span>
       <div class="push-head"><span>물류연동</span><span>✕</span></div><div class="push-title">N배송 리포트 등록 안내</div>
       <div class="push-body">물류사에서 리포트(리포트 ID: {$리포트ID$})를 등록했습니다.</div></div>
-    <div class="push new" data-why="기존 '리포트 등록 안내' 확장 — 등록 + 승인기한 지나면 자동승인 안내(확인·이의는 상세 클릭)" onclick="dr(this)"><span class="pair-label tobe">TOBE</span>
+    <div class="push new" data-why="기존 리포트 등록 안내 확장 — 등록 + 승인기한 지나면 자동승인 안내(확인·이의는 상세 클릭)" onclick="dr(this)"><span class="pair-label tobe">TOBE</span>
       <div class="push-head"><span>물류연동 · 오후 3시 20분</span><span>✕</span></div><div class="push-title">N배송 리포트 등록 안내 (자동승인 예정)</div>
       <div class="push-body">입고 중 문제가 발견되어 리포트가 등록되었습니다. 승인기한(오늘 23:59)이 지나면 자동 승인됩니다.</div>
       <div class="push-body" style="margin-top:8px;color:var(--fg3);font-size:11px">↳ 클릭 시 리포트 상세로 새 탭 연결</div></div>
@@ -435,8 +435,8 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 <div id="p-help" class="pane"><div class="content">
   <div class="sec-head"><div class="sec-title">도움말 · Q&amp;A</div></div>
   <div class="faq">
-    <div class="faq-q">입고 리포트를 제가 승인해야 하나요?</div><div class="faq-a">아니요. 입고 리포트는 <b>등록 당일 23:59에 자동으로 승인</b>됩니다. 다만 더 빨리 처리하고 싶으면 '승인하기'로 즉시 승인할 수 있습니다.</div>
-    <div class="faq-q">내용에 이의가 있으면 어떻게 하나요?</div><div class="faq-a"><b>당일 안에</b> 리포트 상세 하단의 '이의 신청'으로 알려주세요. 이의를 신청하면 물류센터 선작업이 보류되고 담당자가 확인합니다.</div>
+    <div class="faq-q">입고 리포트를 제가 승인해야 하나요?</div><div class="faq-a">아니요. 입고 리포트는 <b>등록 당일 23:59에 자동으로 승인</b>됩니다. 다만 더 빨리 처리하고 싶으면 승인하기로 즉시 승인할 수 있습니다.</div>
+    <div class="faq-q">내용에 이의가 있으면 어떻게 하나요?</div><div class="faq-a"><b>당일 안에</b> 리포트 상세 하단의 이의 신청으로 알려주세요. 이의를 신청하면 물류센터 선작업이 보류되고 담당자가 확인합니다.</div>
     <div class="faq-q">왜 승인 방식이 바뀌었나요?</div><div class="faq-a">실제 물류 작업이 리포트 등록 전에 이미 진행되어, 직접 승인 방식과 실무 사이에 시차·병목이 있었습니다. 이를 줄이기 위해 <b>당일 자동승인</b>으로 실무와 맞췄습니다.</div>
     <div class="faq-q">자동 승인 시점과 정산은요?</div><div class="faq-a">리포트 <b>등록 당일 23:59</b> 승인되며, 당월 발생 리포트는 당월 정산에 처리됩니다.</div>
   </div>
@@ -447,58 +447,58 @@ details.acc>ul{margin:0;padding:2px 18px 16px 38px;line-height:1.85;font-size:12
 </div>
 <script>
 function tab(n){document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(t=>t.classList.remove('active'));var pane=document.getElementById('p-'+n);if(pane)pane.classList.add('active');document.querySelectorAll('.tab-item').forEach(t=>{if((t.getAttribute('onclick')||'').indexOf("'"+n+"'")>=0)t.classList.add('active')});window.scrollTo(0,0);}
-function goTab(n,anchor){tab(n);requestAnimationFrame(function(){var el=document.getElementById(anchor);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.remove('kc-flash');void el.offsetWidth;el.classList.add('kc-flash');setTimeout(function(){el.classList.remove('kc-flash');},1900);});}
+function goTab(n,anchor){tab(n);requestAnimationFrame(function(){var el=document.getElementById(anchor);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.remove('kc-flash');void el.offsetWidth;el.classList.add('kc-flash');setTimeout(function(){el.classList.remove('kc-flash);},1900);});}
 function dr(el){return false;}
 /* i-툴팁: 클릭 토글 + 닫기버튼 + 바깥클릭 닫기 (0618 방식) */
 (function(){
-  document.querySelectorAll('.qi').forEach(function(qi){qi.addEventListener('click',function(e){e.stopPropagation();var op=qi.classList.contains('open');document.querySelectorAll('.qi.open').forEach(function(q){q.classList.remove('open');});if(!op)qi.classList.add('open');});});
+  document.querySelectorAll(.qi').forEach(function(qi){qi.addEventListener('click',function(e){e.stopPropagation();var op=qi.classList.contains('open');document.querySelectorAll('.qi.open').forEach(function(q){q.classList.remove('open');});if(!op)qi.classList.add('open');});});
   document.querySelectorAll('.qi .tip').forEach(function(t){t.addEventListener('click',function(e){e.stopPropagation();});});
   document.querySelectorAll('.tip-close').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();var q=b.closest('.qi');if(q)q.classList.remove('open');});});
   document.addEventListener('click',function(){document.querySelectorAll('.qi.open').forEach(function(q){q.classList.remove('open');});});
 })();
 (function(){var tip=document.getElementById('why-tip'),b=document.getElementById('why-tip-body');
 document.addEventListener('mouseover',function(e){var el=e.target.closest('[data-why]');if(!el||!el.dataset.why)return;b.textContent=el.dataset.why;tip.style.display='block';var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,left=Math.max(8,Math.min(r.left+r.width/2-tw/2,window.innerWidth-tw-8)),top=r.top-th-10;if(top<8)top=r.bottom+10;tip.style.left=left+'px';tip.style.top=top+'px';});
-document.addEventListener('mouseout',function(e){if(e.target.closest('[data-why]'))tip.style.display='none';});})();
+document.addEventListener('mouseout',function(e){if(e.target.closest('[data-why]'))tip.style.display='none;});})();
 /* ── 변경 내역 드로어 (테마별 · 핵심 2개가 뼈대) ── */
-var TABN={ipgo:'입고상세',list:'입고관리',rdetail:'리포트상세',alarm:'알림'};
+var TABN={ipgo:입고상세',list:입고관리,rdetail:리포트상세,alarm:알림};
 var CHG_SECTIONS=[
  {sec:"핵심 변경 · 전 탭 공통", themes:[
    {t:"① 워딩 · <s style=\"color:var(--fg3)\">문의하기</s> → <span style=\"color:var(--brand)\">이의 신청</span>", items:[
-     {p:'rdetail',l:3,loc:"리포트상세 버튼"}
+     {p:'rdetail,l:3,loc:"리포트상세 버튼"}
    ]},
    {t:"② 상태값 · 리포트<s style=\"color:var(--fg3)\">처리</s>대기 → 리포트<span style=\"color:var(--brand)\">승인</span>대기", items:[
-     {p:'ipgo',l:2,loc:"입고상세 진행 단계"},
-     {p:'ipgo',l:6,loc:"입고상세 요약"},
-     {p:'ipgo',l:8,loc:"입고상세 상태이력"},
-     {p:'list',l:1,loc:"입고관리 상태 칩"},
-     {p:'list',l:3,loc:"입고관리 필터"},
-     {p:'list',l:5,loc:"입고관리 목록"}
+     {p:ipgo,l:2,loc:"입고상세 진행 단계"},
+     {p:ipgo,l:6,loc:"입고상세 요약"},
+     {p:ipgo,l:8,loc:"입고상세 상태이력"},
+     {p:list,l:1,loc:"입고관리 상태 칩"},
+     {p:list,l:3,loc:"입고관리 필터"},
+     {p:list,l:5,loc:"입고관리 목록"}
    ]}
  ]},
  {sec:"화면별 개별 변경", themes:[
    {t:"타이틀 정정", items:[
-     {p:'ipgo',l:1,loc:"입고상세 '입고관리'→'입고상세'"},
-     {p:'rdetail',l:1,loc:"리포트상세 '상세보기'→'상세'"}
+     {p:ipgo,l:1,loc:"입고상세 입고관리'→입고상세"},
+     {p:'rdetail,l:1,loc:"리포트상세 상세보기'→상세"}
    ]},
    {t:"안내 문구 워싱 · 자동승인·이의 안내", items:[
-     {p:'ipgo',l:3,loc:"입고상세 안내"},
-     {p:'list',l:4,loc:"입고관리 목록 상단 알림"},
-     {p:'rdetail',l:2,loc:"리포트상세 상태이력"}
+     {p:'ipgo,l:3,loc:"입고상세 안내"},
+     {p:list,l:4,loc:"입고관리 목록 상단 알림"},
+     {p:rdetail,l:2,loc:"리포트상세 상태이력"}
    ]},
    {t:"승인기한(날짜·시간) 병기", items:[
-     {p:'ipgo',l:4,loc:"입고상세 요약"},
-     {p:'ipgo',l:7,loc:"입고상세 진행"},
-     {p:'list',l:6,loc:"입고관리 목록"}
+     {p:ipgo,l:4,loc:"입고상세 요약"},
+     {p:ipgo,l:7,loc:"입고상세 진행"},
+     {p:list,l:6,loc:"입고관리 목록"}
    ]},
    {t:"기타 · 버튼·툴팁·신설", items:[
-     {p:'ipgo',l:5,loc:"입고상세 '확인하기' 버튼"},
-     {p:'list',l:2,loc:"입고관리 상태 칩 i-툴팁"},
-     {p:'alarm',l:1,loc:"알림 '리포트 등록 안내' 신설"}
+     {p:ipgo,l:5,loc:"입고상세 확인하기 버튼"},
+     {p:list,l:2,loc:"입고관리 상태 칩 i-툴팁"},
+     {p:alarm,l:1,loc:"알림 리포트 등록 안내 신설"}
    ]}
  ]}
 ];
 function renderDrawer(){
-  var body=document.getElementById('cdBody');if(!body)return;
+  var body=document.getElementById(cdBody');if(!body)return;
   var html='',total=0;
   CHG_SECTIONS.forEach(function(s,si){
     html+='<div class="cd-sec'+(si>0?' b':'')+'">'+s.sec+'</div>';
@@ -511,7 +511,7 @@ function renderDrawer(){
     });
   });
   body.innerHTML=html;
-  var tot=document.getElementById('cdTotal');if(tot)tot.textContent='전체 '+total+'건';
+  var tot=document.getElementById('cdTotal');if(tot)tot.textContent=전체 +total+건;
   var n=document.querySelector('.chg-btn .n');if(n)n.textContent=total;
 }
 function toggleDrawer(show){var d=document.getElementById('chgDrawer');if(!d)return;if(show===undefined)show=!d.classList.contains('open');d.classList.toggle('open',show);}
@@ -534,7 +534,7 @@ renderDrawer();
 <script>
 (async function(){
   const docs = await loadDocs();
-  renderLNB({ active: '입고 리포트 자동승인', docs });
+  renderLNB({ active: 입고 리포트 자동승인, docs });
   const pc = document.getElementById('page-content');
   const lnb = document.getElementById('lnb');
   const upd = () => { pc.style.marginLeft = lnb.classList.contains('collapsed') ? '48px' : '240px'; };
