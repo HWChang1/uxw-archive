@@ -534,7 +534,7 @@ renderDrawer();
 <script>
 (async function(){
   const docs = await loadDocs();
-  renderLNB({ active: '입고 리포트 자동승인', docs });
+  renderLNB({ active: '입고리포트_자동승인', docs });
   const pc = document.getElementById('page-content');
   const lnb = document.getElementById('lnb');
   const upd = () => { pc.style.marginLeft = lnb.classList.contains('collapsed') ? '48px' : '240px'; };
