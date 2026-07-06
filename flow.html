@@ -154,6 +154,17 @@
 .flow-page .shot .cap b{font-size:13.5px;font-weight:700}
 .flow-page .shot .cap .d{font-size:11.5px;color:var(--ink3);line-height:1.5}
 .flow-page .shot .cap .lk{font-size:11px;color:#1a6dd6;margin-top:2px}
+
+/* 페이지 내 직접 편집(✏️) */
+#editFab{position:fixed;right:22px;bottom:22px;width:44px;height:44px;border-radius:50%;background:#1b1c25;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.25);z-index:90;opacity:.35;transition:opacity .15s}
+#editFab:hover{opacity:1}
+#editBar{position:fixed;left:50%;transform:translateX(-50%);bottom:20px;background:#1b1c25;color:#fff;border-radius:99px;padding:10px 12px 10px 20px;display:flex;align-items:center;gap:14px;z-index:95;box-shadow:0 10px 30px rgba(0,0,0,.35);font-size:13px}
+#editBar b{font-size:13px}
+#editBar span{color:#a6aab6;font-size:12px}
+#editBar button{border:none;border-radius:99px;padding:8px 16px;font-size:12.5px;font-weight:700;cursor:pointer}
+#editBar #evSave{background:#00b84f;color:#fff}
+#editBar #evCancel{background:#3a3b47;color:#d6d8e0}
+body.editing .flow-page{outline:3px dashed rgba(0,184,79,.5);outline-offset:-3px}
 </style></head><body>
 <div class="app-shell">
   <nav class="lnb" id="lnb"></nav>
@@ -461,6 +472,62 @@
     }
   });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeAll(); });
+})();
+
+// ✏️ 페이지 내 직접 편집 — 텍스트 수정 후 [저장·배포]하면 GitHub에 커밋 → ~20초 후 반영
+(function(){
+  var REPO='HWChang1/uxw-archive', FILE='flow.html', BRANCH='main';
+  var fab=document.createElement('div'); fab.id='editFab'; fab.title='페이지 편집'; fab.textContent='✏️';
+  document.body.appendChild(fab);
+  var bar=null;
+  fab.addEventListener('click', function(){
+    if(bar) return;
+    bar=document.createElement('div'); bar.id='editBar';
+    bar.innerHTML='<b>✏️ 편집 모드</b><span>고칠 텍스트를 클릭해 바로 수정하세요</span><button id="evSave">저장·배포</button><button id="evCancel">취소</button>';
+    document.body.appendChild(bar);
+    document.body.classList.add('editing');
+    document.designMode='on';
+    fab.style.display='none';
+  });
+  document.addEventListener('click', async function(e){
+    if(!bar) return;
+    if(e.target.id==='evCancel'){ location.reload(); return; }
+    if(e.target.id!=='evSave') return;
+    var token=localStorage.getItem('gh_token');
+    if(!token){
+      token=prompt('처음 한 번만: GitHub 토큰을 붙여넣으세요.\n(github.com → Settings → Developer settings → Fine-grained tokens → uxw-archive 저장소 Contents: Read and write)\n이 브라우저에만 저장됩니다.');
+      if(!token) return;
+      token=token.trim(); localStorage.setItem('gh_token', token);
+    }
+    document.designMode='off';
+    e.target.textContent='저장 중…'; e.target.disabled=true;
+    // 저장용 사본 정리(편집 UI·런타임 상태 제거)
+    var clone=document.documentElement.cloneNode(true);
+    var rm=clone.querySelector('#editBar'); if(rm) rm.remove();
+    rm=clone.querySelector('#editFab'); if(rm) rm.remove();
+    clone.querySelectorAll('body')[0].classList.remove('editing');
+    var lnb=clone.querySelector('#lnb'); if(lnb) lnb.innerHTML='';
+    clone.querySelectorAll('.ev.open').forEach(function(el){el.classList.remove('open')});
+    clone.querySelectorAll('.tip .x').forEach(function(el){el.remove()});
+    var html='<!DOCTYPE html>'+clone.outerHTML;
+    try{
+      var meta=await fetch('https://api.github.com/repos/'+REPO+'/contents/'+FILE+'?ref='+BRANCH,{headers:{Authorization:'Bearer '+token}});
+      if(!meta.ok) throw new Error('토큰/권한 오류 ('+meta.status+')');
+      var sha=(await meta.json()).sha;
+      var res=await fetch('https://api.github.com/repos/'+REPO+'/contents/'+FILE,{
+        method:'PUT', headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
+        body:JSON.stringify({message:'flow.html: 페이지 내 직접 편집', content:btoa(unescape(encodeURIComponent(html))), sha:sha, branch:BRANCH})
+      });
+      if(!res.ok) throw new Error('커밋 실패 ('+res.status+')');
+      alert('저장 완료! 약 20초 후 사이트에 반영됩니다.');
+      location.reload();
+    }catch(err){
+      if(/401|403/.test(String(err))) localStorage.removeItem('gh_token');
+      alert('저장 실패: '+err.message+'\n다시 [저장·배포]를 누르면 토큰을 재입력할 수 있습니다.');
+      e.target.textContent='저장·배포'; e.target.disabled=false;
+      document.designMode='on';
+    }
+  });
 })();
 </script>
 </body></html>
