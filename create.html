@@ -212,6 +212,8 @@ const ANTHROPIC_API_KEY = localStorage.getItem('uxw_anthropic_key') || '';
 
 // 모델: Sonnet 5 (고해상도 비전 2576px 지원 · Vision 재구성 품질↑). 최고 품질이 필요하면 'claude-opus-4-8'로 교체.
 const AI_MODEL = 'claude-sonnet-5';
+/* Sonnet 5+는 adaptive thinking이 기본 → content[0]이 thinking 블록일 수 있음. text 블록만 모아 읽는다. */
+function apiText(data) { return (data.content || []).filter(b => b.type === "text").map(b => b.text || "").join(""); }
 
 // 🔑 Figma 액세스 토큰(선택 · URL로 화면 가져오기용). 콘솔에서 1회 저장:
 //    localStorage.setItem('uxw_figma_token', 'figd_...')
@@ -518,6 +520,7 @@ async function runBatchAI() {
       },
       body: JSON.stringify({
         model: AI_MODEL,
+        thinking: { type: "disabled" },
         max_tokens: 16000,
         system: BATCH_SYSTEM_PROMPT + grounding,
         messages: [{ role: "user", content: `다음 검토 요청 전문/ASIS에서 수정이 필요한 모든 항목을 추출하고 TOBE를 제안해 주세요.\n\n---\n${requestText}` }]
@@ -525,7 +528,7 @@ async function runBatchAI() {
     });
     if (!res.ok) throw new Error("API 오류 " + res.status + ": " + (await res.text()).slice(0, 200));
     const data = await res.json();
-    let text = (data.content?.[0]?.text || "").replace(/```json|```/g, "").trim();
+    let text = apiText(data).replace(/```json|```/g, "").trim();
     let parsed;
     try { parsed = JSON.parse(text); }
     catch (e) {
@@ -660,6 +663,7 @@ async function runAI(id) {
       },
       body: JSON.stringify({
         model: AI_MODEL,
+        thinking: { type: "disabled" },
         max_tokens: 1024,
         system: SYSTEM_PROMPT,
         messages: [{ role: "user", content: userMsg }]
@@ -670,7 +674,7 @@ async function runAI(id) {
       throw new Error("API 오류 " + res.status + ": " + err.slice(0, 200));
     }
     const data = await res.json();
-    let text = (data.content && data.content[0] && data.content[0].text) || "";
+    let text = apiText(data);
     text = text.replace(/```json|```/g, "").trim();
     const parsed = JSON.parse(text);
     renderSuggestions(id, parsed.suggestions || []);
@@ -1448,11 +1452,11 @@ async function reconstructScreen(imgB64, mediaType, items, ctx) {
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: { "content-type": "application/json", "x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
-    body: JSON.stringify({ model: AI_MODEL, max_tokens: 8192, system: RECON_SYSTEM_PROMPT + grounding, messages: [{ role: "user", content: userContent }] })
+    body: JSON.stringify({ model: AI_MODEL, thinking: { type: "disabled" }, max_tokens: 8192, system: RECON_SYSTEM_PROMPT + grounding, messages: [{ role: "user", content: userContent }] })
   });
   if (!res.ok) throw new Error("재구성 API 오류 " + res.status + ": " + (await res.text()).slice(0, 200));
   const data = await res.json();
-  let html = (data.content?.[0]?.text || "").replace(/```html|```/g, "").trim();
+  let html = apiText(data).replace(/```html|```/g, "").trim();
   if (html.indexOf('class="content"') < 0) html = `<div class="content">${html}</div>`;
   return html;
 }
@@ -1698,6 +1702,7 @@ async function extractImage(file) {
     },
     body: JSON.stringify({
       model: AI_MODEL,
+      thinking: { type: "disabled" },
       max_tokens: 2048,
       messages: [{ role: "user", content: [
         { type: "image", source: { type: "base64", media_type: file.type || "image/png", data: b64 } },
@@ -1707,7 +1712,7 @@ async function extractImage(file) {
   });
   if (!res.ok) return "[" + file.name + "] 이미지 추출 실패: " + res.status;
   const data = await res.json();
-  return "# 화면 캡처: " + file.name + "\n" + (data.content?.[0]?.text || "");
+  return "# 화면 캡처: " + file.name + "\n" + apiText(data);
 }
 
 // 첨부 전체 → ASIS 텍스트 추출 → 편집 가능한 박스에 표시
@@ -1874,14 +1879,14 @@ async function runWash() {
         'anthropic-dangerous-direct-browser-access': 'true'
       },
       body: JSON.stringify({
-        model: AI_MODEL, max_tokens: 2048,
+        model: AI_MODEL, thinking: { type: "disabled" }, max_tokens: 2048,
         system: WASH_SYSTEM_PROMPT,
         messages: [{ role: 'user', content: userMsg }]
       })
     });
     if (!res.ok) throw new Error('API 오류 ' + res.status + ': ' + (await res.text()).slice(0, 200));
     const data = await res.json();
-    let text = (data.content?.[0]?.text || '').replace(/```json|```/g, '').trim();
+    let text = apiText(data).replace(/```json|```/g, '').trim();
     const parsed = JSON.parse(text);
     renderWashResult(parsed.candidates || [], input, ctx);
   } catch (e) {
