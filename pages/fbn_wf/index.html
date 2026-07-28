@@ -25,7 +25,7 @@
 
 
 
-<div style="display:flex; flex-direction:column; min-width:1280px; background:#f1f4f6; font-family:'Pretendard Variable','Pretendard',system-ui,sans-serif; color:rgba(0,0,0,0.81); -webkit-font-smoothing:antialiased;">
+<div style="display:flex; flex-direction:column; min-width:1024px; background:#f1f4f6; font-family:'Pretendard Variable','Pretendard',system-ui,sans-serif; color:rgba(0,0,0,0.81); -webkit-font-smoothing:antialiased;">
 
   <!-- ───────── 화면 캡처 플로팅 버튼 ───────── -->
   
@@ -37,72 +37,7 @@
   <!-- ───────── BODY ROW ───────── -->
   <div style="display:flex; flex:1; min-height:0;">
 
-    <!-- ───────── LNB ───────── -->
-    <aside style="width:210px; background:#475161; display:flex; flex-direction:column; flex-shrink:0; overflow-y:auto;">
-      <!-- profile -->
-      <div style="background:rgba(0,0,0,0.03); padding:28px 20px; display:flex; flex-direction:column; gap:20px; align-items:center;">
-        <div style="width:72px; height:72px; border-radius:999px; background:#5e6879; display:flex; align-items:center; justify-content:center;">
-          <svg width="40" height="40" sc-camel-view-box="0 0 24 24" fill="none"><circle cx="12" cy="8.5" r="4" fill="rgba(255,255,255,0.55)"></circle><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5" fill="rgba(255,255,255,0.55)"></path></svg>
-        </div>
-        <div style="text-align:center;">
-          <div style="font-size:18px; font-weight:700; color:#fff;">qa2test250-2</div>
-          <div style="font-size:13px; font-weight:500; color:#7a808a; margin-top:4px;">통합 매니저</div>
-        </div>
-        <div style="width:100%; display:flex; flex-direction:column; gap:8px;">
-          <div style="display:flex; align-items:center; justify-content:space-between; height:32px; padding:0 10px; background:#fff; border:1px solid rgba(0,0,0,0.1); font-size:12px; color:rgba(0,0,0,0.81);">
-            <span>수취인명</span>
-            <svg width="14" height="14" sc-camel-view-box="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(0,0,0,0.53)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-          </div>
-          <div style="display:flex; align-items:center; gap:6px; height:32px; padding:0 10px; background:#fff; border:1px solid rgba(0,0,0,0.1);">
-            <svg width="14" height="14" sc-camel-view-box="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="rgba(0,0,0,0.4)" stroke-width="2"></circle><path d="M20 20l-3.5-3.5" stroke="rgba(0,0,0,0.4)" stroke-width="2" stroke-linecap="round"></path></svg>
-            <span style="font-size:12px; color:rgba(0,0,0,0.26);">입력 후 검색하세요.</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 상품관리 group (숨김 처리됨 · 복구 가능) -->
-      <sc-if value="{{ showProductGroup }}" hint-placeholder-val="{{ false }}">
-      <div sc-camel-on-click="{{ toggleProductGroup }}" style="display:flex; align-items:center; justify-content:space-between; height:50px; padding:0 20px; cursor:pointer;">
-        <div style="display:flex; align-items:center; gap:6px;">
-          <span style="font-size:14px; font-weight:700; color:#fff;">상품관리</span>
-          <span style="display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:999px; background:#f42428; color:#fff; font-size:8px; font-weight:800;">N</span>
-        </div>
-        <span style="display:inline-flex; transition:transform .15s; transform:{{ gProductChevron }};"><svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
-      </div>
-      <sc-if value="{{ gProductOpen }}" hint-placeholder-val="{{ true }}">
-      <div style="padding-bottom:8px;">
-        <div style="padding:8px 20px 4px;"><span style="font-size:12px; font-weight:500; color:rgba(255,255,255,0.34);">상품 관리</span></div>
-        <div sc-camel-on-click="{{ goProductList }}" style="display:flex; align-items:center; height:42px; padding:0 20px 0 32px; cursor:pointer; font-size:14px; font-weight:{{ navListWeight }}; color:{{ navListColor }}; background:{{ navListBg }};">상품 조회/수정</div>
-        <div sc-camel-on-click="{{ goProduct }}" style="display:flex; align-items:center; height:42px; padding:0 20px 0 32px; cursor:pointer; font-size:14px; font-weight:{{ navProductWeight }}; color:{{ navProductColor }}; background:{{ navProductBg }};">상품 등록</div>
-      </div>
-      </sc-if>
-      </sc-if>
-
-      <!-- N배송 group -->
-      <div sc-camel-on-click="{{ toggleNbaeGroup }}" style="display:flex; align-items:center; justify-content:space-between; height:50px; padding:0 20px; cursor:pointer;">
-        <div style="display:flex; align-items:center; gap:6px;">
-          <span style="font-size:14px; font-weight:700; color:#fff;">N배송</span>
-        </div>
-        <span style="display:inline-flex; transition:transform .15s; transform:{{ gNbaeChevron }};"><svg width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
-      </div>
-      <sc-if value="{{ gNbaeOpen }}" hint-placeholder-val="{{ false }}">
-      <div style="padding-bottom:8px;">
-        <div style="padding:8px 20px 4px;"><span style="font-size:12px; font-weight:500; color:rgba(255,255,255,0.34);">N배송 FBN</span></div>
-        <div sc-camel-on-click="{{ goService }}" style="display:flex; align-items:center; gap:6px; height:42px; padding:0 20px 0 32px; cursor:pointer; font-size:14px; font-weight:{{ navServiceWeight }}; color:{{ navServiceColor }}; background:{{ navServiceBg }};">서비스 소개</div>
-        <div style="display:flex; align-items:center; justify-content:space-between; height:42px; padding:0 20px 0 32px; cursor:pointer; font-size:14px; color:rgba(255,255,255,0.88);"><span>솔루션 추가</span><svg width="14" height="14" sc-camel-view-box="0 0 24 24" fill="none" style="opacity:0.7;"><path d="M8 6h10v10M18 6L6 18" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
-        <div sc-camel-on-click="{{ goApply }}" style="display:flex; align-items:center; height:42px; padding:0 20px 0 32px; cursor:pointer; font-size:14px; font-weight:{{ navApplyWeight }}; color:{{ navApplyColor }}; background:{{ navApplyBg }};">신청하기</div>
-        <div style="padding:12px 20px 4px;"><span style="font-size:12px; font-weight:500; color:rgba(255,255,255,0.34);">N배송 이용</span></div>
-        <div sc-camel-on-click="{{ goInbound }}" style="display:flex; align-items:center; height:42px; padding:0 20px 0 32px; cursor:pointer; font-size:14px; font-weight:{{ navInboundWeight }}; color:{{ navInboundColor }}; background:{{ navInboundBg }};">입고 신청</div>
-        <div sc-camel-on-click="{{ goStock }}" style="display:flex; align-items:center; height:42px; padding:0 20px 0 32px; cursor:pointer; font-size:14px; font-weight:{{ navStockWeight }}; color:{{ navStockColor }}; background:{{ navStockBg }};">SKU·재고</div>
-        <div style="display:flex; align-items:center; height:42px; padding:0 20px 0 32px; cursor:pointer; font-size:14px; color:rgba(255,255,255,0.88);">주문 조회</div>
-        <div style="display:flex; align-items:center; height:42px; padding:0 20px 0 32px; cursor:pointer; font-size:14px; color:rgba(255,255,255,0.88);">리포트 조회</div>
-        <div style="display:flex; align-items:center; height:42px; padding:0 20px 0 32px; cursor:pointer; font-size:14px; color:rgba(255,255,255,0.88);">물류비 청구서</div>
-        <div style="display:flex; align-items:center; gap:6px; height:42px; padding:0 20px 0 32px; cursor:pointer; font-size:14px; color:rgba(255,255,255,0.88);">권한 관리
-        </div>
-      </div>
-      </sc-if>
-      <div style="height:24px;"></div>
-    </aside>
+    
 
     <!-- ───────── CONTENT ───────── -->
     <main style="flex:1; min-width:0; display:flex; flex-direction:column;">
