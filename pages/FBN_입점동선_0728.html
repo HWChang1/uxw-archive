@@ -7,11 +7,14 @@
 :root{--brand:#00b84f;--lnk:#1a6dd6;--fg:rgba(0,0,0,.84);--fg2:rgba(0,0,0,.56);--fg3:rgba(0,0,0,.38);--bg:#f7f8fa;--bg2:#f0f1f5;--bd2:rgba(0,0,0,.07);--ff:'Pretendard Variable',-apple-system,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;letter-spacing:-.25px;-webkit-font-smoothing:antialiased}
-.topbar{position:sticky;top:0;z-index:300}
 .rev-bar{background:#1a1a2e;color:#fff;padding:32px 20px;display:flex;align-items:center;gap:12px}
 .rev-title{font-size:20px;font-weight:700}.rev-sub{font-size:11px;color:rgba(255,255,255,.42);margin-top:12px}
 .rev-meta{margin-left:auto}.chg-badge{background:rgba(0,184,79,.16);border:1px solid rgba(0,184,79,.5);border-radius:6px;padding:6px 13px;font-size:12px;color:#fff}.chg-badge b{color:#00e676;margin-left:3px}
-.tab-bar{background:#fff;border-bottom:1px solid var(--bd2);padding:0 20px;display:flex;gap:26px;overflow-x:auto}
+/* 탭바만 상단 고정 — 헤더(rev-bar)는 스크롤과 함께 사라지고, 그때 변경 내역 배지가 탭바에 도킹 */
+.tab-bar{background:#fff;border-bottom:1px solid var(--bd2);padding:0 20px;display:flex;gap:26px;overflow-x:auto;position:sticky;top:0;z-index:300}
+.tab-chg{display:none;align-items:center;margin-left:auto;align-self:center;font-size:11.5px;font-weight:700;color:#0a7a3c;background:rgba(0,184,79,.1);border:1px solid rgba(0,184,79,.4);border-radius:6px;padding:4px 10px;white-space:nowrap}
+.tab-chg b{margin-left:4px}
+.tab-bar.stuck .tab-chg{display:inline-flex}
 .tab-item{padding:12px 0;font-size:13px;font-weight:600;color:var(--fg3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
 .tab-item.active{color:var(--brand);border-bottom-color:var(--brand)}
 .pane{display:none}.pane.active{display:block}
@@ -101,15 +104,14 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
 <body>
 <nav class="lnb" id="lnb"></nav>
 <div id="page-content">
-  <div class="topbar">
-    <div class="rev-bar"><div><div class="rev-title">N배송 FBN 9월 입점 동선</div>
-      <div class="rev-sub">2026.07.28 · N배송플랫폼기획 · 26'09 정식 출시 — 질의서·물류사 온보딩 삭제, 신청 4단계 간소화</div></div>
-      <div class="rev-meta"><span class="chg-badge">📋 변경 내역 <b>25</b></span></div></div>
-    <div class="tab-bar">
-      <div class="tab-item active" onclick="tab('tone')">배경 &amp; 변경내역</div>
-      <div class="tab-item" onclick="tab('apply')">1. 신청하기</div>
-      <div class="tab-item" onclick="tab('noti')">2. 알림</div>
-    </div>
+  <div class="rev-bar"><div><div class="rev-title">N배송 FBN 9월 입점 동선</div>
+    <div class="rev-sub">2026.07.28 · N배송플랫폼기획 · 26'09 정식 출시 — 질의서·물류사 온보딩 삭제, 신청 4단계 간소화</div></div>
+    <div class="rev-meta"><span class="chg-badge">📋 변경 내역 <b>25</b></span></div></div>
+  <div class="tab-bar">
+    <div class="tab-item active" onclick="tab('tone')">배경 &amp; 변경내역</div>
+    <div class="tab-item" onclick="tab('apply')">1. 신청하기</div>
+    <div class="tab-item" onclick="tab('noti')">2. 알림</div>
+    <span class="tab-chg">📋 변경 내역 <b>25</b></span>
   </div>
   
 <div id="p-tone" class="pane active"><div class="content">
@@ -272,6 +274,12 @@ function setVm(m){var s=document.getElementById('wfshell');if(!s)return;s.classL
 (function(){var tip=document.getElementById('why-tip'),b=document.getElementById('why-tip-body');
 document.addEventListener('mouseover',function(e){var el=e.target.closest('[data-why]');if(!el||!el.dataset.why)return;b.textContent=el.dataset.why;tip.style.display='block';var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,left=Math.max(8,Math.min(r.left+r.width/2-tw/2,window.innerWidth-tw-8)),top=r.top-th-10;if(top<8)top=r.bottom+10;tip.style.left=left+'px';tip.style.top=top+'px';});
 document.addEventListener('mouseout',function(e){if(e.target.closest('[data-why]'))tip.style.display='none';});})();
+(function(){var tb=document.querySelector('.tab-bar'),rb=document.querySelector('.rev-bar');
+if(!tb||!rb)return;
+function u(){tb.classList.toggle('stuck',rb.getBoundingClientRect().bottom<=0);}
+window.addEventListener('scroll',u,{passive:true});
+document.addEventListener('scroll',u,{passive:true,capture:true});
+window.addEventListener('resize',u);setInterval(u,350);u();})();
 </script>
 <script src="../assets/shell.js?v=3"></script>
 <script>(async function(){try{var d=await loadDocs();renderLNB({active:'FBN_입점동선_0728',docs:d});var pc=document.getElementById('page-content'),l=document.getElementById('lnb');function u(){pc.style.marginLeft=l.classList.contains('collapsed')?'48px':'240px';}u();new MutationObserver(u).observe(l,{attributes:true,attributeFilter:['class']});}catch(e){}})();</script>
