@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N배송 FBN 9월 입점 동선</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net/" crossorigin>
+<link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--brand:#00b84f;--lnk:#1a6dd6;--fg:rgba(0,0,0,.84);--fg2:rgba(0,0,0,.56);--fg3:rgba(0,0,0,.38);--bg:#f7f8fa;--bg2:#f0f1f5;--bd2:rgba(0,0,0,.07);--ff:'Pretendard Variable',-apple-system,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;letter-spacing:-.25px;-webkit-font-smoothing:antialiased}
+.topbar{position:sticky;top:0;z-index:300}
+.rev-bar{background:#1a1a2e;color:#fff;padding:32px 20px;display:flex;align-items:center;gap:12px}
+.rev-title{font-size:20px;font-weight:700}.rev-sub{font-size:11px;color:rgba(255,255,255,.42);margin-top:12px}
+.rev-meta{margin-left:auto}.chg-badge{background:rgba(0,184,79,.16);border:1px solid rgba(0,184,79,.5);border-radius:6px;padding:6px 13px;font-size:12px;color:#fff}.chg-badge b{color:#00e676;margin-left:3px}
+.tab-bar{background:#fff;border-bottom:1px solid var(--bd2);padding:0 20px;display:flex;gap:26px;overflow-x:auto}
+.tab-item{padding:12px 0;font-size:13px;font-weight:600;color:var(--fg3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tab-item.active{color:var(--brand);border-bottom-color:var(--brand)}
+.pane{display:none}.pane.active{display:block}
+.content{padding:24px 28px 80px;max-width:1080px;margin:0 auto}
+.sec-head{margin-bottom:18px}.sec-title{font-size:18px;font-weight:700}
+.tone-box{background:#fff;border:1px solid var(--bd2);border-radius:8px;padding:16px 18px;margin-bottom:14px}
+.tone-h{font-weight:700;font-size:14px;margin-bottom:10px}
+details.acc{padding:0}details.acc>summary{cursor:pointer;padding:14px 18px;list-style:none;display:flex;align-items:center;font-weight:700;font-size:14px}
+details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::after{content:'\25be';margin-left:auto;color:var(--fg3);font-size:11px}
+.acc-body{padding:2px 18px 16px}
+.bg-block{margin-bottom:13px}.bg-block:last-child{margin-bottom:0}
+.bg-label{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;color:#0a7a3c;background:rgba(0,184,79,.1);border-radius:4px;padding:2px 8px;margin-bottom:6px}
+.bg-block p,.bg-block ul{font-size:12.5px;line-height:1.7;color:var(--fg2);margin:0}.bg-block ul{margin-left:18px}
+.kc-h{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;flex-wrap:wrap;gap:2px}
+.kc-num{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.72);color:#fff;font-size:11px;font-weight:700;margin-right:7px;flex-shrink:0}
+.kc-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;color:var(--fg2);background:var(--bg2);border-radius:4px;padding:2px 8px;margin-right:8px}
+.kc-as{text-decoration:line-through;color:var(--fg3);font-weight:600}.kc-to{color:var(--brand);font-weight:800}
+.kc-body{padding-left:26px;margin-bottom:2px}
+.kc-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;font-size:12.5px;line-height:1.65}
+.kc-k{flex-shrink:0;width:56px;color:var(--fg3);font-weight:700;font-size:11.5px}.kc-v{color:var(--fg2);flex:1;min-width:0}
+.kc-divider{border-top:1px solid var(--bd2);margin:16px 0}
+.kc-goto{color:var(--lnk);font-weight:700;cursor:pointer;text-decoration:none;border-bottom:1px solid rgba(26,109,214,.4)}
+.kc-flash{animation:kcflash 1.9s ease-out}
+@keyframes kcflash{0%,20%{outline:3px solid var(--brand);outline-offset:3px}100%{outline:3px solid transparent;outline-offset:3px}}
+.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.opt-card{border:1px solid var(--bd2);border-radius:8px;padding:14px}
+.opt-card.rec{border:2px solid var(--brand);background:rgba(0,184,79,.03)}
+.opt-t{font-size:13px;font-weight:700;margin-bottom:6px}.opt-t .rec-b{font-size:10px;color:#fff;background:var(--brand);border-radius:4px;padding:2px 6px;margin-left:6px}
+.opt-card ul{margin:0 0 0 16px;font-size:12px;color:var(--fg2);line-height:1.7}
+/* ── 재현 화면 래퍼 ── */
+.wf{background:#fff;border:1px solid var(--bd2);border-radius:10px;padding:8px 4px;margin-bottom:18px;overflow-x:auto}
+.wf-cap{font-size:11px;color:var(--fg3);margin:0 0 8px 4px}
+.scif{position:relative}
+.scif[data-state]:not([data-state=""])::before{content:attr(data-state);position:absolute;top:-8px;right:4px;font-size:8.5px;font-weight:700;color:#8a6d00;background:#fff6db;border:1px solid #eedc9a;border-radius:4px;padding:0 5px;z-index:5;white-space:nowrap;line-height:1.6;opacity:.92;pointer-events:none}
+/* ── ASIS/TOBE 마킹 ── */
+.uxw{display:inline-flex;flex-direction:column;align-items:flex-start;gap:2px;vertical-align:top;max-width:100%}
+.uxw-a{font-size:.92em;color:rgba(0,0,0,.32);text-decoration:line-through}
+.uxw-t{font-weight:600;color:rgba(0,0,0,.84);background:rgba(0,184,79,.18);border-radius:4px;padding:1px 5px;line-height:1.55;cursor:help}
+.uxw-del{font-weight:700;color:#c22;background:#fdecec;border-radius:4px;padding:1px 6px;cursor:help}
+.uxw-n{display:inline-flex;align-items:center;justify-content:center;min-width:15px;height:15px;border-radius:50%;background:var(--brand);color:#fff;font-size:9.5px;font-weight:700;margin-right:5px;vertical-align:1px}
+.uxw-del .uxw-n{background:#c22}
+.uxw-delcard{border:1.5px dashed #d99;border-radius:10px;margin-bottom:16px;overflow:hidden}
+.uxw-delcard-h{background:#fdecec;color:#a11;font-size:12px;font-weight:600;padding:9px 13px;line-height:1.6}
+.uxw-delcard-b{opacity:.55;position:relative;padding:6px}
+.uxw-delcard-b::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent 0 14px,rgba(200,40,40,.05) 14px 18px);pointer-events:none}
+.why-tip{position:fixed;z-index:99999;background:rgba(14,16,26,.95);color:rgba(255,255,255,.92);font-size:12px;line-height:1.65;padding:9px 13px;border-radius:9px;max-width:280px;pointer-events:none;display:none;box-shadow:0 6px 24px rgba(0,0,0,.4)}
+.why-tip-label{display:block;font-size:10px;font-weight:700;color:rgba(0,220,120,.8);margin-bottom:4px}
+.note{background:var(--bg2);border-radius:8px;padding:10px 14px;font-size:11.5px;color:var(--fg2);line-height:1.6;margin-bottom:14px}
+/* ── 아카이브 LNB ── */
+.lnb{position:fixed;top:0;left:0;width:240px;background:#fff;border-right:1px solid rgba(0,0,0,0.12);display:flex;flex-direction:column;height:100vh;transition:width .2s ease;z-index:400;overflow:hidden}
+.lnb.collapsed{width:48px}
+.lnb-head{padding:20px 18px 14px;border-bottom:1px solid rgba(0,0,0,0.08);flex-shrink:0;display:flex;flex-direction:column}
+.lnb-head-top{display:flex;align-items:center;justify-content:space-between}
+.lnb-title{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:700;color:#00b84f;cursor:pointer;text-decoration:none;overflow:hidden;white-space:nowrap}
+.lnb-title-mark{font-size:16px;flex-shrink:0}.lnb-title-text{overflow:hidden;text-overflow:ellipsis;transition:opacity .15s}
+.lnb.collapsed .lnb-title-text{opacity:0;width:0}
+.lnb-toggle{width:24px;height:24px;border-radius:4px;border:1px solid rgba(0,0,0,0.12);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(0,0,0,0.38);flex-shrink:0}
+.lnb-toggle:hover{background:#f7f8fa}
+.lnb-scroll{flex:1;overflow-y:auto;overflow-x:hidden;padding:8px 0 24px}
+.lnb-section-label{font-size:11px;font-weight:600;color:rgba(0,0,0,0.38);letter-spacing:.4px;padding:14px 18px 6px;white-space:nowrap;transition:opacity .15s}
+.lnb.collapsed .lnb-section-label{opacity:0;pointer-events:none}
+.lnb-item{display:flex;align-items:center;gap:8px;padding:8px 18px;font-size:13px;color:rgba(0,0,0,0.56);cursor:pointer;text-decoration:none;border-left:2px solid transparent;transition:background .12s,color .12s}
+.lnb.collapsed .lnb-item{padding:8px 0;justify-content:center;border-left:none}
+.lnb-item:hover{background:#f7f8fa}
+.lnb-item.active{background:rgba(0,184,79,0.07);color:rgba(0,0,0,0.81);font-weight:600;border-left-color:#00b84f}
+.lnb-item-label{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:opacity .15s}
+.lnb.collapsed .lnb-item-label{opacity:0;width:0;flex:0}
+.lnb-item-icon{font-size:14px;flex-shrink:0}
+.lnb-item-date{font-size:10px;font-weight:400;color:rgba(0,0,0,0.32);white-space:nowrap;margin-left:auto;margin-right:4px;transition:opacity .15s}
+.lnb.collapsed .lnb-item-date{display:none}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block}
+.status-dot.검토중{background:#f5b400}.status-dot.반영완료{background:#00b84f}.status-dot.반영거부{background:#f42428}.status-dot.대기중{background:#c4c8d0}
+#page-content{margin-left:240px;transition:margin-left .2s ease}
+</style></head>
+<body>
+<nav class="lnb" id="lnb"></nav>
+<div id="page-content">
+  <div class="topbar">
+    <div class="rev-bar"><div><div class="rev-title">N배송 FBN 9월 입점 동선</div>
+      <div class="rev-sub">2026.07.28 · N배송플랫폼기획 · 26'09 정식 출시 — 질의서·물류사 온보딩 삭제, 신청 4단계 간소화</div></div>
+      <div class="rev-meta"><span class="chg-badge">📋 변경 내역 <b>16</b></span></div></div>
+    <div class="tab-bar">
+      <div class="tab-item active" onclick="tab('tone')">배경 &amp; 변경내역</div>
+      <div class="tab-item" onclick="tab('apply')">1. 신청하기</div>
+      <div class="tab-item" onclick="tab('noti')">2. 알림</div>
+    </div>
+  </div>
+  
+<div id="p-tone" class="pane active"><div class="content">
+  <div class="sec-head"><div class="sec-title">배경 &amp; 변경 내역</div></div>
+  <details class="tone-box acc"><summary>🗂 배경</summary><div class="acc-body">
+    <div class="bg-block"><span class="bg-label">Problem</span><p>7/8 베타의 신청 동선에 <b>중복 신청 과정</b>(커머스솔루션 추가+신청정보 입력, 질의서+입고신청), <b>분산된 설정</b>(상품·SKU 등록 ↔ 풀필먼트·배송속성), <b>물류사 시스템 이탈 경험</b>이 남아 있어 신청→첫 판매 리드타임이 평균 33.4일(7/1 기준).</p></div>
+    <div class="bg-block"><span class="bg-label">Current</span><p>9월 정식 출시에서 <b>질의서 단계 삭제</b>(초도입고 SKU를 신청 단계에서 등록) + <b>물류사 온보딩 삭제</b>(시스템 자동가입)로 5단계→4단계(신청 → 물류사 연동 → 입고 준비 → 판매 개시) 간소화. KPI: 리드타임 16일 목표.</p></div>
+    <div class="bg-block"><span class="bg-label">Hypothesis</span><p>단계가 줄어든 대신 <b>신청 1단계의 정보 부담</b>(최초 입고 SKU)과 <b>선행 조건(상품·SKU 등록)의 비가시성</b>이 새 병목이 된다 — 선행 조건을 동선 위에 노출하고, 단계별 안내를 실제 행동(무엇을 어디서)으로 구체화하면 이탈 없이 완주 가능.</p></div>
+  </div></details>
+
+  <div class="tone-box"><div class="tone-h" style="margin-bottom:24px">📐 구조 제안 — 상품·SKU 등록을 어디에 둘 것인가</div>
+    <p style="font-size:12.5px;color:var(--fg2);line-height:1.7;margin-bottom:4px">최초 입고 SKU '불러오기'는 <b>SKU 필수정보 입력 + 연결상품 1개 이상</b>이 선행돼야 작동하지만, 현재 4단계 어디에도 이 선행 작업이 보이지 않는다. 두 가지 대안:</p>
+    <div class="opt-grid">
+      <div class="opt-card"><div class="opt-t">ⓐ Step 1에 '상품·SKU 준비' 명시(5단계화 or 1단계 분할)</div>
+        <ul><li>선행 조건이 구조적으로 드러남 — 발견성 최상</li><li>스텝 수 증가 → 심리적 부담↑ (기획 우려와 동일)</li><li>이미 등록을 마친 판매자에겐 불필요한 단계</li></ul></div>
+      <div class="opt-card rec"><div class="opt-t">ⓑ 4단계 유지 + Step 1 내부에서 해결 <span class="rec-b">권장</span></div>
+        <ul><li>최초 입고 SKU 영역 상단에 <b>선행 조건 배너</b>(상품·SKU 등록 여부에 따라 분기)</li><li>미등록 판매자의 empty state에 <b>상품 등록·SKU 등록 CTA</b> 직결</li><li>스텝 부담 없이 카피·분기로 발견성 보완 — 등록 완료 판매자는 방해받지 않음</li></ul></div>
+    </div>
+    <p style="font-size:11.5px;color:var(--fg3);margin-top:10px">※ ⓑ 기준으로 신청하기 탭에 마킹했고, ⓐ 채택 시 스텝퍼 구조 변경안을 별도 제안 가능.</p>
+  </div>
+
+  <div class="tone-box"><div class="tone-h" style="margin-bottom:32px">📌 핵심 변경 <span style="font-size:12px;font-weight:500;color:var(--fg2)">· 안내문구 · 워딩 · 구조</span></div>
+    <div class="kc-h"><span class="kc-num">1</span><span class="kc-tag">안내문구</span><span class="kc-ch"><span class="kc-as">자동으로 상품 판매가 시작됩니다</span> → <span class="kc-to">상품 조회/수정에서 풀필먼트 '설정함'·배송속성 'N배송' 설정</span></span></div>
+    <div class="kc-body">
+      <div class="kc-row"><span class="kc-k">변경 이유</span><div class="kc-v">판매개시 <b>수동 확정</b>(기획 확인) — 자동 안내 전면 정정, 판매자가 켜야 할 2가지 설정과 메뉴 경로를 정확히 명시</div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><a class="kc-goto" onclick="goTab('apply','mk-manual')">신청하기 · SKU 안내 ›</a></div></div>
+    </div>
+    <div class="kc-divider"></div>
+    <div class="kc-h"><span class="kc-num">2</span><span class="kc-tag">구조</span><span class="kc-ch"><span class="kc-as">불러오기 안내 단일 문구</span> → <span class="kc-to">등록 여부 분기 + 상품·SKU 등록 CTA</span></span></div>
+    <div class="kc-body">
+      <div class="kc-row"><span class="kc-k">변경 이유</span><div class="kc-v">신규 판매자는 불러올 SKU가 없음 — 선행 조건(상품·SKU 등록)을 동선 안에서 해결(구조 제안 ⓑ)</div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><a class="kc-goto" onclick="goTab('apply','mk-empty')">신청하기 · 최초 입고 SKU ›</a></div></div>
+    </div>
+    <div class="kc-divider"></div>
+    <div class="kc-h"><span class="kc-num">3</span><span class="kc-tag">안내문구</span><span class="kc-ch"><span class="kc-as">물류사 선정 및 연동</span> → <span class="kc-to">선정·연동 + 물류사가 연락드릴 수 있음 안내</span></span></div>
+    <div class="kc-body">
+      <div class="kc-row"><span class="kc-k">변경 이유</span><div class="kc-v">선정 후 물류사가 판매자에게 연락해 연동하는 실제 프로세스 반영 — 연락 예고로 스팸 오인·누락 방지</div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><a class="kc-goto" onclick="goTab('apply','mk-step2')">신청하기 · 2단계 설명 ›</a></div></div>
+    </div>
+    <div class="kc-divider"></div>
+    <div class="kc-h"><span class="kc-num">4</span><span class="kc-tag">워딩</span><span class="kc-ch"><span class="kc-as">(최대 30개) · 1안(자동 개시) · 가입 심사 단계</span> → <span class="kc-to">999개(확정 스펙) · 1안 삭제 · 폐기 표현 정리</span></span></div>
+    <div class="kc-body">
+      <div class="kc-row"><span class="kc-k">변경 이유</span><div class="kc-v">확정 스펙·폐기 스펙 기준으로 잔존 구버전 수치와 표현 일괄 정정</div></div>
+      <div class="kc-row"><span class="kc-k">변경 위치</span><div class="kc-v"><a class="kc-goto" onclick="goTab('noti','mk-done1')">신청하기·알림 전반 ›</a></div></div>
+    </div>
+  </div>
+
+  <div class="note">오픈 질문(위키 게재): ① '연동 물류사'(알림) vs '선정 물류사'(화면) 명칭 통일 — 스텝명 기준 '연동' 권장 ② 톡톡·광고성 수신 동의 법무 검토 결과 ③ 입고 리마인드 발송 주기(3·7·14일) 카피 차등 여부</div>
+</div></div>
+  
+<div id="p-apply" class="pane"><div class="content">
+  <div class="sec-head"><div class="sec-title">신청하기 <span style="font-size:11px;color:var(--fg3);font-weight:400">N배송 › N배송 FBN › 신청하기 — wireframe 원본 스타일 재현 · 변경만 마킹</span></div></div>
+  <div class="note">노란 칩은 wireframe의 <b>상태 분기</b>(단계·등록 여부별로 노출이 달라지는 블록) 표시입니다. 회색 취소선=ASIS, 초록=TOBE 제안(호버 시 변경 이유).</div>
+  <div class="wf"><div id="mk-step2"></div><div id="mk-manual"></div><div id="mk-empty"></div><div style="flex:1; overflow-y:auto; padding:20px 28px 28px;">
+
+          <!-- 가입절차 -->
+          <section style="background:#fff; border:1px solid #dcdcdc; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 28px; border-bottom:1px solid #eee;">
+              <span style="font-size:16px; font-weight:700; color:rgba(0,0,0,0.85);">N배송 FBN 신청 과정</span>
+              <div style="display:flex; gap:8px;">
+                <button style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; font-size:13px; color:rgba(0,0,0,0.69); background:#fff; border:1px solid rgba(0,0,0,0.15); cursor:pointer;"><span style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:5px; background:#03c75a; color:#fff; font-size:10px; font-weight:800;">N</span>문의하기</button>
+                <button style="display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; font-size:13px; color:rgba(0,0,0,0.69); background:#fff; border:1px solid rgba(0,0,0,0.15); cursor:pointer;">ⓘ 시작 가이드</button>
+              </div>
+            </div>
+            <div style="display:flex; align-items:stretch; padding:30px 24px;">
+              <!-- step 1 -->
+              <div style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center; padding:18px 14px; border-radius:10px; cursor:pointer; box-sizing:border-box; border:#00b84f; background:rgba(0,184,79,.05);">
+                <div style="font-size:13px; margin-bottom:14px; font-weight:700; color:#191919;">Step 01</div>
+                <div style="width:56px; height:56px; margin-bottom:14px; display:flex; align-items:center; justify-content:center;"><svg width="46" height="46" fill="none"><rect x="12" y="6" width="22" height="30" rx="3" fill="#dfe3ea"></rect><rect x="12" y="6" width="22" height="30" rx="3" stroke="#9aa3af" stroke-width="0.5"></rect><path d="M17 14h12M17 19h12M17 24h7" stroke="#fff" stroke-width="2" stroke-linecap="round"></path><path d="M30 30l8-8 4 4-8 8-5 1z" fill="#03c75a"></path></svg></div>
+                <div style="display:flex; align-items:center; gap:4px; font-size:15px; font-weight:700; color:rgba(0,0,0,0.82); margin-bottom:8px;">N배송 FBN 신청 <span style="color:rgba(0,0,0,0.3); font-size:12px;">ⓘ</span></div>
+                <div style="font-size:13px; line-height:19px; color:rgba(0,0,0,0.53);">커머스솔루션 추가 후<br>판매자 정보 및 최초 입고 SKU 정보 입력</div>
+                <div class="scif" data-state="1단계(신청) 상태"><div style="margin-top:10px; font-size:12px; font-weight:700; color:#03c75a;">진행 중</div></div>
+              </div>
+              <div style="display:flex; align-items:center; color:rgba(0,0,0,0.2); font-size:20px;">›</div>
+              <!-- step 2 -->
+              <div style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center; padding:18px 14px; border-radius:10px; cursor:pointer; box-sizing:border-box; border:#e5e5e5; background:#fff;">
+                <div style="font-size:13px; margin-bottom:14px; font-weight:500; color:#8f8f8f;">Step 02</div>
+                <div style="width:56px; height:56px; margin-bottom:14px; display:flex; align-items:center; justify-content:center;"><svg width="46" height="46" fill="none"><rect x="8" y="14" width="32" height="22" rx="3" fill="#03c75a"></rect><path d="M8 17a3 3 0 013-3h26a3 3 0 013 3v3H8z" fill="#02a94c"></path><text x="24" y="31" text-anchor="middle" font-size="14" font-weight="800" fill="#fff" font-family="Pretendard Variable">N</text><path d="M14 11l3-3 3 3" stroke="#9aa3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+                <div style="display:flex; align-items:center; gap:4px; font-size:15px; font-weight:700; color:rgba(0,0,0,0.82); margin-bottom:8px;">물류사 연동 <span style="color:rgba(0,0,0,0.3); font-size:12px;">ⓘ</span></div>
+                <div style="font-size:13px; line-height:19px; color:rgba(0,0,0,0.53);"><span class="uxw"><span class="uxw-a">물류사 선정 및 연동</span><span class="uxw-t" data-why="선정 후 물류사가 판매자에게 연락해 시스템 연동을 진행하는 실제 프로세스 반영 — 연락이 온다는 걸 미리 알려 스팸 오인·누락 방지"><b class="uxw-n">1</b>물류사 선정·시스템 연동 — 선정된 물류사가 연동을 위해 연락드릴 수 있어요</span></span></div>
+                <div class="scif" data-state="2단계(물류사 연동) 상태"><div style="margin-top:10px; font-size:12px; font-weight:700; color:#03c75a;">진행 중</div></div>
+                <div class="scif" data-state="2단계 비활성"><div style="margin-top:10px; display:inline-flex; align-items:center; padding:5px 11px; background:#eef0f2; border-radius:6px; font-size:12px; color:rgba(0,0,0,0.55);">최대 7영업일 내 선정 예정</div></div>
+              </div>
+              <div style="display:flex; align-items:center; color:rgba(0,0,0,0.2); font-size:20px;">›</div>
+              <!-- step 3 -->
+              <div style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center; padding:18px 14px; border-radius:10px; cursor:pointer; box-sizing:border-box; border:#e5e5e5; background:#fff;">
+                <div style="font-size:13px; margin-bottom:14px; font-weight:500; color:#8f8f8f;">Step 03</div>
+                <div style="width:56px; height:56px; margin-bottom:14px; display:flex; align-items:center; justify-content:center;"><svg width="46" height="46" fill="none"><path d="M8 18l16-8 16 8-16 8z" fill="#03c75a"></path><path d="M8 18v14l16 8V26z" fill="#dfe3ea"></path><path d="M40 18v14l-16 8V26z" fill="#c4cad3"></path><rect x="20" y="30" width="8" height="6" rx="1" fill="#fff"></rect></svg></div>
+                <div style="display:flex; align-items:center; gap:4px; font-size:15px; font-weight:700; color:rgba(0,0,0,0.82); margin-bottom:8px;">입고 준비 <span style="color:rgba(0,0,0,0.3); font-size:12px;">ⓘ</span></div>
+                <div style="font-size:13px; line-height:19px; color:rgba(0,0,0,0.53);">물류사 선정 알림 수신 후<br>상품 입고</div>
+                <div class="scif" data-state="3단계(입고 준비) 상태"><div style="margin-top:10px; font-size:12px; font-weight:700; color:#03c75a;">진행 중</div></div>
+              </div>
+              <div style="display:flex; align-items:center; color:rgba(0,0,0,0.2); font-size:20px;">›</div>
+              <!-- step 4 -->
+              <div style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center; padding:18px 14px; border-radius:10px; cursor:pointer; box-sizing:border-box; border:#e5e5e5; background:#fff;">
+                <div style="font-size:13px; margin-bottom:14px; font-weight:500; color:#8f8f8f;">Step 04</div>
+                <div style="width:56px; height:56px; margin-bottom:14px; display:flex; align-items:center; justify-content:center;"><svg width="46" height="46" fill="none"><circle cx="24" cy="24" r="18" fill="#03c75a"></circle><path d="M16 24.5l5 5 11-11" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+                <div style="display:flex; align-items:center; gap:4px; font-size:15px; font-weight:700; color:rgba(0,0,0,0.82); margin-bottom:8px;">판매 개시 <span style="color:rgba(0,0,0,0.3); font-size:12px;">ⓘ</span></div>
+                <div style="font-size:13px; line-height:19px; color:rgba(0,0,0,0.53);">입고 완료 알림 수신 후<br><span class="uxw"><span class="uxw-a">풀필먼트 및 배송속성 설정</span><span class="uxw-t" data-why="판매개시 = 수동 확정(기획 확인) — 무엇을 어디서 켜야 하는지 메뉴·설정값 명시"><b class="uxw-n">2</b>상품 조회/수정에서 풀필먼트 '설정함'·배송속성 'N배송' 설정</span></span></div>
+                <div class="scif" data-state="4단계(판매 개시) 상태"><div style="margin-top:10px; font-size:12px; font-weight:700; color:#03c75a;">진행 중</div></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- N배송 FBN 물류사 정보 -->
+          <div class="scif" data-state="물류사 선정 후">
+          <section style="background:#fff; border:1px solid #dcdcdc; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:6px; padding:18px 28px; border-bottom:1px solid #eee;"><span style="font-size:16px; font-weight:700; color:rgba(0,0,0,0.85);">물류사 정보</span><span style="color:rgba(0,0,0,0.3);">ⓘ</span></div>
+            <div class="scif" data-state="선정 상태 변형 A">
+            <div style="padding:16px 28px; background:#f8f9fd; border-bottom:1px solid #eee;">
+              <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.53);">· 신청일자: 2026년 7월 1일<br>· 신청 정보를 입력하고 신청하면 물류사 선정이 진행됩니다. 물류사는 추후 운영 과정에서 변경될 수 있습니다.</div>
+            </div>
+            <div style="display:flex; align-items:center; padding:18px 28px;">
+              <div style="width:150px; flex-shrink:0; font-size:13px; font-weight:600; color:rgba(0,0,0,0.81);">선정 물류사</div>
+              <span style="font-size:13px; color:rgba(0,0,0,0.4);">물류사가 선정되면 노출됩니다.</span>
+            </div>
+            </div>
+            <div class="scif" data-state="선정 상태 변형 B">
+            <div style="padding:16px 28px; background:#f8f9fd; border-bottom:1px solid #eee;">
+              <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.53);">· 신청일자: 2026년 7월 1일<br>· 신청 정보를 바탕으로 배정된 물류사입니다. 물류사는 추후 운영 과정에서 변경될 수 있습니다.</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:14px; padding:18px 28px;">
+              <div style="width:150px; flex-shrink:0; font-size:13px; font-weight:600; color:rgba(0,0,0,0.81);">선정 물류사</div>
+              <span style="font-size:13px; font-weight:600; color:rgba(0,0,0,0.81);">넥스트마일(컬리), 아르고(ARGO)</span>
+            </div>
+            </div>
+          </section>
+          </div>
+
+                    <!-- 물류센터 상품 유형 정보 -->
+          <section style="background:#fff; border:1px solid #dcdcdc; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 28px; border-bottom:1px solid #eee;">
+              <div style="display:flex; align-items:center; gap:6px;"><span style="font-size:16px; font-weight:700; color:rgba(0,0,0,0.85);">최초 입고 SKU 정보</span><span style="width:5px; height:5px; border-radius:999px; background:#e7676a;"></span><span style="color:rgba(0,0,0,0.3);">ⓘ</span></div>
+              <div style="display:flex; gap:8px;">
+                <div class="scif" data-state="1단계(신청) 상태">
+                <button style="display:inline-flex; align-items:center; gap:5px; height:36px; padding:0 16px; font-size:13px; font-weight:600; color:#fff; background:#03c75a; border:none; cursor:pointer;">불러오기</button>
+                </div>
+                <div class="scif" data-state="2단계(물류사 연동) 상태">
+                <span style="display:inline-flex; align-items:center; gap:5px; height:36px; padding:0 14px; font-size:13px; font-weight:600; color:#029f48; background:#e9fff2; border:1px solid #9ce8bd; border-radius:6px;"><svg width="14" height="14" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#029f48" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>저장 완료</span>
+                </div>
+                <div class="scif" data-state="3단계(입고 준비) 상태">
+                <button style="display:inline-flex; align-items:center; gap:4px; height:36px; padding:0 18px; font-size:13px; font-weight:700; color:#fff; background:#03c75a; border:none; border-radius:6px; cursor:pointer;">입고하기 ›</button>
+                </div>
+                <div class="scif" data-state="4단계(판매 개시) 상태">
+                <span style="display:inline-flex; align-items:center; gap:5px; height:36px; padding:0 14px; font-size:13px; font-weight:600; color:#029f48; background:#e9fff2; border:1px solid #9ce8bd; border-radius:6px;"><svg width="14" height="14" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#029f48" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>입고완료</span>
+                </div>
+              </div>
+            </div>
+            <div style="padding:18px 28px; background:#f8f9fd; border-bottom:1px solid #eee;">
+              <div class="scif" data-state="1단계 노출">
+              <div>
+              <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· N배송 FBN으로 최초 입고를 진행할 SKU 정보를 등록해주세요.</div>
+              <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· 최초 입고 SKU 정보는 <span style="color:#e7676a; font-weight:700;">신청서 제출 이후 수정이 불가능</span>합니다.</div>
+              <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· N배송 FBN으로 SKU를 입고하기 위해서는 SKU에 상품이 반드시 연결되어 있어야 합니다. 자세한 내용은 &nbsp;<span style="color: rgb(3, 199, 90); font-weight: 700; text-decoration: underline; cursor: pointer;">상품/SKU 등록 가이드</span>를 확인해 주세요.</div>
+              
+              
+              </div>
+              </div>
+              <div class="scif" data-state="2단계(물류사 연동) 상태">
+              <div>
+              <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· N배송 FBN으로 최초 입고를 진행할 SKU 정보가 등록되었습니다.</div>
+              <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· 최초 입고 대상으로 등록한 SKU는 물류사가 선정된 후 입고하실 수 있습니다.</div>
+              <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· 미리 <span style="color:#03c75a; font-weight:700; text-decoration:underline; cursor:pointer;">입고 가이드</span>를 확인하고, 입고를 준비해보세요.</div>
+              </div>
+              </div>
+              <div class="scif" data-state="3단계(입고 준비) 상태">
+              <div>
+              <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· N배송 FBN으로 최초 입고를 진행할 SKU 정보가 등록되었습니다.</div>
+              <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· 최초 입고 대상으로 등록한 SKU를 지금 입고하실 수 있습니다. 입고하기 버튼을 클릭해주세요.</div>
+              <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· 입고 방식 및 수량은 입고하기 버튼을 눌러, 입고 신청 상세 화면에서 변경하실 수 있습니다.</div>
+              <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· 미리 <span style="color:#03c75a; font-weight:700; text-decoration:underline; cursor:pointer;">입고 가이드</span>를 확인하고, 입고를 준비해보세요.</div>
+              </div>
+              </div>
+              <div class="scif" data-state="4단계(판매 개시) 상태">
+              <div>
+              <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· N배송 FBN으로 판매할 SKU 입고가 완료되었습니다.</div>
+              <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· <span class="uxw"><span class="uxw-a">최초 입고 SKU가 물류센터에 도착하면, 자동으로 상품 판매가 시작됩니다.</span><span class="uxw-t" data-why="판매개시 자동→수동 확정(기획 확인) — 판매자가 직접 켜야 하는 2가지 설정과 정확한 메뉴 경로 명시"><b class="uxw-n">3</b>최초 입고가 완료되면 <b>[상품관리 &gt; 상품 조회/수정]</b>에서 풀필먼트를 <b>'설정함'</b>으로, 배송속성을 <b>'N배송'</b>으로 설정해주세요. 설정을 마치면 판매가 시작됩니다.</span></span></div>
+              </div>
+              </div>
+            </div>
+            <div style="padding:20px 28px;">
+              <div style="border:1px solid #dcdcdc; overflow-x:auto;">
+                <div style="display:flex; min-width:1620px; background:#f8f9fd; border-bottom:1px solid #eee; font-size:12px; font-weight:600; color:rgba(0,0,0,0.69);">
+                  <div style="flex:1.3; padding:12px 14px; text-align:center;">SKU ID</div>
+                  <div style="flex:1.6; padding:12px 14px; text-align:center;">SKU명</div>
+                  <div style="flex:1.4; padding:12px 14px; text-align:center;">바코드</div>
+                  <div style="flex:0.8; padding:12px 14px; text-align:center;">보관온도</div>
+                  <div style="flex:1.1; padding:12px 14px; text-align:center;">소비기한 관리여부</div>
+                  <div style="flex:1.1; padding:12px 14px; text-align:center;">로트번호 관리여부</div>
+                  <div style="flex:1.3; padding:12px 14px; text-align:center;">보관 사이즈<br><span style="font-size:11px; font-weight:400; color:rgba(0,0,0,0.4);">(가로x세로x높이 cm, 무게kg)</span></div>
+                  <div style="flex:0.8; padding:12px 14px; text-align:center;">연결상품수</div>
+                  <div style="flex:1; padding:12px 14px; text-align:center;">등록일시</div>
+                  <div style="flex:1.2; padding:12px 14px; text-align:center;">입고 방식</div>
+                  <div style="flex:1.2; padding:12px 14px; text-align:center;">수량</div>
+                  <div style="width:44px; flex-shrink:0; padding:12px 8px;"></div>
+                </div>
+                <div class="scif" data-state="1단계 노출">
+                <div class="scif" data-state="SKU 등록 후">
+                <div>
+                  <div>
+                    <div style="display:flex; min-width:1620px; align-items:center; border-top:1px solid #f4f4f4;">
+                      <div style="flex:1.3; padding:14px 14px; text-align:center; font-size:13px; color:#2680eb; font-weight:600;"></div>
+                      <div style="flex:1.6; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.81);"></div>
+                      <div style="flex:1.4; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);"></div>
+                      <div style="flex:0.8; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);"></div>
+                      <div style="flex:1.1; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);"></div>
+                      <div style="flex:1.1; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);"></div>
+                      <div style="flex:1.3; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);"></div>
+                      <div style="flex:0.8; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);"></div>
+                      <div style="flex:1; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);"></div>
+                      <div style="flex:1.2; padding:8px 14px;"><span><option value="">선택</option><option>박스</option><option>팔레트</option><option>팔레트(혼적)</option></span></div>
+                      <div style="flex:1.2; padding:8px 14px;"><div style="display:flex; align-items:center; justify-content:center; gap:6px;"><input value="" type="number" min="1" placeholder="0" style="width:70px; height:36px; padding:0 10px; border:1px solid rgba(0,0,0,0.12); font-family:inherit; font-size:13px; text-align:right; box-sizing:border-box; outline:none;"><span style="font-size:12px; font-weight:600; color:rgba(0,0,0,0.6); min-width:28px;"></span></div></div>
+                      <div style="width:44px; flex-shrink:0; padding:8px; display:flex; justify-content:center;"><span style="cursor:pointer; display:inline-flex;"><svg width="18" height="18" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="rgba(0,0,0,0.4)" stroke-width="2" stroke-linecap="round"></path></svg></span></div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="scif" data-state="SKU 등록 전">
+                <div style="display:flex; align-items:center; justify-content:center; padding:40px 0; border-top:1px solid #f4f4f4; font-size:13px; color:rgba(0,0,0,0.4);"><span class="uxw"><span class="uxw-a">‘불러오기’ 버튼을 통해 입고할 상품을 추가해주세요.</span><span class="uxw-t" data-why="신규 판매자는 불러올 SKU가 없어 빈 목록을 만남 — 미등록 상태 분기와 선행 등록 경로(CTA) 제공"><b class="uxw-n">4</b>등록된 상품·SKU가 있다면 [불러오기]로 추가해주세요. 아직 없다면 <b>상품 등록 ›</b>과 <b>SKU 등록 ›</b>을 먼저 진행해주세요.</span></span></div>
+                </div>
+                </div>
+                <div class="scif" data-state="제출 후(수정 불가)">
+                <div style="display:flex; min-width:1620px; align-items:center; border-top:1px solid #f4f4f4; background:#fafbfc;">
+                  <div style="flex:1.3; padding:14px 14px; text-align:center; font-size:13px; color:#2680eb; font-weight:600;">NS1vLuF35yLu1B</div>
+                  <div style="flex:1.6; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.81);">네이버 그리니 로션 300ml</div>
+                  <div style="flex:1.4; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">N17636270534358</div>
+                  <div style="flex:0.8; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">냉장</div>
+                  <div style="flex:1.1; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">관리함</div>
+                  <div style="flex:1.1; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">관리함</div>
+                  <div style="flex:1.3; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">8x8x18, 0.6</div>
+                  <div style="flex:0.8; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">1개</div>
+                  <div style="flex:1; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">2025-11-20</div>
+                  <div style="flex:1.2; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">박스</div>
+                  <div style="flex:1.2; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.81);">50 <span style="font-size:12px; color:rgba(0,0,0,0.6);">BOX</span></div>
+                  <div style="width:44px; flex-shrink:0; padding:8px;"></div>
+                </div>
+                <div style="display:flex; min-width:1620px; align-items:center; border-top:1px solid #f4f4f4; background:#fafbfc;">
+                  <div style="flex:1.3; padding:14px 14px; text-align:center; font-size:13px; color:#2680eb; font-weight:600;">NS1vpzZjz8Fbqi</div>
+                  <div style="flex:1.6; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.81);">아지뷰 목베개 블랙</div>
+                  <div style="flex:1.4; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">N17691557962729</div>
+                  <div style="flex:0.8; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">상온</div>
+                  <div style="flex:1.1; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">관리안함</div>
+                  <div style="flex:1.1; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">관리안함</div>
+                  <div style="flex:1.3; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">30x30x10, 3</div>
+                  <div style="flex:0.8; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">1개</div>
+                  <div style="flex:1; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">2026-02-11</div>
+                  <div style="flex:1.2; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">박스</div>
+                  <div style="flex:1.2; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.81);">30 <span style="font-size:12px; color:rgba(0,0,0,0.6);">BOX</span></div>
+                  <div style="width:44px; flex-shrink:0; padding:8px;"></div>
+                </div>
+                <div style="display:flex; min-width:1620px; align-items:center; border-top:1px solid #f4f4f4; background:#fafbfc;">
+                  <div style="flex:1.3; padding:14px 14px; text-align:center; font-size:13px; color:#2680eb; font-weight:600;">NS1vLuH8C3ulEK</div>
+                  <div style="flex:1.6; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.81);">아지뷰 목베개 화이트</div>
+                  <div style="flex:1.4; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">N17691557962730</div>
+                  <div style="flex:0.8; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">상온</div>
+                  <div style="flex:1.1; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">관리안함</div>
+                  <div style="flex:1.1; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">관리안함</div>
+                  <div style="flex:1.3; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">30x30x10, 3</div>
+                  <div style="flex:0.8; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">1개</div>
+                  <div style="flex:1; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">2026-02-11</div>
+                  <div style="flex:1.2; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.69);">팔레트</div>
+                  <div style="flex:1.2; padding:14px 14px; text-align:center; font-size:13px; color:rgba(0,0,0,0.81);">2 <span style="font-size:12px; color:rgba(0,0,0,0.6);">PLT</span></div>
+                  <div style="width:44px; flex-shrink:0; padding:8px;"></div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 매니저 정보 -->
+          <section style="background:#fff; border:1px solid #dcdcdc; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 28px; border-bottom:1px solid #eee;">
+              <div style="display:flex; align-items:center; gap:6px;"><span style="font-size:16px; font-weight:700; color:rgba(0,0,0,0.85);">매니저 정보</span><span style="width:5px; height:5px; border-radius:999px; background:#e7676a;"></span></div>
+              <button style="display:inline-flex; align-items:center; gap:4px; height:34px; padding:0 14px; font-size:13px; color:rgba(0,0,0,0.69); background:#fff; border:1px solid rgba(0,0,0,0.15); cursor:pointer;">매니저 관리 바로가기 ›</button>
+            </div>
+            <div style="padding:16px 28px; background:#f8f9fd; border-bottom:1px solid #eee; display:flex; flex-direction:column; gap:5px;">
+              <div style="font-size:12px; line-height:18px; color:#e7676a;">· 매니저 정보는 신청서 제출 후에도 수정 가능합니다.</div>
+              <div style="font-size:12px; line-height:18px; color:rgba(0,0,0,0.53);">· <span class="uxw"><span class="uxw-a">물류 운영 매니저: N배송 FBN 가입 심사 단계 혹은 운영 과정에서 자세한 현황 파악을 위해 네이버 및 물류사 담당자가 연락을 드릴 수 있습니다.</span><span class="uxw-t" data-why="9월 스펙에서 '가입(계정) 심사' 단계가 제거됨 — 폐기 단계 표현 정리 + 운영 역할 중심 서술"><b class="uxw-n">5</b>물류 운영 매니저: 신청 검토와 입고·출고 등 물류 운영 현황 확인이 필요할 때 네이버·물류사 담당자가 연락드릴 수 있습니다.</span></span></div>
+              <div style="font-size:12px; line-height:18px; color:rgba(0,0,0,0.53);">· 물류비 정산 매니저: N배송 FBN 물류비 정산 과정에서 이슈 발생 시 네이버 담당자가 연락을 드릴 수 있습니다. 세금계산서 수기 발행 시 해당 이메일 주소로 내용이 발송됩니다.</div>
+              <div style="font-size:12px; line-height:18px; color:rgba(0,0,0,0.53);">· <span class="uxw"><span class="uxw-a">물류 CS 매니저: N배송 FBN 가입 심사 단계 혹은 운영 과정에서 자세한 현황 파악을 위해 네이버 및 물류사 담당자가 연락을 드릴 수 있습니다.</span><span class="uxw-t" data-why="운영 매니저와 동일 문구 복붙 상태 — 역할(CS 이슈 대응)에 맞게 차별화"><b class="uxw-n">6</b>물류 CS 매니저: 입고·배송·반품 등 물류 CS 이슈가 생겼을 때 네이버·물류사 담당자가 연락드릴 수 있습니다.</span></span></div>
+            </div>
+            <div style="padding:0 28px;">
+              <div style="display:flex; align-items:center; padding:18px 0; border-bottom:1px solid #f4f4f4;">
+                <div style="width:150px; flex-shrink:0; font-size:13px; font-weight:600; color:rgba(0,0,0,0.81);">물류 운영 매니저 <span style="display:inline-block; width:4px; height:4px; border-radius:999px; background:#e7676a; vertical-align:middle;"></span></div>
+                <div style="flex:1; display:flex; align-items:center; gap:12px; flex-wrap:wrap; font-size:13px; color:rgba(0,0,0,0.69);">
+                  <span>이름: <strong style="font-weight:600; color:rgba(0,0,0,0.81);">판매**********02</strong></span>
+                  <span style="width:1px; height:12px; background:#dcdcdc;"></span>
+                  <span>이메일주소: <strong style="font-weight:600; color:rgba(0,0,0,0.81);">se********@test.com</strong></span>
+                  <span style="width:1px; height:12px; background:#dcdcdc;"></span>
+                  <span>휴대폰번호:</span>
+                  <button style="height:32px; padding:0 12px; font-size:12px; color:rgba(0,0,0,0.69); background:#fff; border:1px solid rgba(0,0,0,0.15); cursor:pointer;">매니저 변경하기</button>
+                </div>
+              </div>
+              <div style="display:flex; align-items:center; padding:18px 0; border-bottom:1px solid #f4f4f4;">
+                <div style="width:150px; flex-shrink:0; font-size:13px; font-weight:600; color:rgba(0,0,0,0.81);">물류비 정산 매니저 <span style="display:inline-block; width:4px; height:4px; border-radius:999px; background:#e7676a; vertical-align:middle;"></span></div>
+                <div style="flex:1; display:flex; align-items:center; gap:10px; font-size:13px; color:rgba(0,0,0,0.69);">
+                  <span style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; background:#03c75a;"><svg width="13" height="13" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+                  <span>물류 운영 매니저와 동일</span>
+                  <button style="height:32px; padding:0 12px; font-size:12px; color:rgba(0,0,0,0.69); background:#fff; border:1px solid rgba(0,0,0,0.15); cursor:pointer;">매니저 변경하기</button>
+                </div>
+              </div>
+              <div style="display:flex; align-items:center; padding:18px 0;">
+                <div style="width:150px; flex-shrink:0; font-size:13px; font-weight:600; color:rgba(0,0,0,0.81);">물류 CS 매니저 <span style="display:inline-block; width:4px; height:4px; border-radius:999px; background:#e7676a; vertical-align:middle;"></span></div>
+                <div style="flex:1; display:flex; align-items:center; gap:10px; font-size:13px; color:rgba(0,0,0,0.69);">
+                  <span style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; background:#03c75a;"><svg width="13" height="13" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+                  <span>물류 운영 매니저와 동일</span>
+                  <button style="height:32px; padding:0 12px; font-size:12px; color:rgba(0,0,0,0.69); background:#fff; border:1px solid rgba(0,0,0,0.15); cursor:pointer;">매니저 변경하기</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 반출/회송지 정보 -->
+          <section style="background:#fff; border:1px solid #dcdcdc; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:6px; padding:18px 28px; border-bottom:1px solid #eee;"><span style="font-size:16px; font-weight:700; color:rgba(0,0,0,0.85);">반출/회송지 정보</span><span style="width:5px; height:5px; border-radius:999px; background:#e7676a;"></span></div>
+            <div style="padding:18px 28px 22px;">
+              <div style="display:flex; align-items:center; gap:6px; margin-bottom:12px;"><span style="font-size:14px; font-weight:700; color:rgba(0,0,0,0.81);">자동반출 주소 설정</span><span style="display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; border-radius:999px; background:#eef0f2; color:rgba(0,0,0,0.45); font-size:11px; font-weight:700;">?</span></div>
+              <div style="padding:14px 18px; background:#f8f9fd; border:1px solid #eee; margin-bottom:14px;">
+                <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· 네이버배송 주문 건 중, 교환 또는 반품으로 입고된 SKU 중 재판매가 불가한 SKU 중 선택적으로 자동반출 기능을 제공합니다.</div>
+                <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· <span style="color:#2680eb; cursor:pointer;">N배송 재고관리 &gt; SKU 정보</span>에서 SKU 별로 자동반출 여부를 선택할 수 있습니다.</div>
+              </div>
+              <div style="display:flex; align-items:center; padding:10px 0;">
+                <div style="width:150px; flex-shrink:0; font-size:13px; font-weight:600; color:rgba(0,0,0,0.81);">자동 반출지 <span style="color:#e7676a;">*</span></div>
+                <div style="display:flex; align-items:center; gap:16px;">
+                  <div><div style="font-size:13px; font-weight:700; color:#2680eb;">반출지</div><div style="margin-top:2px; font-size:13px; color:#2680eb;">서울특별시 서대문구 신촌로 291 (AK빌딩) 신촌 (우: 03745)</div></div>
+                  <button style="height:36px; padding:0 16px; font-size:13px; font-weight:600; color:#fff; background:#576772; border:none; border-radius:4px; cursor:pointer; flex-shrink:0;">판매자 주소록</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 제공 동의 및 유의사항 -->
+          <section style="background:#fff; border:1px solid #dcdcdc; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:6px; padding:18px 28px; border-bottom:1px solid #eee;"><span style="font-size:16px; font-weight:700; color:rgba(0,0,0,0.85);">제공 동의 및 유의사항</span><span style="width:5px; height:5px; border-radius:999px; background:#e7676a;"></span></div>
+            <div style="padding:22px 28px;">
+              <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.69); margin-bottom:8px;">네이버(주)는 물류연계 특화서비스(N배송 FBN)를 제공하기 위해 물류(풀필먼트)사에 입력한 정보를 제공합니다.<br>정보 제공 동의 철회를 희망하실 경우 <span style="color:#2680eb; text-decoration:underline; cursor:pointer;">스마트스토어센터 &gt; 솔루션목록</span>에서 N배송 FBN 솔루션 ‘해지하기’를 눌러주세요.</div>
+              <div style="font-size:13px; color:rgba(0,0,0,0.53); margin-bottom:18px; cursor:pointer;">개인정보 수집 및 이용 안내 ›</div>
+              <div style="display:flex; align-items:center; gap:10px; padding:16px 0; border-top:1px solid #eee; cursor:pointer;">
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; box-sizing:border-box; border:1px solid ; background:;"><svg width="13" height="13" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+                <span style="font-size:15px; font-weight:700; color:rgba(0,0,0,0.81);">아래 <span style="color:#03c75a;">모든 사항</span>의 내용을 모두 확인하였고 동의합니다.</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:10px; padding:14px 0; border-top:1px solid #eee; cursor:pointer;">
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; box-sizing:border-box; border:1px solid ; background:;"><svg width="13" height="13" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+                <span style="font-size:14px; font-weight:700; color:rgba(0,0,0,0.78);">아래 <span style="color:#03c75a;">필수사항</span>의 내용을 모두 확인하였고 동의합니다.</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; padding:11px 0; border-top:1px solid #f4f4f4;">
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; box-sizing:border-box; cursor:pointer; border:1px solid ; background:;"><svg width="11" height="11" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+                <span style="font-size:13px; color:rgba(0,0,0,0.6);">(필수) 개인정보 제3자 제공에 동의합니다.</span>
+                <span style="font-size:12px; color:rgba(0,0,0,0.4); cursor:pointer;">내용보기 ›</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; padding:11px 0;">
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; box-sizing:border-box; cursor:pointer; border:1px solid ; background:;"><svg width="11" height="11" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+                <span style="font-size:13px; color:rgba(0,0,0,0.6);">(필수) 판매자정보 제3자 제공에 동의합니다.</span>
+                <span style="font-size:12px; color:rgba(0,0,0,0.4); cursor:pointer;">내용보기 ›</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; padding:11px 0;">
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; box-sizing:border-box; cursor:pointer; border:1px solid ; background:;"><svg width="11" height="11" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+                <span style="font-size:13px; color:rgba(0,0,0,0.6);">(필수) 반출 서비스 이용을 위한 정책 및 유의사항에 동의합니다.</span>
+                <span style="font-size:12px; color:rgba(0,0,0,0.4); cursor:pointer;">내용보기 ›</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; padding:11px 0;">
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; box-sizing:border-box; cursor:pointer; border:1px solid ; background:;"><svg width="11" height="11" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+                <span style="font-size:13px; color:rgba(0,0,0,0.6);">(선택) N배송 FBN 전용 톡톡 알림 수신에 동의합니다.</span>
+                <span style="font-size:12px; color:rgba(0,0,0,0.4); cursor:pointer;">내용보기 ›</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; padding:11px 0;">
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; box-sizing:border-box; cursor:pointer; border:1px solid ; background:;"><svg width="11" height="11" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+                <span style="font-size:13px; color:rgba(0,0,0,0.6);">(선택) N배송 FBN 광고성 정보 제공 수신에 동의합니다.</span>
+                <span style="font-size:12px; color:rgba(0,0,0,0.4); cursor:pointer;">내용보기 ›</span>
+              </div>
+            </div>
+          </section>
+        </div></div>
+  <div class="wf-cap">▼ 불러오기 모달 (최초 입고 SKU › 불러오기 클릭 시)</div>
+  <div class="wf" id="mk-modal"><div style="position:relative; width:980px; max-width:100%; max-height:calc(100vh - 80px); background:#fff; display:flex; flex-direction:column; box-shadow:0 16px 56px rgba(0,0,0,0.4);">
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 22px; border-bottom:1px solid #eee; flex-shrink:0;">
+        <span style="font-size:17px; font-weight:700; color:rgba(0,0,0,0.85);">입고 가능 SKU 목록</span>
+        <span style="cursor:pointer; display:inline-flex;"><svg width="22" height="22" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="rgba(0,0,0,0.5)" stroke-width="2" stroke-linecap="round"></path></svg></span>
+      </div>
+
+      <div style="padding:18px 22px; background:#f2faf5; border-bottom:1px solid #d6eede; flex-shrink:0;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;"><span style="display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px;"><svg width="18" height="18" fill="none"><circle cx="12" cy="12" r="9" stroke="#03c75a" stroke-width="1.8"></circle><path d="M12 11v5" stroke="#03c75a" stroke-width="2" stroke-linecap="round"></path><circle cx="12" cy="7.6" r="1.1" fill="#03c75a"></circle></svg></span><span style="font-size:15px; font-weight:800; color:rgba(0,0,0,0.85);">상품 &amp; SKU 연결 가이드</span><span style="display:inline-flex; align-items:center; gap:4px; height:28px; padding:0 14px; font-size:13px; font-weight:700; color:#03c75a; background:#fff; border:1.5px solid #03c75a; border-radius:6px; cursor:pointer; box-shadow:0 2px 6px rgba(3,199,90,0.18);">바로가기 ›</span></div>
+        <div style="font-size:13px; line-height:22px; color:rgba(0,0,0,0.66); margin-bottom:4px;">· N배송 FBN으로 첫 입고를 하기 위해서는 <strong style="font-weight:700; color:rgba(0,0,0,0.85);">(1) 상품과 SKU를 등록</strong>하고 <strong style="font-weight:700; color:rgba(0,0,0,0.85);">(2) SKU 상세 정보를 입력</strong>해주셔야 합니다.</div>
+        <div style="font-size:13px; line-height:22px; color:rgba(0,0,0,0.66);">· SKU 필수 정보가 입력되지 않은 경우 입고가 제한됩니다. SKU를 입고하기 위해서는 <span style="color:#03c75a; font-weight:700; text-decoration:underline; cursor:pointer;">SKU·재고 메뉴</span>에서 정보를 입력해주세요.</div>
+      </div>
+      <div style="padding:16px 22px; border-bottom:1px solid #eee; flex-shrink:0;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="display:flex; flex-direction:column; gap:8px; flex-shrink:0;">
+            <span style="display:inline-flex; align-items:center; gap:6px; font-size:13px; color:rgba(0,0,0,0.81); cursor:pointer;"><span style="width:16px; height:16px; border-radius:999px; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; border:1px solid ; background:;"><span style="width:6px; height:6px; border-radius:999px; background:#fff; opacity:;"></span></span>SKU ID</span>
+            <span style="display:inline-flex; align-items:center; gap:6px; font-size:13px; color:rgba(0,0,0,0.81); cursor:pointer;"><span style="width:16px; height:16px; border-radius:999px; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; border:1px solid ; background:;"><span style="width:6px; height:6px; border-radius:999px; background:#fff; opacity:;"></span></span>SKU 명</span>
+          </div>
+          <div style="display:flex; align-items:center; flex:1; height:44px; border:1px solid rgba(0,0,0,0.12); background:#fff;">
+            <input placeholder="복수 검색 시 enter &amp; ','(쉼표)로 구분" style="flex:1; height:100%; padding:0 14px; border:none; font-family:inherit; font-size:13px; box-sizing:border-box; outline:none;">
+            <button style="width:46px; height:100%; display:flex; align-items:center; justify-content:center; background:#fff; border:none; border-left:1px solid rgba(0,0,0,0.08); cursor:pointer;"><svg width="18" height="18" fill="none"><circle cx="11" cy="11" r="7" stroke="rgba(0,0,0,0.55)" stroke-width="2"></circle><path d="M20 20l-3.5-3.5" stroke="rgba(0,0,0,0.55)" stroke-width="2" stroke-linecap="round"></path></svg></button>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:flex-end; padding:14px 22px 12px; flex-shrink:0;">
+        <span style="font-size:13px; color:rgba(0,0,0,0.53);"><strong style="color:#03c75a;">2</strong>개 선택됨 <span style="color:rgba(0,0,0,0.4);"><span class="uxw"><span class="uxw-a">(최대 30개)</span><span class="uxw-t" data-why="기획 확정 스펙 = 최대 SKU 999개(사업팀 확인 완료) — 30개는 구버전 수치"><b class="uxw-n">7</b>(최대 999개)</span></span></span></span>
+      </div>
+      <div style="flex:1; overflow:auto;"><div style="flex:1; overflow-y:auto;">
+        <div style="min-width:1360px;"><div style="display:flex; align-items:center; background:#f8f9fd; border-bottom:1px solid #eee; font-size:12px; font-weight:600; color:rgba(0,0,0,0.69); position:sticky; top:0;">
+          <div style="width:46px; flex-shrink:0; padding:12px;"></div>
+          <div style="flex:1.3; padding:12px;">SKU ID</div>
+          <div style="flex:1.7; padding:12px;">SKU 명</div>
+          <div style="flex:1.4; padding:12px;">바코드</div>
+          <div style="flex:0.9; padding:12px; text-align:center;">보관온도</div>
+          <div style="flex:1.1; padding:12px; text-align:center;">소비기한 관리여부</div>
+          <div style="flex:1.1; padding:12px; text-align:center;">로트번호 관리여부</div>
+          <div style="flex:1.3; padding:12px; text-align:center;">보관 사이즈<br><span style="font-size:11px; font-weight:400; color:rgba(0,0,0,0.4);">(가로x세로x높이 cm, 무게kg)</span></div>
+          <div style="flex:0.9; padding:12px; text-align:center;">연결상품수</div>
+          <div style="flex:1; padding:12px; text-align:center;">등록일시</div>
+        </div>
+        <div>
+          <div style="display:flex; align-items:center; font-size:13px; color:rgba(0,0,0,0.81); border-bottom:1px solid #f4f4f4; cursor:pointer; background:;">
+            <div style="width:46px; flex-shrink:0; padding:14px 12px; display:flex; justify-content:center;"><span style="width:18px; height:18px; border-radius:999px; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; border:1px solid ; background:;"><span style="width:7px; height:7px; border-radius:999px; background:#fff; opacity:;"></span></span></div>
+            <div style="flex:1.3; padding:14px 12px; color:#2680eb; font-weight:600;"></div>
+            <div style="flex:1.7; padding:14px 12px; font-weight:600;"></div>
+            <div style="flex:1.4; padding:14px 12px; color:rgba(0,0,0,0.69);"></div>
+            <div style="flex:0.8; padding:14px 12px; text-align:center; color:rgba(0,0,0,0.69);"></div>
+            <div style="flex:1.1; padding:14px 12px; text-align:center; color:rgba(0,0,0,0.69);"></div>
+            <div style="flex:1.1; padding:14px 12px; text-align:center; color:rgba(0,0,0,0.69);"></div>
+            <div style="flex:1.3; padding:14px 12px; text-align:center; color:rgba(0,0,0,0.69);"></div>
+            <div style="flex:0.9; padding:14px 12px; text-align:center; color:rgba(0,0,0,0.69);"></div>
+            <div style="flex:1; padding:14px 12px; text-align:center; color:rgba(0,0,0,0.69);"></div>
+          </div>
+        </div></div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:center; gap:8px; padding:14px 20px; border-top:1px solid #dcdcdc; flex-shrink:0;">
+        <button style="height:42px; padding:0 28px; font-size:14px; color:rgba(0,0,0,0.69); background:#fff; border:1px solid rgba(0,0,0,0.2); cursor:pointer;">취소</button>
+        <button style="height:42px; padding:0 36px; font-size:14px; font-weight:600; color:#fff; background:#03c75a; border:none; cursor:pointer;">추가하기</button>
+      </div>
+    </div>
+  </div></div>
+  <div class="wf-cap">▼ 도움말 패널 — 구 질의서 FAQ (삭제 제안)</div>
+  <div id="mk-faq"><div class="uxw-delcard"><div class="uxw-delcard-h"><b class="uxw-n">16</b> 삭제 제안 — 질의서 단계 폐지로 안내 대상(월 평균 주문건수·포장 방식·박스 사이즈 입력) 자체가 소멸. 최초 입고 SKU 정보 기준의 새 도움말로 대체 필요</div><div class="uxw-delcard-b"><div style="flex:1; overflow-y:auto; padding:8px 26px 40px; border-top:1px solid #eee;">
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:20px 0 14px;">
+          <span style="font-size:16px; font-weight:800; color:rgba(0,0,0,0.85); line-height:1.5;">[N배송 FBN 신청] 물류센터 상품 유형 정보에는 어떤 항목을 입력해야 하나요?</span>
+          <svg width="20" height="20" fill="none" style="flex-shrink:0; margin-top:4px;"><path d="M6 15l6-6 6 6" stroke="rgba(0,0,0,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <div style="font-size:14px; line-height:24px; color:rgba(0,0,0,0.62);">물류센터 상품유형정보는 네이버에서 판매자님에게 가장 적합한 물류사를 선정하기 위해 필요한 정보들입니다.<br>해당 정보가 누락되었을 시, N배송 FBN 신청이 불가할 수 있으니 반드시 모든 정보를 입력해주세요!</div>
+        <div style="font-size:14px; line-height:24px; color:rgba(0,0,0,0.62); margin-top:18px;">필요 항목은 아래와 같습니다.</div>
+
+        <div style="font-size:14px; font-weight:800; color:rgba(0,0,0,0.85); margin-top:22px;">[STEP 1. 운영 기초 정보]</div>
+        <div style="font-size:14px; font-weight:700; color:rgba(0,0,0,0.82); margin-top:12px;">▶ 월 평균 주문건수</div>
+        <div style="font-size:14px; line-height:24px; color:rgba(0,0,0,0.62); margin-top:2px;">N배송 FBN으로 판매하실 상품들의 한 달 평균 주문 건수를 입력합니다.</div>
+        <div style="font-size:14px; line-height:24px; color:#029f48; font-weight:600; margin-top:2px;">예) A상품 1,000건 + B상품 500건 = 1,500건 입력</div>
+        <div style="font-size:14px; line-height:24px; color:#5566d6; margin-top:2px;">※ 물류사 배정의 핵심 기준이 되므로 최대한 정확하게 작성해 주세요.</div>
+
+        <div style="font-size:14px; font-weight:700; color:rgba(0,0,0,0.82); margin-top:18px;">▶ 포장 방식 비중 (합계 100%)</div>
+        <div style="font-size:14px; line-height:24px; color:rgba(0,0,0,0.62); margin-top:2px;"> - 단수: 입고된 박스에 송장만 붙여서 그대로 출고 (별도 포장 없음)<br> - 단포: 입고 박스에서 낱개 1개를 꺼내 새 박스에 포장하여 출고<br> - 합포: 여러 상품(SKU)을 한 박스에 함께 담아 출고</div>
+        <div style="font-size:14px; line-height:24px; color:#5566d6; margin-top:2px;">※ 세 가지 비중의 합이 반드시 100%가 되도록 작성해 주세요.</div>
+
+        <div style="font-size:14px; font-weight:700; color:rgba(0,0,0,0.82); margin-top:18px;">▶ 박스 사이즈 비중 (합계 100%)</div>
+        <div style="font-size:14px; line-height:24px; color:rgba(0,0,0,0.62); margin-top:2px;">출고되는 박스 크기 비율을 입력합니다. (세 변의 합 기준)<br> - 극소: ~80cm / ~2kg<br> - 소: ~100cm / ~5kg<br> - 중: ~120cm / ~10kg<br> - 대: ~140cm / ~15kg<br> - 특대: ~160cm / ~20kg</div>
+        <div style="font-size:14px; line-height:24px; color:#5566d6; margin-top:2px;">※ 세 가지 비중의 합이 반드시 100%가 되도록 작성해 주세요.</div>
+
+        <div style="font-size:14px; font-weight:800; color:rgba(0,0,0,0.85); margin-top:22px;">[STEP 2. 상품별(SKU) 정보]</div>
+        <div style="font-size:14px; font-weight:700; color:rgba(0,0,0,0.82); margin-top:12px;">▶ SKU명(옵션단위)</div>
+        <div style="font-size:14px; line-height:24px; color:rgba(0,0,0,0.62); margin-top:2px;">옵션별로 각각 한 줄씩 입력합니다.</div>
+        <div style="font-size:14px; line-height:24px; color:#029f48; font-weight:600; margin-top:2px;">예) '네이버 에센스 50ml', '네이버 에센스 100ml' → 2줄 입력</div>
+
+        <div style="font-size:14px; font-weight:700; color:rgba(0,0,0,0.82); margin-top:18px;">▶ 온도대</div>
+        <div style="font-size:14px; line-height:24px; color:rgba(0,0,0,0.62); margin-top:2px;">드롭박스에서 선택: 1.상온 / 2.저온(냉장) / 3.저온(냉동)</div>
+        <div style="font-size:14px; line-height:24px; color:#5566d6; margin-top:2px;">※ 냉장·냉동 상품은 반드시 파렛트 입고로 진행해야 합니다.</div>
+
+        <div style="font-size:14px; font-weight:700; color:rgba(0,0,0,0.82); margin-top:18px;">▶ 입고 형태</div>
+        <div style="font-size:14px; line-height:24px; color:rgba(0,0,0,0.62); margin-top:2px;">드롭박스에서 선택: 1.파렛트(PLT) / 2.파렛트(혼적) / 3.박스</div>
+        <div style="font-size:14px; line-height:24px; color:#5566d6; margin-top:2px;">※ 한 신청서 내 상품은 모두 같은 입고 형태여야 합니다. 혼용 불가합니다.</div>
+      </div></div></div></div>
+</div></div>
+  
+<div id="p-noti" class="pane"><div class="content">
+  <div class="sec-head"><div class="sec-title">알림 <span style="font-size:11px;color:var(--fg3);font-weight:400">스마트스토어센터 앱·이메일 알림 — 발송 순서대로</span></div></div>
+  <div class="wf-cap">① 신청 완료 (1회)</div><div class="wf"><div style="position:relative; background:#fff; border:1px solid #cdefd9; border-radius:6px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+            <span style="position:absolute; top:14px; right:14px; cursor:pointer;"><svg width="16" height="16" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="rgba(0,0,0,0.3)" stroke-width="2" stroke-linecap="round"></path></svg></span>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;"><span style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:999px; background:#03c75a; color:#fff; font-size:9px; font-weight:800;">N</span><span style="font-size:12px; color:rgba(0,0,0,0.5);">N배송 알림센터 · 2026.06.30</span></div>
+            <div style="font-size:14px; font-weight:700; color:rgba(0,0,0,0.85); margin-bottom:8px;">N배송 FBN 신청이 완료됐어요.</div>
+            <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.69);">신청 정보를 바탕으로 적합한 물류사를 선정 중입니다.<br><span class="uxw"><span class="uxw-a">물류사는 7영업일 내 선정될 예정이며,</span><span class="uxw-t" data-why="신청 화면 스텝퍼 표기 '최대 7영업일'과 통일 — '최대' 누락 시 7일을 확정 기한으로 오인"><b class="uxw-n">8</b>물류사는 최대 7영업일 내 선정될 예정이며,</span></span><br>물류사 선정이 완료되면 입고를 진행하실 수 있습니다.<br>신청 상태는 '신청하기' 메뉴에서 계속 확인 가능합니다.</div>
+            <div style="display:flex; gap:16px; margin-top:12px;">
+              <span style="font-size:13px; font-weight:700; color:#03c75a; border-bottom:1.5px solid #03c75a; cursor:pointer;">신청 현황 확인하기 ›</span>
+            </div>
+          </div></div>
+  <div class="wf-cap">② 물류사 계약 연동 완료 (1회)</div><div class="wf"><div style="position:relative; background:#fff; border:1px solid #cdefd9; border-radius:6px; padding:16px 16px 16px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+            <span style="position:absolute; top:14px; right:14px; cursor:pointer;"><svg width="16" height="16" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="rgba(0,0,0,0.3)" stroke-width="2" stroke-linecap="round"></path></svg></span>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;"><span style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:999px; background:#03c75a; color:#fff; font-size:9px; font-weight:800;">N</span><span style="font-size:12px; color:rgba(0,0,0,0.5);">N배송 알림센터 · 2026.06.30</span></div>
+            <div style="font-size:14px; font-weight:700; color:rgba(0,0,0,0.85); margin-bottom:8px;"><span class="uxw"><span class="uxw-a">N배송 FBN 입고를 진행해주세요.</span><span class="uxw-t" data-why="리마인드 알림과 타이틀 역할 분리: 이 알림의 핵심 사건(연동 완료)을 타이틀에 — 무엇이 바뀌어 입고가 가능해졌는지 전달"><b class="uxw-n">9</b>물류사 연동 완료 — 이제 최초 입고를 진행할 수 있어요</span></span></div>
+            <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.69);">이제 물류센터에 N배송 FBN 입고가 가능합니다.<br>- <span class="uxw"><span class="uxw-a">연동 물류사</span><span class="uxw-t" data-why="같은 대상을 알림은 '연동 물류사', 신청 화면은 '선정 물류사'로 다르게 부름 — 스텝명 '물류사 연동' 기준 통일 제안(오픈 질문)"><b class="uxw-n">10</b>연동 물류사 <span style="font-size:11px;color:#999">(화면 필드 ‘선정 물류사’와 명칭 통일 필요)</span></span></span> : CJ대한통운, 아르고<br>- 연동 일시 : 2026-06-30 15:30<br>- <span class="uxw"><span class="uxw-a">최초입고 상품명</span><span class="uxw-t" data-why="'최초 입고' 표기 통일(붙임 혼용 정리)"><b class="uxw-n">11</b>최초 입고 상품명</span></span> : 네이버 그리니 로션 500ml<br>- <span class="uxw"><span class="uxw-a">최초입고 수량</span><span class="uxw-t" data-why="'최초 입고' 표기 통일"><b class="uxw-n">12</b>최초 입고 수량</span></span> : 50BOX<br>등록한 상품을 바로 입고해보세요.</div>
+            <div style="display:flex; gap:16px; margin-top:12px;">
+              <span style="font-size:13px; font-weight:700; color:#03c75a; border-bottom:1.5px solid #03c75a; cursor:pointer;">입고 가이드 확인하기 ›</span>
+              <span style="font-size:13px; font-weight:700; color:#03c75a; border-bottom:1.5px solid #03c75a; cursor:pointer;">입고하러 가기 ›</span>
+            </div>
+            <div style="margin-top:10px; display:inline-flex; align-items:center; gap:5px; padding:5px 9px; background:#fff7e6; border:1px dashed #e0b34d; border-radius:5px; font-size:11px; line-height:15px; color:#9a6b00;">📌 클릭 시 신청하기 메뉴로 이동해, 물류사 선정 현황 및 입고 동선 제공</div>
+          </div></div>
+  <div class="wf-cap">③ 입고 리마인드 (연동 후 3·7·14일)</div><div class="wf"><div style="position:relative; background:#fff; border:1px solid #cdefd9; border-radius:6px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+            <span style="position:absolute; top:14px; right:14px; cursor:pointer;"><svg width="16" height="16" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="rgba(0,0,0,0.3)" stroke-width="2" stroke-linecap="round"></path></svg></span>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;"><span style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:999px; background:#03c75a; color:#fff; font-size:9px; font-weight:800;">N</span><span style="font-size:12px; color:rgba(0,0,0,0.5);">N배송 알림센터 · 2026.06.30</span></div>
+            <div style="font-size:14px; font-weight:700; color:rgba(0,0,0,0.85); margin-bottom:8px;">N배송 FBN 입고를 진행해주세요.</div>
+            <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.69);"><span class="uxw"><span class="uxw-a">N배송 FBN으로 첫 판매를 진행할 상품이 입고되지 않았어요.</span><span class="uxw-t" data-why="부정 결과 프레임(~않았어요) 대신 다음 행동+기대 결과 중심으로 — 리마인드의 목적은 행동 유도"><b class="uxw-n">13</b>최초 입고를 진행해주세요 — 입고가 끝나면 N배송 FBN 첫 판매를 시작할 수 있어요.</span></span><br>입고 가이드를 참고해 최초 입고 상품을 물류센터에 보내주세요.</div>
+            <div style="display:flex; gap:16px; margin-top:12px;">
+              <span style="font-size:13px; font-weight:700; color:#03c75a; border-bottom:1.5px solid #03c75a; cursor:pointer;">입고 가이드 확인하기 ›</span>
+              <span style="font-size:13px; font-weight:700; color:#03c75a; border-bottom:1.5px solid #03c75a; cursor:pointer;">입고하러 가기 ›</span>
+            </div>
+          </div></div>
+  <div class="wf-cap">④ 입고 완료 — 1안(자동 개시)</div><div id="mk-done1"><div class="uxw-delcard"><div class="uxw-delcard-h"><b class="uxw-n">14</b> 삭제 제안 — 판매개시 <b>수동</b> 확정(기획 확인)으로 자동 개시 안내(1안)는 폐기</div><div class="uxw-delcard-b"><div style="position:relative; background:#fff; border:1px solid #cdefd9; border-radius:6px; padding:16px 16px 16px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+            <span style="position:absolute; top:14px; right:14px; cursor:pointer;"><svg width="16" height="16" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="rgba(0,0,0,0.3)" stroke-width="2" stroke-linecap="round"></path></svg></span>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;"><span style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:999px; background:#03c75a; color:#fff; font-size:9px; font-weight:800;">N</span><span style="font-size:12px; color:rgba(0,0,0,0.5);">N배송 알림센터 · 2026.06.30</span></div>
+            <div style="font-size:14px; font-weight:700; color:rgba(0,0,0,0.85); margin-bottom:8px;">N배송 FBN 입고가 완료됐어요. <span style="display:inline-flex; align-items:center; padding:1px 7px; border-radius:4px; background:#eef0ff; color:#4d5cd9; font-size:11px; font-weight:700; vertical-align:middle;">1안</span></div>
+            <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.69);">아래 상품의 입고가 완료되었습니다.<br>- SKU명 : 네이버 그리니 로션 500ml 외 5건<br>- 입고일 : 2026-06-30 15:30<br>- 입고수량 : 100BOX<br>N배송으로 판매가 자동으로 시작됩니다. 상품을 확인하고, 지속적으로 재고를 관리해주세요.</div>
+            <div style="display:flex; gap:16px; margin-top:12px;">
+              <span style="font-size:13px; font-weight:700; color:#03c75a; border-bottom:1.5px solid #03c75a; cursor:pointer;">상품 확인하러 가기 ›</span>
+              <span style="font-size:13px; font-weight:700; color:#03c75a; border-bottom:1.5px solid #03c75a; cursor:pointer;">재고 관리하기 ›</span>
+            </div>
+          </div></div></div></div>
+  <div class="wf-cap">④ 입고 완료 — 2안(수동 개시) ✅ 채택</div><div class="wf"><div style="position:relative; background:#fff; border:1px solid #cdefd9; border-radius:6px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+            <span style="position:absolute; top:14px; right:14px; cursor:pointer;"><svg width="16" height="16" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="rgba(0,0,0,0.3)" stroke-width="2" stroke-linecap="round"></path></svg></span>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;"><span style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:999px; background:#03c75a; color:#fff; font-size:9px; font-weight:800;">N</span><span style="font-size:12px; color:rgba(0,0,0,0.5);">N배송 알림센터 · 2026.06.30</span></div>
+            <div style="font-size:14px; font-weight:700; color:rgba(0,0,0,0.85); margin-bottom:8px;">N배송 FBN 입고가 완료됐어요. <span style="display:inline-flex; align-items:center; padding:1px 7px; border-radius:4px; background:#eef0ff; color:#4d5cd9; font-size:11px; font-weight:700; vertical-align:middle;">2안</span></div>
+            <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.69);">아래 상품의 입고가 완료되었습니다.<br>- SKU명 : 네이버 그리니 로션 500ml 외 5건<br>- 입고일 : 2026-06-30 15:30<br>- 입고수량 : 100BOX<br><span class="uxw"><span class="uxw-a">해당 상품을 풀필먼트 '설정함' &amp; N배송 속성 'ON' 처리해 주세요.</span><span class="uxw-t" data-why="판매개시 조건 2가지를 정확한 메뉴 경로와 함께 명시 — '&' 기호·'처리' 표현 정리, 설정 후 결과(판매 시작)까지 서술"><b class="uxw-n">15</b><b>[상품관리 &gt; 상품 조회/수정]</b>에서 풀필먼트를 <b>'설정함'</b>으로, 배송속성을 <b>'N배송'</b>으로 설정하면 판매가 시작됩니다.</span></span></div>
+            <div style="display:flex; gap:16px; margin-top:12px;">
+              <span style="font-size:13px; font-weight:700; color:#03c75a; border-bottom:1.5px solid #03c75a; cursor:pointer;">판매 개시 가이드 바로가기 ›</span>
+              <span style="font-size:13px; font-weight:700; color:#03c75a; border-bottom:1.5px solid #03c75a; cursor:pointer;">상품 조회 목록 바로가기 ›</span>
+            </div>
+          </div></div>
+</div></div>
+</div>
+<div class="why-tip" id="why-tip"><span class="why-tip-label">✦ 변경 이유</span><span id="why-tip-body"></span></div>
+<script>
+function tab(n){document.querySelectorAll('.pane').forEach(function(p){p.classList.remove('active')});document.querySelectorAll('.tab-item').forEach(function(t){t.classList.remove('active')});var pane=document.getElementById('p-'+n);if(pane)pane.classList.add('active');document.querySelectorAll('.tab-item').forEach(function(t){if((t.getAttribute('onclick')||'').indexOf("'"+n+"'")>=0)t.classList.add('active')});window.scrollTo(0,0);}
+function goTab(n,anchor){tab(n);requestAnimationFrame(function(){var el=document.getElementById(anchor);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.remove('kc-flash');void el.offsetWidth;el.classList.add('kc-flash');setTimeout(function(){el.classList.remove('kc-flash');},1900);});}
+(function(){var tip=document.getElementById('why-tip'),b=document.getElementById('why-tip-body');
+document.addEventListener('mouseover',function(e){var el=e.target.closest('[data-why]');if(!el||!el.dataset.why)return;b.textContent=el.dataset.why;tip.style.display='block';var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,left=Math.max(8,Math.min(r.left+r.width/2-tw/2,window.innerWidth-tw-8)),top=r.top-th-10;if(top<8)top=r.bottom+10;tip.style.left=left+'px';tip.style.top=top+'px';});
+document.addEventListener('mouseout',function(e){if(e.target.closest('[data-why]'))tip.style.display='none';});})();
+</script>
+<script src="../assets/shell.js?v=3"></script>
+<script>(async function(){try{var d=await loadDocs();renderLNB({active:'FBN_입점동선_0728',docs:d});var pc=document.getElementById('page-content'),l=document.getElementById('lnb');function u(){pc.style.marginLeft=l.classList.contains('collapsed')?'48px':'240px';}u();new MutationObserver(u).observe(l,{attributes:true,attributeFilter:['class']});}catch(e){}})();</script>
+</body></html>
