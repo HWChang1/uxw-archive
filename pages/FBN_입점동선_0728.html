@@ -50,6 +50,12 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
 .wf-cap{font-size:11px;color:var(--fg3);margin:0 0 8px 4px}
 .scif{position:relative}
 .scif[data-state]:not([data-state=""])::before{content:attr(data-state);position:absolute;top:-8px;right:4px;font-size:8.5px;font-weight:700;color:#8a6d00;background:#fff6db;border:1px solid #eedc9a;border-radius:4px;padding:0 5px;z-index:5;white-space:nowrap;line-height:1.6;opacity:.92;pointer-events:none}
+/* 상태 모드: 기본 = 실제 화면(1단계·입력 전)만 — 원본과 동일한 정보 구성. 전체 펼침은 검수용 */
+.wfshell.mode-s1 .scif:not(.s1){display:none!important}
+.wfshell.mode-s1 .scif::before{display:none}
+.viewmode{display:flex;gap:8px;align-items:center;margin:0 20px 10px}
+.vm-btn{font-size:12px;font-weight:700;padding:6px 14px;border-radius:99px;border:1px solid var(--bd2);background:#fff;color:var(--fg2);cursor:pointer}
+.vm-btn.on{background:var(--brand);border-color:var(--brand);color:#fff}
 /* ── ASIS/TOBE 마킹 ── */
 .uxw{display:inline-flex;flex-direction:column;align-items:flex-start;gap:2px;vertical-align:top;max-width:100%}
 .uxw-a{font-size:.92em;color:rgba(0,0,0,.32);text-decoration:line-through}
@@ -153,9 +159,14 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
 </div></div>
   
 <div id="p-apply" class="pane"><div class="content content-full">
-  <div class="note" style="margin:0 20px 12px">스마트스토어센터 헤더·메뉴 포함 wireframe 원본 재현(문스톤). 노란 칩 = <b>상태 분기</b>(단계·등록 여부별 노출 변형). 회색 취소선=ASIS, 초록=TOBE 제안(호버 시 변경 이유).</div>
+  <div class="note" style="margin:0 20px 12px">스마트스토어센터 헤더·메뉴 포함 wireframe 원본 재현(문스톤). 회색 취소선=ASIS, 초록=TOBE 제안(호버 시 변경 이유). 기본 보기는 <b>실제 화면(1단계·입력 전)</b>과 동일한 정보 구성이며, 2~4단계 문구의 마킹까지 보려면 <b>전체 상태 펼침</b>으로 전환(노란 칩 = 상태 분기 라벨).</div>
+  <div class="viewmode">
+    <span style="font-size:12px;font-weight:700;color:var(--fg3)">보기</span>
+    <button class="vm-btn on" id="vmS1" onclick="setVm('s1')">실제 화면 (1단계 · 입력 전)</button>
+    <button class="vm-btn" id="vmAll" onclick="setVm('all')">전체 상태 펼침 (검수용)</button>
+  </div>
   <div id="mk-step2"></div><div id="mk-manual"></div><div id="mk-empty"></div>
-  <div class="wfshell"><div class="wfshell-inner" style="display:flex; flex-direction:column; min-width:1280px; background:#f1f4f6; font-family:'Pretendard Variable','Pretendard',system-ui,sans-serif; color:rgba(0,0,0,0.81); -webkit-font-smoothing:antialiased; font-size:16px; letter-spacing:normal; line-height:normal;"><header style="display:flex; align-items:center; justify-content:space-between; height:56px; padding:16px 20px; background:#292f38; flex-shrink:0;">
+  <div class="wfshell mode-s1" id="wfshell"><div class="wfshell-inner" style="display:flex; flex-direction:column; min-width:1280px; background:#f1f4f6; font-family:'Pretendard Variable','Pretendard',system-ui,sans-serif; color:rgba(0,0,0,0.81); -webkit-font-smoothing:antialiased; font-size:16px; letter-spacing:normal; line-height:normal;"><header style="display:flex; align-items:center; justify-content:space-between; height:56px; padding:16px 20px; background:#292f38; flex-shrink:0;">
     <div style="display:flex; align-items:center; gap:20px;">
       <div style="display:flex; align-items:center; gap:10px;">
         <div style="width:24px; height:24px; background:#03c75a; border-radius:5px; display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; font-size:15px;">N</div>
@@ -225,7 +236,7 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
         </div>
         <span style="display:inline-flex; transition:transform .15s; transform:;"><svg width="16" height="16" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
       </div>
-      <div class="scif nochip" data-state="">
+      <div class="scif nochip s1" data-state="">
       <div style="padding-bottom:8px;">
         <div style="padding:8px 20px 4px;"><span style="font-size:12px; font-weight:500; color:rgba(255,255,255,0.34);">N배송 FBN</span></div>
         <div style="display:flex; align-items:center; gap:6px; height:42px; padding:0 20px 0 32px; cursor:pointer; font-size:14px; font-weight:; color:; background:;">서비스 소개</div>
@@ -269,7 +280,7 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
                 <div style="width:56px; height:56px; margin-bottom:14px; display:flex; align-items:center; justify-content:center;"><svg width="46" height="46" fill="none"><rect x="12" y="6" width="22" height="30" rx="3" fill="#dfe3ea"></rect><rect x="12" y="6" width="22" height="30" rx="3" stroke="#9aa3af" stroke-width="0.5"></rect><path d="M17 14h12M17 19h12M17 24h7" stroke="#fff" stroke-width="2" stroke-linecap="round"></path><path d="M30 30l8-8 4 4-8 8-5 1z" fill="#03c75a"></path></svg></div>
                 <div style="display:flex; align-items:center; gap:4px; font-size:15px; font-weight:700; color:rgba(0,0,0,0.82); margin-bottom:8px;">N배송 FBN 신청 <span style="color:rgba(0,0,0,0.3); font-size:12px;">ⓘ</span></div>
                 <div style="font-size:13px; line-height:19px; color:rgba(0,0,0,0.53);">커머스솔루션 추가 후<br>판매자 정보 및 최초 입고 SKU 정보 입력</div>
-                <div class="scif" data-state="1단계(신청) 상태"><div style="margin-top:10px; font-size:12px; font-weight:700; color:#03c75a;">진행 중</div></div>
+                <div class="scif s1" data-state="1단계(신청) 상태"><div style="margin-top:10px; font-size:12px; font-weight:700; color:#03c75a;">진행 중</div></div>
               </div>
               <div style="display:flex; align-items:center; color:rgba(0,0,0,0.2); font-size:20px;">›</div>
               <!-- step 2 -->
@@ -279,7 +290,7 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
                 <div style="display:flex; align-items:center; gap:4px; font-size:15px; font-weight:700; color:rgba(0,0,0,0.82); margin-bottom:8px;">물류사 연동 <span style="color:rgba(0,0,0,0.3); font-size:12px;">ⓘ</span></div>
                 <div style="font-size:13px; line-height:19px; color:rgba(0,0,0,0.53);"><span class="uxw"><span class="uxw-a">물류사 선정 및 연동</span><span class="uxw-t" data-why="선정 후 물류사가 판매자에게 연락해 시스템 연동을 진행하는 실제 프로세스 반영 — 연락이 온다는 걸 미리 알려 스팸 오인·누락 방지"><b class="uxw-n">1</b>물류사 선정·시스템 연동 — 선정된 물류사가 연동을 위해 연락드릴 수 있어요</span></span></div>
                 <div class="scif" data-state="2단계(물류사 연동) 상태"><div style="margin-top:10px; font-size:12px; font-weight:700; color:#03c75a;">진행 중</div></div>
-                <div class="scif" data-state="2단계 비활성"><div style="margin-top:10px; display:inline-flex; align-items:center; padding:5px 11px; background:#eef0f2; border-radius:6px; font-size:12px; color:rgba(0,0,0,0.55);">최대 7영업일 내 선정 예정</div></div>
+                <div class="scif s1" data-state="2단계 비활성"><div style="margin-top:10px; display:inline-flex; align-items:center; padding:5px 11px; background:#eef0f2; border-radius:6px; font-size:12px; color:rgba(0,0,0,0.55);">최대 7영업일 내 선정 예정</div></div>
               </div>
               <div style="display:flex; align-items:center; color:rgba(0,0,0,0.2); font-size:20px;">›</div>
               <!-- step 3 -->
@@ -332,7 +343,7 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
             <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 28px; border-bottom:1px solid #eee;">
               <div style="display:flex; align-items:center; gap:6px;"><span style="font-size:16px; font-weight:700; color:rgba(0,0,0,0.85);">최초 입고 SKU 정보</span><span style="width:5px; height:5px; border-radius:999px; background:#e7676a;"></span><span style="color:rgba(0,0,0,0.3);">ⓘ</span></div>
               <div style="display:flex; gap:8px;">
-                <div class="scif" data-state="1단계(신청) 상태">
+                <div class="scif s1" data-state="1단계(신청) 상태">
                 <button style="display:inline-flex; align-items:center; gap:5px; height:36px; padding:0 16px; font-size:13px; font-weight:600; color:#fff; background:#03c75a; border:none; cursor:pointer;">불러오기</button>
                 </div>
                 <div class="scif" data-state="2단계(물류사 연동) 상태">
@@ -347,7 +358,7 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
               </div>
             </div>
             <div style="padding:18px 28px; background:#f8f9fd; border-bottom:1px solid #eee;">
-              <div class="scif" data-state="1단계 노출">
+              <div class="scif s1" data-state="1단계 노출">
               <div>
               <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· <span class="uxw"><span class="uxw-a">N배송 FBN으로 최초 입고를 진행할 SKU 정보를 등록해주세요.</span><span class="uxw-t" data-why="입력 요구 앞에 이유(물류사 배정 기준)를 제시해 입력 동기 부여 — SKU가 배정 key라는 기획 사실 그대로"><b class="uxw-n">5</b>입력하신 SKU 정보로 <b>가장 적합한 물류사·센터를 배정</b>해드려요. 최초 입고를 진행할 SKU 정보를 등록해주세요.</span></span></div>
               <div style="font-size:13px; line-height:21px; color:rgba(0,0,0,0.6);">· <span class="uxw"><span class="uxw-a">최초 입고 SKU 정보는 <span style="color:#e7676a; font-weight:700;">신청서 제출 이후 수정이 불가능</span>합니다.</span><span class="uxw-t" data-why="기획 확인(7/28) — 고정되는 건 신청서 정보(배정 key)뿐이고 실제 입고는 전부 변경 가능. 위협적 단독 경고를 고정 사유+자유 범위 안내로 전환해 첫 제출의 심리 장벽 해소"><b class="uxw-n">4</b>최초 입고 SKU 정보는 <b>물류사 배정의 기준</b>이 되는 정보로, 신청서 제출 후에는 변경되지 않아요. <b>실제 입고할 상품·수량·방식은 입고 단계에서 자유롭게 바꿀 수 있어요.</b></span></span></div>
@@ -394,7 +405,7 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
                   <div style="flex:1.2; padding:12px 14px; text-align:center;">수량</div>
                   <div style="width:44px; flex-shrink:0; padding:12px 8px;"></div>
                 </div>
-                <div class="scif" data-state="1단계 노출">
+                <div class="scif s1" data-state="1단계 노출">
                 <div class="scif" data-state="SKU 등록 후">
                 <div>
                   <div>
@@ -415,7 +426,7 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
                   </div>
                 </div>
                 </div>
-                <div class="scif" data-state="SKU 등록 전">
+                <div class="scif s1" data-state="SKU 등록 전">
                 <div style="display:flex; align-items:center; justify-content:center; padding:40px 0; border-top:1px solid #f4f4f4; font-size:13px; color:rgba(0,0,0,0.4);"><span class="uxw"><span class="uxw-a">‘불러오기’ 버튼을 통해 입고할 상품을 추가해주세요.</span><span class="uxw-t" data-why="신규 판매자는 불러올 SKU가 없어 빈 목록을 만남 — 미등록 상태 분기와 선행 등록 경로(CTA) 제공"><b class="uxw-n">7</b>등록된 상품·SKU가 있다면 [불러오기]로 추가해주세요. 아직 없다면 <b>상품 등록 ›</b>과 <b>SKU 등록 ›</b>을 먼저 진행해주세요.</span></span></div>
                 </div>
                 </div>
@@ -578,7 +589,7 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
         <!-- 신청 단계 플로팅 패널 -->
         <div data-capture-hide="" style="position:fixed; right:24px; bottom:88px; z-index:1500; width:210px; background:#fff; border:1px solid #dcdcdc; border-radius:12px; box-shadow:0 8px 28px rgba(0,0,0,0.16); overflow:hidden;">
           <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:#292f38; color:#fff; font-size:13px; font-weight:700; cursor:pointer;"><span>N배송 FBN 신청 단계</span><span style="display:inline-flex; transition:transform .15s; transform:;"><svg width="16" height="16" fill="none"><path d="M6 9l6 6 6-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
-          <div class="scif nochip" data-state="">
+          <div class="scif nochip s1" data-state="">
           <div style="padding:6px;">
             <div style="display:flex; align-items:center; gap:8px; padding:10px 12px; border-radius:8px; cursor:pointer; background:rgba(0,184,79,.05);"><span style="width:20px; height:20px; flex-shrink:0; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#fff; background:;">1</span><span style="font-size:13px; font-weight:700; color:;">N배송 FBN 신청</span></div>
             <div style="display:flex; align-items:center; gap:8px; padding:10px 12px; border-radius:8px; cursor:pointer; background:#fff;"><span style="width:20px; height:20px; flex-shrink:0; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#fff; background:;">2</span><span style="font-size:13px; font-weight:500; color:;">물류사 배정</span></div>
@@ -776,6 +787,7 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
 <script>
 function tab(n){document.querySelectorAll('.pane').forEach(function(p){p.classList.remove('active')});document.querySelectorAll('.tab-item').forEach(function(t){t.classList.remove('active')});var pane=document.getElementById('p-'+n);if(pane)pane.classList.add('active');document.querySelectorAll('.tab-item').forEach(function(t){if((t.getAttribute('onclick')||'').indexOf("'"+n+"'")>=0)t.classList.add('active')});window.scrollTo(0,0);}
 function goTab(n,anchor){tab(n);requestAnimationFrame(function(){var el=document.getElementById(anchor);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.remove('kc-flash');void el.offsetWidth;el.classList.add('kc-flash');setTimeout(function(){el.classList.remove('kc-flash');},1900);});}
+function setVm(m){var s=document.getElementById('wfshell');if(!s)return;s.classList.toggle('mode-s1',m==='s1');document.getElementById('vmS1').classList.toggle('on',m==='s1');document.getElementById('vmAll').classList.toggle('on',m!=='s1');}
 (function(){var tip=document.getElementById('why-tip'),b=document.getElementById('why-tip-body');
 document.addEventListener('mouseover',function(e){var el=e.target.closest('[data-why]');if(!el||!el.dataset.why)return;b.textContent=el.dataset.why;tip.style.display='block';var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,left=Math.max(8,Math.min(r.left+r.width/2-tw/2,window.innerWidth-tw-8)),top=r.top-th-10;if(top<8)top=r.bottom+10;tip.style.left=left+'px';tip.style.top=top+'px';});
 document.addEventListener('mouseout',function(e){if(e.target.closest('[data-why]'))tip.style.display='none';});})();
