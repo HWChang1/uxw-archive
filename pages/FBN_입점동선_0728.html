@@ -43,8 +43,8 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
 .opt-card ul{margin:0 0 0 16px;font-size:12px;color:var(--fg2);line-height:1.7}
 /* ── 재현 화면 래퍼 ── */
 .content-full{max-width:none;padding:12px 0 80px}
-.wfshell{border:1px solid var(--bd2);border-radius:10px;overflow:hidden;margin:0 20px;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.05)}
-.wfshell-inner{min-width:0}
+.wfshell{border:1px solid var(--bd2);border-radius:10px;overflow-x:auto;margin:0 20px;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.wfshell-inner{min-width:1280px}
 .wfshell [style*="position:fixed"],.wfshell [style*="position: fixed"]{display:none!important} /* 데모용 플로팅 위젯·캡처 버튼 제거 */
 .wf{background:#fff;border:1px solid var(--bd2);border-radius:10px;padding:8px 4px;margin-bottom:18px;overflow-x:auto}
 .wf-cap{font-size:11px;color:var(--fg3);margin:0 0 8px 4px}
@@ -155,7 +155,7 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
 <div id="p-apply" class="pane"><div class="content content-full">
   <div class="note" style="margin:0 20px 12px">스마트스토어센터 헤더·메뉴 포함 wireframe 원본 재현(문스톤). 노란 칩 = <b>상태 분기</b>(단계·등록 여부별 노출 변형). 회색 취소선=ASIS, 초록=TOBE 제안(호버 시 변경 이유).</div>
   <div id="mk-step2"></div><div id="mk-manual"></div><div id="mk-empty"></div>
-  <div class="wfshell"><div class="wfshell-inner" style="display:flex;flex-direction:column;background:#f5f6f8"><header style="display:flex; align-items:center; justify-content:space-between; height:56px; padding:16px 20px; background:#292f38; flex-shrink:0;">
+  <div class="wfshell"><div class="wfshell-inner" style="display:flex; flex-direction:column; min-width:1280px; background:#f1f4f6; font-family:'Pretendard Variable','Pretendard',system-ui,sans-serif; color:rgba(0,0,0,0.81); -webkit-font-smoothing:antialiased; font-size:16px; letter-spacing:normal; line-height:normal;"><header style="display:flex; align-items:center; justify-content:space-between; height:56px; padding:16px 20px; background:#292f38; flex-shrink:0;">
     <div style="display:flex; align-items:center; gap:20px;">
       <div style="display:flex; align-items:center; gap:10px;">
         <div style="width:24px; height:24px; background:#03c75a; border-radius:5px; display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; font-size:15px;">N</div>
