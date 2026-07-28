@@ -14,7 +14,9 @@ body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;l
 .tab-bar{background:#fff;border-bottom:1px solid var(--bd2);padding:0 20px;display:flex;gap:26px;overflow-x:auto}
 .tab-item{padding:12px 0;font-size:13px;font-weight:600;color:var(--fg3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
 .tab-item.active{color:var(--brand);border-bottom-color:var(--brand)}
-.chg-badge-tab{margin-left:auto;align-self:center;background:rgba(0,184,79,.08);border:1px solid rgba(0,184,79,.45);color:#0a7a3c;padding:4px 11px;cursor:pointer;white-space:nowrap}
+.chg-badge-tab{display:none;margin-left:auto;align-self:center;background:rgba(0,184,79,.08);border:1px solid rgba(0,184,79,.45);color:#0a7a3c;padding:4px 11px;cursor:pointer;white-space:nowrap}
+.topbar.shrunk .chg-badge-tab{display:inline-flex;animation:badgein .25s ease}
+@keyframes badgein{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .chg-badge-tab b{color:#0a7a3c}
 .chg-badge-tab:hover{background:rgba(0,184,79,.15)}
 .rev-bar{max-height:200px;overflow:hidden;transition:max-height .25s ease,padding .25s ease}
@@ -106,7 +108,8 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
 <div id="page-content">
   <div class="topbar">
     <div class="rev-bar"><div><div class="rev-title">N배송 FBN 9월 입점 동선</div>
-      <div class="rev-sub">2026.07.28 · N배송플랫폼기획 · 26'09 정식 출시 — 질의서·물류사 온보딩 삭제, 신청 4단계 간소화</div></div></div>
+      <div class="rev-sub">2026.07.28 · N배송플랫폼기획 · 26'09 정식 출시 — 질의서·물류사 온보딩 삭제, 신청 4단계 간소화</div></div>
+      <div class="rev-meta"><span class="chg-badge">📋 변경 내역 <b>25</b></span></div></div>
     <div class="tab-bar">
       <div class="tab-item active" onclick="tab('tone')">배경 &amp; 변경내역</div>
       <div class="tab-item" onclick="tab('apply')">1. 신청하기</div>
