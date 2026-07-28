@@ -333,7 +333,7 @@
       <sc-if value="{{ isInbound }}" hint-placeholder-val="{{ false }}">
       <div style="display:flex; flex-direction:column; flex:1; min-height:0;">
         <div style="display:flex; align-items:center; justify-content:space-between; height:60px; padding:0 28px; background:#fff; border-bottom:1px solid #eee; flex-shrink:0;">
-          <span style="font-size:20px; font-weight:500; color:rgba(0,0,0,0.81);">입고 신청</span>
+          <span style="font-size:20px; font-weight:500; color:rgba(0,0,0,0.81);">입고 신청</span><button sc-camel-on-click="{{ goApply }}" style="margin-left:12px; height:28px; padding:0 12px; font-size:12px; font-weight:600; color:#0a7a3c; background:rgba(0,184,79,.1); border:1px solid rgba(0,184,79,.4); border-radius:99px; cursor:pointer; font-family:inherit;">‹ 신청 화면으로 (검수용)</button>
           <div style="display:flex; gap:8px;">
             <button style="height:34px; padding:0 12px; font-size:13px; color:rgba(0,0,0,0.69); background:#fff; border:1px solid rgba(0,0,0,0.15); cursor:pointer;">문의하기</button>
             <button style="height:34px; padding:0 12px; font-size:13px; color:rgba(0,0,0,0.69); background:#fff; border:1px solid rgba(0,0,0,0.15); cursor:pointer;">입고 상세 가이드</button>
@@ -386,7 +386,21 @@
                   <div style="flex:1; padding:12px 14px;">로트번호 <span style="color:rgba(0,0,0,0.3);">ⓘ</span></div>
                   <div style="flex:1.1; padding:12px 14px;">바코드 부착 서비스 <span style="color:rgba(0,0,0,0.3);">ⓘ</span> <span style="color:#e7676a;">•</span></div>
                 </div>
-                <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:70px 0; min-width:1360px;">
+                <sc-for list="{{ apInbRows }}" as="r" hint-placeholder-count="2">
+<div style="display:flex; min-width:1360px; align-items:center; background:#f6fffa; border-bottom:1px solid #eee; font-size:13px; color:rgba(0,0,0,0.75);">
+  <div style="width:52px; flex-shrink:0; padding:12px; display:flex; justify-content:center;"><span style="width:16px; height:16px; background:#03c75a; border:1px solid #03c75a; display:inline-flex; align-items:center; justify-content:center;"><svg width="12" height="12" sc-camel-view-box="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+  <div style="flex:1.2; padding:12px 14px; color:#2680eb; font-weight:600;">{{ r.sku }}</div>
+  <div style="flex:1.6; padding:12px 14px;">{{ r.sname }}</div>
+  <div style="flex:1.1; padding:12px 14px;">{{ r.barcode }}</div>
+  <div style="flex:0.9; padding:12px 14px;">{{ r.temp }}</div>
+  <div style="flex:0.9; padding:12px 14px;"><span style="display:inline-block; min-width:64px; padding:7px 10px; border:1px solid rgba(0,0,0,0.2); background:#fff; color:rgba(0,0,0,0.55);">{{ r.qty }}</span></div>
+  <div style="flex:1.4; padding:12px 14px; color:rgba(0,0,0,0.45);">{{ r.exp }}</div>
+  <div style="flex:1; padding:12px 14px; color:rgba(0,0,0,0.45);">{{ r.lot }}</div>
+  <div style="flex:1.1; padding:12px 14px; color:rgba(0,0,0,0.45);">선택 안함</div>
+</div>
+</sc-for>
+<div style="display:{{ apInbNoteDisp }}; min-width:1360px; padding:10px 14px; background:#f0fff6; border-bottom:1px solid #d7f2e2; font-size:12px; color:#0a7a3c; font-weight:600;">신청서의 최초 입고 SKU가 자동 선택되어 있습니다. 상품·수량·방식은 이 단계에서 자유롭게 변경할 수 있어요.</div>
+<div style="display:{{ apInbEmptyDisp }}; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:70px 0; min-width:1360px;">
                   <span style="width:40px; height:40px; border-radius:999px; border:2px solid rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; font-size:22px; color:rgba(0,0,0,0.3);">!</span>
                   <span style="font-size:14px; color:rgba(0,0,0,0.4);">데이터가 없습니다.</span>
                 </div>
@@ -997,7 +1011,7 @@
                 <div style="display:flex; align-items:center; gap:4px; font-size:15px; font-weight:700; color:rgba(0,0,0,0.82); margin-bottom:8px;">N배송 FBN 신청 <span style="color:rgba(0,0,0,0.3); font-size:12px;">ⓘ</span></div>
                 <div style="font-size:13px; line-height:19px; color:rgba(0,0,0,0.53);">커머스솔루션 추가 후<br>판매자 정보 및 최초 입고 SKU 정보 입력</div>
                 <sc-if value="{{ apS1 }}" hint-placeholder-val="{{ true }}"><div style="margin-top:10px; font-size:12px; font-weight:700; color:#03c75a;">진행 중</div></sc-if>
-              <div style="margin-top:12px; display:flex; flex-direction:column; gap:6px; align-items:center;"><button style="height:32px; padding:0 14px; font-size:12px; font-weight:600; color:rgba(0,0,0,0.7); background:#fff; border:1px solid #dcdcdc; border-radius:4px; cursor:pointer; font-family:inherit;">신청서 작성 가이드 보기</button><sc-if value="{{ apS1 }}"><button data-stepcta="" style="height:32px; padding:0 16px; font-size:12px; font-weight:700; color:#fff; background:#03c75a; border:none; border-radius:4px; cursor:pointer; font-family:inherit;">신청하기</button></sc-if><div style="margin-top:2px"><span class="uxw-add" data-why="디자이너 시안(직계약 신청 2차)의 스텝별 가이드·CTA 버튼 반영 — 문구 시안 그대로. 랜딩 시 가이드만, 스텝 클릭(활성화) 시 해당 CTA 노출"><b class="uxw-n">26</b>[디자인 반영] 스텝별 가이드·CTA 버튼</span></div></div></div>
+              <div style="margin-top:12px; display:flex; flex-direction:column; gap:6px; align-items:center;"><button style="height:32px; padding:0 14px; font-size:12px; font-weight:600; color:rgba(0,0,0,0.7); background:#fff; border:1px solid #dcdcdc; border-radius:4px; cursor:pointer; font-family:inherit;">신청서 작성 가이드 보기</button><div style="margin-top:2px"><span class="uxw-add" data-why="디자이너 시안(직계약 신청 2차)의 스텝별 버튼 반영 + 기획 확인(7/28): Step1·2는 stepper 내 CTA 제외(Step1 신청하기는 페이지 최하단 CTA와 중복, Step2는 판매자 액션 없는 대기 단계). Step3·4만 활성화 시 CTA 노출 — Step3→입고 신청(신청 SKU 사전 선택), Step4→상품 조회/수정(입고신청 상품 필터)"><b class="uxw-n">26</b>[디자인 반영] 스텝 가이드·CTA 규칙</span></div></div></div>
               <div style="display:flex; align-items:center; color:rgba(0,0,0,0.2); font-size:20px;">›</div>
               <!-- step 2 -->
               <div data-stepcard="" sc-camel-on-click="{{ setApStep2 }}" style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center; padding:18px 14px; border-radius:10px; cursor:pointer; box-sizing:border-box; border:{{ apS2Border }}; background:{{ apS2Bg }};">
@@ -1007,7 +1021,7 @@
                 <div style="font-size:13px; line-height:19px; color:rgba(0,0,0,0.53);">물류사 선정 및 연동</div>
                 <sc-if value="{{ apS2 }}" hint-placeholder-val="{{ false }}"><div style="margin-top:10px; font-size:12px; font-weight:700; color:#03c75a;">진행 중</div></sc-if>
                 <sc-if value="{{ apS2off }}" hint-placeholder-val="{{ true }}"><div style="margin-top:10px; display:inline-flex; align-items:center; padding:5px 11px; background:#eef0f2; border-radius:6px; font-size:12px; color:rgba(0,0,0,0.55);">최대 7영업일 내 선정 예정</div></sc-if>
-              <div style="margin-top:12px; display:flex; flex-direction:column; gap:6px; align-items:center;"><button style="height:32px; padding:0 14px; font-size:12px; font-weight:600; color:rgba(0,0,0,0.7); background:#fff; border:1px solid #dcdcdc; border-radius:4px; cursor:pointer; font-family:inherit;">가이드 보기</button><div style="margin-top:2px"><span class="uxw-add" data-why="시안의 Step2 활성 프레임에는 Step1 카드(신청하기)가 잔존 — 물류사 연동(대기) 단계의 카드·가이드·CTA 문구 미정의. 디자인 확인 필요"><b class="uxw-n">27</b>[확인 필요] Step2 버튼 미정의</span></div></div></div>
+              <div style="margin-top:12px; display:flex; flex-direction:column; gap:6px; align-items:center;"><button style="height:32px; padding:0 14px; font-size:12px; font-weight:600; color:rgba(0,0,0,0.7); background:#fff; border:1px solid #dcdcdc; border-radius:4px; cursor:pointer; font-family:inherit;">가이드 보기</button></div></div>
               <div style="display:flex; align-items:center; color:rgba(0,0,0,0.2); font-size:20px;">›</div>
               <!-- step 3 -->
               <div data-stepcard="" sc-camel-on-click="{{ setApStep3 }}" style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center; padding:18px 14px; border-radius:10px; cursor:pointer; box-sizing:border-box; border:{{ apS3Border }}; background:{{ apS3Bg }};">
@@ -1016,7 +1030,7 @@
                 <div style="display:flex; align-items:center; gap:4px; font-size:15px; font-weight:700; color:rgba(0,0,0,0.82); margin-bottom:8px;">입고 준비 <span style="color:rgba(0,0,0,0.3); font-size:12px;">ⓘ</span></div>
                 <div style="font-size:13px; line-height:19px; color:rgba(0,0,0,0.53);">물류사 선정 알림 수신 후<br>상품 입고</div>
                 <sc-if value="{{ apS3 }}" hint-placeholder-val="{{ false }}"><div style="margin-top:10px; font-size:12px; font-weight:700; color:#03c75a;">진행 중</div></sc-if>
-              <div style="margin-top:12px; display:flex; flex-direction:column; gap:6px; align-items:center;"><button style="height:32px; padding:0 14px; font-size:12px; font-weight:600; color:rgba(0,0,0,0.7); background:#fff; border:1px solid #dcdcdc; border-radius:4px; cursor:pointer; font-family:inherit;">입고 가이드 보기</button><sc-if value="{{ apS3 }}"><button data-stepcta="" style="height:32px; padding:0 16px; font-size:12px; font-weight:700; color:#fff; background:#03c75a; border:none; border-radius:4px; cursor:pointer; font-family:inherit;">입고신청 메뉴 바로가기</button></sc-if></div></div>
+              <div style="margin-top:12px; display:flex; flex-direction:column; gap:6px; align-items:center;"><button style="height:32px; padding:0 14px; font-size:12px; font-weight:600; color:rgba(0,0,0,0.7); background:#fff; border:1px solid #dcdcdc; border-radius:4px; cursor:pointer; font-family:inherit;">입고 가이드 보기</button><sc-if value="{{ apS3 }}"><button data-stepcta="" sc-camel-on-click="{{ goInboundFromApply }}" style="height:32px; padding:0 16px; font-size:12px; font-weight:700; color:#fff; background:#03c75a; border:none; border-radius:4px; cursor:pointer; font-family:inherit;">입고신청 메뉴 바로가기</button></sc-if></div></div>
               <div style="display:flex; align-items:center; color:rgba(0,0,0,0.2); font-size:20px;">›</div>
               <!-- step 4 -->
               <div data-stepcard="" sc-camel-on-click="{{ setApStep4 }}" style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center; padding:18px 14px; border-radius:10px; cursor:pointer; box-sizing:border-box; border:{{ apS4Border }}; background:{{ apS4Bg }};">
@@ -1025,7 +1039,7 @@
                 <div style="display:flex; align-items:center; gap:4px; font-size:15px; font-weight:700; color:rgba(0,0,0,0.82); margin-bottom:8px;">판매 개시 <span style="color:rgba(0,0,0,0.3); font-size:12px;">ⓘ</span></div>
                 <div style="font-size:13px; line-height:19px; color:rgba(0,0,0,0.53);">입고 완료 알림 수신 후<br>풀필먼트 및 배송속성 설정</div>
                 <sc-if value="{{ apS4 }}" hint-placeholder-val="{{ false }}"><div style="margin-top:10px; font-size:12px; font-weight:700; color:#03c75a;">진행 중</div></sc-if>
-              <div style="margin-top:12px; display:flex; flex-direction:column; gap:6px; align-items:center;"><button style="height:32px; padding:0 14px; font-size:12px; font-weight:600; color:rgba(0,0,0,0.7); background:#fff; border:1px solid #dcdcdc; border-radius:4px; cursor:pointer; font-family:inherit;">판매 가이드 보기</button><sc-if value="{{ apS4 }}"><button data-stepcta="" style="height:32px; padding:0 16px; font-size:12px; font-weight:700; color:#fff; background:#03c75a; border:none; border-radius:4px; cursor:pointer; font-family:inherit;">판매 설정하러 가기</button></sc-if></div></div>
+              <div style="margin-top:12px; display:flex; flex-direction:column; gap:6px; align-items:center;"><button style="height:32px; padding:0 14px; font-size:12px; font-weight:600; color:rgba(0,0,0,0.7); background:#fff; border:1px solid #dcdcdc; border-radius:4px; cursor:pointer; font-family:inherit;">판매 가이드 보기</button><sc-if value="{{ apS4 }}"><button data-stepcta="" sc-camel-on-click="{{ goSalesFromApply }}" style="height:32px; padding:0 16px; font-size:12px; font-weight:700; color:#fff; background:#03c75a; border:none; border-radius:4px; cursor:pointer; font-family:inherit;">판매 설정하러 가기</button></sc-if></div></div>
             </div>
           </section>
 
@@ -1562,7 +1576,7 @@
       <sc-if value="{{ isProductList }}" hint-placeholder-val="{{ false }}">
       <div style="display:flex; flex-direction:column; flex:1; min-height:0;">
         <div style="display:flex; align-items:center; gap:12px; height:60px; padding:0 28px; background:#fff; border-bottom:1px solid #eee; flex-shrink:0;">
-          <span style="font-size:20px; font-weight:500; color:rgba(0,0,0,0.81);">상품 조회/수정</span>
+          <span style="font-size:20px; font-weight:500; color:rgba(0,0,0,0.81);">상품 조회/수정</span><button sc-camel-on-click="{{ goApply }}" style="margin-left:12px; height:28px; padding:0 12px; font-size:12px; font-weight:600; color:#0a7a3c; background:rgba(0,184,79,.1); border:1px solid rgba(0,184,79,.4); border-radius:99px; cursor:pointer; font-family:inherit;">‹ 신청 화면으로 (검수용)</button>
           <button style="height:32px; padding:0 12px; font-size:12px; color:#fff; background:#03c75a; border:none; cursor:pointer;">그룹상품이 노출에 강한 이유</button>
         </div>
         <div style="display:flex; align-items:center; height:45px; padding:0 28px; background:#fff; border-bottom:1px solid #dcdcdc; flex-shrink:0;">
@@ -1653,7 +1667,7 @@
           <!-- 상품목록 -->
           <section style="background:#fff; border:1px solid #dcdcdc;">
             <div style="display:flex; align-items:center; justify-content:space-between; padding:20px 24px 12px;">
-              <span style="font-size:15px; font-weight:700; color:rgba(0,0,0,0.85);">상품목록 (총 6개)</span>
+              <span style="font-size:15px; font-weight:700; color:rgba(0,0,0,0.85);">상품목록 (총 {{ plCount }}개)</span><sc-if value="{{ plFromApply }}" hint-placeholder-val="{{ false }}"><span style="margin-left:10px; font-size:12px; font-weight:700; color:#0a7a3c; background:rgba(0,184,79,.12); border:1px solid rgba(0,184,79,.35); border-radius:99px; padding:4px 12px;">입고신청 상품 자동 필터 적용됨</span></sc-if>
               <div style="display:flex; gap:8px;">
                 <sc-raw-select style="height:34px; padding:0 10px; border:1px solid rgba(0,0,0,0.15); background:#fff; font-family:inherit; font-size:12px; color:rgba(0,0,0,0.69); outline:none;"><option>상품등록일순</option></sc-raw-select>
                 <sc-raw-select style="height:34px; padding:0 10px; border:1px solid rgba(0,0,0,0.15); background:#fff; font-family:inherit; font-size:12px; color:rgba(0,0,0,0.69); outline:none;"><option>100개씩</option></sc-raw-select>
@@ -2612,6 +2626,7 @@ class Component extends DCLogic {
     applyStep: 1,
     applyPanelOpen: true,
     fromApply: false,
+    plFromApply: false,
     fulfill: 'off',
     skuLink: 'new',
     inboundMethod2: '',
@@ -2983,7 +2998,10 @@ class Component extends DCLogic {
       { id: 5, group: '일반', smart: '2005281990', name: '네이버 그리니 로션', status: '판매중', disp: '전시중', stock: '80', price: '18,900', methods: ['seller'], editCase: 'apply', cat: ['뷰티'] },
       { id: 6, group: '일반', smart: '2005281774', name: '강아지 노즈워크 담요', status: '품절', disp: '전시중', stock: '0', price: '29,000', methods: ['seller'], editCase: 'category', cat: ['반려동물'] },
     ];
-    const plRows = PLP.map(p => {
+    const PLP_SRC = this.state.plFromApply
+      ? (() => { const f = PLP.filter(pp => this.state.initRows.some(r => (r.sname || '').indexOf(pp.name) === 0)); return f.length ? f : PLP.filter(pp => pp.methods.indexOf('fbn') >= 0); })()
+      : PLP;
+    const plRows = PLP_SRC.map(p => {
       const hasFbn = p.methods.includes('fbn');
       const on = hasFbn || plNbae.includes(p.id);
       return {
@@ -3132,7 +3150,13 @@ class Component extends DCLogic {
       setSkuLater: () => this.setState({ skuLink: 'later' }),
       goInbound: () => this.setState({ page: 'inbound', navGroup: 'nbae' }),
       goInboundFromApply: () => this.setState({ page: 'inbound', navGroup: 'nbae', inboundStep: 1, fromApply: true }),
+      goSalesFromApply: () => this.setState({ page: 'productList', navGroup: 'product', plFromApply: true }),
       fromApply: this.state.fromApply,
+      plFromApply: this.state.plFromApply,
+      plCount: plRows.length,
+      apInbRows: (this.state.fromApply ? this.state.initRows.map(r => ({ sku: r.sku || '-', sname: r.sname || r.name || '-', barcode: r.barcode || '-', temp: r.temp || '-', qty: r.qty || '', exp: r.exp || '관리안함', lot: r.lot || '관리안함' })) : []),
+      apInbNoteDisp: (this.state.fromApply && this.state.initRows.length) ? 'block' : 'none',
+      apInbEmptyDisp: (this.state.fromApply && this.state.initRows.length) ? 'none' : 'flex',
       notFromApply: !this.state.fromApply,
       goStock: () => this.setState({ page: 'stock', navGroup: 'nbae' }),
       goStockClose: () => this.setState({ page: 'stock', navGroup: 'nbae', loadPopOpen: false, modalOpen: false }),
