@@ -399,7 +399,7 @@
   <div style="flex:1.1; padding:12px 14px; color:rgba(0,0,0,0.45);">선택 안함</div>
 </div>
 </sc-for>
-<div style="display:{{ apInbNoteDisp }}; min-width:1360px; padding:10px 14px; background:#f0fff6; border-bottom:1px solid #d7f2e2; font-size:12px; color:#0a7a3c; font-weight:600;">신청서의 최초 입고 SKU가 자동 선택되어 있습니다. 상품·수량·방식은 이 단계에서 자유롭게 변경할 수 있어요.</div>
+<div style="display:{{ apInbNoteDisp }}; min-width:1360px; padding:10px 14px; background:#f0fff6; border-bottom:1px solid #d7f2e2; font-size:12px; color:#0a7a3c; font-weight:600;">신청서의 최초 입고 예정 SKU가 자동 선택되어 있습니다. 실제 입고 SKU와 수량은 이 단계에서 자유롭게 변경할 수 있어요.</div>
 <div style="display:{{ apInbEmptyDisp }}; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:70px 0; min-width:1360px;">
                   <span style="width:40px; height:40px; border-radius:999px; border:2px solid rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; font-size:22px; color:rgba(0,0,0,0.3);">!</span>
                   <span style="font-size:14px; color:rgba(0,0,0,0.4);">데이터가 없습니다.</span>
@@ -3137,9 +3137,13 @@ class Component extends DCLogic {
       apLblW4: this.state.applyStep === 4 ? '600' : '400',
       plFromApply: this.state.plFromApply,
       plCount: plRows.length,
-      apInbRows: (this.state.fromApply ? this.state.initRows.map(r => ({ sku: r.sku || '-', sname: r.sname || r.name || '-', barcode: r.barcode || '-', temp: r.temp || '-', qty: r.qty || '', exp: r.exp || '관리안함', lot: r.lot || '관리안함' })) : []),
-      apInbNoteDisp: (this.state.fromApply && this.state.initRows.length) ? 'block' : 'none',
-      apInbEmptyDisp: (this.state.fromApply && this.state.initRows.length) ? 'none' : 'flex',
+      apInbRows: (this.state.fromApply
+        ? (this.state.initRows.length
+            ? this.state.initRows.map(r => ({ sku: r.sku || '-', sname: r.sname || r.name || '-', barcode: r.barcode || '-', temp: r.temp || '-', qty: r.qty || '', exp: r.exp || '관리안함', lot: r.lot || '관리안함' }))
+            : this.LOAD_PRODUCTS.slice(0, 6).map(p => ({ sku: p.sku, sname: p.sname, barcode: p.barcode, temp: p.temp, qty: '', exp: p.exp || '관리안함', lot: p.lot || '관리안함' })))
+        : []),
+      apInbNoteDisp: this.state.fromApply ? 'block' : 'none',
+      apInbEmptyDisp: this.state.fromApply ? 'none' : 'flex',
       notFromApply: !this.state.fromApply,
       goStock: () => this.setState({ page: 'stock', navGroup: 'nbae' }),
       goStockClose: () => this.setState({ page: 'stock', navGroup: 'nbae', loadPopOpen: false, modalOpen: false }),
