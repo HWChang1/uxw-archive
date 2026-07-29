@@ -1033,7 +1033,7 @@
                     <!-- 물류센터 상품 유형 정보 -->
           <section style="background:#fff; border:1px solid #dcdcdc; margin-bottom:16px;">
             <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 28px; border-bottom:1px solid #eee;">
-              <div style="display:flex; align-items:center; gap:6px;"><span style="font-size:16px; font-weight:700; color:rgba(0,0,0,0.85);"><span class="uxw"><span class="uxw-a">최초 입고 SKU 정보</span><span class="uxw-t" id="mk1" data-why="신청 단계의 SKU는 '예정' 정보: 실제 입고 SKU·수량과 다를 수 있음을 명칭에서부터 구분"><b class="uxw-n">1</b>최초 입고 예정 SKU 정보</span></span></span><span style="width:5px; height:5px; border-radius:999px; background:#e7676a;"></span><span style="color:rgba(0,0,0,0.3);">ⓘ</span></div>
+              <div style="display:flex; align-items:center; gap:6px;"><span style="font-size:16px; font-weight:700; color:rgba(0,0,0,0.85);"><span class="uxw"><span class="uxw-a">최초 입고 SKU 정보</span><span class="uxw-tp" id="mk1" data-why="신청 단계의 SKU는 '예정' 정보: 실제 입고 SKU·수량과 다를 수 있음을 명칭에서부터 구분"><b class="uxw-n">1</b>최초 입고 <span style="background:rgba(0,184,79,.22); border-radius:3px; padding:0 2px; font-weight:700;">예정</span> SKU 정보</span></span></span><span style="width:5px; height:5px; border-radius:999px; background:#e7676a;"></span><span style="color:rgba(0,0,0,0.3);">ⓘ</span></div>
               <div style="display:flex; gap:8px;">
                 <sc-if value="{{ apS1 }}" hint-placeholder-val="{{ true }}">
                 <span class="uxw-btnwrap" id="mk3" data-why="'불러오기'는 시스템 동작 관점. 판매자 과업(신청서에 SKU 추가) 관점으로 변경"><b class="uxw-n">3</b><button sc-camel-on-click="{{ openLoadPop }}" style="display:inline-flex; align-items:center; gap:5px; height:36px; padding:0 16px; font-size:13px; font-weight:600; color:#fff; background:#03c75a; border:none; cursor:pointer;"><span style="text-decoration:line-through; color:rgba(255,255,255,0.72); font-weight:400; margin-right:6px;">불러오기</span>SKU 추가하기</button></span>
@@ -2292,7 +2292,7 @@
         </div>
       </div>
       <div style="display:flex; align-items:center; justify-content:flex-end; padding:14px 22px 12px; flex-shrink:0;">
-        <span style="font-size:13px; color:rgba(0,0,0,0.53);"><strong style="color:#03c75a;">{{ loadSelCount }}</strong>개 선택됨 <span style="color:rgba(0,0,0,0.4);"><span class="uxw"><span class="uxw-a">(최대 30개)</span><span class="uxw-t" id="mk7" data-why="기획 확정 스펙 = 최대 SKU 999개(사업팀 확인 완료) — 30개는 구버전 수치"><b class="uxw-n">7</b>(최대 999개)</span></span></span></span>
+        <span style="font-size:13px; color:rgba(0,0,0,0.53);"><strong style="color:#03c75a;">{{ loadSelCount }}</strong>개 선택됨 <span style="color:rgba(0,0,0,0.4);"><span class="uxw"><span class="uxw-a">(최대 30개)</span><span class="uxw-tp" id="mk7" data-why="기획 확정 스펙 = 최대 SKU 999개(사업팀 확인 완료) — 30개는 구버전 수치"><b class="uxw-n">7</b>(최대 <span style="background:rgba(0,184,79,.22); border-radius:3px; padding:0 2px; font-weight:700;">999</span>개)</span></span></span></span>
       </div>
       <div style="overflow-x:auto;"><div>
         <div style="min-width:1360px;"><div style="display:flex; align-items:center; background:#f8f9fd; border-bottom:1px solid #eee; font-size:12px; font-weight:600; color:rgba(0,0,0,0.69); position:sticky; top:0;">
@@ -3479,6 +3479,8 @@ class Component extends DCLogic {
 .uxw-add{font-weight:600;color:#124f9e;background:rgba(26,109,214,.13);border-radius:4px;padding:1px 6px;cursor:help;line-height:1.55}
 .uxw-add .uxw-n{background:#1a6dd6}
 .uxw-t,.uxw-del,.uxw-add{position:relative;margin-left:-5px}
+.uxw-tp{position:relative;font-weight:600;color:rgba(0,0,0,.86);line-height:1.55;cursor:help}
+.uxw-tp>.uxw-n{position:absolute;top:-8px;left:-8px;margin:0;z-index:6;box-shadow:0 1px 4px rgba(0,0,0,.28)}
 .uxw-t>.uxw-n,.uxw-del>.uxw-n,.uxw-add>.uxw-n{position:absolute;top:-8px;left:-8px;margin:0;z-index:6;box-shadow:0 1px 4px rgba(0,0,0,.28)}
 .uxw-btnwrap{position:relative;display:inline-flex;vertical-align:top;cursor:help}
 .uxw-btnwrap>.uxw-n{position:absolute;top:-7px;left:-7px;z-index:5;box-shadow:0 1px 4px rgba(0,0,0,.3);margin-right:0}
