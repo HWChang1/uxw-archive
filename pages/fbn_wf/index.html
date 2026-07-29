@@ -3498,7 +3498,25 @@ class Component extends DCLogic {
 <div class="why-tip" id="uxw-why-tip"><span class="why-tip-label">&#10022; 변경 이유</span><span id="uxw-why-body"></span></div>
 <script>
 (function(){var tip=document.getElementById('uxw-why-tip'),b=document.getElementById('uxw-why-body');
-document.addEventListener('mouseover',function(e){var el=e.target.closest('[data-why]');if(!el||!el.dataset.why)return;b.textContent=el.dataset.why;tip.style.display='block';var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,left=Math.max(8,Math.min(r.left+r.width/2-tw/2,window.innerWidth-tw-8)),top=r.top-th-10;if(top<8)top=r.bottom+10;tip.style.left=left+'px';tip.style.top=top+'px';});
+function _vp(){/* 임베드 시 부모 가시영역(상단 sticky 포함) 계산 */
+  var o={off:0, top:8, bottom:window.innerHeight};
+  try{ var fr=window.frameElement; if(!fr) return o; var pv=window.parent, fr0=fr.getBoundingClientRect();
+    var vh=(pv.document&&pv.document.documentElement&&pv.document.documentElement.clientHeight)||pv.innerHeight||0;
+    if(vh<240) vh=0;   /* 높이를 못 구해도 상단 판단은 iframe 오프셋만으로 가능 */
+    var pad=0, tb=pv.document.querySelector('.tab-bar');
+    if(tb){var tr=tb.getBoundingClientRect(); if(tr.top<4&&tr.bottom>0) pad=tr.bottom;}
+    o.off=fr0.top; o.top=pad+8-fr0.top;                          /* iframe 좌표계로 환산 */
+    o.bottom = vh ? (vh-8-fr0.top) : window.innerHeight;
+  }catch(err){}
+  return o;}
+document.addEventListener('mouseover',function(e){var el=e.target.closest('[data-why]');if(!el||!el.dataset.why)return;
+  b.textContent=el.dataset.why;tip.style.display='block';
+  var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,v=_vp(),top;
+  if(r.top-th-10>=v.top) top=r.top-th-10;              /* 위에 공간 충분 → 위 */
+  else if(r.bottom+th+10<=v.bottom) top=r.bottom+10;   /* 아니면 아래 */
+  else top=Math.max(v.top, Math.min(r.bottom+10, v.bottom-th));  /* 둘 다 부족 → 가시영역 안으로 클램프 */
+  var left=Math.max(8,Math.min(r.left+r.width/2-tw/2,window.innerWidth-tw-8));
+  tip.style.left=left+'px';tip.style.top=top+'px';});
 document.addEventListener('mouseout',function(e){if(e.target.closest('[data-why]'))tip.style.display='none';});})();
 </script>
 <script>

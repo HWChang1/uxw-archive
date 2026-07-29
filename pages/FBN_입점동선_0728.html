@@ -168,7 +168,7 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
 <div id="page-content">
   <div class="rev-bar"><div><div class="rev-title">N배송 FBN 9월 입점 동선</div>
     <div class="rev-sub">2026.07.28 · N배송플랫폼기획 · 26'09 정식 출시 — 질의서·물류사 온보딩 삭제, 신청 4단계 간소화</div></div>
-    <div class="rev-meta"><a class="hdr-btn" href="fbn_wf/index.html?v=c5ccfbea" target="_blank" title="신청 화면을 새 창에서 크게 보기">새 창에서 크게 보기 ↗</a><span class="chg-badge" onclick="drawer(true)" title="변경 내역 열기">📋 변경 내역 <b>24</b></span></div></div>
+    <div class="rev-meta"><a class="hdr-btn" href="fbn_wf/index.html?v=2344b35d" target="_blank" title="신청 화면을 새 창에서 크게 보기">새 창에서 크게 보기 ↗</a><span class="chg-badge" onclick="drawer(true)" title="변경 내역 열기">📋 변경 내역 <b>24</b></span></div></div>
   <div class="tab-bar">
     <div class="tab-item active" onclick="tab('apply')">1. 신청하기</div>
     <div class="tab-item" onclick="tab('noti')">2. 알림</div>
@@ -179,7 +179,7 @@ details.acc>summary::-webkit-details-marker{display:none}details.acc>summary::af
 <div id="p-apply" class="pane active"><div class="content content-full">
   <div id="mk-step2"></div><div id="mk-manual"></div><div id="mk-empty"></div><div id="mk-modal"></div>
   <div class="wfshell" style="margin:0 20px;overflow:hidden">
-    <iframe src="fbn_wf/index.html?v=c5ccfbea" title="N배송 FBN 신청 — wireframe 원본(인터랙티브)"
+    <iframe src="fbn_wf/index.html?v=2344b35d" title="N배송 FBN 신청 — wireframe 원본(인터랙티브)"
       style="display:block;width:100%;height:800px;border:0"></iframe>
   </div>
 </div></div>
@@ -391,7 +391,17 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')drawer(false
 function goTab(n,anchor){tab(n);requestAnimationFrame(function(){var el=document.getElementById(anchor);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.remove('kc-flash');void el.offsetWidth;el.classList.add('kc-flash');setTimeout(function(){el.classList.remove('kc-flash');},1900);});}
 function setVm(m){var s=document.getElementById('wfshell');if(!s)return;s.classList.toggle('mode-s1',m==='s1');document.getElementById('vmS1').classList.toggle('on',m==='s1');document.getElementById('vmAll').classList.toggle('on',m!=='s1');}
 (function(){var tip=document.getElementById('why-tip'),b=document.getElementById('why-tip-body');
-document.addEventListener('mouseover',function(e){var el=e.target.closest('[data-why]');if(!el||!el.dataset.why)return;b.textContent=el.dataset.why;tip.style.display='block';var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,left=Math.max(8,Math.min(r.left+r.width/2-tw/2,window.innerWidth-tw-8)),top=r.top-th-10;if(top<8)top=r.bottom+10;tip.style.left=left+'px';tip.style.top=top+'px';});
+document.addEventListener('mouseover',function(e){var el=e.target.closest('[data-why]');if(!el||!el.dataset.why)return;
+  b.textContent=el.dataset.why;tip.style.display='block';
+  var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight;
+  var pad=8,tb=document.querySelector('.tab-bar');
+  if(tb){var tr=tb.getBoundingClientRect();if(tr.top<4&&tr.bottom>0)pad=tr.bottom+8;}
+  var vh=document.documentElement.clientHeight||window.innerHeight||800,top;
+  if(r.top-th-10>=pad) top=r.top-th-10;
+  else if(r.bottom+th+10<=vh-8) top=r.bottom+10;
+  else top=Math.max(pad,Math.min(r.bottom+10,vh-8-th));
+  var left=Math.max(8,Math.min(r.left+r.width/2-tw/2,(document.documentElement.clientWidth||window.innerWidth)-tw-8));
+  tip.style.left=left+'px';tip.style.top=top+'px';});
 document.addEventListener('mouseout',function(e){if(e.target.closest('[data-why]'))tip.style.display='none';});})();
 (function(){var tb=document.querySelector('.tab-bar'),rb=document.querySelector('.rev-bar');
 if(!tb||!rb)return;
