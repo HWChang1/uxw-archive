@@ -336,6 +336,9 @@ const RECON_SYSTEM_PROMPT = `당신은 네이버 판매자센터 화면을 "문�
 - 짧은 라벨/문구 변경 → 인라인:
   <span class="change-wrap"><span class="asis">기존문구</span><span class="tobe" data-why="변경 이유">새문구</span></span>
 - 문장 전체가 바뀌는 안내문은 **문장 전체**를 change-wrap 하나로 감싼다(ASIS 문장 전문 위·TOBE 문장 전문 아래). 문장 중간 일부만 감싸 앞뒤가 쪼개지게 하지 말 것. 단어·라벨 치환만 부분 감싸기.
+- **안내/가이드 메시지 박스(불릿 2줄 이상)는 박스 단위로 하나만 감싼다**: 박스 안 불릿을 개별로 여러 번 감싸 ASIS·TOBE가 번갈아 나오게 하지 말 것. 위=ASIS 전체(모든 불릿), 아래=TOBE 전체(모든 불릿). 같은 박스가 상태(단계)별로 여러 벌 있으면 각 상태의 ASIS는 그대로 두고 **TOBE는 전부 동일한 문안**으로 통일하며 번호 배지도 같은 번호를 재사용한다.
+- **ASIS·TOBE는 원문과 같은 텍스트 크기**로 렌더(ASIS를 작게 축소하지 말 것). 크기 차이로 위계를 주지 않고 취소선·배경색으로만 구분한다.
+- **번호 배지는 텍스트 흐름·와이어프레임 정렬을 방해하지 않게** 렌더: 흐름에서 빼고(absolute) 해당 문장·버튼의 **좌상단 모서리에 살짝 겹치게** 배치. 배지가 텍스트를 밀어내 ASIS와 TOBE의 시작 위치가 어긋나면 안 된다(강조 배경의 좌측 패딩만큼 음수 마진으로 보정).
 - 긴 설명/툴팁 변경 → 물음표 아이콘 툴팁:
   <span class="qi has-change">?<span class="tip"><div class="tip-outer"><div class="tip-col tip-col-asis"><span class="tip-col-header h-asis">ASIS</span><div class="tip-col-body">기존 설명</div></div><div class="tip-col"><span class="tip-col-header h-tobe">TOBE</span><div class="tip-col-body">새 설명<div class="tip-col-callout"><strong>효과</strong> 기대효과</div></div></div></div></span></span>
 - 툴팁 안에 참고이미지가 있으면(화면상 이미지·아이콘) 각 tip-col-body 뒤에 placeholder 추가: <div class="tip-col-img-box">🖼️</div><span class="tip-col-img-cap">참고이미지 (설명)</span>
@@ -1373,9 +1376,11 @@ body{font-family:var(--ff);background:var(--bg-secondary);color:var(--fg-primary
 .tab-item.active{color:var(--brand);border-bottom-color:var(--brand)}
 .pane{display:none}.pane.active{display:block}
 .content{padding:24px 36px 90px;max-width:960px;margin:0 auto}
-.change-wrap{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;vertical-align:top}
-.asis{font-size:11px;color:rgba(0,0,0,0.30);text-decoration:line-through;white-space:nowrap}
-.tobe{font-size:13px;font-weight:600;color:var(--fg-primary);white-space:nowrap;background:rgba(0,184,79,0.18);border-radius:3px;padding:0 3px}
+.change-wrap{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;vertical-align:top;max-width:100%}
+.asis{font-size:1em;color:rgba(0,0,0,0.32);text-decoration:line-through}
+.tobe{font-size:1em;font-weight:600;color:var(--fg-primary);background:rgba(0,184,79,0.18);border-radius:3px;padding:1px 5px;position:relative;margin-left:-5px}
+body{counter-reset:chgno}
+.tobe::before{counter-increment:chgno;content:counter(chgno);position:absolute;top:-8px;left:-8px;width:15px;height:15px;border-radius:50%;background:var(--brand);color:#fff;font-size:9.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,0.28);z-index:6;letter-spacing:0}
 .qi{position:relative;display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;border:1px solid var(--bd-primary);font-size:10px;color:var(--fg-tertiary);cursor:pointer;flex-shrink:0;vertical-align:middle}
 .qi.has-change{border-color:rgba(0,0,0,0.35);background:rgba(0,0,0,0.04);color:var(--fg-secondary)}
 .qi .tip{display:none;position:absolute;left:22px;top:50%;transform:translateY(-50%);background:#222;color:#fff;font-size:12px;line-height:1.7;padding:0;border-radius:8px;width:560px;max-width:70vw;z-index:300;box-shadow:0 8px 32px rgba(0,0,0,0.28);font-weight:400;letter-spacing:var(--ls);overflow:hidden}
