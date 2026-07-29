@@ -3504,16 +3504,27 @@ document.addEventListener('mouseout',function(e){if(e.target.closest('[data-why]
   var sync = function(){ var v = docH(); if(Math.abs((parseInt(fr.style.height)||0)-v) > 4) fr.style.height = v + 'px'; };
   new ResizeObserver(sync).observe(document.body);
   setInterval(sync, 800); sync();
+  setInterval(function(){ refit(); }, 200);
   function fit(el){
     try {
       el.setAttribute('data-uxwfit','');
       var rect = fr.getBoundingClientRect();
       var pv = window.parent;
-      var pvh = (pv.visualViewport && pv.visualViewport.height) || pv.innerHeight
-                || (pv.document && pv.document.documentElement.clientHeight) || 800;
-      var visTop = Math.max(0, -rect.top);
+      var pvh = (pv.document && pv.document.documentElement && pv.document.documentElement.clientHeight)
+                || (pv.visualViewport && pv.visualViewport.height) || pv.innerHeight || 800;
+      if (!pvh || pvh < 240) pvh = 800;
+      /* 부모의 sticky 탭바가 뷰포트 상단에 붙어 있으면 그 아래부터를 가시영역으로 본다 */
+      var pad = 0;
+      try {
+        var st2 = pv.document && pv.document.querySelector('.tab-bar');
+        if (st2) { var r2 = st2.getBoundingClientRect(); if (r2.top < 4 && r2.bottom > 0) pad = r2.bottom; }
+      } catch(e) {}
+      var visTop = Math.max(0, pad - rect.top);
       var visBottom = Math.min(docH(), pvh - rect.top);
       var visH = Math.max(240, visBottom - visTop);
+      var key = visTop + '/' + visH;
+      if (el.getAttribute('data-fitkey') === key) return;
+      el.setAttribute('data-fitkey', key);
       el.style.position = 'absolute';
       el.style.top = visTop + 'px';
       el.style.height = visH + 'px';
