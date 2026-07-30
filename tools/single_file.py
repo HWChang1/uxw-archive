@@ -102,6 +102,12 @@ doc = doc.replace('<a class="hdr-btn" href="fbn_wf/index.html?v=%s" target="_bla
                   '<a class="hdr-btn" href="#" onclick="return __openWF()"')
 assert 'fbn_wf/' not in doc, '부모 문서에 상대경로 잔존'
 
+# 아카이브 셸(LNB) 제거 — 단독본은 문서 하나만 전달하므로 목록 내비게이션은 죽은 링크가 된다
+doc = re.sub(r'<script src="\.\./assets/shell\.js[^>]*></script>', '', doc)
+doc = doc.replace('</head>', '<style>.lnb{display:none!important}'
+                             '#page-content{margin-left:0!important}</style></head>', 1)
+
+
 RUNTIME = """
 <script id="wf-assets">/* 단독본: 와이어프레임 원본을 문서 안에 내장(폴더 없이 파일 하나로 동작) */
 var __A=%s;
