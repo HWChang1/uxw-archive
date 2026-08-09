@@ -1,0 +1,305 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>N배송 FBN Beta 알림 문구_UXW검수본</title>
+<style>
+:root{--brand:#00b84f;--lnk:#1a6dd6;--fg:rgba(0,0,0,.84);--fg2:rgba(0,0,0,.56);--fg3:rgba(0,0,0,.38);--bg:#f7f8fa;--bg2:#f0f1f5;--bd2:rgba(0,0,0,.07);--ff:'Pretendard Variable',-apple-system,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;letter-spacing:-.25px;-webkit-font-smoothing:antialiased}
+.topbar{position:sticky;top:0;z-index:300}
+.rev-bar{background:#1a1a2e;color:#fff;padding:32px 20px;display:flex;align-items:center;gap:12px}
+.rev-title{font-size:20px;font-weight:700}
+.rev-sub{font-size:11px;color:rgba(255,255,255,.42);margin-top:12px}
+.rev-meta{margin-left:auto;display:flex;align-items:center;gap:10px}
+.chg-badge{background:rgba(0,184,79,.16);border:1px solid rgba(0,184,79,.5);border-radius:6px;padding:6px 13px;font-size:12px;color:#fff}
+.chg-badge b{color:#00e676;margin-left:3px}
+.tab-bar{background:#fff;border-bottom:1px solid var(--bd2);padding:0 20px;display:flex;gap:26px;overflow-x:auto}
+.tab-item{padding:12px 0;font-size:13px;font-weight:600;color:var(--fg3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tab-item.active{color:var(--brand);border-bottom-color:var(--brand)}
+.pane{display:none}.pane.active{display:block}
+.content{padding:24px 28px 80px;max-width:920px;margin:0 auto}
+.sec-head{margin-bottom:18px}
+.sec-title{font-size:18px;font-weight:700;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tone-box{background:#fff;border:1px solid var(--bd2);border-radius:8px;padding:16px 18px;margin-bottom:14px}
+.tone-h{font-weight:700;font-size:14px;margin-bottom:10px}
+details.acc{padding:0}
+details.acc>summary{cursor:pointer;padding:14px 18px;list-style:none;display:flex;align-items:center;margin:0;font-weight:700;font-size:14px}
+details.acc>summary::-webkit-details-marker{display:none}
+details.acc>summary::after{content:'▾';margin-left:auto;color:var(--fg3);font-size:11px;transition:transform .2s}
+details.acc[open]>summary::after{transform:rotate(180deg)}
+.acc-body{padding:2px 18px 16px}
+.bg-block{margin-bottom:13px}.bg-block:last-child{margin-bottom:0}
+.bg-label{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;color:#0a7a3c;background:rgba(0,184,79,.1);border-radius:4px;padding:2px 8px;margin-bottom:6px}
+.bg-block p{font-size:12.5px;line-height:1.7;color:var(--fg2);margin:0}
+.kc-h{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;flex-wrap:wrap;gap:2px}
+.kc-num{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.72);color:#fff;font-size:11px;font-weight:700;margin-right:7px;flex-shrink:0}
+.kc-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;color:var(--fg2);background:var(--bg2);border-radius:4px;padding:2px 8px;margin-right:8px;flex-shrink:0}
+.kc-ch{font-size:13px}
+.kc-as{text-decoration:line-through;color:var(--fg3);font-weight:600}
+.kc-to{color:var(--brand);font-weight:800}
+.kc-body{padding-left:26px;margin-bottom:2px}
+.kc-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;font-size:12.5px;line-height:1.65}.kc-row:last-child{margin-bottom:0}
+.kc-k{flex-shrink:0;width:56px;color:var(--fg3);font-weight:700;font-size:11.5px;padding-top:1px}
+.kc-v{color:var(--fg2);flex:1;min-width:0}
+.kc-divider{border-top:1px solid var(--bd2);margin:16px 0}
+.kc-goto{color:var(--lnk);font-weight:700;cursor:pointer;text-decoration:none;border-bottom:1px solid rgba(26,109,214,.4);padding-bottom:1px}
+.kc-goto:hover{border-bottom-color:var(--lnk)}
+.kc-flash{animation:kcflash 1.9s ease-out}
+@keyframes kcflash{0%,20%{outline:3px solid var(--brand);outline-offset:3px}100%{outline:3px solid transparent;outline-offset:3px}}
+.bp-card{background:#fff;border:1px solid var(--bd2);border-radius:8px;padding:14px 16px;margin-bottom:10px}
+.bp-card-head{display:flex;align-items:center;gap:6px;margin-bottom:9px}
+.bp-sec{font-size:11px;font-weight:700;color:var(--fg3)}
+.bp-asis{font-size:12.5px;color:var(--fg3);text-decoration:line-through;margin-bottom:5px}
+.bp-tobe{font-size:13px;font-weight:700;color:#0a7a3c;background:rgba(0,184,79,.12);border-radius:5px;padding:5px 9px;display:inline-block}
+.bp-why{margin-top:9px;font-size:11.5px;color:var(--fg2);line-height:1.6}
+.bp-why-k{color:var(--brand);font-weight:700}
+.bp-empty{color:var(--fg3);font-size:12.5px;padding:20px;text-align:center}
+.lnb{position:fixed;top:0;left:0;width:240px;background:#fff;border-right:1px solid rgba(0,0,0,0.12);display:flex;flex-direction:column;height:100vh;transition:width .2s ease;z-index:400;overflow:hidden}
+.lnb.collapsed{width:48px}
+.lnb-head{padding:20px 18px 14px;border-bottom:1px solid rgba(0,0,0,0.08);flex-shrink:0;display:flex;flex-direction:column}
+.lnb-head-top{display:flex;align-items:center;justify-content:space-between}
+.lnb-title{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:700;color:#00b84f;cursor:pointer;text-decoration:none;overflow:hidden;white-space:nowrap}
+.lnb-title-mark{font-size:16px;flex-shrink:0}.lnb-title-text{overflow:hidden;text-overflow:ellipsis;transition:opacity .15s}
+.lnb.collapsed .lnb-title-text{opacity:0;width:0}
+.lnb-toggle{width:24px;height:24px;border-radius:4px;border:1px solid rgba(0,0,0,0.12);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(0,0,0,0.38);flex-shrink:0}
+.lnb-toggle:hover{background:#f7f8fa}
+.lnb-scroll{flex:1;overflow-y:auto;overflow-x:hidden;padding:8px 0 24px}
+.lnb-section-label{font-size:11px;font-weight:600;color:rgba(0,0,0,0.38);letter-spacing:.4px;padding:14px 18px 6px;white-space:nowrap;transition:opacity .15s}
+.lnb.collapsed .lnb-section-label{opacity:0;pointer-events:none}
+.lnb-item{display:flex;align-items:center;gap:8px;padding:8px 18px;font-size:13px;color:rgba(0,0,0,0.56);cursor:pointer;text-decoration:none;border-left:2px solid transparent;transition:background .12s,color .12s}
+.lnb.collapsed .lnb-item{padding:8px 0;justify-content:center;border-left:none}
+.lnb-item:hover{background:#f7f8fa}
+.lnb-item.active{background:rgba(0,184,79,0.07);color:rgba(0,0,0,0.81);font-weight:600;border-left-color:#00b84f}
+.lnb-item-label{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:opacity .15s}
+.lnb.collapsed .lnb-item-label{opacity:0;width:0;flex:0}
+.lnb-item-icon{font-size:14px;flex-shrink:0}
+.lnb-item-date{font-size:10px;font-weight:400;color:rgba(0,0,0,0.32);white-space:nowrap;margin-left:auto;margin-right:4px;transition:opacity .15s}
+.lnb.collapsed .lnb-item-date{display:none}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block}
+.status-dot.검토중{background:#f5b400}.status-dot.반영완료{background:#00b84f}.status-dot.반영거부{background:#f42428}.status-dot.대기중{background:#c4c8d0}
+#page-content{transition:margin-left .2s ease}
+#page-content{margin-left:240px}
+/* ── 화면 재현(문스톤 킷, .recon-scope 격리) ── */
+:root{--fg-primary:rgba(0,0,0,0.81);--fg-secondary:rgba(0,0,0,0.56);--fg-tertiary:rgba(0,0,0,0.38);--fg-placeholder:rgba(0,0,0,0.26);--fg-counter:#f42428;--fg-link:#00b84f;--bg-primary:#fff;--bg-secondary:#f7f8fa;--bg-tertiary:#f0f1f5;--bg-success:#edfaf3;--bd-primary:rgba(0,0,0,0.18);--bd-secondary:rgba(0,0,0,0.12);--bd-tertiary:rgba(0,0,0,0.08);--brand:#00b84f;--brand-hover:#00a245;--ff:'Pretendard Variable',-apple-system,BlinkMacSystemFont,sans-serif;--ls:-0.25px}.recon-scope *{box-sizing:border-box;margin:0;padding:0}.recon-scope{font-family:var(--ff);background:var(--bg-secondary);color:var(--fg-primary);font-size:13px;letter-spacing:var(--ls);-webkit-font-smoothing:antialiased}.recon-scope .review-bar{background:#1a1a2e;color:#fff;padding:24px 36px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:300;transition:padding .18s ease}.recon-scope .review-bar.rb-mini{padding-top:14px;padding-bottom:14px}.recon-scope .review-bar-title{font-size:20px;font-weight:700}.recon-scope .review-bar-sub{font-size:11px;color:rgba(255,255,255,0.5);margin-top:8px;transition:margin-top .18s ease}.recon-scope .review-bar.rb-mini .review-bar-sub{margin-top:2px}.recon-scope .rb-meta{margin-left:auto;display:flex;align-items:center;gap:10px}.recon-scope .rb-badge{background:rgba(0,184,79,0.2);border:1px solid rgba(0,184,79,0.45);border-radius:6px;padding:6px 13px;font-size:12px;color:#fff;display:flex;align-items:center;gap:7px}.recon-scope .rb-badge b{background:var(--brand);border-radius:99px;font-size:10px;padding:1px 7px}.recon-scope .tab-bar{background:var(--bg-primary);border-bottom:1px solid var(--bd-secondary);padding:0 36px;display:flex;position:sticky;top:var(--bar-h,73px);z-index:190}.recon-scope .tab-item{padding:14px 0;margin-right:28px;font-size:13px;font-weight:600;color:var(--fg-tertiary);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s}.recon-scope .tab-item.active{color:var(--brand);border-bottom-color:var(--brand)}.recon-scope .pane{display:none}.recon-scope .pane.active{display:block}.recon-scope .content{padding:24px 36px 90px;max-width:960px;margin:0 auto}.recon-scope .change-wrap{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;vertical-align:top}.recon-scope .asis{font-size:11px;color:rgba(0,0,0,0.30);text-decoration:line-through;white-space:nowrap}.recon-scope .tobe{font-size:13px;font-weight:600;color:var(--fg-primary);white-space:nowrap;background:rgba(0,184,79,0.18);border-radius:3px;padding:0 3px}.recon-scope .qi{position:relative;display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;border:1px solid var(--bd-primary);font-size:10px;color:var(--fg-tertiary);cursor:pointer;flex-shrink:0;vertical-align:middle}.recon-scope .qi.has-change{border-color:rgba(0,0,0,0.35);background:rgba(0,0,0,0.04);color:var(--fg-secondary)}.recon-scope .qi .tip{display:none;position:absolute;left:22px;top:50%;transform:translateY(-50%);background:#222;color:#fff;font-size:12px;line-height:1.7;padding:0;border-radius:8px;width:560px;max-width:70vw;z-index:300;box-shadow:0 8px 32px rgba(0,0,0,0.28);font-weight:400;letter-spacing:var(--ls);overflow:hidden}.recon-scope .qi .tip::before{content:'';position:absolute;left:-5px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left:0;border-right-color:#222}.recon-scope .qi.open .tip{display:block}.recon-scope .tip-close{position:absolute;top:8px;right:10px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:15px;cursor:pointer;padding:2px 6px;border-radius:4px;line-height:1;z-index:10}.recon-scope .tip-close:hover{color:#fff;background:rgba(255,255,255,0.12)}.recon-scope .tip-outer{display:flex;gap:0;min-width:0}.recon-scope .tip-col{flex:1;padding:14px 16px;min-width:0}.recon-scope .tip-col-asis{border-right:1px solid rgba(255,255,255,0.12)}.recon-scope .tip-col-header{font-size:10px;font-weight:600;letter-spacing:.5px;margin-bottom:10px;display:block;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.12)}.recon-scope .tip-col-header.h-asis{color:rgba(255,255,255,0.4)}.recon-scope .tip-col-header.h-tobe{color:rgba(255,255,255,0.7)}.recon-scope .tip-col-body{font-size:12px;color:rgba(255,255,255,0.75);line-height:1.7}.recon-scope .tip-col-body ul{padding-left:14px;margin-top:4px}.recon-scope .tip-col-body li{margin-bottom:3px}.recon-scope .tip-col-body strong{color:#fff}.recon-scope .tip-col-callout{background:rgba(0,184,79,0.15);border:1px solid rgba(0,184,79,0.3);border-radius:4px;padding:8px 10px;font-size:11px;color:rgba(255,255,255,0.8);margin-top:10px;line-height:1.6}.recon-scope .tip-col-callout strong{color:#4fd98a}.recon-scope .tip-col-title{font-size:13px;font-weight:600;color:#fff;margin-bottom:6px}.recon-scope .tip-col-img{display:block;width:100%;max-width:170px;object-fit:contain;border-radius:4px;margin:10px auto 4px;background:rgba(255,255,255,0.06);padding:6px}.recon-scope .tip-col-img-box{width:100%;max-width:170px;height:96px;background:rgba(255,255,255,0.05);border:1px dashed rgba(255,255,255,0.2);border-radius:6px;display:flex;align-items:center;justify-content:center;margin:10px auto 4px;font-size:22px}.recon-scope .tip-col-img-cap{font-size:10px;color:rgba(255,255,255,0.4);text-align:center;display:block}.recon-scope .tip-col-empty{display:flex;align-items:center;justify-content:center;min-height:100px;font-size:11px;color:rgba(255,255,255,0.25);font-style:italic;border:1px dashed rgba(255,255,255,0.12);border-radius:6px;padding:14px}.recon-scope .data-table{width:100%;border-collapse:collapse;margin:8px 0 16px}.recon-scope .data-table th{background:var(--bg-secondary);font-size:12px;font-weight:600;color:var(--fg-secondary);padding:10px 12px;text-align:left;border-bottom:1px solid var(--bd-secondary);white-space:nowrap}.recon-scope .data-table td{font-size:13px;padding:11px 12px;border-bottom:1px solid var(--bd-tertiary);vertical-align:middle}.recon-scope .data-table tr:last-child td{border-bottom:none}.recon-scope .data-table th.num,.recon-scope .data-table td.num{text-align:right}.recon-scope .panel{background:var(--bg-primary);border:1px solid var(--bd-secondary);border-radius:8px;margin-bottom:16px;overflow:visible}.recon-scope .panel-header{display:flex;align-items:center;padding:0 36px;min-height:72px;border-bottom:1px solid var(--bd-tertiary)}.recon-scope .ph-title{font-size:15px;font-weight:600;flex-shrink:0}.recon-scope .ph-desc{font-size:13px;color:var(--fg-secondary);line-height:18px;margin-left:12px;flex:1}.recon-scope .ph-links{display:flex;gap:16px;margin-left:auto;align-items:center;flex-shrink:0}.recon-scope .text-link{color:var(--fg-link);font-size:13px;cursor:pointer;text-decoration:none}.recon-scope .notice{background:var(--bg-success);border-bottom:1px solid rgba(0,184,79,0.2);padding:10px 36px;font-size:13px;color:#007a35;line-height:18px}.recon-scope .panel-body{padding:0 36px}.recon-scope .form-row{display:grid;grid-template-columns:185px 1fr;gap:0 16px;align-items:center;min-height:49px;padding:8px 0;border-bottom:1px solid var(--bd-tertiary)}.recon-scope .form-row:last-child{border-bottom:none}.recon-scope .form-row.top{align-items:flex-start}.recon-scope .form-label{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600;line-height:18px;flex-wrap:wrap;padding:8px 0}.recon-scope .form-value{display:flex;flex-direction:column;gap:4px;padding:8px 0}.recon-scope .section-sub{font-size:11px;font-weight:400;color:var(--fg-tertiary);display:block;margin-top:1px}.recon-scope .helper{font-size:12px;color:var(--brand);line-height:16px}.recon-scope .helper-muted{font-size:12px;color:var(--fg-tertiary);line-height:16px}.recon-scope .helper-warn{font-size:12px;color:var(--fg-counter);line-height:1.6}.recon-scope .input{height:36px;border:1px solid var(--bd-primary);border-radius:4px;padding:0 12px;font-family:var(--ff);font-size:13px;color:var(--fg-placeholder);background:var(--bg-primary);width:100%;display:flex;align-items:center;justify-content:space-between}.recon-scope .seg{display:inline-flex;border:1px solid var(--bd-primary);border-radius:4px;overflow:hidden}.recon-scope .seg-btn{padding:0 16px;height:36px;display:flex;align-items:center;font-size:13px;font-weight:600;color:var(--fg-secondary);background:var(--bg-primary);cursor:pointer;border:none;outline:none;font-family:var(--ff)}.recon-scope .seg-btn+.seg-btn{border-left:1px solid var(--bd-primary)}.recon-scope .seg-btn.active{background:var(--brand);color:#fff}.recon-scope .radio-group{display:flex;align-items:center;gap:20px;flex-wrap:wrap}.recon-scope .radio-opt{display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;user-select:none}.recon-scope .rc{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--bd-primary);flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--bg-primary)}.recon-scope .radio-opt.checked .rc{border-color:var(--brand);background:var(--brand)}.recon-scope .radio-opt.checked .rc::after{content:'';width:6px;height:6px;border-radius:50%;background:#fff}.recon-scope .preset-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.recon-scope .preset-card{border:1px solid var(--bd-secondary);border-radius:6px;padding:14px 16px;cursor:pointer;transition:border-color .15s}.recon-scope .preset-card.active{border:2px solid var(--brand);background:rgba(0,184,79,0.04)}.recon-scope .pct{font-size:13px;font-weight:600;line-height:18px;margin-bottom:4px}.recon-scope .pcd{font-size:12px;color:var(--fg-secondary);line-height:1.6}.recon-scope .pcd-tags{color:var(--brand);font-weight:500}.recon-scope .pcd .asis{font-size:11px;white-space:normal}.recon-scope .pcd .tobe{font-size:12px;font-weight:400;white-space:normal}.recon-scope .det-badge{display:inline-block;font-size:11px;background:rgba(0,184,79,0.08);color:#007a35;border:1px solid rgba(0,184,79,0.3);border-radius:99px;padding:2px 8px;margin-right:6px}.recon-scope .sub-group{border:1px solid var(--bd-tertiary);border-radius:6px;overflow:visible;margin-top:10px}.recon-scope .sub-group-title{background:var(--bg-secondary);padding:7px 14px;font-size:12px;font-weight:600;color:var(--fg-secondary);border-bottom:1px solid var(--bd-tertiary);border-radius:6px 6px 0 0}.recon-scope .sub-row{display:grid;grid-template-columns:160px 1fr;gap:12px;align-items:center;padding:9px 14px;border-bottom:1px solid var(--bd-tertiary);font-size:13px}.recon-scope .sub-row:last-child{border-bottom:none}.recon-scope .sub-label{color:var(--fg-secondary)}.recon-scope .tag-cost{font-size:11px;background:#fff8e6;color:#995900;border:1px solid #f5c842;border-radius:99px;padding:1px 7px;margin-left:4px}.recon-scope .btn{display:inline-flex;align-items:center;justify-content:center;height:36px;padding:0 16px;border-radius:4px;font-family:var(--ff);font-size:13px;font-weight:600;cursor:pointer;border:none;outline:none}.recon-scope .btn-primary{background:var(--brand);color:#fff}.recon-scope .btn-secondary{background:#fff;color:var(--fg-primary);border:1px solid var(--bd-primary)}.recon-scope .btn-row{display:flex;justify-content:flex-end;gap:8px;padding:16px 36px;border-top:1px solid var(--bd-tertiary)}.recon-scope .why-tip{position:fixed;z-index:99999;background:rgba(14,16,26,0.95);color:rgba(255,255,255,0.92);font-size:12px;line-height:1.65;padding:9px 13px;border-radius:9px;max-width:240px;pointer-events:none;display:none;box-shadow:0 6px 24px rgba(0,0,0,0.4)}.recon-scope .why-tip-label{display:block;font-size:10px;font-weight:600;color:rgba(0,220,120,0.8);margin-bottom:4px;letter-spacing:.4px}.recon-scope [data-why]{cursor:help;text-decoration:underline dotted rgba(0,0,0,0.28);text-underline-offset:2px}
+.why-tip{position:fixed;z-index:99999;background:rgba(14,16,26,0.95);color:rgba(255,255,255,0.92);font-size:12px;line-height:1.65;padding:9px 13px;border-radius:9px;max-width:240px;pointer-events:none;display:none;box-shadow:0 6px 24px rgba(0,0,0,0.4)}
+.why-tip-label{display:block;font-size:10px;font-weight:600;color:rgba(0,220,120,0.8);margin-bottom:4px;letter-spacing:.4px}
+/* ── 마킹 보정 ── */
+.tobe{white-space:normal!important;line-height:1.6}
+.asis{white-space:normal!important;line-height:1.5}
+.change-wrap.mk{position:relative;margin-left:12px}
+.mkn{position:absolute;left:-14px;top:-5px;width:17px;height:17px;border-radius:50%;background:var(--brand);
+  color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:5}
+.mk-new .tobe{box-shadow:0 0 0 1px rgba(0,184,79,.35)}
+.qi.has-change{border-color:var(--brand);color:var(--brand)}
+.qi-n{position:absolute;right:-7px;top:-7px;width:14px;height:14px;border-radius:50%;background:var(--brand);
+  color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.tip{white-space:normal}
+.mk-flash,.mk-flash .tobe{outline:2px solid var(--brand);outline-offset:3px}
+.st-wait,.st-done,.st-end{width:max-content}
+.notice .change-wrap.mk{display:flex;margin:7px 0 11px}
+.gd .change-wrap.mk,.jr .change-wrap.mk{margin-left:16px}
+.notice>div:first-child .change-wrap.mk{margin-top:2px}
+.helper-muted .change-wrap.mk{display:flex}
+/* ── 화면 프레임 ── */
+.scr{background:#fff;border:1px solid var(--bd2);border-radius:10px;overflow:hidden;margin:14px 0 26px}
+.scr-hd{padding:18px 22px 16px;border-bottom:1px solid var(--bd2);display:flex;align-items:flex-end;gap:12px}
+.scr-t{font-size:17px;font-weight:700;display:flex;align-items:center;gap:10px}
+.crumb{font-size:11px;font-weight:500;color:var(--fg3);background:var(--bg2);padding:3px 8px;border-radius:4px}
+.scr-btns{margin-left:auto;display:flex;gap:8px}
+.scr-note{background:rgba(26,109,214,.05);border-bottom:1px solid var(--bd2);padding:8px 22px;font-size:11.5px;color:#1a6dd6}
+.scr-bd{padding:18px 22px 22px;background:var(--bg)}
+.scr .panel{margin-bottom:14px}
+/* ── 검색조건 ── */
+.srch{display:flex;flex-direction:column;gap:0}
+.srch-r{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid rgba(0,0,0,.045);align-items:center}
+.srch-r:last-child{border-bottom:0}
+.srch-l{font-size:12px;color:var(--fg2);font-weight:600}
+.srch-f{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12.5px}
+.sel{display:inline-flex;align-items:center;justify-content:space-between;gap:8px;height:32px;padding:0 10px;
+  border:1px solid rgba(0,0,0,.16);border-radius:4px;background:#fff;font-size:12.5px;color:var(--fg)}
+.sel i{font-style:normal;color:var(--fg3);font-size:10px}
+.chip{height:30px;padding:0 12px;border:1px solid rgba(0,0,0,.16);border-radius:4px;background:#fff;
+  display:inline-flex;align-items:center;font-size:12px;color:var(--fg2)}
+.chip.on{border-color:var(--brand);color:#0a7a3c;background:rgba(0,184,79,.06);font-weight:600}
+.srch-btns{display:flex;gap:8px;justify-content:center;padding:14px 0 2px}
+/* ── 목록 툴바 · 페이저 ── */
+.tbar{display:flex;align-items:center;margin:4px 0 8px}
+.tbar-l{font-size:12.5px;color:var(--fg)}
+.tbar-r{margin-left:auto;display:flex;gap:8px;align-items:center}
+.pager{text-align:center;font-size:12px;color:var(--fg3);padding:10px 0 2px;letter-spacing:6px}
+.pager b{color:var(--fg);background:var(--bg2);padding:2px 7px;border-radius:3px;letter-spacing:0}
+.data-table th{background:var(--bg2);font-size:11px;color:var(--fg2);font-weight:700;padding:9px 8px;
+  border-bottom:1px solid var(--bd2);text-align:left;white-space:nowrap}
+.data-table td{padding:10px 8px;border-bottom:1px solid rgba(0,0,0,.05);font-size:12px;vertical-align:middle}
+.data-table .num{text-align:right;font-variant-numeric:tabular-nums}
+.rid{color:#1a6dd6;text-decoration:underline}
+.st-wait{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;background:rgba(245,180,0,.14);color:#996f00}
+.st-done{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;background:rgba(0,184,79,.1);color:#007a35}
+.st-end{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;background:rgba(0,0,0,.06);color:var(--fg2)}
+/* ── 모달 ── */
+.mo{border:1px solid var(--bd2);border-radius:8px;overflow:hidden;background:#fff;max-width:760px;box-shadow:0 6px 24px rgba(0,0,0,.1)}
+.mo-hd{background:var(--brand);color:#fff;font-size:13px;font-weight:700;padding:11px 14px;display:flex;justify-content:space-between}
+.mo-bd{padding:14px}
+.mo-ft{padding:12px 14px;border-top:1px solid var(--bd2);display:flex;gap:8px;justify-content:flex-end;background:var(--bg)}
+.exl{background:rgba(0,184,79,.07);border:1px solid rgba(0,184,79,.2);padding:10px 12px;border-radius:5px;
+  font-size:12px;line-height:1.85;color:var(--fg);margin-bottom:10px}
+.exl-b{font-size:12.5px;font-weight:700;margin-bottom:8px}
+/* ── 공통 ── */
+.sec-desc{font-size:12px;color:var(--fg2);margin-top:6px;line-height:1.6}
+.note{background:rgba(0,184,79,.07);border-left:3px solid var(--brand);padding:12px 14px;border-radius:0 6px 6px 0;
+  font-size:12.5px;line-height:1.75;margin:14px 0}
+.warn{background:rgba(231,103,106,.08);border-left:3px solid #e7676a}
+.tag{font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;background:var(--bg2);color:var(--fg2)}
+.tag-n{background:rgba(0,184,79,.14);color:#0a7a3c}
+.tag-w{background:rgba(231,103,106,.12);color:#c0392b}
+/* ── 드로어 ── */
+.dr-mask{position:fixed;inset:0;background:rgba(0,0,0,.32);opacity:0;pointer-events:none;transition:opacity .2s;z-index:900}
+.dr-mask.open{opacity:1;pointer-events:auto}
+.dr{position:fixed;top:0;right:0;width:470px;max-width:92vw;height:100vh;background:#fff;z-index:901;
+  transform:translateX(100%);transition:transform .24s ease;display:flex;flex-direction:column;box-shadow:-8px 0 32px rgba(0,0,0,.16)}
+.dr.open{transform:none}
+.dr-head{padding:18px 20px;border-bottom:1px solid var(--bd2);display:flex;align-items:center;justify-content:space-between}
+.dr-x{border:0;background:none;font-size:17px;cursor:pointer;color:var(--fg2)}
+.dr-list{overflow-y:auto;padding:6px 0}
+.dr-item{padding:11px 20px;border-bottom:1px solid rgba(0,0,0,.05);cursor:pointer;display:flex;gap:10px}
+.dr-item:hover{background:var(--bg)}
+.dr-n{width:19px;height:19px;border-radius:50%;background:var(--brand);color:#fff;font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.dr-b{min-width:0}
+.dr-loc{font-size:11px;color:var(--fg3);margin-bottom:3px}
+.dr-as{font-size:11.5px;color:var(--fg3);text-decoration:line-through;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dr-to{font-size:12.5px;font-weight:600;line-height:1.5;margin-top:2px}
+.dr-gp{padding:11px 20px 4px;font-size:11px;font-weight:700;color:var(--brand);letter-spacing:.3px}
+/* ── 타임라인 ── */
+.tl{display:flex;margin:16px 0 6px;overflow-x:auto;padding-bottom:4px}
+.tl-s{flex:1;min-width:130px;position:relative;padding:0 10px}
+.tl-s:not(:last-child)::after{content:'';position:absolute;top:7px;right:0;width:100%;height:2px;background:var(--bd2)}
+.tl-dot{width:15px;height:15px;border-radius:50%;background:#fff;border:3px solid var(--brand);position:relative;z-index:1}
+.tl-when{font-size:11px;font-weight:700;color:var(--brand);margin:8px 0 3px}
+.tl-what{font-size:12px;line-height:1.55}
+.tl-sub{font-size:11px;color:var(--fg3);margin-top:3px;line-height:1.5}
+/* ── 알림 ── */
+.nt-grid{display:grid;grid-template-columns:66px 1fr 1fr;gap:14px;align-items:start;margin-top:8px}
+.nt-h{font-size:11px;font-weight:700;padding-bottom:4px}
+.nt-h.a{color:var(--fg3)}.nt-h.t{color:var(--brand)}
+.nt-lab{font-size:11px;color:var(--fg2);font-weight:600;padding-top:14px}
+.app-card{background:#fff;border:1px solid var(--bd2);border-radius:10px;padding:12px 13px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.app-top{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--fg3);margin-bottom:7px}
+.app-ico{width:15px;height:15px;border-radius:4px;background:var(--brand);color:#fff;font-size:9px;font-weight:700;
+  display:flex;align-items:center;justify-content:center}
+.app-t{font-size:12.5px;font-weight:700;line-height:1.55;margin-bottom:4px}
+.app-b{font-size:12px;color:var(--fg2);line-height:1.7}
+.mail-sh{background:#fff;border:1px solid var(--bd2);border-radius:8px;overflow:hidden}
+.mail-hd{background:var(--bg2);padding:8px 12px;font-size:11px;color:var(--fg2)}
+.mail-bd{padding:13px}
+.mail-tb{width:100%;border-collapse:collapse;margin:9px 0;font-size:11.5px}
+.mail-tb td{padding:5px 8px;border:1px solid var(--bd2)}
+.mail-tb td:first-child{background:var(--bg);color:var(--fg2);width:96px}
+.mail-cta{display:inline-block;background:var(--brand);color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:5px;margin-top:6px}
+/* ── AUAM ── */
+.fl{display:grid;grid-template-columns:100px repeat(4,minmax(0,1fr));gap:1px;background:var(--bd2);
+  border:1px solid var(--bd2);border-radius:8px;overflow:hidden;margin:14px 0}
+.fl>div{background:#fff;padding:10px 11px}
+.fl-hd{background:#1a1a2e!important;color:#fff;font-size:11.5px;font-weight:700;text-align:center}
+.fl-hd small{display:block;font-weight:400;color:rgba(255,255,255,.5);font-size:10px;margin-top:2px}
+.fl-rk{background:var(--bg)!important;font-size:11px;font-weight:700;color:var(--fg2);display:flex;align-items:center}
+.fl-c{font-size:11.5px;line-height:1.65}
+.fl-risk{color:#c0392b}.fl-fix{color:#0a7a3c}
+.fl-tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 5px;border-radius:3px}
+.fl-tag.f{background:rgba(0,184,79,.14);color:#0a7a3c}
+/* ── 여정 · 용어 · 가이드 표 ── */
+.jr{border:1px solid var(--bd2);border-radius:8px;overflow:hidden;margin:14px 0}
+.jr-r{display:grid;grid-template-columns:146px 1fr 1fr;gap:1px;background:var(--bd2)}
+.jr-r>div{background:#fff;padding:10px 12px;font-size:11.5px;line-height:1.62}
+.jr-r.hd>div{background:var(--bg2);font-weight:700;font-size:11px;color:var(--fg2)}
+.jr-st{font-weight:700}
+.jr-st small{display:block;font-weight:400;color:var(--fg3);font-size:10.5px;margin-top:2px}
+.gd{width:100%;border-collapse:collapse;font-size:11.5px;margin:12px 0}
+.gd th,.gd td{border:1px solid var(--bd2);padding:8px 9px;text-align:left;vertical-align:top;line-height:1.6}
+.gd th{background:var(--bg2);font-size:11px;color:var(--fg2);font-weight:700;white-space:nowrap}
+.gd td.c{text-align:center;white-space:nowrap}
+.gd tr.hi td{background:rgba(0,184,79,.06)}
+.gd .own-n{color:#0a7a3c;font-weight:700}
+.gd .own-l{color:var(--fg3)}
+.gd-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--fg2);margin-top:6px}
+
+/* ── 표·마킹 레이아웃 보정 ── */
+.content{max-width:1400px!important}
+.data-table th,.data-table td{font-size:11.5px;padding:8px 7px}
+.data-table th{font-size:10.5px}
+.data-table{table-layout:auto}
+.data-table th{padding-top:15px;vertical-align:bottom}
+.data-table th .change-wrap{gap:0}
+.data-table th .asis,.data-table th .tobe,.data-table td .tobe,.data-table td .asis{white-space:nowrap!important}
+.data-table td{white-space:nowrap}
+.data-table td.wrap{white-space:normal}
+.srch-f .tag{display:inline-flex;align-items:center;gap:6px;line-height:1.7;padding:5px 9px;flex-wrap:wrap}
+.srch-f .change-wrap{margin-left:4px}
+.mo-bd .data-table td{white-space:nowrap;font-size:11.5px}
+
+/* ── 정정 프로세스 흐름 ── */
+.pf{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+.pf-s{flex:1;min-width:150px;background:#fff;border:1px solid var(--bd2);border-radius:8px;padding:11px 12px;position:relative}
+.pf-s:not(:last-child)::after{content:'›';position:absolute;right:-9px;top:50%;transform:translateY(-50%);
+  color:var(--fg3);font-size:15px;z-index:2}
+.pf-off{background:var(--bg2);opacity:.72}
+.pf-who{font-size:10px;font-weight:700;color:var(--brand);letter-spacing:.3px;margin-bottom:4px}
+.pf-off .pf-who{color:var(--fg3)}
+.pf-t{font-size:12.5px;font-weight:700;margin-bottom:4px}
+.pf-d{font-size:11px;color:var(--fg2);line-height:1.55}
+#why-tip{position:fixed;z-index:1200;max-width:330px;background:#222;color:#fff;font-size:11.5px;line-height:1.65;
+  padding:9px 11px;border-radius:6px;display:none;box-shadow:0 4px 16px rgba(0,0,0,.28)}
+</style></head><body>
+<nav class="lnb" id="lnb"></nav>
+<div id="page-content">
+<div class="topbar">
+  <div class="rev-bar">
+    <div><div class="rev-title">N배송 FBN Beta 알림 문구</div><div class="rev-sub">2026.08.07 · N배송플랫폼기획 박선영 · 물류사 배정·계약연동 안내 강화 (검토 기한 8/12)</div></div>
+    <div class="rev-meta"><span class="chg-badge" onclick="drawer(true)">📋 변경 내역 <b>19</b></span></div>
+  </div>
+  <div class="tab-bar"><div class="tab-item active" onclick="tab('bg')">배경 · UX 구조</div><div class="tab-item" onclick="tab('c1')">1. 물류사 선정 완료 알림</div><div class="tab-item" onclick="tab('c2')">2. 계약 연동 완료 알림</div><div class="tab-item" onclick="tab('scr')">3. 신청 후 필수정보 등록</div><div class="tab-item" onclick="tab('rule')">4. 안내 원칙 정리</div></div>
+</div>
+<div id="p-bg" class="pane active"><div class="content"><div class="sec-head"><div class="sec-title">배경 &amp; UX 구조</div></div><details class="acc" open><summary>🗂 배경</summary><div class="acc-body"><div class="bg-block"><span class="bg-label">Problem</span><p>N배송 FBN 오픈 후 <b>물류사 배정 관련 CS가 지속 인입</b>되고 있다. 7/24~8/6 기준 전체 N배송 FBN CS 중 <b>일평균 10~20% 비중</b>. 판매자는 신청 후 “언제 배정되는지 · 지금 어디쯤인지 · 다음에 뭘 해야 하는지”를 알 수 없는 상태로 기다린다.</p></div><div class="bg-block"><span class="bg-label">Current</span><p>알림은 <b>물류사 선정 완료</b>와 <b>계약 연동 완료</b> 두 시점에만 발송되고, 각 알림에는 <b>해당 단계의 완료 일시 하나만</b> 담긴다. 신청 일자는 [신청 후 필수정보 등록] 화면에만 있고 알림에는 없다. 소요 기간(배정 평균 7영업일)은 어디에도 없어 판매자가 남은 기간을 가늠할 수 없다.</p></div><div class="bg-block"><span class="bg-label">Hypothesis</span><p>대기 구간의 문의는 <b>정보 부재가 아니라 기준점 부재</b>에서 온다. ① 알림마다 <b>신청일 → 이번 완료일 → 다음 예상</b> 3점을 함께 주어 스스로 역산하게 하고 ② 소요 기간은 <b>지연을 부르지 않는 표현</b>으로 (평균·최대 구분, 4영업일 강조 지양) ③ 다음 할 일을 <b>실제 화면·버튼 이름</b>으로 지정하면, 배정 관련 CS 비중을 낮출 수 있다.</p></div></div></details><div class="sec-head" style="margin-top:26px"><div class="sec-title">판매자 대기 구간 · 알림이 닿는 시점</div><div class="sec-desc">회색 구간은 판매자가 아무 정보 없이 기다리는 구간입니다. 이번 검수의 목표는 이 구간을 없애는 것이 아니라 <b>예측 가능하게</b> 만드는 것입니다.</div></div><div class="tl"><div class="tl-s"><div class="tl-dot"></div><div class="tl-when">D0 · 신청</div><div class="tl-what">N배송 FBN 신청</div><div class="tl-sub">신청일자 = 역산 기준점(현재 알림에 없음)</div></div><div class="tl-s"><div class="tl-dot"></div><div class="tl-when">D+1~7 영업일</div><div class="tl-what"><span class="tag tag-w">대기 — 알림 없음</span></div><div class="tl-sub">“얼마나 더 기다리나” 문의 집중</div></div><div class="tl-s"><div class="tl-dot"></div><div class="tl-when">배정 완료</div><div class="tl-what">Case 1. 물류사 선정 완료 알림</div><div class="tl-sub">선정 일시만 안내</div></div><div class="tl-s"><div class="tl-dot"></div><div class="tl-when">배정~연동</div><div class="tl-what"><span class="tag tag-w">대기 — 온보딩 진행</span></div><div class="tl-sub">물류사 시스템 가입 필요</div></div><div class="tl-s"><div class="tl-dot"></div><div class="tl-when">연동 완료</div><div class="tl-what">Case 2. 계약 연동 완료 알림</div><div class="tl-sub">연동 일시만 안내</div></div><div class="tl-s"><div class="tl-dot"></div><div class="tl-when">이후</div><div class="tl-what">상품 등록 → 입고 → 판매 개시</div></div></div><div class="note"><b>이번 요청 3가지에 대한 답</b><br>① <b>소요 일시</b> — 배정은 “최대 7영업일”로, 연동은 <b>일수 대신 조건</b>(물류사 가입 완료 후)으로 안내. 4영업일은 표기하지 않음<br>② <b>일자 안내</b> — 알림마다 <b>신청일 · 완료일 · 다음 예상</b> 3점 제공. 화면과 같은 표기 형식으로 통일<br>③ <b>next action</b> — “온보딩·판매 시작” 같은 상태어 대신 <b>실제 할 일과 위치</b>(물류사 시스템 가입 / 상품 등록 · N배송 속성 설정)로 명시</div><div class="sec-head" style="margin-top:30px"><div class="sec-title">판매자 플로우 · Awareness → Understanding → Action → Managing</div><div class="sec-desc">신청 직후부터 판매 개시까지, 알림이 각 단계에서 해야 할 일</div></div><div class="fl"><div class="fl-hd"></div><div class="fl-hd">Awareness<small>인지</small></div><div class="fl-hd">Understanding<small>이해</small></div><div class="fl-hd">Action<small>행동</small></div><div class="fl-hd">Managing<small>관리</small></div><div class="fl-rk">판매자 상태</div><div class="fl-c">신청은 했는데 언제 되는지 모른다.</div><div class="fl-c">배정됐다는데 물류사가 3곳이다. 온보딩이 뭔지 모른다.</div><div class="fl-c">가입은 했는데 그다음이 없다.</div><div class="fl-c">지금 어디까지 왔는지 다시 확인하고 싶다.</div><div class="fl-rk">접점</div><div class="fl-c">신청 완료 화면 · (알림 없음)</div><div class="fl-c">Case 1 알림 · 물류사 온보딩 가이드</div><div class="fl-c">Case 2 알림 · N배송 상품 설정</div><div class="fl-c">[N배송 FBN 신청] 페이지 · 5단계 스텝</div><div class="fl-rk">이탈 · 오해 리스크</div><div class="fl-c fl-risk">기준점이 없어 <b>D+2에도 문의</b>. CS 인입의 시작점.</div><div class="fl-c fl-risk">“온보딩”이 공급자 용어 — <b>무엇을 하라는 건지</b> 모른 채 가이드만 받음.</div><div class="fl-c fl-risk">“판매를 시작해보세요”는 <b>행동이 아니라 상태</b> — 무엇부터 할지 모름.</div><div class="fl-c fl-risk">알림은 지나가면 사라지는데, <b>화면에서 진행 상태·일자</b>를 다시 찾기 어렵다.</div><div class="fl-rk">UX 처방</div><div class="fl-c fl-fix">신청 완료 시점에 <b>신청일 + 최대 7영업일</b> 안내. 화면·알림 동일 문구</div><div class="fl-c fl-fix">온보딩 = <b>물류사 시스템 가입</b>으로 풀어쓰고, 물류사가 여러 곳인 이유를 한 줄로</div><div class="fl-c fl-fix"><b>상품 등록 → N배송 속성 설정</b> 순서로 지정. 제휴 케이스와 같은 수준으로 통일</div><div class="fl-c fl-fix">알림·화면이 <b>같은 일자 세트</b>를 보여주고, 알림에서 화면으로 이동 경로 제공</div></div><div class="sec-head" style="margin-top:30px"><div class="sec-title">관련 용어</div></div><table class="gd"><tr><th>용어</th><th>뜻</th><th>판매자 관점 표현</th></tr><tr class="hi"><td class="c"><b>물류사 온보딩</b></td><td>배정된 물류사의 시스템에 판매자 계정을 만드는 절차</td><td><b>물류사 시스템 가입</b> — 온보딩은 공급자 용어라 무엇을 하라는지 전달되지 않음</td></tr><tr class="hi"><td class="c"><b>계약FEED 연동</b></td><td>물류사와 네이버 간 계약 정보가 시스템에 반영되는 처리</td><td><b>물류사 연동</b> — 판매자가 할 일이 없는 시스템 처리이므로 결과만 통보</td></tr><tr><td class="c"><b>물류사 선정 / 배정</b></td><td>판매 상품에 맞는 물류사를 네이버가 정하는 것</td><td>화면 스텝명이 <b>물류사 연동</b>이므로 알림도 같은 말로</td></tr><tr><td class="c"><b>직계약 / 제휴 물류센터</b></td><td>계약 주체가 다른 두 유형</td><td>판매자에게는 구분 실익이 없음 — 문구는 동일하게, 안내 항목만 다르게</td></tr></table></div></div><div id="p-c1" class="pane"><div class="content"><div class="sec-head"><div class="sec-title">Case 1. 물류사 선정 완료 알림</div><div class="sec-desc">신청 → 배정 완료 시점 발송. 판매자가 “배정 후 무엇을 해야 하는지” 알게 되는 첫 접점</div></div><div class="panel"><div class="panel-header"><div class="ph-title">물류사 선정 완료 (앱 · 메일)</div></div><div class="panel-body"><div class="nt-grid"><div></div><div class="nt-h a">ASIS · 현재 기획안</div><div class="nt-h t">TOBE · 제안</div><div class="nt-lab">앱 알림</div><div><div class="app-card"><div class="app-top"><span class="app-ico">N</span>물류관리<span style="margin-left:auto">오전 10시 00분</span></div><div class="app-t">물류사 온보딩을 진행해주세요</div><div class="app-b">물류사 선정이 완료됐어요.<br>- 물류사 : 품고, 아르고, CJ 대한통운<br>- 선정 일시 : 2026-07-08 00:00<br>온보딩 가이드를 확인하고, 물류사 시스템 가입을 진행해주세요.</div><div style="margin-top:7px;font-size:11.5px;color:#0a7a3c;font-weight:600">물류사 온보딩 가이드 보러가기 &gt;</div></div></div><div><div class="app-card"><div class="app-top"><span class="app-ico">N</span>물류관리<span style="margin-left:auto">오전 10시 00분</span></div><div class="app-t"><span class="change-wrap mk" id="mk1"><span class="mkn">1</span><span class="tobe" data-why="&#x27;온보딩&#x27;은 공급자 용어 — 무엇을 하라는 건지 전달되지 않음. 일어난 일(배정)과 할 일(가입)을 함께">물류사가 배정됐어요 · 물류사 시스템 가입을 진행해주세요</span></span></div><div class="app-b"><span class="change-wrap mk" id="mk2"><span class="mkn">2</span><span class="tobe" data-why="푸시는 핵심 2~3개만 — 신청일(역산 기준)과 할 일만 남기고 물류사 목록·시각은 상세로. 물류사가 여러 곳인 이유와 “모두 가입해야 한다”는 조건을 명시">7월 1일 신청하신 건의 물류사가 배정됐습니다.<br>배정 물류사 3곳 모두 <b>시스템 가입</b>을 마쳐야 연동이 완료됩니다.</span></span></div><div style="margin-top:7px;font-size:11.5px;color:#0a7a3c;font-weight:600"><span class="change-wrap mk" id="mk3"><span class="mkn">3</span><span class="tobe" data-why="가이드를 보는 것이 목적이 아니라 가입이 목적 — 링크 라벨을 행동으로">물류사 시스템 가입하기 ></span></span></div></div></div><div class="nt-lab">메일</div><div><div class="mail-sh"><div class="mail-hd">N 스마트스토어센터</div><div class="mail-bd"><div class="app-t">[N배송 FBN] 물류사 온보딩을 진행해주세요.</div><div class="app-b">물류사 온보딩을 진행해주세요.<br>물류사 선정이 완료됐어요. 온보딩 가이드를 확인하고, 물류사 시스템 가입을 진행해주세요.</div><table class="mail-tb"><tr><td>물류사</td><td>품고, 아르고, CJ대한통운</td></tr><tr><td>선정일시</td><td>2026.07.08 00:00</td></tr></table><span class="mail-cta">물류사 온보딩 가이드 보러가기</span></div></div></div><div><div class="mail-sh"><div class="mail-hd">N 스마트스토어센터</div><div class="mail-bd"><div class="app-t"><span class="change-wrap mk" id="mk4"><span class="mkn">4</span><span class="tobe" data-why="메일함에서 제목만으로 무슨 일이 있었는지(배정) 알 수 있게 — 결과 + 할 일 순서">[N배송 FBN] 물류사가 배정됐습니다 · 물류사 시스템 가입을 진행해주세요</span></span></div><div class="app-b"><span class="change-wrap mk" id="mk5"><span class="mkn">5</span><span class="tobe" data-why="&#x27;~했어요&#x27; 구어체를 판매자센터 기본 톤(~합니다)으로 통일 + 다음 단계까지 서술해 대기 이유를 설명. 권고 일수(4영업일)는 지연 시 신뢰를 잃으므로 조건형으로 대체">2026년 7월 1일 신청하신 N배송 FBN의 물류사가 배정됐습니다.<br>배정된 물류사 <b>3곳 모두 시스템 가입</b>을 마치면 계약 연동이 완료되고, 그 뒤 상품을 등록할 수 있습니다.<br>가입은 물류사 온보딩 진행 상황에 따라 소요 기간이 달라질 수 있습니다.</span></span></div><table class="mail-tb"><tr><td>신청일</td><td>2026.07.01</td></tr><tr><td>배정일</td><td>2026.07.08</td></tr><tr><td>배정 물류사</td><td>품고, 아르고, CJ대한통운</td></tr><tr><td>다음 단계</td><td>물류사 시스템 가입 → 계약 연동</td></tr></table><div style="margin:8px 0 4px"><span class="change-wrap mk" id="mk6"><span class="mkn">6</span><span class="tobe" data-why="완료일 하나만으로는 진행 정도를 알 수 없음 — 신청일·완료일·다음 단계 3점을 주어 판매자가 스스로 역산">신청일 2026.07.01 · 배정일 2026.07.08 · 배정 물류사 품고, 아르고, CJ대한통운 · 다음 단계 물류사 시스템 가입</span></span><br><span class="change-wrap mk" id="mk7"><span class="mkn">7</span><span class="tobe" data-why="앱은 하이픈, 메일은 마침표로 형식이 갈리고 00:00은 배치 시각이라 의미 없음 — 화면 표기와 같은 형식으로 날짜만">2026.07.08 (날짜만 · 화면과 동일 형식)</span></span></div><span class="mail-cta">물류사 시스템 가입하기</span></div></div></div></div></div></div><div class="note"><b>물류사가 여러 곳인 이유를 설명해야 합니다</b> · 배정 결과가 3곳인데 알림은 나열만 합니다. 판매자는 “왜 3곳인지 · 다 가입해야 하는지”를 묻습니다(현재 CS 유형 중 하나). 가입 대상이 전부라는 조건을 문장에 넣고, 상세는 화면에서 확인하도록 했습니다.</div></div></div><div id="p-c2" class="pane"><div class="content"><div class="sec-head"><div class="sec-title">Case 2. 계약 연동 완료 알림</div><div class="sec-desc">직계약(2-1)과 제휴(2-2) 두 유형 · 판매자 관점에서는 같은 사건이므로 문구를 통일</div></div><div class="panel"><div class="panel-header"><div class="ph-title">Case 2-1. 직계약 물류센터 계약 연동완료 (앱 · 메일)</div></div><div class="panel-body"><div class="nt-grid"><div></div><div class="nt-h a">ASIS · 현재 기획안</div><div class="nt-h t">TOBE · 제안</div><div class="nt-lab">앱 알림</div><div><div class="app-card"><div class="app-top"><span class="app-ico">N</span>물류관리<span style="margin-left:auto">오후 3시 20분</span></div><div class="app-t">N배송 물류사 계약 연동완료 알림</div><div class="app-b">물류사와 계약 정보 연동이 완료되었습니다.<br>가이드를 참고하여 N배송 상품 판매를 시작해보세요.<br>- 물류사: 품고 (계약 연동 일시: 2025-10-01 00:00)</div><div style="margin-top:7px;font-size:11.5px;color:#0a7a3c;font-weight:600">N배송 가이드 보러가기 &gt; &nbsp; N배송 상품 설정하러 가기 &gt;</div></div></div><div><div class="app-card"><div class="app-top"><span class="app-ico">N</span>물류관리<span style="margin-left:auto">오후 3시 20분</span></div><div class="app-t"><span class="change-wrap mk" id="mk8"><span class="mkn">8</span><span class="tobe" data-why="알림 채널에서 &#x27;알림&#x27;은 군더더기 + Case 1(행동 요청형)과 형식이 달라 같은 시리즈로 읽히지 않음 — 결과 + 할 일 형식으로 통일">물류사 연동이 완료됐습니다 · 이제 상품을 등록해주세요</span></span></div><div class="app-b"><span class="change-wrap mk" id="mk9"><span class="mkn">9</span><span class="tobe" data-why="&#x27;판매를 시작해보세요&#x27;는 상태 서술 — 실제로 해야 할 두 가지(상품 등록 · N배송 속성 설정)를 순서대로 지정">품고와의 연동이 완료돼 N배송 FBN으로 판매할 수 있습니다.<br>판매할 <b>상품을 등록</b>하고 <b>N배송 속성을 설정</b>해 주세요.</span></span></div><div style="margin-top:7px;font-size:11.5px;color:#0a7a3c;font-weight:600"><span class="change-wrap mk" id="mk10"><span class="mkn">10</span><span class="tobe" data-why="주 행동(상품 등록)을 앞에 두고, 화면의 CTA 이름과 같은 말로 — 지금은 링크 두 개의 우선순위가 없음">상품 등록하기 &gt; · N배송 가이드 &gt;</span></span></div></div></div><div class="nt-lab">메일</div><div><div class="mail-sh"><div class="mail-hd">N 스마트스토어센터</div><div class="mail-bd"><div class="app-t">N배송 물류사 계약 연동완료 안내</div><div class="app-b">안녕하세요. 네이버 스마트스토어센터입니다.<br>{$스토어명} 스토어에 대하여 물류사와 계약 정보 연동이 완료되었습니다.<br>가이드를 참고하여 N배송 상품 판매를 시작해보세요.</div><table class="mail-tb"><tr><td>물류사</td><td>품고</td></tr><tr><td>계약 연동 상태</td><td>연동완료</td></tr><tr><td>계약 연동 일시</td><td>2025-10-01 00:00</td></tr></table><span class="mail-cta">N배송 상품 설정하러 가기</span></div></div></div><div><div class="mail-sh"><div class="mail-hd">N 스마트스토어센터</div><div class="mail-bd"><div class="app-t"><span class="change-wrap mk" id="mk11"><span class="mkn">11</span><span class="tobe" data-why="Case 1과 같은 [N배송 FBN] 프리픽스로 시리즈 인지 + 제목에서 다음 할 일까지">[N배송 FBN] 물류사 연동 완료 · 이제 상품을 등록해주세요</span></span></div><div class="app-b">안녕하세요. 네이버 스마트스토어센터입니다.<br><span class="change-wrap mk" id="mk12"><span class="mkn">12</span><span class="tobe" data-why="&#x27;계약 정보 연동&#x27;은 내부 처리 표현 — 판매자 화면 스텝명(물류사 연동)과 통일하고 다음 행동 두 가지를 명시">{$스토어명} 스토어의 물류사 연동이 완료됐습니다.<br>이제 N배송 FBN으로 판매할 <b>상품을 등록</b>하고 <b>N배송 속성을 설정</b>하면 판매를 시작할 수 있습니다.</span></span></div><table class="mail-tb"><tr><td>신청일</td><td>2026.07.01</td></tr><tr><td>배정일</td><td>2026.07.08</td></tr><tr><td>연동 완료일</td><td>2026.07.14</td></tr><tr><td>물류사</td><td>품고</td></tr><tr><td>연동 상태</td><td>완료</td></tr><tr><td>다음 단계</td><td>상품 등록 → N배송 속성 설정</td></tr></table><div style="margin:8px 0 4px"><span class="change-wrap mk" id="mk13"><span class="mkn">13</span><span class="tobe" data-why="연동 완료일만으로는 전체 소요를 알 수 없음 — 신청부터 연동까지 3점을 한 표에 담아 진행 이력을 완성">신청일 · 배정일 · 연동 완료일 · 물류사 · 다음 단계</span></span><br><span class="change-wrap mk" id="mk14"><span class="mkn">14</span><span class="tobe" data-why="&#x27;계약 연동 상태&#x27;와 &#x27;계약 연동 일시&#x27;가 반복 — 표 제목이 이미 연동 결과이므로 중복 제거">연동 상태 : 완료</span></span></div><span class="mail-cta">상품 등록하기</span></div></div></div></div></div></div><div class="panel"><div class="panel-header"><div class="ph-title">Case 2-2. 제휴 물류센터 계약 연동완료 <span style="font-weight:400;color:var(--fg3);font-size:12px">· 기획안에는 변경 없음</span></div></div><div class="panel-body"><div class="nt-grid"><div></div><div class="nt-h a">ASIS · 현재</div><div class="nt-h t">TOBE · 제안</div><div class="nt-lab">앱 알림</div><div><div class="app-card"><div class="app-top"><span class="app-ico">N</span>물류관리<span style="margin-left:auto">오후 3시 20분</span></div><div class="app-t">상품 등록을 진행해주세요</div><div class="app-b">이제 N배송 FBN으로 판매할 상품을 등록해주세요.</div></div></div><div><div class="app-card"><div class="app-top"><span class="app-ico">N</span>물류관리<span style="margin-left:auto">오후 3시 20분</span></div><div class="app-t">물류사 연동이 완료됐습니다 · 이제 상품을 등록해주세요</div><div class="app-b">제휴 물류센터와의 연동이 완료돼 N배송 FBN으로 판매할 수 있습니다.<br>판매할 <b>상품을 등록</b>하고 <b>N배송 속성을 설정</b>해 주세요.</div></div><div style="margin-top:8px"><span class="change-wrap mk mk-new" id="mk15"><span class="mkn">15</span><span class="tobe" data-why="판매자에게 직계약·제휴는 구분 실익이 없는데 문구가 갈리면 다른 사건으로 읽힘 — 같은 문장, 안내 항목만 유형에 맞게">직계약(2-1)과 동일 문구 사용</span></span></div></div></div></div></div><div class="note">제휴 케이스가 오히려 <b>next action이 명확</b>합니다(상품 등록을 진행해주세요). 직계약 문구를 제휴 수준으로 맞추면 두 유형을 하나의 문장 세트로 관리할 수 있습니다.</div></div></div><div id="p-scr" class="pane"><div class="content"><div class="sec-head"><div class="sec-title">신청 후 필수정보 등록 (화면)</div><div class="sec-desc">알림과 같은 정보를 화면에서도 볼 수 있어야 합니다 — 8/19 개발 목표인 안내 강화안(SPPRODUCT-126924)과 함께 반영 제안</div></div><div class="recon-scope"><div class="scr"><div class="scr-hd"><div class="scr-t">N배송 FBN 신청<span class="crumb">스마트스토어센터 &gt; N배송 &gt; N배송 FBN &gt; 신청 후 필수정보 등록</span></div><div class="scr-btns"><button class="btn btn-secondary">시작 가이드</button></div></div><div class="scr-bd"><div class="panel"><div class="panel-header"><div class="ph-title">N배송 FBN 가입 절차</div></div><div class="panel-body"><div class="scr-bd" style="background:#fff;padding:0"><table class="data-table"><thead><tr><th>Step 01</th><th>Step 02</th><th>Step 03</th><th>Step 04</th><th>Step 05</th></tr></thead><tbody><tr><td>N배송 FBN 신청<br><span style="color:var(--fg3)">커머스솔루션 추가 후 정보 입력</span></td><td>물류사 연동<br><span style="color:var(--fg3)">물류사 선정 후 온보딩 가이드 확인</span></td><td>상품 등록<br><span style="color:var(--fg3)">상품 및 SKU 등록</span></td><td>입고 준비<br><span style="color:var(--fg3)">입고 정보 입력 및 입고 상품 보내기</span></td><td>판매 개시<br><span style="color:var(--fg3)">N배송 FBN 설정 후 판매개시</span></td></tr></tbody></table></div></div></div><div class="note" style="margin:0 0 12px"><span class="change-wrap mk mk-new" id="mk16"><span class="mkn">16</span><span class="tobe" data-why="신청 직후~배정 전이 CS가 가장 몰리는 구간인데 화면에도 기준점이 없음 — 신청일과 최대 소요를 함께 노출해 역산 가능하게">신청일 2026.07.01 · 물류사는 최대 7영업일 내 배정될 예정입니다.</span></span></div><div class="panel"><div class="panel-header"><div class="ph-title">N배송 FBN 물류사 정보</div></div><div class="panel-body"><div class="helper-muted" style="margin-bottom:10px"><span class="change-wrap mk" id="mk17"><span class="mkn">17</span><span class="asis">신청 정보를 입력하고 신청하면 물류사 선정이 진행됩니다.</span><span class="tobe" data-why="언제 끝나는지·어떻게 알게 되는지가 없어 판매자가 화면을 반복 확인 — 소요 기간과 통지 방법을 함께">신청하시면 물류사 배정이 시작되며, 최대 7영업일 내 배정 결과를 알림으로 보내드립니다.</span></span></div><div class="form-row"><div class="form-label">선정 물류사</div><div class="form-value">품고, 아르고, CJ대한통운</div></div><div class="form-row"><div class="form-label">진행 이력</div><div class="form-value"><span class="change-wrap mk mk-new" id="mk19"><span class="mkn">19</span><span class="tobe" data-why="알림은 지나가면 사라지므로 화면이 이력을 보관해야 함 — 알림과 같은 3점 세트를 화면에도 동일 형식으로">신청일 2026.07.01 · 배정일 2026.07.08 · 연동 완료일 2026.07.14</span></span></div></div><div class="form-row"><div class="form-label">물류 담당자</div><div class="form-value">홍길동 · 010-0000-0000</div></div></div></div><div class="panel"><div class="panel-header"><div class="ph-title">신청 완료 팝업</div></div><div class="panel-body"><div class="helper-muted"><span class="change-wrap mk" id="mk18"><span class="mkn">18</span><span class="asis">물류사 선정이 완료되면, 알림이 발송됩니다. 물류 담당자 정보는 이후에도 계속해서 수정 가능하며, 신청 상태는 해당 페이지에서 계속해서 확인 가능합니다.</span><span class="tobe" data-why="가장 궁금한 소요 기간이 빠져 있음 — 기간을 먼저 알리고 나머지는 순서를 정리">물류사 배정은 최대 7영업일이 걸리며, 완료되면 알림을 보내드립니다.<br>진행 상태는 이 페이지에서 언제든 확인할 수 있고, 물류 담당자 정보도 계속 수정할 수 있습니다.</span></span></div></div></div></div></div></div></div></div><div id="p-rule" class="pane"><div class="content"><div class="sec-head"><div class="sec-title">안내 원칙 정리</div><div class="sec-desc">이번 요청 3가지에 대한 답 + 앞으로 알림을 추가할 때 그대로 적용할 규칙</div></div><table class="gd"><tr><th>요청</th><th>결론</th><th>적용 문구 · 근거</th></tr><tr class="hi"><td class="c"><b>① 소요 일시<br>강조</b></td><td>배정은 <b>최대 7영업일</b>로 표기<br>연동은 <b>일수 미표기</b></td><td>“최대”는 지연 시에도 약속을 지키는 표현(평균은 초과 시 불만). 연동은 물류사 온보딩 속도에 좌우되므로 <b>“물류사 가입을 마치면 연동이 완료됩니다”</b>처럼 조건형으로. 4영업일은 표기하지 않음</td></tr><tr class="hi"><td class="c"><b>② 일자 안내</b></td><td>알림·화면 모두 <b>3점 세트</b><br>(신청일 · 이번 완료일 · 다음 단계)</td><td>완료일 하나로는 “얼마나 걸렸고 얼마나 남았는지”를 알 수 없음. 표기는 <b>YYYY.MM.DD</b>로 통일하고 00:00 같은 배치 시각은 노출하지 않음</td></tr><tr class="hi"><td class="c"><b>③ next action</b></td><td><b>할 일 + 위치</b>로 명시</td><td>배정 후 = <b>물류사 시스템 가입</b>(온보딩 ✕), 연동 후 = <b>상품 등록 → N배송 속성 설정</b>(판매 시작 ✕). 링크 라벨도 행동으로(가이드 보러가기 → 가입하기 · 상품 등록하기)</td></tr></table><div class="sec-head" style="margin-top:26px"><div class="sec-title">알림 문장 골격 (신규 알림 추가 시 재사용)</div></div><table class="gd"><tr><th>구성</th><th>규칙</th><th>예</th></tr><tr><td class="c">제목</td><td>[N배송 FBN] + <b>일어난 일</b> + · + <b>할 일</b></td><td>[N배송 FBN] 물류사가 배정됐습니다 · 물류사 시스템 가입을 진행해주세요</td></tr><tr><td class="c">본문 1줄</td><td>기준일 + 결과</td><td>7월 1일 신청하신 건의 물류사가 배정됐습니다.</td></tr><tr><td class="c">본문 2줄</td><td>할 일 + 조건(왜 필요한지)</td><td>배정 물류사 3곳 모두 시스템 가입을 마쳐야 연동이 완료됩니다.</td></tr><tr><td class="c">정보 표</td><td>신청일 · 이번 완료일 · 다음 단계(필요 시 대상)</td><td>신청일 / 배정일 / 배정 물류사 / 다음 단계</td></tr><tr><td class="c">버튼</td><td>주 행동 1개를 앞에, 가이드는 뒤에</td><td>[물류사 시스템 가입하기] [가이드]</td></tr></table><div class="note warn"><b>기획 확인 필요</b><br>① <b>소요 기간 표기 기준</b> — 요청 메일은 배정 “평균 7영업일”인데, FBN 입점 동선 화면·알림은 <b>“최대 7영업일”</b>로 안내 중입니다. 둘 중 하나로 통일해야 하며 <b>최대</b>를 권장합니다(초과 시 문의·불만 방지)<br>② <b>신청 완료 알림 발송 여부</b> — 현재 신청 직후 알림이 없어 대기 구간이 가장 깁니다. 신청 완료 알림 신설이 가능한지<br>③ <b>배정 물류사가 여러 곳일 때</b> — 전부 가입해야 연동이 완료되는지, 일부만 가입해도 순차 연동되는지에 따라 문구가 달라집니다<br>④ <b>화면 반영 범위</b> — 8/19 개발 목표(SPPRODUCT-126924)에 진행 이력(3점 세트) 노출이 포함되는지</div></div></div>
+<div class="dr-mask" id="dr-mask" onclick="drawer(false)"></div><div class="dr" id="dr"><div class="dr-head"><b>변경 내역 19건</b><button class="dr-x" onclick="drawer(false)">✕</button></div><div class="dr-list"><div class="dr-gp">Case 1. 물류사 선정 완료</div><div class="dr-item" onclick="goMark('c1','mk1')"><span class="dr-n">1</span><div class="dr-b"><div class="dr-loc">Case 1 · 물류사 선정 완료 알림 · 앱 타이틀</div><div class="dr-as">물류사 온보딩을 진행해주세요</div><div class="dr-to">물류사가 배정됐어요 · 물류사 시스템 가입을 진행해주세요</div></div></div><div class="dr-item" onclick="goMark('c1','mk2')"><span class="dr-n">2</span><div class="dr-b"><div class="dr-loc">Case 1 · 물류사 선정 완료 알림 · 앱 본문</div><div class="dr-as">물류사 선정이 완료됐어요. / - 물류사 : 품고, 아르고, CJ 대한통운 / - 선정 일시 : 2026-07-08 00:00</div><div class="dr-to">7월 1일 신청하신 건의 물류사가 배정됐습니다.배정 물류사 3곳 모두 시스템 가입을 마쳐야 연동이 완료됩니다.</div></div></div><div class="dr-item" onclick="goMark('c1','mk3')"><span class="dr-n">3</span><div class="dr-b"><div class="dr-loc">Case 1 · 물류사 선정 완료 알림 · 앱 링크</div><div class="dr-as">물류사 온보딩 가이드 보러가기 &gt;</div><div class="dr-to">물류사 시스템 가입하기 &gt;</div></div></div><div class="dr-item" onclick="goMark('c1','mk4')"><span class="dr-n">4</span><div class="dr-b"><div class="dr-loc">Case 1 · 물류사 선정 완료 알림 · 메일 제목</div><div class="dr-as">[N배송 FBN] 물류사 온보딩을 진행해주세요.</div><div class="dr-to">[N배송 FBN] 물류사가 배정됐습니다 · 물류사 시스템 가입을 진행해주세요</div></div></div><div class="dr-item" onclick="goMark('c1','mk5')"><span class="dr-n">5</span><div class="dr-b"><div class="dr-loc">Case 1 · 물류사 선정 완료 알림 · 메일 본문</div><div class="dr-as">물류사 선정이 완료됐어요. 온보딩 가이드를 확인하고, 물류사 시스템 가입을 진행해주세요.</div><div class="dr-to">2026년 7월 1일 신청하신 N배송 FBN의 물류사가 배정됐습니다.배정된 물류사 3곳 모두 시스템 가입을 마치면 계약 연동이 완료되고, 그 뒤 상품을 등록할 수 있습니다.가입은 물류사 온보딩 진행 상황에 따라 소요</div></div></div><div class="dr-item" onclick="goMark('c1','mk6')"><span class="dr-n">6</span><div class="dr-b"><div class="dr-loc">Case 1 · 물류사 선정 완료 알림 · 메일 정보 표</div><div class="dr-as">물류사 · 선정일시(2026.07.08 00:00)</div><div class="dr-to">신청일 2026.07.01 · 배정일 2026.07.08 · 배정 물류사 품고, 아르고, CJ대한통운 · 다음 단계 물류사 시스템 가입</div></div></div><div class="dr-item" onclick="goMark('c1','mk7')"><span class="dr-n">7</span><div class="dr-b"><div class="dr-loc">Case 1 · 물류사 선정 완료 알림 · 일시 표기</div><div class="dr-as">2026-07-08 00:00 (앱) / 2026.07.08 00:00 (메일)</div><div class="dr-to">2026.07.08 (날짜만 · 화면과 동일 형식)</div></div></div><div class="dr-gp">Case 2. 계약 연동 완료</div><div class="dr-item" onclick="goMark('c2','mk8')"><span class="dr-n">8</span><div class="dr-b"><div class="dr-loc">Case 2-1 · 계약 연동 완료 알림 · 앱 타이틀</div><div class="dr-as">N배송 물류사 계약 연동완료 알림</div><div class="dr-to">물류사 연동이 완료됐습니다 · 이제 상품을 등록해주세요</div></div></div><div class="dr-item" onclick="goMark('c2','mk9')"><span class="dr-n">9</span><div class="dr-b"><div class="dr-loc">Case 2-1 · 계약 연동 완료 알림 · 앱 본문</div><div class="dr-as">물류사와 계약 정보 연동이 완료되었습니다. 가이드를 참고하여 N배송 상품 판매를 시작해보세요. - 물류사: 품고 (계약 연동 </div><div class="dr-to">품고와의 연동이 완료돼 N배송 FBN으로 판매할 수 있습니다.판매할 상품을 등록하고 N배송 속성을 설정해 주세요.</div></div></div><div class="dr-item" onclick="goMark('c2','mk10')"><span class="dr-n">10</span><div class="dr-b"><div class="dr-loc">Case 2-1 · 계약 연동 완료 알림 · 앱 링크</div><div class="dr-as">N배송 가이드 보러가기 &gt; / N배송 상품 설정하러 가기 &gt;</div><div class="dr-to">상품 등록하기 &gt; · N배송 가이드 &gt;</div></div></div><div class="dr-item" onclick="goMark('c2','mk11')"><span class="dr-n">11</span><div class="dr-b"><div class="dr-loc">Case 2-1 · 계약 연동 완료 알림 · 메일 제목</div><div class="dr-as">N배송 물류사 계약 연동완료 안내</div><div class="dr-to">[N배송 FBN] 물류사 연동 완료 · 이제 상품을 등록해주세요</div></div></div><div class="dr-item" onclick="goMark('c2','mk12')"><span class="dr-n">12</span><div class="dr-b"><div class="dr-loc">Case 2-1 · 계약 연동 완료 알림 · 메일 본문</div><div class="dr-as">{$스토어명} 스토어에 대하여 물류사와 계약 정보 연동이 완료되었습니다. 가이드를 참고하여 N배송 상품 판매를 시작해보세요.</div><div class="dr-to">{$스토어명} 스토어의 물류사 연동이 완료됐습니다.이제 N배송 FBN으로 판매할 상품을 등록하고 N배송 속성을 설정하면 판매를 시작할 수 있습니다.</div></div></div><div class="dr-item" onclick="goMark('c2','mk13')"><span class="dr-n">13</span><div class="dr-b"><div class="dr-loc">Case 2-1 · 계약 연동 완료 알림 · 메일 정보 표</div><div class="dr-as">물류사 · 계약 연동 상태 · 계약 연동 일시</div><div class="dr-to">신청일 · 배정일 · 연동 완료일 · 물류사 · 다음 단계</div></div></div><div class="dr-item" onclick="goMark('c2','mk14')"><span class="dr-n">14</span><div class="dr-b"><div class="dr-loc">Case 2-1 · 계약 연동 완료 알림 · 메일 정보 표 · 상태값</div><div class="dr-as">계약 연동 상태 : 연동완료</div><div class="dr-to">연동 상태 : 완료</div></div></div><div class="dr-item" onclick="goMark('c2','mk15')"><span class="dr-n">15</span><div class="dr-b"><div class="dr-loc">Case 2-2 · 제휴 물류센터 알림</div><div class="dr-as">(없음 · 신설)</div><div class="dr-to">직계약(2-1)과 동일 문구 사용</div></div></div><div class="dr-gp">신청 후 필수정보 등록</div><div class="dr-item" onclick="goMark('scr','mk16')"><span class="dr-n">16</span><div class="dr-b"><div class="dr-loc">신청 후 필수정보 등록 · 신청 완료 직후 안내</div><div class="dr-as">(없음 · 신설)</div><div class="dr-to">신청일 2026.07.01 · 물류사는 최대 7영업일 내 배정될 예정입니다.</div></div></div><div class="dr-item" onclick="goMark('scr','mk17')"><span class="dr-n">17</span><div class="dr-b"><div class="dr-loc">신청 후 필수정보 등록 · 물류사 정보 섹션 안내</div><div class="dr-as">신청 정보를 입력하고 신청하면 물류사 선정이 진행됩니다.</div><div class="dr-to">신청하시면 물류사 배정이 시작되며, 최대 7영업일 내 배정 결과를 알림으로 보내드립니다.</div></div></div><div class="dr-item" onclick="goMark('scr','mk18')"><span class="dr-n">18</span><div class="dr-b"><div class="dr-loc">신청 후 필수정보 등록 · 신청 완료 팝업</div><div class="dr-as">물류사 선정이 완료되면, 알림이 발송됩니다. 물류 담당자 정보는 이후에도 계속해서 수정 가능하며, 신청 상태는 해당 페이지에서</div><div class="dr-to">물류사 배정은 최대 7영업일이 걸리며, 완료되면 알림을 보내드립니다.진행 상태는 이 페이지에서 언제든 확인할 수 있고, 물류 담당자 정보도 계속 수정할 수 있습니다.</div></div></div><div class="dr-item" onclick="goMark('scr','mk19')"><span class="dr-n">19</span><div class="dr-b"><div class="dr-loc">신청 후 필수정보 등록 · 물류사 정보 섹션 일자</div><div class="dr-as">(없음 · 신설)</div><div class="dr-to">신청일 2026.07.01 · 배정일 2026.07.08 · 연동 완료일 2026.07.14</div></div></div></div></div>
+<div id="why-tip"></div>
+</div>
+<script>
+function tab(name){document.querySelectorAll('.tab-item').forEach(function(t){t.classList.remove('active')});
+ document.querySelectorAll('.pane').forEach(function(p){p.classList.remove('active')});
+ var p=document.getElementById('p-'+name);if(p)p.classList.add('active');
+ document.querySelectorAll('.tab-item').forEach(function(t){if((t.getAttribute('onclick')||'').indexOf("'"+name+"'")>=0)t.classList.add('active')});
+ window.scrollTo(0,0);}
+function goTab(name,anchor){tab(name);if(!anchor)return;setTimeout(function(){var el=document.getElementById(anchor);
+ if(!el)return;el.scrollIntoView({block:'center',behavior:'smooth'});el.classList.add('mk-flash');
+ setTimeout(function(){el.classList.remove('mk-flash')},2200);},90);}
+function drawer(o){document.getElementById('dr').classList.toggle('open',o);
+ document.getElementById('dr-mask').classList.toggle('open',o);}
+function goMark(t,a){drawer(false);goTab(t,a);}
+(function(){var rb=document.querySelector('.rev-bar');if(!rb)return;
+ function u(){document.documentElement.style.setProperty('--bar-h',rb.offsetHeight+'px');}
+ u();window.addEventListener('resize',u);
+ window.addEventListener('scroll',function(){rb.classList.toggle('rb-mini',window.scrollY>8);u();},{passive:true});})();
+/* i-툴팁 클릭 토글 */
+document.querySelectorAll('.qi').forEach(function(q){q.addEventListener('click',function(e){e.stopPropagation();
+ var open=q.classList.contains('open');document.querySelectorAll('.qi.open').forEach(function(x){x.classList.remove('open')});
+ if(!open)q.classList.add('open');});});
+document.addEventListener('click',function(){document.querySelectorAll('.qi.open').forEach(function(q){q.classList.remove('open')});});
+/* 변경 이유 툴팁 — 위 공간 부족 시 자동 아래로, 가시영역 안으로 클램프 */
+(function(){var tip=document.getElementById('why-tip');if(!tip)return;
+ function vp(){var top=8,bar=document.querySelector('.topbar');
+  if(bar){var r=bar.getBoundingClientRect();if(r.top<4&&r.bottom>0)top=r.bottom+8;}
+  var h=document.documentElement.clientHeight||window.innerHeight||800;return {top:top,bottom:h-8};}
+ document.addEventListener('mouseover',function(e){var el=e.target.closest('[data-why]');
+  if(!el||!el.dataset.why)return;tip.textContent=el.dataset.why;tip.style.display='block';
+  var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,v=vp(),top;
+  if(r.top-th-10>=v.top)top=r.top-th-10;else if(r.bottom+th+10<=v.bottom)top=r.bottom+10;
+  else top=Math.max(v.top,Math.min(r.bottom+10,v.bottom-th));
+  tip.style.left=Math.max(8,Math.min(r.left+r.width/2-tw/2,window.innerWidth-tw-8))+'px';
+  tip.style.top=top+'px';});
+ document.addEventListener('mouseout',function(e){if(e.target.closest('[data-why]'))tip.style.display='none';});})();
+</script>
+<script src="../assets/shell.js?v=3"></script>
+<script>(async function(){try{var d=await loadDocs();renderLNB({active:"FBN_Beta알림문구_0807",docs:d});
+var l=document.getElementById('lnb'),pc=document.getElementById('page-content');
+new MutationObserver(function(){pc.style.marginLeft=l.classList.contains('collapsed')?'48px':'240px';})
+ .observe(l,{attributes:true,attributeFilter:['class']});}catch(e){}})();</script>
+</body></html>
