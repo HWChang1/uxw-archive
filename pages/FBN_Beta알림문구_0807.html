@@ -262,6 +262,9 @@ details.acc[open]>summary::after{transform:rotate(180deg)}
 .noti-sub{font-size:11.5px;font-weight:600;color:var(--fg2);background:var(--bg2);border-radius:99px;padding:3px 10px}
 .noti-sec{padding-bottom:30px;margin-bottom:30px;border-bottom:1px solid var(--bd2)}
 .noti-sec:last-child{border-bottom:none;padding-bottom:8px;margin-bottom:0}
+
+/* LNB 접힘 시 본문 여백 — JS 동기화 실패 환경에서도 동작하는 형제 선택자 */
+.lnb.collapsed ~ #page-content{margin-left:48px!important}
 </style></head><body>
 <nav class="lnb" id="lnb"></nav>
 <div id="page-content">
@@ -314,6 +317,7 @@ document.addEventListener('click',function(){document.querySelectorAll('.qi.open
 <script src="../assets/shell.js?v=3"></script>
 <script>(async function(){try{var d=await loadDocs();renderLNB({active:"FBN_Beta알림문구_0807",docs:d});
 var l=document.getElementById('lnb'),pc=document.getElementById('page-content');
-new MutationObserver(function(){pc.style.marginLeft=l.classList.contains('collapsed')?'48px':'240px';})
- .observe(l,{attributes:true,attributeFilter:['class']});}catch(e){}})();</script>
+function syncML(){pc.style.marginLeft=l.classList.contains('collapsed')?'48px':'240px';}
+syncML();setTimeout(syncML,0);setTimeout(syncML,300);
+new MutationObserver(syncML).observe(l,{attributes:true,attributeFilter:['class']});}catch(e){}})();</script>
 </body></html>

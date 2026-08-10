@@ -236,6 +236,9 @@ details.acc[open]>summary::after{transform:rotate(180deg)}
 .mo-bd .data-table td{white-space:nowrap;font-size:11.5px}
 #why-tip{position:fixed;z-index:1200;max-width:330px;background:#222;color:#fff;font-size:11.5px;line-height:1.65;
   padding:9px 11px;border-radius:6px;display:none;box-shadow:0 4px 16px rgba(0,0,0,.28)}
+
+/* LNB 접힘 시 본문 여백 — JS 동기화 실패 환경에서도 동작하는 형제 선택자 */
+.lnb.collapsed ~ #page-content{margin-left:48px!important}
 </style></head><body>
 <nav class="lnb" id="lnb"></nav>
 <div id="page-content">
@@ -288,6 +291,7 @@ document.addEventListener('click',function(){document.querySelectorAll('.qi.open
 <script src="../assets/shell.js?v=3"></script>
 <script>(async function(){try{var d=await loadDocs();renderLNB({active:"반품리포트_정산내재화_0805",docs:d});
 var l=document.getElementById('lnb'),pc=document.getElementById('page-content');
-new MutationObserver(function(){pc.style.marginLeft=l.classList.contains('collapsed')?'48px':'240px';})
- .observe(l,{attributes:true,attributeFilter:['class']});}catch(e){}})();</script>
+function syncML(){pc.style.marginLeft=l.classList.contains('collapsed')?'48px':'240px';}
+syncML();setTimeout(syncML,0);setTimeout(syncML,300);
+new MutationObserver(syncML).observe(l,{attributes:true,attributeFilter:['class']});}catch(e){}})();</script>
 </body></html>
