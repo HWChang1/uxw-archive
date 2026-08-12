@@ -1,0 +1,618 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>N배송 FBN SKU 원포장 출고_UXW검수본</title>
+<style>
+:root{--brand:#00b84f;--lnk:#1a6dd6;--fg:rgba(0,0,0,.84);--fg2:rgba(0,0,0,.56);--fg3:rgba(0,0,0,.38);--bg:#f7f8fa;--bg2:#f0f1f5;--bd2:rgba(0,0,0,.07);--ff:'Pretendard Variable',-apple-system,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--ff);background:var(--bg);color:var(--fg);font-size:13px;letter-spacing:-.25px;-webkit-font-smoothing:antialiased}
+.topbar{position:sticky;top:0;z-index:300}
+.rev-bar{background:#1a1a2e;color:#fff;padding:32px 20px;display:flex;align-items:center;gap:12px}
+.rev-title{font-size:20px;font-weight:700}
+.rev-sub{font-size:11px;color:rgba(255,255,255,.42);margin-top:12px}
+.rev-meta{margin-left:auto;display:flex;align-items:center;gap:10px}
+.chg-badge{background:rgba(0,184,79,.16);border:1px solid rgba(0,184,79,.5);border-radius:6px;padding:6px 13px;font-size:12px;color:#fff}
+.chg-badge b{color:#00e676;margin-left:3px}
+.tab-bar{background:#fff;border-bottom:1px solid var(--bd2);padding:0 20px;display:flex;gap:26px;overflow-x:auto}
+.tab-item{padding:12px 0;font-size:13px;font-weight:600;color:var(--fg3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tab-item.active{color:var(--brand);border-bottom-color:var(--brand)}
+.pane{display:none}.pane.active{display:block}
+.content{padding:24px 28px 80px;max-width:920px;margin:0 auto}
+.sec-head{margin-bottom:18px}
+.sec-title{font-size:18px;font-weight:700;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tone-box{background:#fff;border:1px solid var(--bd2);border-radius:8px;padding:16px 18px;margin-bottom:14px}
+.tone-h{font-weight:700;font-size:14px;margin-bottom:10px}
+details.acc{padding:0}
+details.acc>summary{cursor:pointer;padding:14px 18px;list-style:none;display:flex;align-items:center;margin:0;font-weight:700;font-size:14px}
+details.acc>summary::-webkit-details-marker{display:none}
+details.acc>summary::after{content:'▾';margin-left:auto;color:var(--fg3);font-size:11px;transition:transform .2s}
+details.acc[open]>summary::after{transform:rotate(180deg)}
+.acc-body{padding:2px 18px 16px}
+.bg-block{margin-bottom:13px}.bg-block:last-child{margin-bottom:0}
+.bg-label{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;color:#0a7a3c;background:rgba(0,184,79,.1);border-radius:4px;padding:2px 8px;margin-bottom:6px}
+.bg-block p{font-size:12.5px;line-height:1.7;color:var(--fg2);margin:0}
+.kc-h{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;flex-wrap:wrap;gap:2px}
+.kc-num{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.72);color:#fff;font-size:11px;font-weight:700;margin-right:7px;flex-shrink:0}
+.kc-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;color:var(--fg2);background:var(--bg2);border-radius:4px;padding:2px 8px;margin-right:8px;flex-shrink:0}
+.kc-ch{font-size:13px}
+.kc-as{text-decoration:line-through;color:var(--fg3);font-weight:600}
+.kc-to{color:var(--brand);font-weight:800}
+.kc-body{padding-left:26px;margin-bottom:2px}
+.kc-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;font-size:12.5px;line-height:1.65}.kc-row:last-child{margin-bottom:0}
+.kc-k{flex-shrink:0;width:56px;color:var(--fg3);font-weight:700;font-size:11.5px;padding-top:1px}
+.kc-v{color:var(--fg2);flex:1;min-width:0}
+.kc-divider{border-top:1px solid var(--bd2);margin:16px 0}
+.kc-goto{color:var(--lnk);font-weight:700;cursor:pointer;text-decoration:none;border-bottom:1px solid rgba(26,109,214,.4);padding-bottom:1px}
+.kc-goto:hover{border-bottom-color:var(--lnk)}
+.kc-flash{animation:kcflash 1.9s ease-out}
+@keyframes kcflash{0%,20%{outline:3px solid var(--brand);outline-offset:3px}100%{outline:3px solid transparent;outline-offset:3px}}
+.bp-card{background:#fff;border:1px solid var(--bd2);border-radius:8px;padding:14px 16px;margin-bottom:10px}
+.bp-card-head{display:flex;align-items:center;gap:6px;margin-bottom:9px}
+.bp-sec{font-size:11px;font-weight:700;color:var(--fg3)}
+.bp-asis{font-size:12.5px;color:var(--fg3);text-decoration:line-through;margin-bottom:5px}
+.bp-tobe{font-size:13px;font-weight:700;color:#0a7a3c;background:rgba(0,184,79,.12);border-radius:5px;padding:5px 9px;display:inline-block}
+.bp-why{margin-top:9px;font-size:11.5px;color:var(--fg2);line-height:1.6}
+.bp-why-k{color:var(--brand);font-weight:700}
+.bp-empty{color:var(--fg3);font-size:12.5px;padding:20px;text-align:center}
+.lnb{position:fixed;top:0;left:0;width:240px;background:#fff;border-right:1px solid rgba(0,0,0,0.12);display:flex;flex-direction:column;height:100vh;transition:width .2s ease;z-index:400;overflow:hidden}
+.lnb.collapsed{width:48px}
+.lnb-head{padding:20px 18px 14px;border-bottom:1px solid rgba(0,0,0,0.08);flex-shrink:0;display:flex;flex-direction:column}
+.lnb-head-top{display:flex;align-items:center;justify-content:space-between}
+.lnb-title{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:700;color:#00b84f;cursor:pointer;text-decoration:none;overflow:hidden;white-space:nowrap}
+.lnb-title-mark{font-size:16px;flex-shrink:0}.lnb-title-text{overflow:hidden;text-overflow:ellipsis;transition:opacity .15s}
+.lnb.collapsed .lnb-title-text{opacity:0;width:0}
+.lnb-toggle{width:24px;height:24px;border-radius:4px;border:1px solid rgba(0,0,0,0.12);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(0,0,0,0.38);flex-shrink:0}
+.lnb-toggle:hover{background:#f7f8fa}
+.lnb-scroll{flex:1;overflow-y:auto;overflow-x:hidden;padding:8px 0 24px}
+.lnb-section-label{font-size:11px;font-weight:600;color:rgba(0,0,0,0.38);letter-spacing:.4px;padding:14px 18px 6px;white-space:nowrap;transition:opacity .15s}
+.lnb.collapsed .lnb-section-label{opacity:0;pointer-events:none}
+.lnb-item{display:flex;align-items:center;gap:8px;padding:8px 18px;font-size:13px;color:rgba(0,0,0,0.56);cursor:pointer;text-decoration:none;border-left:2px solid transparent;transition:background .12s,color .12s}
+.lnb.collapsed .lnb-item{padding:8px 0;justify-content:center;border-left:none}
+.lnb-item:hover{background:#f7f8fa}
+.lnb-item.active{background:rgba(0,184,79,0.07);color:rgba(0,0,0,0.81);font-weight:600;border-left-color:#00b84f}
+.lnb-item-label{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:opacity .15s}
+.lnb.collapsed .lnb-item-label{opacity:0;width:0;flex:0}
+.lnb-item-icon{font-size:14px;flex-shrink:0}
+.lnb-item-date{font-size:10px;font-weight:400;color:rgba(0,0,0,0.32);white-space:nowrap;margin-left:auto;margin-right:4px;transition:opacity .15s}
+.lnb.collapsed .lnb-item-date{display:none}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block}
+.status-dot.검토중{background:#f5b400}.status-dot.반영완료{background:#00b84f}.status-dot.반영거부{background:#f42428}.status-dot.대기중{background:#c4c8d0}
+#page-content{transition:margin-left .2s ease}
+#page-content{margin-left:240px}
+/* ── 화면 재현(문스톤 킷, .recon-scope 격리) ── */
+:root{--fg-primary:rgba(0,0,0,0.81);--fg-secondary:rgba(0,0,0,0.56);--fg-tertiary:rgba(0,0,0,0.38);--fg-placeholder:rgba(0,0,0,0.26);--fg-counter:#f42428;--fg-link:#00b84f;--bg-primary:#fff;--bg-secondary:#f7f8fa;--bg-tertiary:#f0f1f5;--bg-success:#edfaf3;--bd-primary:rgba(0,0,0,0.18);--bd-secondary:rgba(0,0,0,0.12);--bd-tertiary:rgba(0,0,0,0.08);--brand:#00b84f;--brand-hover:#00a245;--ff:'Pretendard Variable',-apple-system,BlinkMacSystemFont,sans-serif;--ls:-0.25px}.recon-scope *{box-sizing:border-box;margin:0;padding:0}.recon-scope{font-family:var(--ff);background:var(--bg-secondary);color:var(--fg-primary);font-size:13px;letter-spacing:var(--ls);-webkit-font-smoothing:antialiased}.recon-scope .review-bar{background:#1a1a2e;color:#fff;padding:24px 36px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:300;transition:padding .18s ease}.recon-scope .review-bar.rb-mini{padding-top:14px;padding-bottom:14px}.recon-scope .review-bar-title{font-size:20px;font-weight:700}.recon-scope .review-bar-sub{font-size:11px;color:rgba(255,255,255,0.5);margin-top:8px;transition:margin-top .18s ease}.recon-scope .review-bar.rb-mini .review-bar-sub{margin-top:2px}.recon-scope .rb-meta{margin-left:auto;display:flex;align-items:center;gap:10px}.recon-scope .rb-badge{background:rgba(0,184,79,0.2);border:1px solid rgba(0,184,79,0.45);border-radius:6px;padding:6px 13px;font-size:12px;color:#fff;display:flex;align-items:center;gap:7px}.recon-scope .rb-badge b{background:var(--brand);border-radius:99px;font-size:10px;padding:1px 7px}.recon-scope .tab-bar{background:var(--bg-primary);border-bottom:1px solid var(--bd-secondary);padding:0 36px;display:flex;position:sticky;top:var(--bar-h,73px);z-index:190}.recon-scope .tab-item{padding:14px 0;margin-right:28px;font-size:13px;font-weight:600;color:var(--fg-tertiary);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s}.recon-scope .tab-item.active{color:var(--brand);border-bottom-color:var(--brand)}.recon-scope .pane{display:none}.recon-scope .pane.active{display:block}.recon-scope .content{padding:24px 36px 90px;max-width:960px;margin:0 auto}.recon-scope .change-wrap{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;vertical-align:top}.recon-scope .asis{font-size:11px;color:rgba(0,0,0,0.30);text-decoration:line-through;white-space:nowrap}.recon-scope .tobe{font-size:13px;font-weight:600;color:var(--fg-primary);white-space:nowrap;background:rgba(0,184,79,0.18);border-radius:3px;padding:0 3px}.recon-scope .qi{position:relative;display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;border:1px solid var(--bd-primary);font-size:10px;color:var(--fg-tertiary);cursor:pointer;flex-shrink:0;vertical-align:middle}.recon-scope .qi.has-change{border-color:rgba(0,0,0,0.35);background:rgba(0,0,0,0.04);color:var(--fg-secondary)}.recon-scope .qi .tip{display:none;position:absolute;left:22px;top:50%;transform:translateY(-50%);background:#222;color:#fff;font-size:12px;line-height:1.7;padding:0;border-radius:8px;width:560px;max-width:70vw;z-index:300;box-shadow:0 8px 32px rgba(0,0,0,0.28);font-weight:400;letter-spacing:var(--ls);overflow:hidden}.recon-scope .qi .tip::before{content:'';position:absolute;left:-5px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left:0;border-right-color:#222}.recon-scope .qi.open .tip{display:block}.recon-scope .tip-close{position:absolute;top:8px;right:10px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:15px;cursor:pointer;padding:2px 6px;border-radius:4px;line-height:1;z-index:10}.recon-scope .tip-close:hover{color:#fff;background:rgba(255,255,255,0.12)}.recon-scope .tip-outer{display:flex;gap:0;min-width:0}.recon-scope .tip-col{flex:1;padding:14px 16px;min-width:0}.recon-scope .tip-col-asis{border-right:1px solid rgba(255,255,255,0.12)}.recon-scope .tip-col-header{font-size:10px;font-weight:600;letter-spacing:.5px;margin-bottom:10px;display:block;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.12)}.recon-scope .tip-col-header.h-asis{color:rgba(255,255,255,0.4)}.recon-scope .tip-col-header.h-tobe{color:rgba(255,255,255,0.7)}.recon-scope .tip-col-body{font-size:12px;color:rgba(255,255,255,0.75);line-height:1.7}.recon-scope .tip-col-body ul{padding-left:14px;margin-top:4px}.recon-scope .tip-col-body li{margin-bottom:3px}.recon-scope .tip-col-body strong{color:#fff}.recon-scope .tip-col-callout{background:rgba(0,184,79,0.15);border:1px solid rgba(0,184,79,0.3);border-radius:4px;padding:8px 10px;font-size:11px;color:rgba(255,255,255,0.8);margin-top:10px;line-height:1.6}.recon-scope .tip-col-callout strong{color:#4fd98a}.recon-scope .tip-col-title{font-size:13px;font-weight:600;color:#fff;margin-bottom:6px}.recon-scope .tip-col-img{display:block;width:100%;max-width:170px;object-fit:contain;border-radius:4px;margin:10px auto 4px;background:rgba(255,255,255,0.06);padding:6px}.recon-scope .tip-col-img-box{width:100%;max-width:170px;height:96px;background:rgba(255,255,255,0.05);border:1px dashed rgba(255,255,255,0.2);border-radius:6px;display:flex;align-items:center;justify-content:center;margin:10px auto 4px;font-size:22px}.recon-scope .tip-col-img-cap{font-size:10px;color:rgba(255,255,255,0.4);text-align:center;display:block}.recon-scope .tip-col-empty{display:flex;align-items:center;justify-content:center;min-height:100px;font-size:11px;color:rgba(255,255,255,0.25);font-style:italic;border:1px dashed rgba(255,255,255,0.12);border-radius:6px;padding:14px}.recon-scope .data-table{width:100%;border-collapse:collapse;margin:8px 0 16px}.recon-scope .data-table th{background:var(--bg-secondary);font-size:12px;font-weight:600;color:var(--fg-secondary);padding:10px 12px;text-align:left;border-bottom:1px solid var(--bd-secondary);white-space:nowrap}.recon-scope .data-table td{font-size:13px;padding:11px 12px;border-bottom:1px solid var(--bd-tertiary);vertical-align:middle}.recon-scope .data-table tr:last-child td{border-bottom:none}.recon-scope .data-table th.num,.recon-scope .data-table td.num{text-align:right}.recon-scope .panel{background:var(--bg-primary);border:1px solid var(--bd-secondary);border-radius:8px;margin-bottom:16px;overflow:visible}.recon-scope .panel-header{display:flex;align-items:center;padding:0 36px;min-height:72px;border-bottom:1px solid var(--bd-tertiary)}.recon-scope .ph-title{font-size:15px;font-weight:600;flex-shrink:0}.recon-scope .ph-desc{font-size:13px;color:var(--fg-secondary);line-height:18px;margin-left:12px;flex:1}.recon-scope .ph-links{display:flex;gap:16px;margin-left:auto;align-items:center;flex-shrink:0}.recon-scope .text-link{color:var(--fg-link);font-size:13px;cursor:pointer;text-decoration:none}.recon-scope .notice{background:var(--bg-success);border-bottom:1px solid rgba(0,184,79,0.2);padding:10px 36px;font-size:13px;color:#007a35;line-height:18px}.recon-scope .panel-body{padding:0 36px}.recon-scope .form-row{display:grid;grid-template-columns:185px 1fr;gap:0 16px;align-items:center;min-height:49px;padding:8px 0;border-bottom:1px solid var(--bd-tertiary)}.recon-scope .form-row:last-child{border-bottom:none}.recon-scope .form-row.top{align-items:flex-start}.recon-scope .form-label{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600;line-height:18px;flex-wrap:wrap;padding:8px 0}.recon-scope .form-value{display:flex;flex-direction:column;gap:4px;padding:8px 0}.recon-scope .section-sub{font-size:11px;font-weight:400;color:var(--fg-tertiary);display:block;margin-top:1px}.recon-scope .helper{font-size:12px;color:var(--brand);line-height:16px}.recon-scope .helper-muted{font-size:12px;color:var(--fg-tertiary);line-height:16px}.recon-scope .helper-warn{font-size:12px;color:var(--fg-counter);line-height:1.6}.recon-scope .input{height:36px;border:1px solid var(--bd-primary);border-radius:4px;padding:0 12px;font-family:var(--ff);font-size:13px;color:var(--fg-placeholder);background:var(--bg-primary);width:100%;display:flex;align-items:center;justify-content:space-between}.recon-scope .seg{display:inline-flex;border:1px solid var(--bd-primary);border-radius:4px;overflow:hidden}.recon-scope .seg-btn{padding:0 16px;height:36px;display:flex;align-items:center;font-size:13px;font-weight:600;color:var(--fg-secondary);background:var(--bg-primary);cursor:pointer;border:none;outline:none;font-family:var(--ff)}.recon-scope .seg-btn+.seg-btn{border-left:1px solid var(--bd-primary)}.recon-scope .seg-btn.active{background:var(--brand);color:#fff}.recon-scope .radio-group{display:flex;align-items:center;gap:20px;flex-wrap:wrap}.recon-scope .radio-opt{display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;user-select:none}.recon-scope .rc{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--bd-primary);flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--bg-primary)}.recon-scope .radio-opt.checked .rc{border-color:var(--brand);background:var(--brand)}.recon-scope .radio-opt.checked .rc::after{content:'';width:6px;height:6px;border-radius:50%;background:#fff}.recon-scope .preset-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.recon-scope .preset-card{border:1px solid var(--bd-secondary);border-radius:6px;padding:14px 16px;cursor:pointer;transition:border-color .15s}.recon-scope .preset-card.active{border:2px solid var(--brand);background:rgba(0,184,79,0.04)}.recon-scope .pct{font-size:13px;font-weight:600;line-height:18px;margin-bottom:4px}.recon-scope .pcd{font-size:12px;color:var(--fg-secondary);line-height:1.6}.recon-scope .pcd-tags{color:var(--brand);font-weight:500}.recon-scope .pcd .asis{font-size:11px;white-space:normal}.recon-scope .pcd .tobe{font-size:12px;font-weight:400;white-space:normal}.recon-scope .det-badge{display:inline-block;font-size:11px;background:rgba(0,184,79,0.08);color:#007a35;border:1px solid rgba(0,184,79,0.3);border-radius:99px;padding:2px 8px;margin-right:6px}.recon-scope .sub-group{border:1px solid var(--bd-tertiary);border-radius:6px;overflow:visible;margin-top:10px}.recon-scope .sub-group-title{background:var(--bg-secondary);padding:7px 14px;font-size:12px;font-weight:600;color:var(--fg-secondary);border-bottom:1px solid var(--bd-tertiary);border-radius:6px 6px 0 0}.recon-scope .sub-row{display:grid;grid-template-columns:160px 1fr;gap:12px;align-items:center;padding:9px 14px;border-bottom:1px solid var(--bd-tertiary);font-size:13px}.recon-scope .sub-row:last-child{border-bottom:none}.recon-scope .sub-label{color:var(--fg-secondary)}.recon-scope .tag-cost{font-size:11px;background:#fff8e6;color:#995900;border:1px solid #f5c842;border-radius:99px;padding:1px 7px;margin-left:4px}.recon-scope .btn{display:inline-flex;align-items:center;justify-content:center;height:36px;padding:0 16px;border-radius:4px;font-family:var(--ff);font-size:13px;font-weight:600;cursor:pointer;border:none;outline:none}.recon-scope .btn-primary{background:var(--brand);color:#fff}.recon-scope .btn-secondary{background:#fff;color:var(--fg-primary);border:1px solid var(--bd-primary)}.recon-scope .btn-row{display:flex;justify-content:flex-end;gap:8px;padding:16px 36px;border-top:1px solid var(--bd-tertiary)}.recon-scope .why-tip{position:fixed;z-index:99999;background:rgba(14,16,26,0.95);color:rgba(255,255,255,0.92);font-size:12px;line-height:1.65;padding:9px 13px;border-radius:9px;max-width:240px;pointer-events:none;display:none;box-shadow:0 6px 24px rgba(0,0,0,0.4)}.recon-scope .why-tip-label{display:block;font-size:10px;font-weight:600;color:rgba(0,220,120,0.8);margin-bottom:4px;letter-spacing:.4px}.recon-scope [data-why]{cursor:help;text-decoration:underline dotted rgba(0,0,0,0.28);text-underline-offset:2px}
+.why-tip{position:fixed;z-index:99999;background:rgba(14,16,26,0.95);color:rgba(255,255,255,0.92);font-size:12px;line-height:1.65;padding:9px 13px;border-radius:9px;max-width:240px;pointer-events:none;display:none;box-shadow:0 6px 24px rgba(0,0,0,0.4)}
+.why-tip-label{display:block;font-size:10px;font-weight:600;color:rgba(0,220,120,0.8);margin-bottom:4px;letter-spacing:.4px}
+/* ── 마킹 보정 ── */
+.tobe{white-space:normal!important;line-height:1.6}
+.asis{white-space:normal!important;line-height:1.5}
+.change-wrap.mk{position:relative;margin-left:12px}
+.mkn{position:absolute;left:-14px;top:-5px;width:17px;height:17px;border-radius:50%;background:var(--brand);
+  color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:5}
+.mk-new .tobe{box-shadow:0 0 0 1px rgba(0,184,79,.35)}
+.qi.has-change{border-color:var(--brand);color:var(--brand)}
+.qi-n{position:absolute;right:-7px;top:-7px;width:14px;height:14px;border-radius:50%;background:var(--brand);
+  color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.tip{white-space:normal}
+.mk-flash,.mk-flash .tobe{outline:2px solid var(--brand);outline-offset:3px}
+.st-wait,.st-done,.st-end{width:max-content}
+.notice .change-wrap.mk{display:flex;margin:7px 0 11px}
+.gd .change-wrap.mk,.jr .change-wrap.mk{margin-left:16px}
+.notice>div:first-child .change-wrap.mk{margin-top:2px}
+.helper-muted .change-wrap.mk{display:flex}
+/* ── 화면 프레임 ── */
+.scr{background:#fff;border:1px solid var(--bd2);border-radius:10px;overflow:hidden;margin:14px 0 26px}
+.scr-hd{padding:18px 22px 16px;border-bottom:1px solid var(--bd2);display:flex;align-items:flex-end;gap:12px}
+.scr-t{font-size:17px;font-weight:700;display:flex;align-items:center;gap:10px}
+.crumb{font-size:11px;font-weight:500;color:var(--fg3);background:var(--bg2);padding:3px 8px;border-radius:4px}
+.scr-btns{margin-left:auto;display:flex;gap:8px}
+.scr-note{background:rgba(26,109,214,.05);border-bottom:1px solid var(--bd2);padding:8px 22px;font-size:11.5px;color:#1a6dd6}
+.scr-bd{padding:18px 22px 22px;background:var(--bg)}
+.scr .panel{margin-bottom:14px}
+/* ── 검색조건 ── */
+.srch{display:flex;flex-direction:column;gap:0}
+.srch-r{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid rgba(0,0,0,.045);align-items:center}
+.srch-r:last-child{border-bottom:0}
+.srch-l{font-size:12px;color:var(--fg2);font-weight:600}
+.srch-f{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12.5px}
+.sel{display:inline-flex;align-items:center;justify-content:space-between;gap:8px;height:32px;padding:0 10px;
+  border:1px solid rgba(0,0,0,.16);border-radius:4px;background:#fff;font-size:12.5px;color:var(--fg)}
+.sel i{font-style:normal;color:var(--fg3);font-size:10px}
+.chip{height:30px;padding:0 12px;border:1px solid rgba(0,0,0,.16);border-radius:4px;background:#fff;
+  display:inline-flex;align-items:center;font-size:12px;color:var(--fg2)}
+.chip.on{border-color:var(--brand);color:#0a7a3c;background:rgba(0,184,79,.06);font-weight:600}
+.srch-btns{display:flex;gap:8px;justify-content:center;padding:14px 0 2px}
+/* ── 목록 툴바 · 페이저 ── */
+.tbar{display:flex;align-items:center;margin:4px 0 8px}
+.tbar-l{font-size:12.5px;color:var(--fg)}
+.tbar-r{margin-left:auto;display:flex;gap:8px;align-items:center}
+.pager{text-align:center;font-size:12px;color:var(--fg3);padding:10px 0 2px;letter-spacing:6px}
+.pager b{color:var(--fg);background:var(--bg2);padding:2px 7px;border-radius:3px;letter-spacing:0}
+.data-table th{background:var(--bg2);font-size:11px;color:var(--fg2);font-weight:700;padding:9px 8px;
+  border-bottom:1px solid var(--bd2);text-align:left;white-space:nowrap}
+.data-table td{padding:10px 8px;border-bottom:1px solid rgba(0,0,0,.05);font-size:12px;vertical-align:middle}
+.data-table .num{text-align:right;font-variant-numeric:tabular-nums}
+.rid{color:#1a6dd6;text-decoration:underline}
+.st-wait{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;background:rgba(245,180,0,.14);color:#996f00}
+.st-done{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;background:rgba(0,184,79,.1);color:#007a35}
+.st-end{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;background:rgba(0,0,0,.06);color:var(--fg2)}
+/* ── 모달 ── */
+.mo{border:1px solid var(--bd2);border-radius:8px;overflow:hidden;background:#fff;max-width:760px;box-shadow:0 6px 24px rgba(0,0,0,.1)}
+.mo-hd{background:var(--brand);color:#fff;font-size:13px;font-weight:700;padding:11px 14px;display:flex;justify-content:space-between}
+.mo-bd{padding:14px}
+.mo-ft{padding:12px 14px;border-top:1px solid var(--bd2);display:flex;gap:8px;justify-content:flex-end;background:var(--bg)}
+.exl{background:rgba(0,184,79,.07);border:1px solid rgba(0,184,79,.2);padding:10px 12px;border-radius:5px;
+  font-size:12px;line-height:1.85;color:var(--fg);margin-bottom:10px}
+.exl-b{font-size:12.5px;font-weight:700;margin-bottom:8px}
+/* ── 공통 ── */
+.sec-desc{font-size:12px;color:var(--fg2);margin-top:6px;line-height:1.6}
+.note{background:rgba(0,184,79,.07);border-left:3px solid var(--brand);padding:12px 14px;border-radius:0 6px 6px 0;
+  font-size:12.5px;line-height:1.75;margin:14px 0}
+.warn{background:rgba(231,103,106,.08);border-left:3px solid #e7676a}
+.tag{font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;background:var(--bg2);color:var(--fg2)}
+.tag-n{background:rgba(0,184,79,.14);color:#0a7a3c}
+.tag-w{background:rgba(231,103,106,.12);color:#c0392b}
+/* ── 드로어 ── */
+.dr-mask{position:fixed;inset:0;background:rgba(0,0,0,.32);opacity:0;pointer-events:none;transition:opacity .2s;z-index:900}
+.dr-mask.open{opacity:1;pointer-events:auto}
+.dr{position:fixed;top:0;right:0;width:470px;max-width:92vw;height:100vh;background:#fff;z-index:901;
+  transform:translateX(100%);transition:transform .24s ease;display:flex;flex-direction:column;box-shadow:-8px 0 32px rgba(0,0,0,.16)}
+.dr.open{transform:none}
+.dr-head{padding:18px 20px;border-bottom:1px solid var(--bd2);display:flex;align-items:center;justify-content:space-between}
+.dr-x{border:0;background:none;font-size:17px;cursor:pointer;color:var(--fg2)}
+.dr-list{overflow-y:auto;padding:6px 0}
+.dr-item{padding:11px 20px;border-bottom:1px solid rgba(0,0,0,.05);cursor:pointer;display:flex;gap:10px}
+.dr-item:hover{background:var(--bg)}
+.dr-n{width:19px;height:19px;border-radius:50%;background:var(--brand);color:#fff;font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.dr-b{min-width:0}
+.dr-loc{font-size:11px;color:var(--fg3);margin-bottom:3px}
+.dr-as{font-size:11.5px;color:var(--fg3);text-decoration:line-through;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dr-to{font-size:12.5px;font-weight:600;line-height:1.5;margin-top:2px}
+.dr-gp{padding:11px 20px 4px;font-size:11px;font-weight:700;color:var(--brand);letter-spacing:.3px}
+/* ── 타임라인 ── */
+.tl{display:flex;margin:16px 0 6px;overflow-x:auto;padding-bottom:4px}
+.tl-s{flex:1;min-width:130px;position:relative;padding:0 10px}
+.tl-s:not(:last-child)::after{content:'';position:absolute;top:7px;right:0;width:100%;height:2px;background:var(--bd2)}
+.tl-dot{width:15px;height:15px;border-radius:50%;background:#fff;border:3px solid var(--brand);position:relative;z-index:1}
+.tl-when{font-size:11px;font-weight:700;color:var(--brand);margin:8px 0 3px}
+.tl-what{font-size:12px;line-height:1.55}
+.tl-sub{font-size:11px;color:var(--fg3);margin-top:3px;line-height:1.5}
+/* ── 알림 ── */
+.nt-grid{display:grid;grid-template-columns:66px 1fr 1fr;gap:14px;align-items:start;margin-top:8px}
+.nt-h{font-size:11px;font-weight:700;padding-bottom:4px}
+.nt-h.a{color:var(--fg3)}.nt-h.t{color:var(--brand)}
+.nt-lab{font-size:11px;color:var(--fg2);font-weight:600;padding-top:14px}
+.app-card{background:#fff;border:1px solid var(--bd2);border-radius:10px;padding:12px 13px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.app-top{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--fg3);margin-bottom:7px}
+.app-ico{width:15px;height:15px;border-radius:4px;background:var(--brand);color:#fff;font-size:9px;font-weight:700;
+  display:flex;align-items:center;justify-content:center}
+.app-t{font-size:12.5px;font-weight:700;line-height:1.55;margin-bottom:4px}
+.app-b{font-size:12px;color:var(--fg2);line-height:1.7}
+.mail-sh{background:#fff;border:1px solid var(--bd2);border-radius:8px;overflow:hidden}
+.mail-hd{background:var(--bg2);padding:8px 12px;font-size:11px;color:var(--fg2)}
+.mail-bd{padding:13px}
+.mail-tb{width:100%;border-collapse:collapse;margin:9px 0;font-size:11.5px}
+.mail-tb td{padding:5px 8px;border:1px solid var(--bd2)}
+.mail-tb td:first-child{background:var(--bg);color:var(--fg2);width:96px}
+.mail-cta{display:inline-block;background:var(--brand);color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:5px;margin-top:6px}
+/* ── AUAM ── */
+.fl{display:grid;grid-template-columns:100px repeat(4,minmax(0,1fr));gap:1px;background:var(--bd2);
+  border:1px solid var(--bd2);border-radius:8px;overflow:hidden;margin:14px 0}
+.fl>div{background:#fff;padding:10px 11px}
+.fl-hd{background:#1a1a2e!important;color:#fff;font-size:11.5px;font-weight:700;text-align:center}
+.fl-hd small{display:block;font-weight:400;color:rgba(255,255,255,.5);font-size:10px;margin-top:2px}
+.fl-rk{background:var(--bg)!important;font-size:11px;font-weight:700;color:var(--fg2);display:flex;align-items:center}
+.fl-c{font-size:11.5px;line-height:1.65}
+.fl-risk{color:#c0392b}.fl-fix{color:#0a7a3c}
+.fl-tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 5px;border-radius:3px}
+.fl-tag.f{background:rgba(0,184,79,.14);color:#0a7a3c}
+/* ── 여정 · 용어 · 가이드 표 ── */
+.jr{border:1px solid var(--bd2);border-radius:8px;overflow:hidden;margin:14px 0}
+.jr-r{display:grid;grid-template-columns:146px 1fr 1fr;gap:1px;background:var(--bd2)}
+.jr-r>div{background:#fff;padding:10px 12px;font-size:11.5px;line-height:1.62}
+.jr-r.hd>div{background:var(--bg2);font-weight:700;font-size:11px;color:var(--fg2)}
+.jr-st{font-weight:700}
+.jr-st small{display:block;font-weight:400;color:var(--fg3);font-size:10.5px;margin-top:2px}
+.gd{width:100%;border-collapse:collapse;font-size:11.5px;margin:12px 0}
+.gd th,.gd td{border:1px solid var(--bd2);padding:8px 9px;text-align:left;vertical-align:top;line-height:1.6}
+.gd th{background:var(--bg2);font-size:11px;color:var(--fg2);font-weight:700;white-space:nowrap}
+.gd td.c{text-align:center;white-space:nowrap}
+.gd tr.hi td{background:rgba(0,184,79,.06)}
+.gd .own-n{color:#0a7a3c;font-weight:700}
+.gd .own-l{color:var(--fg3)}
+.gd-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--fg2);margin-top:6px}
+
+/* ── 표·마킹 레이아웃 보정 ── */
+.content{max-width:1400px!important}
+.data-table th,.data-table td{font-size:11.5px;padding:8px 7px}
+.data-table th{font-size:10.5px}
+.data-table{table-layout:auto}
+.data-table th{padding-top:15px;vertical-align:bottom}
+.data-table th .change-wrap{gap:0}
+.data-table th .asis,.data-table th .tobe,.data-table td .tobe,.data-table td .asis{white-space:nowrap!important}
+.data-table td{white-space:nowrap}
+.data-table td.wrap{white-space:normal}
+.srch-f .tag{display:inline-flex;align-items:center;gap:6px;line-height:1.7;padding:5px 9px;flex-wrap:wrap}
+.srch-f .change-wrap{margin-left:4px}
+.mo-bd .data-table td{white-space:nowrap;font-size:11.5px}
+
+/* ── 정정 프로세스 흐름 ── */
+.pf{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+.pf-s{flex:1;min-width:150px;background:#fff;border:1px solid var(--bd2);border-radius:8px;padding:11px 12px;position:relative}
+.pf-s:not(:last-child)::after{content:'›';position:absolute;right:-9px;top:50%;transform:translateY(-50%);
+  color:var(--fg3);font-size:15px;z-index:2}
+.pf-off{background:var(--bg2);opacity:.72}
+.pf-who{font-size:10px;font-weight:700;color:var(--brand);letter-spacing:.3px;margin-bottom:4px}
+.pf-off .pf-who{color:var(--fg3)}
+.pf-t{font-size:12.5px;font-weight:700;margin-bottom:4px}
+.pf-d{font-size:11px;color:var(--fg2);line-height:1.55}
+#why-tip{position:fixed;z-index:1200;max-width:330px;background:#222;color:#fff;font-size:11.5px;line-height:1.65;
+  padding:9px 11px;border-radius:6px;display:none;box-shadow:0 4px 16px rgba(0,0,0,.28)}
+
+/* ── 알림 재현 표준(FBN_입점동선_0728 정본) ── */
+.nt-tobe{cursor:help}
+.nt-grid{display:grid;grid-template-columns:74px 1fr 1fr;gap:12px;align-items:start;margin-bottom:12px}
+.nt-grid.nt-1{grid-template-columns:74px 1fr}
+.nt-head{margin-bottom:6px}
+.nt-cl{font-size:11px;font-weight:700;letter-spacing:.3px;padding:3px 0 0}
+.nt-cl-asis{color:var(--fg3)}
+.nt-cl-tobe{color:#0a7a3c}
+.nt-rl{font-size:11px;font-weight:700;color:var(--fg2);text-align:left;padding-top:0}
+.noti-h{font-size:16px;font-weight:800;color:var(--fg);margin:0 0 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.noti-sub{font-size:11.5px;font-weight:600;color:var(--fg2);background:var(--bg2);border-radius:99px;padding:3px 10px}
+.noti-sec{padding-bottom:30px;margin-bottom:30px;border-bottom:1px solid var(--bd2)}
+.noti-sec:last-child{border-bottom:none;padding-bottom:8px;margin-bottom:0}
+
+/* LNB 접힘 시 본문 여백 — JS 동기화 실패 환경에서도 동작하는 형제 선택자 */
+.lnb.collapsed ~ #page-content{margin-left:48px!important}
+/* ── 문구 후보 비교 카드 ── */
+.cand{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.cand-c{border:1px solid var(--bd2);border-radius:8px;padding:13px 14px;background:#fff}
+.cand-c.cand-on{border-color:var(--brand);box-shadow:0 0 0 1px rgba(0,184,79,.25)}
+.cand-h{font-size:11px;font-weight:700;letter-spacing:.3px;margin-bottom:9px;display:flex;align-items:center;gap:6px}
+.cand-h-o{color:var(--fg3)}.cand-h-a{color:#0a7a3c}.cand-h-b{color:#1a6dd6}
+.cand-b{font-size:12.5px;line-height:20px;color:var(--fg);padding:11px 12px;background:#f7f8fa;
+  border:1px solid #eef1f4;border-radius:6px;min-height:84px}
+.cand-w{font-size:11.5px;line-height:1.7;color:var(--fg2);margin-top:9px}
+@media (max-width:1100px){.cand{grid-template-columns:1fr}}
+/* ── 발송 조건 케이스 비교 ── */
+.case{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:6px}
+.case-c{border:1px solid var(--bd2);border-radius:8px;padding:15px 16px;background:#fff}
+.case-h{font-size:13px;font-weight:800;display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.case-b{font-size:10.5px;font-weight:600;color:var(--fg2);background:var(--bg2);border-radius:99px;padding:3px 9px}
+.case-b-w{background:rgba(231,103,106,.1);color:#c0392b}
+.case-l{margin:0 0 12px;padding-left:17px}
+.case-l li{font-size:12px;line-height:1.75;color:var(--fg)}
+.case-p{margin-bottom:10px}
+.case-arrow{font-size:11px;font-weight:700;color:var(--brand);text-align:center;padding:6px 0 10px;position:relative}
+.case-arrow::before{content:'↓';display:block;font-size:14px;margin-bottom:2px}
+.case-w{font-size:11.5px;line-height:1.7;color:var(--fg2);border-top:1px solid var(--bd2);padding-top:10px}
+@media (max-width:1100px){.case{grid-template-columns:1fr}}
+/* ── 시나리오 스윔레인 ── */
+.sw{display:grid;grid-template-columns:104px repeat(4,minmax(0,1fr));gap:1px;background:var(--bd2);
+  border:1px solid var(--bd2);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.sw>div{background:#fff;padding:10px 11px}
+.sw-h{background:var(--bg2)!important;font-size:11px;font-weight:700;color:var(--fg2);text-align:center;line-height:1.5}
+.sw-sub{font-weight:400;color:var(--fg3);font-size:10px}
+.sw-r{background:var(--bg)!important;font-size:11.5px;font-weight:800;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.sw-r-a{border-left:3px solid #e7676a}
+.sw-r-b{border-left:3px solid var(--brand)}
+.sw-tag{font-size:10px;font-weight:600;color:var(--fg3)}
+.sw-c{display:flex;align-items:center;justify-content:center;text-align:center}
+.sw-chip{font-size:11px;line-height:1.55;color:var(--fg);background:var(--bg2);border-radius:5px;padding:6px 9px;width:100%}
+.sw-chip-on{background:rgba(0,184,79,.14);color:#0a7a3c;font-weight:600}
+.sw-chip-mute{background:transparent;color:var(--fg3);border:1px dashed var(--bd2)}
+.sw-none{font-size:11px;color:var(--fg3)}
+.swx{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:4px}
+.swx-c{border:1px solid var(--bd2);border-radius:8px;padding:12px 14px;background:#fff}
+.swx-h{font-size:11.5px;font-weight:800;margin-bottom:6px}
+.swx-h-a{color:#c0392b}.swx-h-b{color:#0a7a3c}
+.swx-b{font-size:11.5px;line-height:1.7;color:var(--fg2)}
+@media (max-width:1100px){.sw{grid-template-columns:1fr}.swx{grid-template-columns:1fr}}
+/* ── 알림 3열(ASIS · TOBE1 · TOBE2) ── */
+.nt-grid.nt-3{grid-template-columns:74px repeat(3,minmax(0,1fr))}
+.nt-x{font-size:11.5px;color:var(--fg3);background:var(--bg);border:1px dashed var(--bd2);border-radius:6px;
+  padding:14px 12px;text-align:center;line-height:1.6}
+.nt-x span{font-size:10.5px;color:var(--fg3);opacity:.8}
+/* ── 시나리오 타임라인 ── */
+
+/* ── 타임라인 노드 강조 ── */
+.tl-s.tl-hot{background:rgba(0,184,79,.07);border:1px solid rgba(0,184,79,.28);border-radius:8px;
+  padding:9px 11px 11px;margin-top:-9px}
+.tl-hot .tl-dot{background:var(--brand);border-color:var(--brand);box-shadow:0 0 0 4px rgba(0,184,79,.16)}
+.tl-hot .tl-what{font-weight:800}
+.tl-mark{background:rgba(0,184,79,.24);border-radius:3px;padding:1px 5px;font-weight:800;color:rgba(0,0,0,.82)}
+.sc-hd{font-size:13px;font-weight:800;color:var(--fg);margin:2px 0 10px}
+
+
+/* ── 실제 메일 템플릿 재현 ── */
+.mt{border:1px solid #e3e6ea;border-radius:8px;background:#fff;overflow:hidden}
+.mt-hd{padding:16px 18px 12px;display:flex;align-items:center;justify-content:space-between}
+.mt-logo{font-size:14.5px;font-weight:800;color:rgba(0,0,0,.85)}
+.mt-logo sup{font-size:8.5px;font-weight:600;color:var(--fg3);margin-left:3px;vertical-align:super}
+.mt-btn{font-size:10.5px;color:var(--fg2);border:1px solid rgba(0,0,0,.16);border-radius:4px;padding:6px 10px}
+.mt-bd{padding:8px 18px 18px}
+.mt-t{font-size:19px;font-weight:800;line-height:1.42;color:rgba(0,0,0,.86);margin-bottom:10px}
+.mt-t em{font-style:normal;color:#03c75a}
+.mt-p{font-size:12.5px;line-height:1.78;color:rgba(0,0,0,.6);margin-bottom:14px}
+.mt-info{background:#f5f6f8;border-radius:6px;padding:12px 14px;font-size:12px;line-height:1.95;
+  color:rgba(0,0,0,.62);margin-bottom:20px}
+.mt-steps{margin-top:4px}
+.mt-st{position:relative;padding:0 0 20px 42px}
+.mt-st:not(.mt-last)::before{content:'';position:absolute;left:13px;top:28px;bottom:0;width:2px;background:#e6e8eb}
+.mt-done:not(.mt-last)::before,.mt-cur:not(.mt-last)::before{background:rgba(3,199,90,.5)}
+.mt-ic{position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:11px;font-weight:800;background:#f0f1f3;color:var(--fg3);border:1px solid #e6e8eb}
+.mt-done .mt-ic{background:#03c75a;color:#fff;border-color:#03c75a}
+.mt-cur .mt-ic{background:#fff;color:#03c75a;border:2px solid #03c75a}
+.mt-sh{font-size:13.5px;font-weight:800;color:rgba(0,0,0,.85);padding-top:5px}
+.mt-next .mt-sh{color:rgba(0,0,0,.45)}
+.mt-mstrong{font-size:13.5px;font-weight:800;color:rgba(0,0,0,.85);margin-right:6px}
+.mt-meta{font-size:11px;font-weight:600;color:var(--fg3);margin-left:8px}
+.mt-ss{font-size:11.5px;color:var(--fg3);margin-top:3px;line-height:1.6}
+.mt-note{background:#f5f6f8;border:1px solid #eceef1;border-radius:8px;padding:12px 13px;margin-top:12px;font-size:12px;line-height:1.75;color:rgba(0,0,0,.6)}
+.mt-note-warn{background:rgba(245,180,0,.09);border:1px solid rgba(245,180,0,.38);
+  display:flex;gap:9px;align-items:flex-start;color:rgba(0,0,0,.62)}
+.mt-note-warn b{font-weight:700;color:rgba(0,0,0,.75)}
+.mt-note-i{flex-shrink:0;width:17px;height:17px;border-radius:50%;background:#f5b400;color:#fff;font-size:11px;
+  font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.cand .mt-note{margin-top:0}
+.mt-card{background:#f5f6f8;border-radius:8px;padding:16px;margin-top:12px;text-align:center}
+.mt-ill{font-size:30px;line-height:1;margin-bottom:8px}
+.mt-ct{font-size:12px;line-height:1.7;color:rgba(0,0,0,.6);margin-bottom:12px}
+.mt-cl{font-size:11px;font-weight:700;color:var(--fg3);margin-bottom:5px}
+.mt-cv{font-size:13.5px;font-weight:800;color:rgba(0,0,0,.82);line-height:1.6;margin-bottom:12px}
+.mt-inwarn{text-align:left;margin:0 0 12px}
+.mt-inwarn .mt-note{margin-top:0}
+.mt-cv2{font-size:13px;font-weight:800;color:rgba(0,0,0,.82);margin-bottom:8px;line-height:1.6}
+.mt-cta{background:#03c75a;color:#fff;font-size:12.5px;font-weight:700;padding:12px;border-radius:6px}
+.mt-ft{border-top:1px solid #eef1f4;padding:13px 18px;font-size:10.5px;line-height:1.75;color:var(--fg3)}
+.mt-lk{color:#1a6dd6;text-decoration:underline}
+/* ── 시나리오 블록(라벨+설명 → 타임라인 → 장단점) ── */
+.sc-blk{margin-bottom:30px}
+.sc-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.sc-top .sc-tl-lb{position:static;top:auto;left:auto}
+.sc-desc{font-size:12.5px;font-weight:700;color:var(--fg)}
+.sc-blk .tl{margin:0}
+.sc-pc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 26px;margin-bottom:14px}
+.sc-p{font-size:11.5px;line-height:1.75;color:var(--fg2);padding:0}
+.sc-p-h{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.4px;color:var(--fg3);margin-right:7px}
+.sc-p b{font-weight:700;color:var(--fg)}
+@media (max-width:1100px){.sc-pc{grid-template-columns:1fr}}
+.sc-l{margin:0 0 16px;padding-left:18px}
+.sc-l li{font-size:12.5px;line-height:1.9;color:var(--fg)}
+.sc-t{font-size:11px;color:var(--fg2);background:var(--bg2);border-radius:99px;padding:2px 9px;margin-left:6px}
+.sc-tl-r{position:relative;padding-left:96px;margin-bottom:18px}
+.sc-tl-lb{position:absolute;left:0;top:14px;font-size:11px;font-weight:800;padding:4px 9px;border-radius:5px}
+.sc-tl-a{background:rgba(231,103,106,.12);color:#c0392b}
+.sc-tl-b{background:rgba(0,184,79,.14);color:#0a7a3c}
+.sc-tl-r .tl{margin:0}
+@media (max-width:1100px){.nt-grid.nt-3{grid-template-columns:1fr}.sc-tl-r{padding-left:0}.sc-tl-lb{position:static;display:inline-block;margin-bottom:8px}}
+
+
+
+
+</style></head><body>
+<nav class="lnb" id="lnb"></nav>
+<div id="page-content">
+<div class="topbar">
+  <div class="rev-bar">
+    <div><div class="rev-title">N배송 FBN SKU 원포장 출고</div><div class="rev-sub">2026.08.12 · N배송플랫폼기획 홍지호 · SKU META 정보 추가 및 입력 개선 (검토 기한 8/14)</div></div>
+    <div class="rev-meta"><span class="chg-badge" onclick="drawer(true)">📋 변경 내역 <b>11</b></span></div>
+  </div>
+  <div class="tab-bar"><div class="tab-item active" onclick="tab('sku')">1. SKU 등록/수정</div><div class="tab-item" onclick="tab('alert')">2. 알럿 · 에러 문구</div><div class="tab-item" onclick="tab('bg')">3. 배경 & 변경내역</div></div>
+</div>
+<div id="p-sku" class="pane active"><div class="content"><div class="recon-scope"><div class="scr"><div class="scr-hd"><div class="scr-t">SKU 등록<span class="crumb">N배송 &gt; SKU재고 &gt; SKU 정보</span></div></div><div class="scr-bd"><style>
+.sk-note{font-size:12px;line-height:19px;color:rgba(0,0,0,.5);margin-top:7px}
+.sk-note b{color:rgba(0,0,0,.62)}
+.rd{display:inline-flex;gap:6px;flex-wrap:wrap}
+.rd i{font-style:normal;display:inline-flex;align-items:center;gap:5px;border:1px solid #dfe3e8;
+  border-radius:5px;padding:7px 13px;font-size:13px;color:rgba(0,0,0,.66);background:#fff;white-space:nowrap}
+.rd i.on{border-color:#03c75a;color:#0a7a3c;font-weight:700;background:rgba(0,184,79,.06)}
+.rd i:before{content:'';width:12px;height:12px;border-radius:50%;border:1.5px solid #ccd2d8;flex-shrink:0}
+.rd i.on:before{border:4px solid #03c75a}
+.rd.dis i{background:#f5f6f8;color:rgba(0,0,0,.3);border-color:#e8ebee}
+.rd.dis i.on:before{border-color:#c8ccd0}
+.rd.dis i:before{border-color:#d8dce0}
+.inp{display:inline-flex;align-items:center;border:1px solid #dfe3e8;border-radius:5px;padding:7px 10px;
+  font-size:13px;color:rgba(0,0,0,.4);background:#fff;min-width:150px;justify-content:space-between}
+.inp em{font-style:normal;font-size:11px;color:rgba(0,0,0,.3);margin-left:8px}
+.unit{display:inline-flex;margin-left:6px}
+.unit s{text-decoration:none;font-size:12px;border:1px solid #dfe3e8;padding:6px 9px;color:rgba(0,0,0,.45);background:#fff}
+.unit s.on{background:#f0f2f5;color:rgba(0,0,0,.72);font-weight:700}
+.unit s:first-child{border-radius:5px 0 0 5px}
+.unit s:last-child{border-radius:0 5px 5px 0;border-left:0}
+.szrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.szrow > span{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:rgba(0,0,0,.55)}
+.err{font-size:12px;line-height:19px;color:#f42428;margin-top:7px}
+.pset{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.pcard{flex:1;min-width:212px;border:1px solid #e3e6ea;border-radius:8px;padding:14px;background:#fff}
+.pcard.on{border-color:#03c75a;box-shadow:0 0 0 1px #03c75a inset}
+.pc-t{font-size:13.5px;font-weight:800;color:rgba(0,0,0,.85);margin-bottom:6px}
+.pc-d{font-size:12px;line-height:18px;color:rgba(0,0,0,.5);margin-bottom:9px}
+.pc-tag{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:11px}
+.pc-tag b{font-weight:600;font-size:10.5px;color:#0a7a3c;background:rgba(0,184,79,.1);border-radius:3px;padding:2px 6px}
+.pc-kv{border-top:1px solid #f0f2f5;padding-top:9px;font-size:12px;line-height:20px}
+.pc-kv div{display:flex;justify-content:space-between;gap:10px}
+.pc-kv span:first-child{color:rgba(0,0,0,.45)}
+.pc-kv span:last-child{color:rgba(0,0,0,.72);font-weight:600;text-align:right}
+.pc-kv .cost{font-size:10px;color:#f5b400;font-weight:700;margin-right:4px}
+.pc-btn{margin-top:11px;text-align:center;font-size:12.5px;font-weight:700;padding:9px;border-radius:6px;
+  border:1px solid #03c75a;color:#0a7a3c;background:#fff}
+.pcard.on .pc-btn{background:#03c75a;color:#fff;border-color:#03c75a}
+.dimbox{background:#f5f6f8;border:1px dashed #d5d9de;border-radius:6px;padding:12px 13px;margin-top:10px}
+.dimbox .dl{font-size:12px;font-weight:700;color:rgba(0,0,0,.5);margin-bottom:8px}
+.al{max-width:460px;border:1px solid #e0e3e7;border-radius:10px;background:#fff;
+  box-shadow:0 8px 26px rgba(0,0,0,.1);overflow:hidden;margin-top:4px}
+.al-hd{display:flex;align-items:center;justify-content:space-between;padding:15px 18px 0}
+.al-t{font-size:14px;font-weight:800;color:#0a7a3c}
+.al-t.plain{color:rgba(0,0,0,.85)}
+.al-x{color:rgba(0,0,0,.3);font-size:13px}
+.al-bd{padding:12px 18px 18px;font-size:13px;line-height:21px;color:rgba(0,0,0,.72);font-weight:700}
+.al-ft{border-top:1px solid #f0f2f5;padding:11px;display:flex;gap:8px;justify-content:center}
+.al-ft b{font-size:12.5px;font-weight:700;padding:9px 26px;border-radius:6px;background:#03c75a;color:#fff}
+.al-ft b.gh{background:#fff;border:1px solid #dfe3e8;color:rgba(0,0,0,.6)}
+.gist{background:rgba(0,184,79,.07);border:1px solid rgba(0,184,79,.28);border-radius:8px;
+  padding:14px 16px;margin:0 0 18px;font-size:13px;line-height:21px;color:rgba(0,0,0,.72)}
+.gist b{color:rgba(0,0,0,.85)}
+.gist ul{margin:8px 0 0;padding-left:18px}
+.gist li{margin-bottom:4px}
+.sk-sub{font-size:12px;color:rgba(0,0,0,.45);margin:22px 0 8px;font-weight:700}
+</style><div class="gist"><b>원포장 출고 항목이 추가되면서, 아래 반품 처리 방식의 박스 재포장을 잠그는 구조가 됐습니다.</b><ul><li>제약을 <b>사후 알럿으로만</b> 알려 판매자가 공들여 고른 프리셋이 초기화됩니다 → 알럿에 영향 범위 명시</li><li>비활성화된 영역에 <b>왜 못 고르는지가 없어</b> 버그로 인식됩니다 → 비활성 사유 인라인 안내 신설</li><li>패션·패브릭 전문 검품 <b>예외를 화면에서 발견할 수 없습니다</b> → 조건부 안내 신설</li></ul></div><div class="panel"><div class="panel-header"><div class="ph-title">기본정보</div></div><div class="notice">SKU 정보는 물류사에 한 번 연동되면 수정할 수 없으며, 물류사 입고 검수 과정에서 일부 상세 정보가 변경될 수 있습니다.</div><div class="panel-body"><div class="form-row"><div class="form-label">SKU 명</div><div class="form-value"><span class="inp">SKU 명을 입력해주세요.<em>0/150</em></span></div></div><div class="form-row"><div class="form-label">바코드</div><div class="form-value"><div class="rd"><i class="on">판매자 직접 입력</i><i class="">네이버 자동 생성</i></div><div class="sk-note">한번 등록된 바코드는 수정할 수 없으니 정확히 입력해 주세요.</div></div></div><div class="form-row"><div class="form-label">보관온도</div><div class="form-value"><div class="rd"><i class="">상온</i><i class="on">냉장</i><i class="">냉동</i></div></div></div><div class="form-row"><div class="form-label">소비기한 관리 <span class="qi has-change" id="mk1"><span class="qi-n">1</span>?<span class="tip"><div class="tip-outer"><div class="tip-col tip-col-asis"><span class="tip-col-header h-asis">ASIS</span><div class="tip-col-body">보관온도가 ‘냉장/냉동’ 이지만 소비기한을 관리하지 않는 SKU가 맞는지 재확인해 주세요. 입고 후 관리여부 변경 시, 전수조사에 따른 판매자 부담 비용이 발생할 수 있습니다.</div></div><div class="tip-col"><span class="tip-col-header h-tobe">TOBE</span><div class="tip-col-body">냉장·냉동 상품은 대부분 소비기한을 관리합니다. 관리안함으로 저장한 뒤 입고 후에 변경하면, 전수조사 비용이 <span class="tip-hl">판매자에게 청구</span>됩니다.<div class="tip-col-callout"><strong>이유</strong> 판단 근거를 앞세우고 비용 주체를 청구로 명확히 — 저장을 막는 오류가 아니라 재확인</div></div></div></div></span></span></div><div class="form-value"><div class="rd"><i class="">관리함</i><i class="on">관리안함</i></div><div class="err">보관온도가 냉장·냉동인 경우 확인 문구가 노출됩니다.</div></div></div><div class="form-row"><div class="form-label">로트번호 관리</div><div class="form-value"><div class="rd"><i class="">관리함</i><i class="on">관리안함</i></div></div></div><div class="form-row"><div class="form-label">보관사이즈</div><div class="form-value"><div class="szrow"><span>가로 <span class="inp">0</span><span class="unit"><s class="on">cm</s><s class="">mm</s></span></span><span>세로 <span class="inp">0</span><span class="unit"><s class="on">cm</s><s class="">mm</s></span></span><span>높이 <span class="inp">0</span><span class="unit"><s class="on">cm</s><s class="">mm</s></span></span><span>무게 <span class="inp">0</span><span class="unit"><s class="on">kg</s><s class="">g</s></span></span></div><div class="sk-note"><span class="change-wrap mk" id="mk2"><span class="mkn">2</span><span class="asis">물류센터에 보관하는 사이즈로 입력해 주세요.</span><span class="tobe" data-why="실측으로 오해해 입력하는 사고가 잦음 — 기준이 포장 상태임을 명시">상품 실측이 아니라 포장 상태의 크기·무게를 입력해 주세요.</span></span></div><div class="err"><span class="change-wrap mk" id="mk3"><span class="mkn">3</span><span class="asis">0.001kg (1g) 이상으로 입력해 주세요.</span><span class="tobe" data-why="kg·g 토글이 있는데 두 단위를 함께 적어 환산 부담 — 선택 단위 기준으로 노출">0.001kg 이상으로 입력해 주세요. <span style="opacity:.75">(g 선택 시 1g 이상)</span></span></span></div></div></div><div class="form-row"><div class="form-label">SKU 유형</div><div class="form-value"><div class="rd"><i class="on">상품</i><i class="">사은품</i></div></div></div></div></div><div class="panel"><div class="panel-header"><div class="ph-title">추가정보</div></div><div class="notice">추가 정보는 SKU가 물류센터에 입고된 이후에도 수정이 가능합니다.</div><div class="panel-body"><div class="form-row"><div class="form-label">공급원가</div><div class="form-value"><span class="inp">0</span> 원<div class="sk-note">공급원가는 매입 원가 및 제조 원가를 의미합니다. 재고 보상 필요 시, 참고 기준으로 활용됩니다.</div></div></div><div class="form-row"><div class="form-label">원포장 출고 <span class="qi has-change" id="mk4"><span class="qi-n">4</span>?<span class="tip"><div class="tip-outer"><div class="tip-col tip-col-asis"><span class="tip-col-header h-asis">ASIS</span><div class="tip-col-body">(툴팁 내용 미정의)</div></div><div class="tip-col"><span class="tip-col-header h-tobe">TOBE</span><div class="tip-col-body">출고할 때 상품의 <span class="tip-hl">자체 포장을 그대로 쓸지</span> 여부입니다. 설정하면 물류센터에서 박스를 추가하지 않고 그대로 보냅니다.<div class="tip-col-callout"><strong>이유</strong> 원포장은 물류 용어라 라벨만으로는 뜻이 전달되지 않음 — 툴팁에 판매자 관점 정의</div></div></div></div></span></span></div><div class="form-value"><div class="rd"><i class="on">설정안함</i><i class="">설정함</i></div><div class="sk-note"><span class="change-wrap mk" id="mk5"><span class="mkn">5</span><span class="asis">원포장 출고가 아닌 상품은 반품 시 박스 재포장 서비스 대상 상품이 아닙니다.<br>원포장 출고를 설정하면 박스 포장없이 상품의 포장 상태 그대로 출고됩니다.</span><span class="tobe" data-why="정의보다 제약이 먼저 오고 부정문이 겹쳐 해석 부담 — 값별 결과로 나눠 배치"><b>설정함</b> — 박스 포장 없이 상품의 포장 상태 그대로 출고됩니다.<br><b>설정안함</b> — 출고 시 별도 포장이 추가되며, 반품 시 박스 재포장은 사용할 수 없습니다.</span></span></div></div></div></div></div><div class="panel"><div class="panel-header"><div class="ph-title">반품 처리 방식</div><div class="ph-desc">반품된 상품의 검품 및 처리 방식을 SKU별로 설정합니다. 선택한 유형에 맞게 최적의 옵션이 자동 선택되며, 옵션값은 변경 가능합니다.</div></div><div class="panel-body"><div class="pset"><div class="pcard on"><div class="pc-t">기본</div><div class="pc-d">상품 문제를 빠르게 확인하고, 정상이면 바로 재판매합니다.</div><div class="pc-tag"><b>#신속한 재판매</b><b>#대다수 판매자에게 적합</b><b>#비용 및 시간 절약</b></div><div class="pc-kv"><div><span>상품 자동 수거</span><span>필요함</span></div><div><span>검품 방식</span><span>일반 검품</span></div><div><span>정상재고 처리</span><span>재판매</span></div><div><span>판매불가 처리</span><span>반출</span></div><div><span>박스 재포장</span><span>설정안함</span></div><div><span>리퍼(등급화)</span><span>설정안함</span></div></div><div class="pc-btn">선택됨</div></div><div class="pcard"><div class="pc-t">박스 재포장·리퍼(등급화) 분류</div><div class="pc-d">박스 재포장 또는 리퍼(등급화) 분류 후 재판매 가능한 상품이 있는지 확인합니다.</div><div class="pc-tag"><b>#폐기 상품 최소화</b><b>#중·고가형 상품에 적합</b><b>#수익 증대</b></div><div class="pc-kv"><div><span>상품 자동 수거</span><span>필요함</span></div><div><span>검품 방식</span><span>일반 검품</span></div><div><span>정상재고 처리</span><span>재판매</span></div><div><span>판매불가 처리</span><span>반출</span></div><div><span>박스 재포장</span><span><span class="cost">추가비용</span>일반 박스 사용</span></div><div><span>리퍼(등급화)</span><span><span class="cost">추가비용</span>설정함</span></div></div><div class="pc-btn">선택하기</div></div><div class="pcard"><div class="pc-t">패션·패브릭 전문</div><div class="pc-d">패션 상품이 재판매에 적합한지 마감, 이음새 등을 꼼꼼하게 확인합니다.</div><div class="pc-tag"><b>#꼼꼼한 검품</b><b>#패션·패브릭 상품에 특화</b><b>#브랜드 이미지 보호</b></div><div class="pc-kv"><div><span>상품 자동 수거</span><span>필요함</span></div><div><span>검품 방식</span><span><span class="cost">추가비용</span>패션·패브릭 전문 검품</span></div><div><span>정상재고 처리</span><span>재판매</span></div><div><span>판매불가 처리</span><span>반출</span></div><div><span>박스 재포장</span><span>설정안함</span></div><div><span>리퍼(등급화)</span><span>설정안함</span></div></div><div class="pc-btn">선택하기</div></div></div><div class="sk-sub">직접 설정하기 · 박스 재포장 영역</div><div class="dimbox"><div class="dl">박스 재포장 · 리퍼(등급화) 선택 영역 <span style="font-weight:400;color:rgba(0,0,0,.35)">(원포장 출고 = 설정안함 → 비활성)</span></div><div class="rd dis"><i class="on">설정안함</i><i class="">일반 박스 사용</i></div><div class="sk-note"><span class="change-wrap mk mk-new" id="mk6"><span class="mkn">6</span><span class="tobe" data-why="비활성 컨트롤만 두면 판매자가 버그로 인식해 문의 발생 — 잠긴 이유와 해제 방법을 함께">원포장 출고를 <b>설정함</b>으로 바꾸면 선택할 수 있습니다.</span></span></div><div class="sk-note"><span class="change-wrap mk mk-new" id="mk7"><span class="mkn">7</span><span class="tobe" data-why="같은 설정안함인데 되는 경우와 안 되는 경우가 갈려 규칙을 추론할 수 없음 — 예외를 화면에서 안내">검품 방식을 <b>패션·패브릭 전문 검품</b>으로 선택하면 원포장 출고와 무관하게 설정할 수 있습니다.</span></span></div></div></div></div></div></div></div></div></div><div id="p-alert" class="pane"><div class="content"><style>
+.sk-note{font-size:12px;line-height:19px;color:rgba(0,0,0,.5);margin-top:7px}
+.sk-note b{color:rgba(0,0,0,.62)}
+.rd{display:inline-flex;gap:6px;flex-wrap:wrap}
+.rd i{font-style:normal;display:inline-flex;align-items:center;gap:5px;border:1px solid #dfe3e8;
+  border-radius:5px;padding:7px 13px;font-size:13px;color:rgba(0,0,0,.66);background:#fff;white-space:nowrap}
+.rd i.on{border-color:#03c75a;color:#0a7a3c;font-weight:700;background:rgba(0,184,79,.06)}
+.rd i:before{content:'';width:12px;height:12px;border-radius:50%;border:1.5px solid #ccd2d8;flex-shrink:0}
+.rd i.on:before{border:4px solid #03c75a}
+.rd.dis i{background:#f5f6f8;color:rgba(0,0,0,.3);border-color:#e8ebee}
+.rd.dis i.on:before{border-color:#c8ccd0}
+.rd.dis i:before{border-color:#d8dce0}
+.inp{display:inline-flex;align-items:center;border:1px solid #dfe3e8;border-radius:5px;padding:7px 10px;
+  font-size:13px;color:rgba(0,0,0,.4);background:#fff;min-width:150px;justify-content:space-between}
+.inp em{font-style:normal;font-size:11px;color:rgba(0,0,0,.3);margin-left:8px}
+.unit{display:inline-flex;margin-left:6px}
+.unit s{text-decoration:none;font-size:12px;border:1px solid #dfe3e8;padding:6px 9px;color:rgba(0,0,0,.45);background:#fff}
+.unit s.on{background:#f0f2f5;color:rgba(0,0,0,.72);font-weight:700}
+.unit s:first-child{border-radius:5px 0 0 5px}
+.unit s:last-child{border-radius:0 5px 5px 0;border-left:0}
+.szrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.szrow > span{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:rgba(0,0,0,.55)}
+.err{font-size:12px;line-height:19px;color:#f42428;margin-top:7px}
+.pset{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.pcard{flex:1;min-width:212px;border:1px solid #e3e6ea;border-radius:8px;padding:14px;background:#fff}
+.pcard.on{border-color:#03c75a;box-shadow:0 0 0 1px #03c75a inset}
+.pc-t{font-size:13.5px;font-weight:800;color:rgba(0,0,0,.85);margin-bottom:6px}
+.pc-d{font-size:12px;line-height:18px;color:rgba(0,0,0,.5);margin-bottom:9px}
+.pc-tag{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:11px}
+.pc-tag b{font-weight:600;font-size:10.5px;color:#0a7a3c;background:rgba(0,184,79,.1);border-radius:3px;padding:2px 6px}
+.pc-kv{border-top:1px solid #f0f2f5;padding-top:9px;font-size:12px;line-height:20px}
+.pc-kv div{display:flex;justify-content:space-between;gap:10px}
+.pc-kv span:first-child{color:rgba(0,0,0,.45)}
+.pc-kv span:last-child{color:rgba(0,0,0,.72);font-weight:600;text-align:right}
+.pc-kv .cost{font-size:10px;color:#f5b400;font-weight:700;margin-right:4px}
+.pc-btn{margin-top:11px;text-align:center;font-size:12.5px;font-weight:700;padding:9px;border-radius:6px;
+  border:1px solid #03c75a;color:#0a7a3c;background:#fff}
+.pcard.on .pc-btn{background:#03c75a;color:#fff;border-color:#03c75a}
+.dimbox{background:#f5f6f8;border:1px dashed #d5d9de;border-radius:6px;padding:12px 13px;margin-top:10px}
+.dimbox .dl{font-size:12px;font-weight:700;color:rgba(0,0,0,.5);margin-bottom:8px}
+.al{max-width:460px;border:1px solid #e0e3e7;border-radius:10px;background:#fff;
+  box-shadow:0 8px 26px rgba(0,0,0,.1);overflow:hidden;margin-top:4px}
+.al-hd{display:flex;align-items:center;justify-content:space-between;padding:15px 18px 0}
+.al-t{font-size:14px;font-weight:800;color:#0a7a3c}
+.al-t.plain{color:rgba(0,0,0,.85)}
+.al-x{color:rgba(0,0,0,.3);font-size:13px}
+.al-bd{padding:12px 18px 18px;font-size:13px;line-height:21px;color:rgba(0,0,0,.72);font-weight:700}
+.al-ft{border-top:1px solid #f0f2f5;padding:11px;display:flex;gap:8px;justify-content:center}
+.al-ft b{font-size:12.5px;font-weight:700;padding:9px 26px;border-radius:6px;background:#03c75a;color:#fff}
+.al-ft b.gh{background:#fff;border:1px solid #dfe3e8;color:rgba(0,0,0,.6)}
+.gist{background:rgba(0,184,79,.07);border:1px solid rgba(0,184,79,.28);border-radius:8px;
+  padding:14px 16px;margin:0 0 18px;font-size:13px;line-height:21px;color:rgba(0,0,0,.72)}
+.gist b{color:rgba(0,0,0,.85)}
+.gist ul{margin:8px 0 0;padding-left:18px}
+.gist li{margin-bottom:4px}
+.sk-sub{font-size:12px;color:rgba(0,0,0,.45);margin:22px 0 8px;font-weight:700}
+</style><div class="gist"><b>알럿은 판매자가 되돌릴 수 없는 결정을 내리는 자리입니다.</b> 무엇이 초기화되는지·왜 막히는지를 알럿에서 알려주지 않으면 그대로 저장하고 나중에 문의가 됩니다.</div><div class="sec-head"><div class="sec-title">1. 원포장 출고 설정함 → 설정안함 변경 시</div><div class="sec-desc">박스 재포장이 일반 박스 사용 또는 브랜드 포장재 사용인 상태에서 원포장 출고를 끄면 노출</div></div><div class="al"><div class="al-hd"><span></span><span class="al-x">✕</span></div><div class="al-bd"><span class="change-wrap mk" id="mk8"><span class="mkn">8</span><span class="asis">원포장 출고 설정 안함에 따라 박스 재포장 선택값이 ‘설정안함’으로 초기화됩니다.</span><span class="tobe" data-why="박스 재포장만 초기화되는 것이 아니라 선택한 프리셋 조합이 해제되는데 그 사실이 빠져 있음">원포장 출고를 설정안함으로 바꾸면 박스 재포장이 설정안함으로 초기화되고, 선택하신 <b>박스 재포장·리퍼(등급화) 분류</b> 설정이 해제됩니다.</span></span></div><div class="al-ft"><b class="gh">취소</b><b>확인</b></div></div><div class="sec-head"><div class="sec-title">2. 보관사이즈 밀도 초과 시</div><div class="sec-desc">무게 ÷ 부피가 20g/cm³ 이상이면 저장 차단</div></div><div class="al"><div class="al-hd"><div class="al-t">필수 정보를 확인해 주세요.</div><span class="al-x">✕</span></div><div class="al-bd"><span class="change-wrap mk" id="mk9"><span class="mkn">9</span><span class="asis">보관사이즈로 입력한 수치의 밀도가 20 이상입니다. 부피 대비하여 올바른 무게를 입력해 주세요.</span><span class="tobe" data-why="밀도·20은 판매자가 계산해본 적 없는 값 — 무엇이 잘못됐고 무엇을 볼지로 바꿈">입력한 크기에 비해 무게가 너무 큽니다. 포장 상태의 가로·세로·높이와 무게를 다시 확인해 주세요.</span></span></div><div class="al-ft"><b>확인</b></div></div><div class="sec-head"><div class="sec-title">3. 가로·세로·높이가 모두 같을 때</div><div class="sec-desc">저장 시 확인 알럿 · 확인하면 저장 진행</div></div><div class="al"><div class="al-hd"><span></span><span class="al-x">✕</span></div><div class="al-bd"><span class="change-wrap mk" id="mk10"><span class="mkn">10</span><span class="asis">입력하신 보관사이즈가 모두 동일합니다. 이대로 저장하시겠습니까?</span><span class="tobe" data-why="왜 묻는지가 없어 판매자가 그대로 확인을 누름 — 확인할 대상을 지정">가로·세로·높이가 모두 같습니다. 정육면체 상품이 맞는지 확인해 주세요.</span></span></div><div class="al-ft"><b class="gh">취소</b><b>확인</b></div></div><div class="sec-head"><div class="sec-title">4. 냉장·냉동 + 소비기한 관리안함</div><div class="sec-desc">보관온도 냉장·냉동에서 소비기한 관리안함 선택 시 · 저장은 가능</div></div><div class="al"><div class="al-hd"><div class="al-t plain">필수 정보를 확인해 주세요.</div><span class="al-x">✕</span></div><div class="al-bd">냉장·냉동 상품은 대부분 소비기한을 관리합니다. 관리안함으로 저장한 뒤 입고 후에 변경하면, 전수조사 비용이 판매자에게 청구됩니다.</div><div class="al-ft"><b>확인</b></div></div><div class="sk-note" style="margin-top:10px">위 4번은 저장을 막지 않는 <b>재확인</b>이므로 1~3번(입력 오류)과 같은 스타일로 묶지 않는 것을 제안합니다. 문스톤 기준으로도 에러(레드)와 주의·확인은 색·아이콘이 달라야 합니다.</div></div></div><div id="p-bg" class="pane"><div class="content"><style>
+.sk-note{font-size:12px;line-height:19px;color:rgba(0,0,0,.5);margin-top:7px}
+.sk-note b{color:rgba(0,0,0,.62)}
+.rd{display:inline-flex;gap:6px;flex-wrap:wrap}
+.rd i{font-style:normal;display:inline-flex;align-items:center;gap:5px;border:1px solid #dfe3e8;
+  border-radius:5px;padding:7px 13px;font-size:13px;color:rgba(0,0,0,.66);background:#fff;white-space:nowrap}
+.rd i.on{border-color:#03c75a;color:#0a7a3c;font-weight:700;background:rgba(0,184,79,.06)}
+.rd i:before{content:'';width:12px;height:12px;border-radius:50%;border:1.5px solid #ccd2d8;flex-shrink:0}
+.rd i.on:before{border:4px solid #03c75a}
+.rd.dis i{background:#f5f6f8;color:rgba(0,0,0,.3);border-color:#e8ebee}
+.rd.dis i.on:before{border-color:#c8ccd0}
+.rd.dis i:before{border-color:#d8dce0}
+.inp{display:inline-flex;align-items:center;border:1px solid #dfe3e8;border-radius:5px;padding:7px 10px;
+  font-size:13px;color:rgba(0,0,0,.4);background:#fff;min-width:150px;justify-content:space-between}
+.inp em{font-style:normal;font-size:11px;color:rgba(0,0,0,.3);margin-left:8px}
+.unit{display:inline-flex;margin-left:6px}
+.unit s{text-decoration:none;font-size:12px;border:1px solid #dfe3e8;padding:6px 9px;color:rgba(0,0,0,.45);background:#fff}
+.unit s.on{background:#f0f2f5;color:rgba(0,0,0,.72);font-weight:700}
+.unit s:first-child{border-radius:5px 0 0 5px}
+.unit s:last-child{border-radius:0 5px 5px 0;border-left:0}
+.szrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.szrow > span{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:rgba(0,0,0,.55)}
+.err{font-size:12px;line-height:19px;color:#f42428;margin-top:7px}
+.pset{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.pcard{flex:1;min-width:212px;border:1px solid #e3e6ea;border-radius:8px;padding:14px;background:#fff}
+.pcard.on{border-color:#03c75a;box-shadow:0 0 0 1px #03c75a inset}
+.pc-t{font-size:13.5px;font-weight:800;color:rgba(0,0,0,.85);margin-bottom:6px}
+.pc-d{font-size:12px;line-height:18px;color:rgba(0,0,0,.5);margin-bottom:9px}
+.pc-tag{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:11px}
+.pc-tag b{font-weight:600;font-size:10.5px;color:#0a7a3c;background:rgba(0,184,79,.1);border-radius:3px;padding:2px 6px}
+.pc-kv{border-top:1px solid #f0f2f5;padding-top:9px;font-size:12px;line-height:20px}
+.pc-kv div{display:flex;justify-content:space-between;gap:10px}
+.pc-kv span:first-child{color:rgba(0,0,0,.45)}
+.pc-kv span:last-child{color:rgba(0,0,0,.72);font-weight:600;text-align:right}
+.pc-kv .cost{font-size:10px;color:#f5b400;font-weight:700;margin-right:4px}
+.pc-btn{margin-top:11px;text-align:center;font-size:12.5px;font-weight:700;padding:9px;border-radius:6px;
+  border:1px solid #03c75a;color:#0a7a3c;background:#fff}
+.pcard.on .pc-btn{background:#03c75a;color:#fff;border-color:#03c75a}
+.dimbox{background:#f5f6f8;border:1px dashed #d5d9de;border-radius:6px;padding:12px 13px;margin-top:10px}
+.dimbox .dl{font-size:12px;font-weight:700;color:rgba(0,0,0,.5);margin-bottom:8px}
+.al{max-width:460px;border:1px solid #e0e3e7;border-radius:10px;background:#fff;
+  box-shadow:0 8px 26px rgba(0,0,0,.1);overflow:hidden;margin-top:4px}
+.al-hd{display:flex;align-items:center;justify-content:space-between;padding:15px 18px 0}
+.al-t{font-size:14px;font-weight:800;color:#0a7a3c}
+.al-t.plain{color:rgba(0,0,0,.85)}
+.al-x{color:rgba(0,0,0,.3);font-size:13px}
+.al-bd{padding:12px 18px 18px;font-size:13px;line-height:21px;color:rgba(0,0,0,.72);font-weight:700}
+.al-ft{border-top:1px solid #f0f2f5;padding:11px;display:flex;gap:8px;justify-content:center}
+.al-ft b{font-size:12.5px;font-weight:700;padding:9px 26px;border-radius:6px;background:#03c75a;color:#fff}
+.al-ft b.gh{background:#fff;border:1px solid #dfe3e8;color:rgba(0,0,0,.6)}
+.gist{background:rgba(0,184,79,.07);border:1px solid rgba(0,184,79,.28);border-radius:8px;
+  padding:14px 16px;margin:0 0 18px;font-size:13px;line-height:21px;color:rgba(0,0,0,.72)}
+.gist b{color:rgba(0,0,0,.85)}
+.gist ul{margin:8px 0 0;padding-left:18px}
+.gist li{margin-bottom:4px}
+.sk-sub{font-size:12px;color:rgba(0,0,0,.45);margin:22px 0 8px;font-weight:700}
+</style><div class="sec-head"><div class="sec-title">배경</div><div class="sec-desc">요청: N배송플랫폼기획 홍지호 · 검토 기한 2026.08.14 · 개발 완료 2026.08.19</div></div><div class="gist"><b>Problem</b> · 8월 반품 과제로 반품 처리 방식·추가정보 영역이 분리되면서 SKU 등록 화면이 길고 복잡해졌습니다. 여기에 원포장 출고가 추가되고, 이 값이 아래 박스 재포장을 <b>잠그는</b> 관계가 생겼습니다.<br><br><b>Current</b> · 제약은 정책에만 있고 화면에는 비활성 컨트롤과 사후 알럿 한 줄뿐입니다. 판매자는 왜 못 고르는지, 무엇이 사라지는지 알 수 없습니다.<br><br><b>Hypothesis</b> · 잠긴 이유·해제 방법·예외를 그 자리에서 알려주면, 판매자가 프리셋을 다시 고르거나 문의하는 일을 줄일 수 있습니다.</div><div class="sec-head"><div class="sec-title">구조 제안 · 역방향 의존 해소</div><div class="sec-desc">워딩 외 제안 — 개발 범위 판단이 필요해 별도로 정리</div></div><div class="gist" style="background:#fff;border-color:#e3e6ea">화면 순서는 <b>기본정보 → 추가정보(원포장 출고) → 반품 처리 방식(박스 재포장)</b>입니다. 판매자는 위에서 아래로 채우는데, <b>위 선택이 아래를 잠그는</b> 역방향 의존입니다.<br><br><b>대안 A</b> — 원포장 출고를 반품 처리 방식 영역 앞머리로 이동. 인과가 인접해지지만 추가정보 영역 구성을 바꿔야 합니다.<br><b>대안 B (권장)</b> — 위치는 그대로 두고, 반품 처리 방식 영역 상단에 현재 값을 요약 노출. 예: <b>원포장 출고 설정안함 · 박스 재포장 사용 불가</b><br><br>B는 개발 영향이 작고, 판매자가 반품 처리 방식을 고르기 직전에 제약을 인지합니다.</div><div class="sec-head"><div class="sec-title">관련 용어</div></div><dl class="term"><dt>원포장 출고</dt><dd>상품의 자체 포장 상태 그대로 출고하는 것(정책상 단수·SIOC). 판매자에게는 <b>박스를 추가하지 않고 그대로 보낸다</b>로 전달해야 합니다.</dd><dt>박스 재포장</dt><dd>반품된 상품을 새 박스에 다시 담아 재판매 가능 상태로 만드는 서비스. 원포장 출고 상품만 대상입니다.</dd><dt>리퍼(등급화)</dt><dd>반품 상품의 상태를 등급으로 나눠 재판매 여부를 분류하는 것.</dd><dt>전수조사</dt><dd>입고된 재고 전체를 다시 확인하는 작업. 소비기한 관리여부를 나중에 바꾸면 이 작업이 필요해 비용이 청구됩니다.</dd></dl><div class="sec-head"><div class="sec-title">기획 확인 필요</div></div><div class="gist" style="background:#fff;border-color:#e3e6ea">① <b>원포장 출고 툴팁</b> — 현재 정책·와이어프레임에 툴팁 내용이 정의돼 있지 않습니다. 제안 문구로 채워도 될지 확인 부탁드립니다.<br>② <b>비활성 영역 인라인 안내</b> — 8/19 개발 범위에 문구 추가가 가능한지 확인 부탁드립니다.<br>③ <b>알럿 스타일 분리</b>(에러 ↔ 재확인) — 디자인 검토(@김준성) 결과에 따라 달라집니다.<br>④ <b>무게 오류 문구 단위 분기</b> — 선택 단위(kg·g)에 따라 문구를 바꾸는 것이 개발 가능한지 확인 부탁드립니다.</div></div></div>
+<div class="dr-mask" id="dr-mask" onclick="drawer(false)"></div><div class="dr" id="dr"><div class="dr-head"><b>변경 내역 11건</b><button class="dr-x" onclick="drawer(false)">✕</button></div><div class="dr-list"><div class="dr-gp">SKU 등록/수정</div><div class="dr-item" onclick="goMark('sku','mk1')"><span class="dr-n">1</span><div class="dr-b"><div class="dr-loc">SKU 등록 · 소비기한 관리 · 확인 문구</div><div class="dr-as">보관온도가 ‘냉장/냉동’ 이지만 소비기한을 관리하지 않는 SKU가 맞는지 재확인해 주세요. 입고 후 관리여부 변경 시, 전수조</div><div class="dr-to">냉장·냉동 상품은 대부분 소비기한을 관리합니다. 관리안함으로 저장한 뒤 입고 후에 변경하면, 전수조사 비용이 판매자에게 청구됩니다.</div></div></div><div class="dr-item" onclick="goMark('sku','mk2')"><span class="dr-n">2</span><div class="dr-b"><div class="dr-loc">SKU 등록 · 보관사이즈 · 안내 문구</div><div class="dr-as">물류센터에 보관하는 사이즈로 입력해 주세요.</div><div class="dr-to">상품 실측이 아니라 포장 상태의 크기·무게를 입력해 주세요.</div></div></div><div class="dr-item" onclick="goMark('sku','mk3')"><span class="dr-n">3</span><div class="dr-b"><div class="dr-loc">SKU 등록 · 보관사이즈 · 무게 최솟값 오류</div><div class="dr-as">0.001kg (1g) 이상으로 입력해 주세요.</div><div class="dr-to">0.001kg 이상으로 입력해 주세요. (g 선택 시 1g 이상)</div></div></div><div class="dr-item" onclick="goMark('sku','mk4')"><span class="dr-n">4</span><div class="dr-b"><div class="dr-loc">SKU 등록 · 추가정보 · 원포장 출고 · 툴팁</div><div class="dr-as">(툴팁 내용 미정의)</div><div class="dr-to">출고할 때 상품의 자체 포장을 그대로 쓸지 여부입니다. 설정하면 물류센터에서 박스를 추가하지 않고 그대로 보냅니다.</div></div></div><div class="dr-item" onclick="goMark('sku','mk5')"><span class="dr-n">5</span><div class="dr-b"><div class="dr-loc">SKU 등록 · 추가정보 · 원포장 출고 · 안내 문구</div><div class="dr-as">원포장 출고가 아닌 상품은 반품 시 박스 재포장 서비스 대상 상품이 아닙니다.원포장 출고를 설정하면 박스 포장없이 상품의 포장</div><div class="dr-to">설정함 — 박스 포장 없이 상품의 포장 상태 그대로 출고됩니다.설정안함 — 출고 시 별도 포장이 추가되며, 반품 시 박스 재포장은 사용할 수 없습니다.</div></div></div><div class="dr-item" onclick="goMark('sku','mk6')"><span class="dr-n">6</span><div class="dr-b"><div class="dr-loc">SKU 등록 · 반품 처리 방식 · 박스 재포장 · 비활성 사유 안내</div><div class="dr-as">(없음 · 신설)</div><div class="dr-to">원포장 출고를 설정함으로 바꾸면 선택할 수 있습니다.</div></div></div><div class="dr-item" onclick="goMark('sku','mk7')"><span class="dr-n">7</span><div class="dr-b"><div class="dr-loc">SKU 등록 · 반품 처리 방식 · 박스 재포장 · 예외 조건 안내</div><div class="dr-as">(없음 · 신설)</div><div class="dr-to">검품 방식을 패션·패브릭 전문 검품으로 선택하면 원포장 출고와 무관하게 설정할 수 있습니다.</div></div></div><div class="dr-gp">알럿 · 에러 문구</div><div class="dr-item" onclick="goMark('alert','mk8')"><span class="dr-n">8</span><div class="dr-b"><div class="dr-loc">알럿 · 박스 재포장 초기화</div><div class="dr-as">원포장 출고 설정 안함에 따라 박스 재포장 선택값이 ‘설정안함’으로 초기화됩니다.</div><div class="dr-to">원포장 출고를 설정안함으로 바꾸면 박스 재포장이 설정안함으로 초기화되고, 선택하신 박스 재포장·리퍼(등급화) 분류 설정이 해제됩니다.</div></div></div><div class="dr-item" onclick="goMark('alert','mk9')"><span class="dr-n">9</span><div class="dr-b"><div class="dr-loc">알럿 · 밀도 초과</div><div class="dr-as">보관사이즈로 입력한 수치의 밀도가 20 이상입니다. 부피 대비하여 올바른 무게를 입력해 주세요.</div><div class="dr-to">입력한 크기에 비해 무게가 너무 큽니다. 포장 상태의 가로·세로·높이와 무게를 다시 확인해 주세요.</div></div></div><div class="dr-item" onclick="goMark('alert','mk10')"><span class="dr-n">10</span><div class="dr-b"><div class="dr-loc">알럿 · 세 변 동일</div><div class="dr-as">입력하신 보관사이즈가 모두 동일합니다. 이대로 저장하시겠습니까?</div><div class="dr-to">가로·세로·높이가 모두 같습니다. 정육면체 상품이 맞는지 확인해 주세요.</div></div></div><div class="dr-item" onclick="goMark('alert','mk11')"><span class="dr-n">11</span><div class="dr-b"><div class="dr-loc">알럿 · 에러와 재확인 구분</div><div class="dr-as">입력 오류(레드)와 같은 스타일</div><div class="dr-to">재확인(앰버 계열)으로 구분 — 저장을 막지 않는 경고임을 색으로 전달</div></div></div></div></div>
+<div id="why-tip"></div>
+</div>
+<script>
+function tab(name){document.querySelectorAll('.tab-item').forEach(function(t){t.classList.remove('active')});
+ document.querySelectorAll('.pane').forEach(function(p){p.classList.remove('active')});
+ var p=document.getElementById('p-'+name);if(p)p.classList.add('active');
+ document.querySelectorAll('.tab-item').forEach(function(t){if((t.getAttribute('onclick')||'').indexOf("'"+name+"'")>=0)t.classList.add('active')});
+ window.scrollTo(0,0);}
+function goTab(name,anchor){tab(name);if(!anchor)return;setTimeout(function(){var el=document.getElementById(anchor);
+ if(!el)return;el.scrollIntoView({block:'center',behavior:'smooth'});el.classList.add('mk-flash');
+ setTimeout(function(){el.classList.remove('mk-flash')},2200);},90);}
+function drawer(o){document.getElementById('dr').classList.toggle('open',o);
+ document.getElementById('dr-mask').classList.toggle('open',o);}
+function goMark(t,a){drawer(false);goTab(t,a);}
+(function(){var rb=document.querySelector('.rev-bar');if(!rb)return;
+ function u(){document.documentElement.style.setProperty('--bar-h',rb.offsetHeight+'px');}
+ u();window.addEventListener('resize',u);
+ window.addEventListener('scroll',function(){rb.classList.toggle('rb-mini',window.scrollY>8);u();},{passive:true});})();
+/* i-툴팁 클릭 토글 */
+document.querySelectorAll('.qi').forEach(function(q){q.addEventListener('click',function(e){e.stopPropagation();
+ var open=q.classList.contains('open');document.querySelectorAll('.qi.open').forEach(function(x){x.classList.remove('open')});
+ if(!open)q.classList.add('open');});});
+document.addEventListener('click',function(){document.querySelectorAll('.qi.open').forEach(function(q){q.classList.remove('open')});});
+/* 변경 이유 툴팁 — 위 공간 부족 시 자동 아래로, 가시영역 안으로 클램프 */
+(function(){var tip=document.getElementById('why-tip');if(!tip)return;
+ function vp(){var top=8,bar=document.querySelector('.topbar');
+  if(bar){var r=bar.getBoundingClientRect();if(r.top<4&&r.bottom>0)top=r.bottom+8;}
+  var h=document.documentElement.clientHeight||window.innerHeight||800;return {top:top,bottom:h-8};}
+ document.addEventListener('mouseover',function(e){var el=e.target.closest('[data-why]');
+  if(!el||!el.dataset.why)return;tip.textContent=el.dataset.why;tip.style.display='block';
+  var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,v=vp(),top;
+  if(r.top-th-10>=v.top)top=r.top-th-10;else if(r.bottom+th+10<=v.bottom)top=r.bottom+10;
+  else top=Math.max(v.top,Math.min(r.bottom+10,v.bottom-th));
+  tip.style.left=Math.max(8,Math.min(r.left+r.width/2-tw/2,window.innerWidth-tw-8))+'px';
+  tip.style.top=top+'px';});
+ document.addEventListener('mouseout',function(e){if(e.target.closest('[data-why]'))tip.style.display='none';});})();
+</script>
+<script src="../assets/shell.js?v=3"></script>
+<script>(async function(){try{var d=await loadDocs();renderLNB({active:"FBN_SKU_원포장출고_0812",docs:d});
+var l=document.getElementById('lnb'),pc=document.getElementById('page-content');
+function syncML(){pc.style.marginLeft=l.classList.contains('collapsed')?'48px':'240px';}
+syncML();setTimeout(syncML,0);setTimeout(syncML,300);
+new MutationObserver(syncML).observe(l,{attributes:true,attributeFilter:['class']});}catch(e){}})();</script>
+</body></html>

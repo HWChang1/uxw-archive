@@ -1,6 +1,15 @@
 {
   "docs": [
     {
+      "id": "FBN_SKU_원포장출고_0812",
+      "title": "N배송 FBN SKU 원포장 출고",
+      "date": "2026-08-12",
+      "status": "검토중",
+      "planner": "N배송플랫폼기획",
+      "changeCount": 11,
+      "file": "pages/FBN_SKU_원포장출고_0812.html"
+    },
+    {
       "id": "FBN_Beta알림문구_0807",
       "title": "N배송 FBN Beta 알림 문구",
       "date": "2026-08-07",
