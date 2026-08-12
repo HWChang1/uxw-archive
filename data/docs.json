@@ -16,7 +16,8 @@
       "status": "검토중",
       "planner": "N배송플랫폼기획",
       "changeCount": 47,
-      "file": "pages/출고리포트_정산내재화_0805.html"
+      "file": "pages/출고리포트_정산내재화_0805.html",
+      "hidden": true
     },
     {
       "id": "반품리포트_정산내재화_0805",
@@ -25,7 +26,8 @@
       "status": "대기중",
       "planner": "N배송플랫폼기획",
       "changeCount": 43,
-      "file": "pages/반품리포트_정산내재화_0805.html"
+      "file": "pages/반품리포트_정산내재화_0805.html",
+      "hidden": true
     },
     {
       "id": "FBN_입점동선_0728",

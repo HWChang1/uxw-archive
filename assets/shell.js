@@ -39,7 +39,8 @@ async function loadJSON(path, fallback) {
 
 async function loadDocs() {
   const data = await loadJSON(_ROOT + "data/docs.json", SEED_DOCS);
-  return (data && data.docs) ? data.docs : [];
+  const list = (data && data.docs) ? data.docs : [];
+  return list.filter(d => !d.hidden);
 }
 
 async function loadGlossary() {
