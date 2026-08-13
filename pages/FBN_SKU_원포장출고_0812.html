@@ -2703,7 +2703,11 @@ details.acc[open]>summary::after{transform:rotate(180deg)}
       paint();
     });
     document.addEventListener('keydown', function(e){
-      if(e.key==='Escape' && $('skModalMask') && $('skModalMask').style.display==='flex') closeModal();
+      if(e.key!=='Escape') return;
+      /* 모달 안 툴팁이 열려 있으면 툴팁만 먼저 닫는다(base_all.js가 처리).
+         모달은 다음 Esc에 닫히게 해 한 번에 두 겹이 사라지지 않도록. */
+      if(document.querySelector('#skModalMask .qi.open')) return;
+      if($('skModalMask') && $('skModalMask').style.display==='flex') closeModal();
     });
     paint();   /* 초기: 물류센터 박스 출고 → 박스 재포장 행 disabled + 사유 안내 노출 */
   }
