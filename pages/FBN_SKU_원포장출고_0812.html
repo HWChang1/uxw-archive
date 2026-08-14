@@ -2541,15 +2541,15 @@ details.acc[open]>summary::after{transform:rotate(180deg)}
   }
   function flashEl(el){
     if(!el) return;
-    el.style.transition='outline-color .55s ease, background-color .55s ease';
-    el.style.outline='2px solid #03c75a'; el.style.outlineOffset='2px';
-    el.style.backgroundColor='rgba(0,184,79,.08)';
+    /* 테두리 없이 배경만 — 2초 유지 후 페이드아웃 */
+    el.style.transition='background-color .5s ease';
+    el.style.backgroundColor='rgba(0,184,79,.11)';
     setTimeout(function(){
-      el.style.outlineColor='rgba(3,199,90,0)'; el.style.backgroundColor='transparent';
-    },2500);
+      el.style.backgroundColor='transparent';
+    },2000);
     setTimeout(function(){
-      el.style.outline='none'; el.style.outlineOffset=''; el.style.transition='';
-    },3150);
+      el.style.transition='';
+    },2600);
   }
   /* 목적지 — 출고 포장 방식 라디오와 라벨 셀을 함께 감싸는 form-row.
      라벨 셀의 부모만 잡으면 마크업이 바뀔 때 라디오가 빠진 블록을 잡을 수 있어,
